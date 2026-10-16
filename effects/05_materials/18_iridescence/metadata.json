@@ -1,0 +1,20 @@
+{
+  "number": 85,
+  "name": "虹彩",
+  "slug": "iridescence",
+  "category": "真实与半真实材质",
+  "category_slug": "materials",
+  "category_number": 5,
+  "kind": "spatial",
+  "implementation": "三维材质",
+  "approximation": false,
+  "summary": "模型随观察角度呈现彩虹色。",
+  "directory": "res://effects/05_materials/18_iridescence",
+  "shader": "res://effects/05_materials/18_iridescence/effect.gdshader",
+  "readme": "res://effects/05_materials/18_iridescence/README.md",
+  "scene": "res://effects/05_materials/18_iridescence/demo.tscn",
+  "shape": "sphere",
+  "amount": 0.55,
+  "keywords": "materials iridescence spatial",
+  "text": false
+}

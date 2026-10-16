@@ -1,0 +1,20 @@
+{
+  "number": 344,
+  "name": "热浪扭曲",
+  "slug": "heat",
+  "category": "模糊、镜头与扭曲",
+  "category_slug": "lens",
+  "category_number": 18,
+  "kind": "post",
+  "implementation": "屏幕后处理",
+  "approximation": false,
+  "summary": "画面像被热空气轻轻搅动。",
+  "directory": "res://effects/18_lens/19_heat",
+  "shader": "res://effects/18_lens/19_heat/effect.gdshader",
+  "readme": "res://effects/18_lens/19_heat/README.md",
+  "scene": "res://effects/18_lens/19_heat/demo.tscn",
+  "shape": "sphere",
+  "amount": 0.55,
+  "keywords": "lens heat post",
+  "text": false
+}

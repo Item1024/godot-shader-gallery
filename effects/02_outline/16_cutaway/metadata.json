@@ -1,0 +1,20 @@
+{
+  "number": 32,
+  "name": "剖切显示",
+  "slug": "cutaway",
+  "category": "描边、轮廓与遮挡",
+  "category_slug": "outline",
+  "category_number": 2,
+  "kind": "spatial",
+  "implementation": "演示近似",
+  "approximation": true,
+  "summary": "模型像被一把平刀切掉一部分。",
+  "directory": "res://effects/02_outline/16_cutaway",
+  "shader": "res://effects/02_outline/16_cutaway/effect.gdshader",
+  "readme": "res://effects/02_outline/16_cutaway/README.md",
+  "scene": "res://effects/02_outline/16_cutaway/demo.tscn",
+  "shape": "sphere",
+  "amount": 0.55,
+  "keywords": "outline cutaway spatial",
+  "text": false
+}

@@ -1,0 +1,20 @@
+{
+  "number": 35,
+  "name": "闪烁发光",
+  "slug": "flicker",
+  "category": "发光、流光与扫光",
+  "category_slug": "emission",
+  "category_number": 3,
+  "kind": "canvas",
+  "implementation": "二维 Shader",
+  "approximation": false,
+  "summary": "图案像接触不良的灯一样闪烁。",
+  "directory": "res://effects/03_emission/03_flicker",
+  "shader": "res://effects/03_emission/03_flicker/effect.gdshader",
+  "readme": "res://effects/03_emission/03_flicker/README.md",
+  "scene": "res://effects/03_emission/03_flicker/demo.tscn",
+  "shape": "sphere",
+  "amount": 0.55,
+  "keywords": "emission flicker canvas",
+  "text": false
+}

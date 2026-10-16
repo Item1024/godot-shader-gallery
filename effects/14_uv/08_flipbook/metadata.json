@@ -1,0 +1,20 @@
+{
+  "number": 252,
+  "name": "序列帧播放",
+  "slug": "flipbook",
+  "category": "UV、视差与程序纹理",
+  "category_slug": "uv",
+  "category_number": 14,
+  "kind": "canvas",
+  "implementation": "演示近似",
+  "approximation": true,
+  "summary": "图案按一格一格的顺序播放。",
+  "directory": "res://effects/14_uv/08_flipbook",
+  "shader": "res://effects/14_uv/08_flipbook/effect.gdshader",
+  "readme": "res://effects/14_uv/08_flipbook/README.md",
+  "scene": "res://effects/14_uv/08_flipbook/demo.tscn",
+  "shape": "sphere",
+  "amount": 0.55,
+  "keywords": "uv flipbook canvas",
+  "text": false
+}

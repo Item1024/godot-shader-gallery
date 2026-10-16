@@ -1,0 +1,20 @@
+{
+  "number": 332,
+  "name": "运动模糊",
+  "slug": "motion",
+  "category": "模糊、镜头与扭曲",
+  "category_slug": "lens",
+  "category_number": 18,
+  "kind": "post",
+  "implementation": "演示近似",
+  "approximation": true,
+  "summary": "画面像移动太快而拖出模糊。",
+  "directory": "res://effects/18_lens/07_motion",
+  "shader": "res://effects/18_lens/07_motion/effect.gdshader",
+  "readme": "res://effects/18_lens/07_motion/README.md",
+  "scene": "res://effects/18_lens/07_motion/demo.tscn",
+  "shape": "sphere",
+  "amount": 0.55,
+  "keywords": "lens motion post",
+  "text": false
+}

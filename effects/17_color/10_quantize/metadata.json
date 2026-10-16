@@ -1,0 +1,20 @@
+{
+  "number": 316,
+  "name": "色彩量化",
+  "slug": "quantize",
+  "category": "屏幕调色",
+  "category_slug": "color",
+  "category_number": 17,
+  "kind": "post",
+  "implementation": "屏幕后处理",
+  "approximation": false,
+  "summary": "画面颜色数量变少，呈现受限色彩感。",
+  "directory": "res://effects/17_color/10_quantize",
+  "shader": "res://effects/17_color/10_quantize/effect.gdshader",
+  "readme": "res://effects/17_color/10_quantize/README.md",
+  "scene": "res://effects/17_color/10_quantize/demo.tscn",
+  "shape": "sphere",
+  "amount": 0.55,
+  "keywords": "color quantize post",
+  "text": false
+}

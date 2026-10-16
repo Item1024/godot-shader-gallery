@@ -1,0 +1,20 @@
+{
+  "number": 73,
+  "name": "皮肤",
+  "slug": "skin",
+  "category": "真实与半真实材质",
+  "category_slug": "materials",
+  "category_number": 5,
+  "kind": "spatial",
+  "implementation": "三维材质",
+  "approximation": false,
+  "summary": "球面呈现偏暖的皮肤质感。",
+  "directory": "res://effects/05_materials/06_skin",
+  "shader": "res://effects/05_materials/06_skin/effect.gdshader",
+  "readme": "res://effects/05_materials/06_skin/README.md",
+  "scene": "res://effects/05_materials/06_skin/demo.tscn",
+  "shape": "sphere",
+  "amount": 0.55,
+  "keywords": "materials skin spatial",
+  "text": false
+}

@@ -1,0 +1,339 @@
+extends SubViewport
+
+var entry: Dictionary = {}
+var shader_material: ShaderMaterial
+var environment: Environment
+var subject: Node3D
+var camera: Camera3D
+var elapsed := 0.0
+var paused := false
+var enabled := true
+var amount := 0.55
+var speed := 1.0
+var scale_value := 1.0
+var orbit := 0.0
+var elevation := 0.28
+var distance := 5.0
+var canvas_root: Control
+
+
+func _init() -> void:
+	size = Vector2i(900, 660)
+	own_world_3d = true
+	render_target_update_mode = SubViewport.UPDATE_ALWAYS
+	handle_input_locally = false
+	transparent_bg = false
+
+
+func configure(data: Dictionary) -> void:
+	for child in get_children():
+		child.free()
+	entry = data
+	elapsed = 0.0
+	orbit = 0.0
+	amount = float(data.get("amount", 0.55))
+	enabled = true
+	subject = null
+	camera = null
+	environment = null
+	shader_material = ShaderMaterial.new()
+	shader_material.shader = load(str(data["shader"]))
+	if data["category_slug"] == "vertex" and data["slug"] == "vat":
+		shader_material.set_shader_parameter("vat_texture", load("res://assets/vat.png"))
+	if data["category_slug"] == "color" and data["slug"] == "lut":
+		shader_material.set_shader_parameter("lut_texture", load("res://assets/warm_lut.png"))
+	if data["category_slug"] == "transition":
+		shader_material.set_shader_parameter("destination_texture", load("res://assets/destination.svg"))
+	_set_uniforms()
+	var kind: String = data["kind"]
+	if kind in ["spatial", "pipeline", "depth"]:
+		_build_3d()
+	else:
+		_build_canvas(kind)
+
+
+func _set_uniforms() -> void:
+	if shader_material == null:
+		return
+	shader_material.set_shader_parameter("u_time", elapsed)
+	shader_material.set_shader_parameter("u_amount", amount)
+	shader_material.set_shader_parameter("u_speed", speed)
+	shader_material.set_shader_parameter("u_scale", scale_value)
+	shader_material.set_shader_parameter("u_enabled", enabled)
+	shader_material.set_shader_parameter("u_color", Color("#55e8bb"))
+
+
+func _build_canvas(kind: String) -> void:
+	canvas_root = Control.new()
+	canvas_root.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	canvas_root.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	add_child(canvas_root)
+	var backdrop := ColorRect.new()
+	backdrop.color = Color("#0a1220")
+	backdrop.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	canvas_root.add_child(backdrop)
+	if kind == "post":
+		var picture := TextureRect.new()
+		picture.texture = load("res://assets/cottage.png")
+		picture.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+		picture.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_COVERED
+		picture.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+		canvas_root.add_child(picture)
+		var effect := ColorRect.new()
+		effect.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+		effect.material = shader_material
+		effect.mouse_filter = Control.MOUSE_FILTER_IGNORE
+		canvas_root.add_child(effect)
+	else:
+		var picture := TextureRect.new()
+		picture.texture = load("res://assets/lettering.svg" if entry.get("text", false) else "res://assets/subject.svg")
+		picture.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+		picture.stretch_mode = TextureRect.STRETCH_SCALE
+		picture.material = shader_material
+		picture.mouse_filter = Control.MOUSE_FILTER_IGNORE
+		picture.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+		if kind == "sprite":
+			picture.anchor_left = 0.13
+			picture.anchor_top = 0.12
+			picture.anchor_right = 0.87
+			picture.anchor_bottom = 0.88
+		canvas_root.add_child(picture)
+
+
+func _surface(color: Color, roughness: float = 0.5) -> StandardMaterial3D:
+	var material := StandardMaterial3D.new()
+	material.albedo_color = color
+	material.roughness = roughness
+	return material
+
+
+func _mesh(parent: Node, geometry: Mesh, position_value: Vector3, material: Material) -> MeshInstance3D:
+	var instance := MeshInstance3D.new()
+	instance.mesh = geometry
+	instance.position = position_value
+	instance.material_override = material
+	parent.add_child(instance)
+	return instance
+
+
+func _colored_mesh(geometry: Mesh) -> ArrayMesh:
+	var arrays := geometry.surface_get_arrays(0)
+	var vertices: PackedVector3Array = arrays[Mesh.ARRAY_VERTEX]
+	var normals: PackedVector3Array = arrays[Mesh.ARRAY_NORMAL]
+	var uvs: PackedVector2Array = arrays[Mesh.ARRAY_TEX_UV]
+	var indices: PackedInt32Array = arrays[Mesh.ARRAY_INDEX]
+	var tool := SurfaceTool.new()
+	tool.begin(Mesh.PRIMITIVE_TRIANGLES)
+	for index in range(indices.size()):
+		var source := indices[index]
+		var color := Color(uvs[source].x, uvs[source].y, 1.0 - uvs[source].x)
+		if entry.get("barycentric", false):
+			color = [Color.RED, Color.GREEN, Color.BLUE][index % 3]
+		tool.set_color(color)
+		tool.set_normal(normals[source])
+		tool.set_uv(uvs[source])
+		tool.add_vertex(vertices[source])
+	tool.generate_tangents()
+	return tool.commit()
+
+
+func _build_3d() -> void:
+	var world := Node3D.new()
+	add_child(world)
+	var world_environment := WorldEnvironment.new()
+	environment = Environment.new()
+	environment.background_mode = Environment.BG_COLOR
+	environment.background_color = Color("#101c2d")
+	environment.ambient_light_source = Environment.AMBIENT_SOURCE_COLOR
+	environment.ambient_light_color = Color("#91abc5")
+	environment.ambient_light_energy = 0.55
+	environment.reflected_light_source = Environment.REFLECTION_SOURCE_SKY
+	environment.tonemap_mode = Environment.TONE_MAPPER_FILMIC
+	var sky := Sky.new()
+	var sky_material := ProceduralSkyMaterial.new()
+	sky_material.sky_top_color = Color("#203e62")
+	sky_material.sky_horizon_color = Color("#9ab4bd")
+	sky_material.ground_bottom_color = Color("#142435")
+	sky_material.ground_horizon_color = Color("#85999e")
+	sky.sky_material = sky_material
+	environment.sky = sky
+	world_environment.environment = environment
+	world.add_child(world_environment)
+	var sun := DirectionalLight3D.new()
+	sun.rotation_degrees = Vector3(-42, -32, 0)
+	sun.light_color = Color("#ffe5bd")
+	sun.light_energy = 1.5
+	sun.shadow_enabled = true
+	world.add_child(sun)
+	var fill := OmniLight3D.new()
+	fill.position = Vector3(-2, 2.5, 2)
+	fill.light_color = Color("#58b5ff")
+	fill.light_energy = 3.5
+	fill.omni_range = 8.0
+	world.add_child(fill)
+	var floor_mesh := PlaneMesh.new()
+	floor_mesh.size = Vector2(20, 20)
+	_mesh(world, floor_mesh, Vector3(0, -1.05, 0), _surface(Color("#172b3d"), 0.22))
+	subject = Node3D.new()
+	world.add_child(subject)
+	var shape: String = entry.get("shape", "sphere")
+	if shape == "quad":
+		var quad := QuadMesh.new()
+		quad.size = Vector2(2, 2)
+		_mesh(subject, quad, Vector3.ZERO, shader_material)
+	elif shape == "cube":
+		var cube := BoxMesh.new()
+		cube.size = Vector3(1.55, 1.55, 1.55)
+		cube.subdivide_width = 16
+		cube.subdivide_height = 16
+		cube.subdivide_depth = 16
+		_mesh(subject, cube, Vector3.ZERO, shader_material)
+	elif shape in ["plane", "cloth"]:
+		var plane := PlaneMesh.new()
+		plane.size = Vector2(3.6, 3.1)
+		plane.subdivide_width = 70
+		plane.subdivide_depth = 70
+		var surface := _mesh(subject, _colored_mesh(plane) if entry.get("vertex_colors", false) else plane, Vector3.ZERO, shader_material)
+		if shape == "cloth":
+			surface.rotation_degrees.x = 80
+	else:
+		var sphere := SphereMesh.new()
+		sphere.radius = 0.92
+		sphere.height = 1.84
+		sphere.radial_segments = 64
+		sphere.rings = 40
+		_mesh(subject, _colored_mesh(sphere) if entry.get("vertex_colors", false) else sphere, Vector3(0, 0.10, 0), shader_material)
+		var torus := TorusMesh.new()
+		torus.inner_radius = 0.19
+		torus.outer_radius = 0.34
+		torus.rings = 40
+		torus.ring_segments = 20
+		var ring := _mesh(world, torus, Vector3(-1.48, -0.58, 0.45), _surface(Color("#e7b772"), 0.23))
+		ring.rotation_degrees = Vector3(65, 15, 10)
+		var cube := BoxMesh.new()
+		cube.size = Vector3(0.68, 0.68, 0.68)
+		var block := _mesh(world, cube, Vector3(1.4, -0.69, -0.4), _surface(Color("#5bc9bc"), 0.35))
+		block.rotation_degrees.y = 25
+		for index in range(4):
+			var post := BoxMesh.new()
+			post.size = Vector3(0.34, 0.50 + index * 0.26, 0.34)
+			_mesh(world, post, Vector3(-1.6 + index * 0.85, -0.75 + index * 0.13, -2.1), _surface(Color("#8d99bc")))
+	if entry.get("rocks", false):
+		for index in range(4):
+			var rock := SphereMesh.new()
+			rock.radius = 0.32 + index * 0.035
+			rock.height = 0.7
+			_mesh(world, rock, Vector3(-1.3 + index * 0.85, -0.2, -0.5), _surface(Color("#8e9c99"), 0.8))
+	if entry.get("occluder", false):
+		var wall := BoxMesh.new()
+		wall.size = Vector3(2.4, 1.15, 0.16)
+		_mesh(world, wall, Vector3(0.15, -0.25, 0.8), _surface(Color("#354b68"), 0.7))
+	if entry.get("reflection_probes", false):
+		for index in range(2):
+			var probe := ReflectionProbe.new()
+			probe.position = Vector3(-0.8 + index * 1.6, 0, 0)
+			probe.size = Vector3(4, 4, 4)
+			probe.box_projection = true
+			probe.intensity = 0.7 + index * 0.5
+			world.add_child(probe)
+	if entry.get("fog_volume", false):
+		var volume := FogVolume.new()
+		volume.size = Vector3(2.5, 2.0, 2.0)
+		var fog_material := FogMaterial.new()
+		fog_material.density = 0.7
+		fog_material.albedo = Color("#8bc9c1")
+		volume.material = fog_material
+		world.add_child(volume)
+	if entry.get("soft_shadow", false):
+		sun.light_angular_distance = 2.5
+	var pedestal := CylinderMesh.new()
+	pedestal.top_radius = 1.16
+	pedestal.bottom_radius = 1.25
+	pedestal.height = 0.16
+	_mesh(world, pedestal, Vector3(0, -0.97, 0), _surface(Color("#263e52"), 0.5))
+	camera = Camera3D.new()
+	camera.current = true
+	camera.fov = 43
+	camera.near = 0.05
+	world.add_child(camera)
+	_position_camera()
+	if entry["kind"] == "depth":
+		var quad := QuadMesh.new()
+		quad.size = Vector2(2, 2)
+		var screen := _mesh(camera, quad, Vector3.ZERO, shader_material)
+		screen.extra_cull_margin = 100
+		shader_material.render_priority = 127
+		for instance in subject.get_children():
+			if instance is MeshInstance3D:
+				instance.material_override = _surface(Color("#6c9d96"))
+	if entry.get("object_ids", false):
+		var id_index := 1
+		for instance in world.find_children("*", "MeshInstance3D", true, false):
+			instance.material_override = shader_material
+			instance.set_instance_shader_parameter("instance_id", float(id_index))
+			id_index += 1
+	_apply_pipeline()
+
+
+func _apply_pipeline() -> void:
+	if environment == null or entry.get("kind", "") != "pipeline":
+		return
+	for property_name in ["ssao_enabled", "ssil_enabled", "ssr_enabled", "glow_enabled", "fog_enabled", "volumetric_fog_enabled"]:
+		environment.set(property_name, false)
+	if not enabled:
+		return
+	var properties: Dictionary = entry.get("environment", {})
+	for property_name in properties:
+		var value: Variant = properties[property_name]
+		if value is Array and value.size() == 4:
+			value = Color(value[0], value[1], value[2], value[3])
+		environment.set(property_name, value)
+	if properties.has("glow_enabled"):
+		environment.glow_intensity = 0.3 + amount * 2.0
+	if properties.has("fog_enabled"):
+		environment.fog_density = amount * 0.12
+	if properties.has("ssao_enabled"):
+		environment.ssao_intensity = amount * 4.0
+	if properties.has("volumetric_fog_enabled"):
+		environment.volumetric_fog_density = amount * 0.12
+
+
+func _position_camera() -> void:
+	if camera:
+		camera.position = Vector3(sin(orbit) * distance, distance * elevation + 0.6, cos(orbit) * distance)
+		camera.look_at(Vector3(0, -0.05, 0))
+
+
+func set_parameter(key: String, value: Variant) -> void:
+	match key:
+		"u_amount": amount = float(value)
+		"u_speed": speed = float(value)
+		"u_scale": scale_value = float(value)
+		"u_enabled": enabled = bool(value)
+	if shader_material:
+		shader_material.set_shader_parameter(key, value)
+	_apply_pipeline()
+
+
+func orbit_input(event: InputEvent) -> void:
+	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
+		set_parameter("u_mouse", event.position / Vector2(size))
+	if camera == null:
+		return
+	if event is InputEventMouseMotion and event.button_mask & MOUSE_BUTTON_MASK_LEFT:
+		orbit -= event.relative.x * 0.008
+		elevation = clampf(elevation + event.relative.y * 0.003, -0.05, 1.0)
+		_position_camera()
+	if event is InputEventMouseButton and event.pressed:
+		if event.button_index == MOUSE_BUTTON_WHEEL_UP:
+			distance = maxf(3.2, distance - 0.3)
+		elif event.button_index == MOUSE_BUTTON_WHEEL_DOWN:
+			distance = minf(9.0, distance + 0.3)
+		_position_camera()
+
+
+func _process(delta: float) -> void:
+	if not paused:
+		elapsed += delta
+	if shader_material:
+		shader_material.set_shader_parameter("u_time", elapsed)

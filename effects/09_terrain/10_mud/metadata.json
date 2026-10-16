@@ -1,0 +1,20 @@
+{
+  "number": 156,
+  "name": "泥土附着",
+  "slug": "mud",
+  "category": "地表与表面变化",
+  "category_slug": "terrain",
+  "category_number": 9,
+  "kind": "spatial",
+  "implementation": "三维材质",
+  "approximation": false,
+  "summary": "地面出现一片片泥土附着。",
+  "directory": "res://effects/09_terrain/10_mud",
+  "shader": "res://effects/09_terrain/10_mud/effect.gdshader",
+  "readme": "res://effects/09_terrain/10_mud/README.md",
+  "scene": "res://effects/09_terrain/10_mud/demo.tscn",
+  "shape": "plane",
+  "amount": 0.55,
+  "keywords": "terrain mud spatial",
+  "text": false
+}

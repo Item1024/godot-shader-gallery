@@ -1,0 +1,20 @@
+{
+  "number": 395,
+  "name": "投影纹理",
+  "slug": "cookie",
+  "category": "光照、阴影与空间渲染",
+  "category_slug": "lighting",
+  "category_number": 21,
+  "kind": "spatial",
+  "implementation": "演示近似",
+  "approximation": true,
+  "summary": "表面像被投上重复的方格光影。",
+  "directory": "res://effects/21_lighting/14_cookie",
+  "shader": "res://effects/21_lighting/14_cookie/effect.gdshader",
+  "readme": "res://effects/21_lighting/14_cookie/README.md",
+  "scene": "res://effects/21_lighting/14_cookie/demo.tscn",
+  "shape": "sphere",
+  "amount": 0.55,
+  "keywords": "lighting cookie spatial",
+  "text": false
+}

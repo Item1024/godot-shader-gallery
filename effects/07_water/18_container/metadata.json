@@ -1,0 +1,21 @@
+{
+  "number": 129,
+  "name": "容器内液面",
+  "slug": "container",
+  "category": "水体与液体表面",
+  "category_slug": "water",
+  "category_number": 7,
+  "kind": "spatial",
+  "implementation": "演示近似",
+  "approximation": true,
+  "summary": "一小块液面像在容器里晃动。",
+  "directory": "res://effects/07_water/18_container",
+  "shader": "res://effects/07_water/18_container/effect.gdshader",
+  "readme": "res://effects/07_water/18_container/README.md",
+  "scene": "res://effects/07_water/18_container/demo.tscn",
+  "shape": "plane",
+  "amount": 0.55,
+  "keywords": "water container spatial",
+  "text": false,
+  "rocks": true
+}

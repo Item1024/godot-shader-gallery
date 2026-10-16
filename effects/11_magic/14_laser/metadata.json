@@ -1,0 +1,20 @@
+{
+  "number": 201,
+  "name": "激光",
+  "slug": "laser",
+  "category": "科幻、能量与魔法",
+  "category_slug": "magic",
+  "category_number": 11,
+  "kind": "canvas",
+  "implementation": "二维 Shader",
+  "approximation": false,
+  "summary": "画面中有一条很细、很亮的激光。",
+  "directory": "res://effects/11_magic/14_laser",
+  "shader": "res://effects/11_magic/14_laser/effect.gdshader",
+  "readme": "res://effects/11_magic/14_laser/README.md",
+  "scene": "res://effects/11_magic/14_laser/demo.tscn",
+  "shape": "sphere",
+  "amount": 0.55,
+  "keywords": "magic laser canvas",
+  "text": false
+}

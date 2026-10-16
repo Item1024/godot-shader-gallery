@@ -1,0 +1,20 @@
+{
+  "number": 314,
+  "name": "渐变映射",
+  "slug": "gradient_map",
+  "category": "屏幕调色",
+  "category_slug": "color",
+  "category_number": 17,
+  "kind": "post",
+  "implementation": "屏幕后处理",
+  "approximation": false,
+  "summary": "不同亮度被换成一条渐变里的颜色。",
+  "directory": "res://effects/17_color/08_gradient_map",
+  "shader": "res://effects/17_color/08_gradient_map/effect.gdshader",
+  "readme": "res://effects/17_color/08_gradient_map/README.md",
+  "scene": "res://effects/17_color/08_gradient_map/demo.tscn",
+  "shape": "sphere",
+  "amount": 0.55,
+  "keywords": "color gradient_map post",
+  "text": false
+}

@@ -1,0 +1,20 @@
+{
+  "number": 260,
+  "name": "Voronoi蜂窝",
+  "slug": "voronoi",
+  "category": "UV、视差与程序纹理",
+  "category_slug": "uv",
+  "category_number": 14,
+  "kind": "canvas",
+  "implementation": "二维 Shader",
+  "approximation": false,
+  "summary": "画面出现许多大小不一的斑块。",
+  "directory": "res://effects/14_uv/16_voronoi",
+  "shader": "res://effects/14_uv/16_voronoi/effect.gdshader",
+  "readme": "res://effects/14_uv/16_voronoi/README.md",
+  "scene": "res://effects/14_uv/16_voronoi/demo.tscn",
+  "shape": "sphere",
+  "amount": 0.55,
+  "keywords": "uv voronoi canvas",
+  "text": false
+}

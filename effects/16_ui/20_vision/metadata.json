@@ -1,0 +1,20 @@
+{
+  "number": 303,
+  "name": "视野遮罩",
+  "slug": "vision",
+  "category": "UI、文字与地图",
+  "category_slug": "ui",
+  "category_number": 16,
+  "kind": "canvas",
+  "implementation": "二维 Shader",
+  "approximation": false,
+  "summary": "图案只在一小块视野中清楚可见。",
+  "directory": "res://effects/16_ui/20_vision",
+  "shader": "res://effects/16_ui/20_vision/effect.gdshader",
+  "readme": "res://effects/16_ui/20_vision/README.md",
+  "scene": "res://effects/16_ui/20_vision/demo.tscn",
+  "shape": "sphere",
+  "amount": 0.55,
+  "keywords": "ui vision canvas",
+  "text": false
+}

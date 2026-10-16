@@ -1,0 +1,20 @@
+{
+  "number": 48,
+  "name": "星点闪烁",
+  "slug": "stars",
+  "category": "发光、流光与扫光",
+  "category_slug": "emission",
+  "category_number": 3,
+  "kind": "canvas",
+  "implementation": "二维 Shader",
+  "approximation": false,
+  "summary": "许多小星点各自明暗变化。",
+  "directory": "res://effects/03_emission/16_stars",
+  "shader": "res://effects/03_emission/16_stars/effect.gdshader",
+  "readme": "res://effects/03_emission/16_stars/README.md",
+  "scene": "res://effects/03_emission/16_stars/demo.tscn",
+  "shape": "sphere",
+  "amount": 0.55,
+  "keywords": "emission stars canvas",
+  "text": false
+}

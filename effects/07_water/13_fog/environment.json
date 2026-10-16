@@ -1,0 +1,9 @@
+{
+  "fog_enabled": true,
+  "fog_light_color": [
+    0.1,
+    0.45,
+    0.52,
+    1
+  ]
+}

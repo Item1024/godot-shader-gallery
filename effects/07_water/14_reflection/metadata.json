@@ -1,0 +1,21 @@
+{
+  "number": 125,
+  "name": "水面反射",
+  "slug": "reflection",
+  "category": "水体与液体表面",
+  "category_slug": "water",
+  "category_number": 7,
+  "kind": "spatial",
+  "implementation": "三维材质",
+  "approximation": false,
+  "summary": "水面反射周围环境。",
+  "directory": "res://effects/07_water/14_reflection",
+  "shader": "res://effects/07_water/14_reflection/effect.gdshader",
+  "readme": "res://effects/07_water/14_reflection/README.md",
+  "scene": "res://effects/07_water/14_reflection/demo.tscn",
+  "shape": "plane",
+  "amount": 0.55,
+  "keywords": "water reflection spatial",
+  "text": false,
+  "rocks": true
+}

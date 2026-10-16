@@ -1,0 +1,20 @@
+{
+  "number": 4,
+  "name": "径向溶解",
+  "slug": "radial",
+  "category": "溶解、显隐与侵蚀",
+  "category_slug": "dissolve",
+  "category_number": 1,
+  "kind": "sprite",
+  "implementation": "二维 Shader",
+  "approximation": false,
+  "summary": "图片从中心向外被擦掉。",
+  "directory": "res://effects/01_dissolve/04_radial",
+  "shader": "res://effects/01_dissolve/04_radial/effect.gdshader",
+  "readme": "res://effects/01_dissolve/04_radial/README.md",
+  "scene": "res://effects/01_dissolve/04_radial/demo.tscn",
+  "shape": "sphere",
+  "amount": 0.32,
+  "keywords": "dissolve radial sprite",
+  "text": false
+}

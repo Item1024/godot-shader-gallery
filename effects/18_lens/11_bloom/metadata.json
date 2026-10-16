@@ -1,0 +1,20 @@
+{
+  "number": 336,
+  "name": "Bloom泛光",
+  "slug": "bloom",
+  "category": "模糊、镜头与扭曲",
+  "category_slug": "lens",
+  "category_number": 18,
+  "kind": "post",
+  "implementation": "演示近似",
+  "approximation": true,
+  "summary": "画面较亮的地方向外泛出一层光。",
+  "directory": "res://effects/18_lens/11_bloom",
+  "shader": "res://effects/18_lens/11_bloom/effect.gdshader",
+  "readme": "res://effects/18_lens/11_bloom/README.md",
+  "scene": "res://effects/18_lens/11_bloom/demo.tscn",
+  "shape": "sphere",
+  "amount": 0.55,
+  "keywords": "lens bloom post",
+  "text": false
+}

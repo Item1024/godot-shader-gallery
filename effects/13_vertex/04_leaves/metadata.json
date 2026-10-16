@@ -1,0 +1,20 @@
+{
+  "number": 232,
+  "name": "树叶颤动",
+  "slug": "leaves",
+  "category": "顶点变形与模型运动",
+  "category_slug": "vertex",
+  "category_number": 13,
+  "kind": "spatial",
+  "implementation": "三维材质",
+  "approximation": false,
+  "summary": "表面像树叶一样细微颤动。",
+  "directory": "res://effects/13_vertex/04_leaves",
+  "shader": "res://effects/13_vertex/04_leaves/effect.gdshader",
+  "readme": "res://effects/13_vertex/04_leaves/README.md",
+  "scene": "res://effects/13_vertex/04_leaves/demo.tscn",
+  "shape": "cloth",
+  "amount": 0.55,
+  "keywords": "vertex leaves spatial",
+  "text": false
+}

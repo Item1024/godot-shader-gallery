@@ -1,0 +1,20 @@
+{
+  "number": 399,
+  "name": "程序化地形",
+  "slug": "terrain",
+  "category": "程序化与体积进阶",
+  "category_slug": "advanced",
+  "category_number": 22,
+  "kind": "canvas",
+  "implementation": "演示近似",
+  "approximation": true,
+  "summary": "地形由公式直接画出来。",
+  "directory": "res://effects/22_advanced/03_terrain",
+  "shader": "res://effects/22_advanced/03_terrain/effect.gdshader",
+  "readme": "res://effects/22_advanced/03_terrain/README.md",
+  "scene": "res://effects/22_advanced/03_terrain/demo.tscn",
+  "shape": "sphere",
+  "amount": 0.55,
+  "keywords": "advanced terrain canvas",
+  "text": false
+}

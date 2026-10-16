@@ -1,0 +1,20 @@
+{
+  "number": 229,
+  "name": "波浪起伏",
+  "slug": "wave",
+  "category": "顶点变形与模型运动",
+  "category_slug": "vertex",
+  "category_number": 13,
+  "kind": "spatial",
+  "implementation": "三维材质",
+  "approximation": false,
+  "summary": "表面像波浪一样上下起伏。",
+  "directory": "res://effects/13_vertex/01_wave",
+  "shader": "res://effects/13_vertex/01_wave/effect.gdshader",
+  "readme": "res://effects/13_vertex/01_wave/README.md",
+  "scene": "res://effects/13_vertex/01_wave/demo.tscn",
+  "shape": "cloth",
+  "amount": 0.55,
+  "keywords": "vertex wave spatial",
+  "text": false
+}

@@ -1,0 +1,20 @@
+{
+  "number": 76,
+  "name": "布料",
+  "slug": "cloth",
+  "category": "真实与半真实材质",
+  "category_slug": "materials",
+  "category_number": 5,
+  "kind": "spatial",
+  "implementation": "三维材质",
+  "approximation": false,
+  "summary": "模型表面像有细密经纬线。",
+  "directory": "res://effects/05_materials/09_cloth",
+  "shader": "res://effects/05_materials/09_cloth/effect.gdshader",
+  "readme": "res://effects/05_materials/09_cloth/README.md",
+  "scene": "res://effects/05_materials/09_cloth/demo.tscn",
+  "shape": "sphere",
+  "amount": 0.55,
+  "keywords": "materials cloth spatial",
+  "text": false
+}

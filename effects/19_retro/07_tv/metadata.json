@@ -1,0 +1,20 @@
+{
+  "number": 354,
+  "name": "模拟电视干扰",
+  "slug": "tv",
+  "category": "复古、故障与显示器",
+  "category_slug": "retro",
+  "category_number": 19,
+  "kind": "post",
+  "implementation": "屏幕后处理",
+  "approximation": false,
+  "summary": "画面混入电视雪花。",
+  "directory": "res://effects/19_retro/07_tv",
+  "shader": "res://effects/19_retro/07_tv/effect.gdshader",
+  "readme": "res://effects/19_retro/07_tv/README.md",
+  "scene": "res://effects/19_retro/07_tv/demo.tscn",
+  "shape": "sphere",
+  "amount": 0.55,
+  "keywords": "retro tv post",
+  "text": false
+}

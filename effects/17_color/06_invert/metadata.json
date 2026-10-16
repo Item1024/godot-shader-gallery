@@ -1,0 +1,20 @@
+{
+  "number": 312,
+  "name": "反色",
+  "slug": "invert",
+  "category": "屏幕调色",
+  "category_slug": "color",
+  "category_number": 17,
+  "kind": "post",
+  "implementation": "屏幕后处理",
+  "approximation": false,
+  "summary": "画面像照片底片，颜色变成相反颜色。",
+  "directory": "res://effects/17_color/06_invert",
+  "shader": "res://effects/17_color/06_invert/effect.gdshader",
+  "readme": "res://effects/17_color/06_invert/README.md",
+  "scene": "res://effects/17_color/06_invert/demo.tscn",
+  "shape": "sphere",
+  "amount": 0.55,
+  "keywords": "color invert post",
+  "text": false
+}

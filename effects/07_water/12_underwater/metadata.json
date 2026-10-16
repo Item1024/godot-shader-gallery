@@ -1,0 +1,20 @@
+{
+  "number": 123,
+  "name": "水下扭曲",
+  "slug": "underwater",
+  "category": "水体与液体表面",
+  "category_slug": "water",
+  "category_number": 7,
+  "kind": "post",
+  "implementation": "屏幕后处理",
+  "approximation": false,
+  "summary": "画面像在水下看东西一样扭动。",
+  "directory": "res://effects/07_water/12_underwater",
+  "shader": "res://effects/07_water/12_underwater/effect.gdshader",
+  "readme": "res://effects/07_water/12_underwater/README.md",
+  "scene": "res://effects/07_water/12_underwater/demo.tscn",
+  "shape": "sphere",
+  "amount": 0.55,
+  "keywords": "water underwater post",
+  "text": false
+}

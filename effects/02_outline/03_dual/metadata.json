@@ -1,0 +1,20 @@
+{
+  "number": 19,
+  "name": "双色描边",
+  "slug": "dual",
+  "category": "描边、轮廓与遮挡",
+  "category_slug": "outline",
+  "category_number": 2,
+  "kind": "sprite",
+  "implementation": "二维 Shader",
+  "approximation": false,
+  "summary": "图案内外各有一种描边色。",
+  "directory": "res://effects/02_outline/03_dual",
+  "shader": "res://effects/02_outline/03_dual/effect.gdshader",
+  "readme": "res://effects/02_outline/03_dual/README.md",
+  "scene": "res://effects/02_outline/03_dual/demo.tscn",
+  "shape": "sphere",
+  "amount": 0.55,
+  "keywords": "outline dual sprite",
+  "text": false
+}

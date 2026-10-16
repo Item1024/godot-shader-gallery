@@ -1,0 +1,20 @@
+{
+  "number": 375,
+  "name": "燃烧转场",
+  "slug": "burn",
+  "category": "场景切换与转场",
+  "category_slug": "transition",
+  "category_number": 20,
+  "kind": "post",
+  "implementation": "屏幕后处理",
+  "approximation": false,
+  "summary": "旧画面像烧掉一样露出下一张图。",
+  "directory": "res://effects/20_transition/10_burn",
+  "shader": "res://effects/20_transition/10_burn/effect.gdshader",
+  "readme": "res://effects/20_transition/10_burn/README.md",
+  "scene": "res://effects/20_transition/10_burn/demo.tscn",
+  "shape": "sphere",
+  "amount": 0.55,
+  "keywords": "transition burn post",
+  "text": false
+}

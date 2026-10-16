@@ -1,0 +1,20 @@
+{
+  "number": 226,
+  "name": "局部损伤",
+  "slug": "damage",
+  "category": "角色受击与状态",
+  "category_slug": "status",
+  "category_number": 12,
+  "kind": "spatial",
+  "implementation": "三维材质",
+  "approximation": false,
+  "summary": "模型表面出现斑驳的深色损伤。",
+  "directory": "res://effects/12_status/15_damage",
+  "shader": "res://effects/12_status/15_damage/effect.gdshader",
+  "readme": "res://effects/12_status/15_damage/README.md",
+  "scene": "res://effects/12_status/15_damage/demo.tscn",
+  "shape": "sphere",
+  "amount": 0.55,
+  "keywords": "status damage spatial",
+  "text": false
+}

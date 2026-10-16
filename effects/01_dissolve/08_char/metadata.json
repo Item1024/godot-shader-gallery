@@ -1,0 +1,20 @@
+{
+  "number": 8,
+  "name": "焦边溶解",
+  "slug": "char",
+  "category": "溶解、显隐与侵蚀",
+  "category_slug": "dissolve",
+  "category_number": 1,
+  "kind": "sprite",
+  "implementation": "二维 Shader",
+  "approximation": false,
+  "summary": "消失边缘带着烧焦的橙色。",
+  "directory": "res://effects/01_dissolve/08_char",
+  "shader": "res://effects/01_dissolve/08_char/effect.gdshader",
+  "readme": "res://effects/01_dissolve/08_char/README.md",
+  "scene": "res://effects/01_dissolve/08_char/demo.tscn",
+  "shape": "sphere",
+  "amount": 0.32,
+  "keywords": "dissolve char sprite",
+  "text": false
+}

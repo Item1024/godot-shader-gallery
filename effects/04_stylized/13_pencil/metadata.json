@@ -1,0 +1,20 @@
+{
+  "number": 61,
+  "name": "铅笔素描",
+  "slug": "pencil",
+  "category": "卡通与绘画风格",
+  "category_slug": "stylized",
+  "category_number": 4,
+  "kind": "post",
+  "implementation": "演示近似",
+  "approximation": true,
+  "summary": "照片像铅笔画，轮廓明显并带细碎颗粒。",
+  "directory": "res://effects/04_stylized/13_pencil",
+  "shader": "res://effects/04_stylized/13_pencil/effect.gdshader",
+  "readme": "res://effects/04_stylized/13_pencil/README.md",
+  "scene": "res://effects/04_stylized/13_pencil/demo.tscn",
+  "shape": "sphere",
+  "amount": 0.55,
+  "keywords": "stylized pencil post",
+  "text": false
+}

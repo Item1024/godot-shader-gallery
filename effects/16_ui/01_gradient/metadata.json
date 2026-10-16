@@ -1,0 +1,20 @@
+{
+  "number": 284,
+  "name": "渐变填色",
+  "slug": "gradient",
+  "category": "UI、文字与地图",
+  "category_slug": "ui",
+  "category_number": 16,
+  "kind": "canvas",
+  "implementation": "二维 Shader",
+  "approximation": false,
+  "summary": "一个区域从一种颜色平滑过渡到另一种。",
+  "directory": "res://effects/16_ui/01_gradient",
+  "shader": "res://effects/16_ui/01_gradient/effect.gdshader",
+  "readme": "res://effects/16_ui/01_gradient/README.md",
+  "scene": "res://effects/16_ui/01_gradient/demo.tscn",
+  "shape": "sphere",
+  "amount": 0.55,
+  "keywords": "ui gradient canvas",
+  "text": false
+}

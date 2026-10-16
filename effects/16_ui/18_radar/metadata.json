@@ -1,0 +1,20 @@
+{
+  "number": 301,
+  "name": "雷达扫描",
+  "slug": "radar",
+  "category": "UI、文字与地图",
+  "category_slug": "ui",
+  "category_number": 16,
+  "kind": "canvas",
+  "implementation": "二维 Shader",
+  "approximation": false,
+  "summary": "一片扇形亮光绕圆心扫描。",
+  "directory": "res://effects/16_ui/18_radar",
+  "shader": "res://effects/16_ui/18_radar/effect.gdshader",
+  "readme": "res://effects/16_ui/18_radar/README.md",
+  "scene": "res://effects/16_ui/18_radar/demo.tscn",
+  "shape": "sphere",
+  "amount": 0.55,
+  "keywords": "ui radar canvas",
+  "text": false
+}

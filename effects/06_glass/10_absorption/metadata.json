@@ -1,0 +1,20 @@
+{
+  "number": 105,
+  "name": "玻璃厚度吸收",
+  "slug": "absorption",
+  "category": "透明、折射与反射",
+  "category_slug": "glass",
+  "category_number": 6,
+  "kind": "spatial",
+  "implementation": "演示近似",
+  "approximation": true,
+  "summary": "玻璃中间颜色更深，边缘更浅。",
+  "directory": "res://effects/06_glass/10_absorption",
+  "shader": "res://effects/06_glass/10_absorption/effect.gdshader",
+  "readme": "res://effects/06_glass/10_absorption/README.md",
+  "scene": "res://effects/06_glass/10_absorption/demo.tscn",
+  "shape": "sphere",
+  "amount": 0.55,
+  "keywords": "glass absorption spatial",
+  "text": false
+}

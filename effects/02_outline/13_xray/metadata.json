@@ -1,0 +1,21 @@
+{
+  "number": 29,
+  "name": "X光透视",
+  "slug": "xray",
+  "category": "描边、轮廓与遮挡",
+  "category_slug": "outline",
+  "category_number": 2,
+  "kind": "spatial",
+  "implementation": "三维材质",
+  "approximation": false,
+  "summary": "模型像透视图一样半透明，边缘更亮。",
+  "directory": "res://effects/02_outline/13_xray",
+  "shader": "res://effects/02_outline/13_xray/effect.gdshader",
+  "readme": "res://effects/02_outline/13_xray/README.md",
+  "scene": "res://effects/02_outline/13_xray/demo.tscn",
+  "shape": "sphere",
+  "amount": 0.55,
+  "keywords": "outline xray spatial",
+  "text": false,
+  "occluder": true
+}

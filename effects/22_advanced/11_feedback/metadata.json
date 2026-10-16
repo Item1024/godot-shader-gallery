@@ -1,0 +1,20 @@
+{
+  "number": 407,
+  "name": "反馈拖影",
+  "slug": "feedback",
+  "category": "程序化与体积进阶",
+  "category_slug": "advanced",
+  "category_number": 22,
+  "kind": "canvas",
+  "implementation": "演示近似",
+  "approximation": true,
+  "summary": "移动亮点后面跟着一串变淡的残光。",
+  "directory": "res://effects/22_advanced/11_feedback",
+  "shader": "res://effects/22_advanced/11_feedback/effect.gdshader",
+  "readme": "res://effects/22_advanced/11_feedback/README.md",
+  "scene": "res://effects/22_advanced/11_feedback/demo.tscn",
+  "shape": "sphere",
+  "amount": 0.55,
+  "keywords": "advanced feedback canvas",
+  "text": false
+}

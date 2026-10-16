@@ -1,0 +1,20 @@
+{
+  "number": 3,
+  "name": "高度溶解",
+  "slug": "height",
+  "category": "溶解、显隐与侵蚀",
+  "category_slug": "dissolve",
+  "category_number": 1,
+  "kind": "sprite",
+  "implementation": "二维 Shader",
+  "approximation": false,
+  "summary": "图片沿上下方向消失。",
+  "directory": "res://effects/01_dissolve/03_height",
+  "shader": "res://effects/01_dissolve/03_height/effect.gdshader",
+  "readme": "res://effects/01_dissolve/03_height/README.md",
+  "scene": "res://effects/01_dissolve/03_height/demo.tscn",
+  "shape": "sphere",
+  "amount": 0.32,
+  "keywords": "dissolve height sprite",
+  "text": false
+}

@@ -1,0 +1,20 @@
+{
+  "number": 272,
+  "name": "调色板替换",
+  "slug": "palette",
+  "category": "2D精灵与像素画",
+  "category_slug": "sprite",
+  "category_number": 15,
+  "kind": "sprite",
+  "implementation": "二维 Shader",
+  "approximation": false,
+  "summary": "图片换成一套较少的颜色。",
+  "directory": "res://effects/15_sprite/06_palette",
+  "shader": "res://effects/15_sprite/06_palette/effect.gdshader",
+  "readme": "res://effects/15_sprite/06_palette/README.md",
+  "scene": "res://effects/15_sprite/06_palette/demo.tscn",
+  "shape": "sphere",
+  "amount": 0.55,
+  "keywords": "sprite palette sprite",
+  "text": false
+}

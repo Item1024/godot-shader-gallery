@@ -1,0 +1,20 @@
+{
+  "number": 37,
+  "name": "斜向扫光",
+  "slug": "diagonal",
+  "category": "发光、流光与扫光",
+  "category_slug": "emission",
+  "category_number": 3,
+  "kind": "canvas",
+  "implementation": "二维 Shader",
+  "approximation": false,
+  "summary": "亮带斜着扫过图案。",
+  "directory": "res://effects/03_emission/05_diagonal",
+  "shader": "res://effects/03_emission/05_diagonal/effect.gdshader",
+  "readme": "res://effects/03_emission/05_diagonal/README.md",
+  "scene": "res://effects/03_emission/05_diagonal/demo.tscn",
+  "shape": "sphere",
+  "amount": 0.55,
+  "keywords": "emission diagonal canvas",
+  "text": false
+}

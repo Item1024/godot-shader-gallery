@@ -1,0 +1,20 @@
+{
+  "number": 134,
+  "name": "燃烧表面",
+  "slug": "burning",
+  "category": "火焰、烟雾与爆炸",
+  "category_slug": "fire",
+  "category_number": 8,
+  "kind": "canvas",
+  "implementation": "二维 Shader",
+  "approximation": false,
+  "summary": "表面像布满正在燃烧的裂缝。",
+  "directory": "res://effects/08_fire/04_burning",
+  "shader": "res://effects/08_fire/04_burning/effect.gdshader",
+  "readme": "res://effects/08_fire/04_burning/README.md",
+  "scene": "res://effects/08_fire/04_burning/demo.tscn",
+  "shape": "sphere",
+  "amount": 0.55,
+  "keywords": "fire burning canvas",
+  "text": false
+}

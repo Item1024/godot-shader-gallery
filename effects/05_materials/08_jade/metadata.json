@@ -1,0 +1,20 @@
+{
+  "number": 75,
+  "name": "玉石",
+  "slug": "jade",
+  "category": "真实与半真实材质",
+  "category_slug": "materials",
+  "category_number": 5,
+  "kind": "spatial",
+  "implementation": "三维材质",
+  "approximation": false,
+  "summary": "模型像带云纹的绿色玉石。",
+  "directory": "res://effects/05_materials/08_jade",
+  "shader": "res://effects/05_materials/08_jade/effect.gdshader",
+  "readme": "res://effects/05_materials/08_jade/README.md",
+  "scene": "res://effects/05_materials/08_jade/demo.tscn",
+  "shape": "sphere",
+  "amount": 0.55,
+  "keywords": "materials jade spatial",
+  "text": false
+}

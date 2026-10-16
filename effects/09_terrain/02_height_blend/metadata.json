@@ -1,0 +1,20 @@
+{
+  "number": 148,
+  "name": "高度混合",
+  "slug": "height_blend",
+  "category": "地表与表面变化",
+  "category_slug": "terrain",
+  "category_number": 9,
+  "kind": "spatial",
+  "implementation": "三维材质",
+  "approximation": false,
+  "summary": "不同高度和纹理区域混入不同材质。",
+  "directory": "res://effects/09_terrain/02_height_blend",
+  "shader": "res://effects/09_terrain/02_height_blend/effect.gdshader",
+  "readme": "res://effects/09_terrain/02_height_blend/README.md",
+  "scene": "res://effects/09_terrain/02_height_blend/demo.tscn",
+  "shape": "plane",
+  "amount": 0.55,
+  "keywords": "terrain height_blend spatial",
+  "text": false
+}

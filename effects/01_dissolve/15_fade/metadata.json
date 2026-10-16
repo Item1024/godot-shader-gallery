@@ -1,0 +1,20 @@
+{
+  "number": 15,
+  "name": "渐隐渐现",
+  "slug": "fade",
+  "category": "溶解、显隐与侵蚀",
+  "category_slug": "dissolve",
+  "category_number": 1,
+  "kind": "sprite",
+  "implementation": "二维 Shader",
+  "approximation": false,
+  "summary": "整张图片一起慢慢变透明。",
+  "directory": "res://effects/01_dissolve/15_fade",
+  "shader": "res://effects/01_dissolve/15_fade/effect.gdshader",
+  "readme": "res://effects/01_dissolve/15_fade/README.md",
+  "scene": "res://effects/01_dissolve/15_fade/demo.tscn",
+  "shape": "sphere",
+  "amount": 0.32,
+  "keywords": "dissolve fade sprite",
+  "text": false
+}

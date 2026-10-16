@@ -1,0 +1,23 @@
+{
+  "number": 181,
+  "name": "光柱",
+  "slug": "light_column",
+  "category": "天空、天气与大气",
+  "category_slug": "sky",
+  "category_number": 10,
+  "kind": "pipeline",
+  "implementation": "管线功能",
+  "approximation": false,
+  "summary": "灯光在雾里更容易显出光束感。",
+  "directory": "res://effects/10_sky/14_light_column",
+  "shader": "res://effects/10_sky/14_light_column/effect.gdshader",
+  "readme": "res://effects/10_sky/14_light_column/README.md",
+  "scene": "res://effects/10_sky/14_light_column/demo.tscn",
+  "shape": "sphere",
+  "amount": 0.55,
+  "keywords": "sky light_column pipeline",
+  "text": false,
+  "environment": {
+    "volumetric_fog_enabled": true
+  }
+}

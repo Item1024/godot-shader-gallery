@@ -1,0 +1,20 @@
+{
+  "number": 323,
+  "name": "夜视仪风格",
+  "slug": "night",
+  "category": "屏幕调色",
+  "category_slug": "color",
+  "category_number": 17,
+  "kind": "post",
+  "implementation": "屏幕后处理",
+  "approximation": false,
+  "summary": "画面变成带噪点的绿色夜视风格。",
+  "directory": "res://effects/17_color/17_night",
+  "shader": "res://effects/17_color/17_night/effect.gdshader",
+  "readme": "res://effects/17_color/17_night/README.md",
+  "scene": "res://effects/17_color/17_night/demo.tscn",
+  "shape": "sphere",
+  "amount": 0.55,
+  "keywords": "color night post",
+  "text": false
+}

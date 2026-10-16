@@ -1,0 +1,20 @@
+{
+  "number": 247,
+  "name": "UV缩放",
+  "slug": "zoom",
+  "category": "UV、视差与程序纹理",
+  "category_slug": "uv",
+  "category_number": 14,
+  "kind": "canvas",
+  "implementation": "二维 Shader",
+  "approximation": false,
+  "summary": "表面图案看起来变大或变小。",
+  "directory": "res://effects/14_uv/03_zoom",
+  "shader": "res://effects/14_uv/03_zoom/effect.gdshader",
+  "readme": "res://effects/14_uv/03_zoom/README.md",
+  "scene": "res://effects/14_uv/03_zoom/demo.tscn",
+  "shape": "sphere",
+  "amount": 0.55,
+  "keywords": "uv zoom canvas",
+  "text": false
+}

@@ -1,0 +1,21 @@
+{
+  "number": 118,
+  "name": "交互涟漪",
+  "slug": "interactive",
+  "category": "水体与液体表面",
+  "category_slug": "water",
+  "category_number": 7,
+  "kind": "spatial",
+  "implementation": "三维材质",
+  "approximation": false,
+  "summary": "点击位置成为涟漪中心。",
+  "directory": "res://effects/07_water/07_interactive",
+  "shader": "res://effects/07_water/07_interactive/effect.gdshader",
+  "readme": "res://effects/07_water/07_interactive/README.md",
+  "scene": "res://effects/07_water/07_interactive/demo.tscn",
+  "shape": "plane",
+  "amount": 0.55,
+  "keywords": "water interactive spatial",
+  "text": false,
+  "rocks": true
+}

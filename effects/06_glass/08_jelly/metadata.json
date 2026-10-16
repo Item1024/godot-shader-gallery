@@ -1,0 +1,20 @@
+{
+  "number": 103,
+  "name": "果冻",
+  "slug": "jelly",
+  "category": "透明、折射与反射",
+  "category_slug": "glass",
+  "category_number": 6,
+  "kind": "spatial",
+  "implementation": "三维材质",
+  "approximation": false,
+  "summary": "模型像会抖动的透明果冻。",
+  "directory": "res://effects/06_glass/08_jelly",
+  "shader": "res://effects/06_glass/08_jelly/effect.gdshader",
+  "readme": "res://effects/06_glass/08_jelly/README.md",
+  "scene": "res://effects/06_glass/08_jelly/demo.tscn",
+  "shape": "sphere",
+  "amount": 0.55,
+  "keywords": "glass jelly spatial",
+  "text": false
+}

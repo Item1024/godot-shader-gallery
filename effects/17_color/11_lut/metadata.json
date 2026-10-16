@@ -1,0 +1,20 @@
+{
+  "number": 317,
+  "name": "LUT调色",
+  "slug": "lut",
+  "category": "屏幕调色",
+  "category_slug": "color",
+  "category_number": 17,
+  "kind": "post",
+  "implementation": "屏幕后处理",
+  "approximation": false,
+  "summary": "整张画面像套了一款调色滤镜。",
+  "directory": "res://effects/17_color/11_lut",
+  "shader": "res://effects/17_color/11_lut/effect.gdshader",
+  "readme": "res://effects/17_color/11_lut/README.md",
+  "scene": "res://effects/17_color/11_lut/demo.tscn",
+  "shape": "sphere",
+  "amount": 0.55,
+  "keywords": "color lut post",
+  "text": false
+}

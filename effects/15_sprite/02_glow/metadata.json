@@ -1,0 +1,20 @@
+{
+  "number": 268,
+  "name": "内外发光",
+  "slug": "glow",
+  "category": "2D精灵与像素画",
+  "category_slug": "sprite",
+  "category_number": 15,
+  "kind": "sprite",
+  "implementation": "二维 Shader",
+  "approximation": false,
+  "summary": "图片外面围着一圈亮色。",
+  "directory": "res://effects/15_sprite/02_glow",
+  "shader": "res://effects/15_sprite/02_glow/effect.gdshader",
+  "readme": "res://effects/15_sprite/02_glow/README.md",
+  "scene": "res://effects/15_sprite/02_glow/demo.tscn",
+  "shape": "sphere",
+  "amount": 0.55,
+  "keywords": "sprite glow sprite",
+  "text": false
+}

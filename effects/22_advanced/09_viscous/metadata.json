@@ -1,0 +1,20 @@
+{
+  "number": 405,
+  "name": "黏性融合",
+  "slug": "viscous",
+  "category": "程序化与体积进阶",
+  "category_slug": "advanced",
+  "category_number": 22,
+  "kind": "canvas",
+  "implementation": "二维 Shader",
+  "approximation": false,
+  "summary": "几个圆润团块像黏液一样互相粘连。",
+  "directory": "res://effects/22_advanced/09_viscous",
+  "shader": "res://effects/22_advanced/09_viscous/effect.gdshader",
+  "readme": "res://effects/22_advanced/09_viscous/README.md",
+  "scene": "res://effects/22_advanced/09_viscous/demo.tscn",
+  "shape": "sphere",
+  "amount": 0.55,
+  "keywords": "advanced viscous canvas",
+  "text": false
+}

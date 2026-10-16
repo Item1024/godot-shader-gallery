@@ -1,0 +1,20 @@
+{
+  "number": 238,
+  "name": "球化",
+  "slug": "sphere",
+  "category": "顶点变形与模型运动",
+  "category_slug": "vertex",
+  "category_number": 13,
+  "kind": "spatial",
+  "implementation": "三维材质",
+  "approximation": false,
+  "summary": "方块逐渐鼓成球形。",
+  "directory": "res://effects/13_vertex/10_sphere",
+  "shader": "res://effects/13_vertex/10_sphere/effect.gdshader",
+  "readme": "res://effects/13_vertex/10_sphere/README.md",
+  "scene": "res://effects/13_vertex/10_sphere/demo.tscn",
+  "shape": "cube",
+  "amount": 0.55,
+  "keywords": "vertex sphere spatial",
+  "text": false
+}

@@ -1,0 +1,21 @@
+{
+  "number": 121,
+  "name": "浪尖白沫",
+  "slug": "crest",
+  "category": "水体与液体表面",
+  "category_slug": "water",
+  "category_number": 7,
+  "kind": "spatial",
+  "implementation": "三维材质",
+  "approximation": false,
+  "summary": "一部分波纹上出现白沫。",
+  "directory": "res://effects/07_water/10_crest",
+  "shader": "res://effects/07_water/10_crest/effect.gdshader",
+  "readme": "res://effects/07_water/10_crest/README.md",
+  "scene": "res://effects/07_water/10_crest/demo.tscn",
+  "shape": "plane",
+  "amount": 0.55,
+  "keywords": "water crest spatial",
+  "text": false,
+  "rocks": true
+}

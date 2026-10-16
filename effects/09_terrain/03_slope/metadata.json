@@ -1,0 +1,20 @@
+{
+  "number": 149,
+  "name": "坡度混合",
+  "slug": "slope",
+  "category": "地表与表面变化",
+  "category_slug": "terrain",
+  "category_number": 9,
+  "kind": "spatial",
+  "implementation": "三维材质",
+  "approximation": false,
+  "summary": "不同朝向的表面换成不同材料。",
+  "directory": "res://effects/09_terrain/03_slope",
+  "shader": "res://effects/09_terrain/03_slope/effect.gdshader",
+  "readme": "res://effects/09_terrain/03_slope/README.md",
+  "scene": "res://effects/09_terrain/03_slope/demo.tscn",
+  "shape": "plane",
+  "amount": 0.55,
+  "keywords": "terrain slope spatial",
+  "text": false
+}

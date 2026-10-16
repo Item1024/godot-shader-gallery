@@ -1,0 +1,20 @@
+{
+  "number": 18,
+  "name": "内描边",
+  "slug": "inner",
+  "category": "描边、轮廓与遮挡",
+  "category_slug": "outline",
+  "category_number": 2,
+  "kind": "sprite",
+  "implementation": "二维 Shader",
+  "approximation": false,
+  "summary": "描边画在图案里面。",
+  "directory": "res://effects/02_outline/02_inner",
+  "shader": "res://effects/02_outline/02_inner/effect.gdshader",
+  "readme": "res://effects/02_outline/02_inner/README.md",
+  "scene": "res://effects/02_outline/02_inner/demo.tscn",
+  "shape": "sphere",
+  "amount": 0.55,
+  "keywords": "outline inner sprite",
+  "text": false
+}

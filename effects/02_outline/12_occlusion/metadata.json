@@ -1,0 +1,21 @@
+{
+  "number": 28,
+  "name": "遮挡轮廓",
+  "slug": "occlusion",
+  "category": "描边、轮廓与遮挡",
+  "category_slug": "outline",
+  "category_number": 2,
+  "kind": "spatial",
+  "implementation": "演示近似",
+  "approximation": true,
+  "summary": "遮挡物后面还能看到模型的亮轮廓。",
+  "directory": "res://effects/02_outline/12_occlusion",
+  "shader": "res://effects/02_outline/12_occlusion/effect.gdshader",
+  "readme": "res://effects/02_outline/12_occlusion/README.md",
+  "scene": "res://effects/02_outline/12_occlusion/demo.tscn",
+  "shape": "sphere",
+  "amount": 0.55,
+  "keywords": "outline occlusion spatial",
+  "text": false,
+  "occluder": true
+}

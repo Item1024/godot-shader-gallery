@@ -1,0 +1,20 @@
+{
+  "number": 258,
+  "name": "窗内假房间",
+  "slug": "interior",
+  "category": "UV、视差与程序纹理",
+  "category_slug": "uv",
+  "category_number": 14,
+  "kind": "canvas",
+  "implementation": "演示近似",
+  "approximation": true,
+  "summary": "窗口像能看到里面的小房间。",
+  "directory": "res://effects/14_uv/14_interior",
+  "shader": "res://effects/14_uv/14_interior/effect.gdshader",
+  "readme": "res://effects/14_uv/14_interior/README.md",
+  "scene": "res://effects/14_uv/14_interior/demo.tscn",
+  "shape": "sphere",
+  "amount": 0.55,
+  "keywords": "uv interior canvas",
+  "text": false
+}

@@ -1,0 +1,20 @@
+{
+  "number": 200,
+  "name": "能量光束",
+  "slug": "beam",
+  "category": "科幻、能量与魔法",
+  "category_slug": "magic",
+  "category_number": 11,
+  "kind": "canvas",
+  "implementation": "二维 Shader",
+  "approximation": false,
+  "summary": "画面中有一条会轻微摇摆的粗光束。",
+  "directory": "res://effects/11_magic/13_beam",
+  "shader": "res://effects/11_magic/13_beam/effect.gdshader",
+  "readme": "res://effects/11_magic/13_beam/README.md",
+  "scene": "res://effects/11_magic/13_beam/demo.tscn",
+  "shape": "sphere",
+  "amount": 0.55,
+  "keywords": "magic beam canvas",
+  "text": false
+}

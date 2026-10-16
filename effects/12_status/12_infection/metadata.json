@@ -1,0 +1,20 @@
+{
+  "number": 223,
+  "name": "感染扩散",
+  "slug": "infection",
+  "category": "角色受击与状态",
+  "category_slug": "status",
+  "category_number": 12,
+  "kind": "spatial",
+  "implementation": "三维材质",
+  "approximation": false,
+  "summary": "模型上深紫色的感染斑块逐渐扩散。",
+  "directory": "res://effects/12_status/12_infection",
+  "shader": "res://effects/12_status/12_infection/effect.gdshader",
+  "readme": "res://effects/12_status/12_infection/README.md",
+  "scene": "res://effects/12_status/12_infection/demo.tscn",
+  "shape": "sphere",
+  "amount": 0.55,
+  "keywords": "status infection spatial",
+  "text": false
+}

@@ -1,0 +1,20 @@
+{
+  "number": 291,
+  "name": "按钮扫光",
+  "slug": "button_shine",
+  "category": "UI、文字与地图",
+  "category_slug": "ui",
+  "category_number": 16,
+  "kind": "canvas",
+  "implementation": "二维 Shader",
+  "approximation": false,
+  "summary": "按钮上周期性扫过一条斜光。",
+  "directory": "res://effects/16_ui/08_button_shine",
+  "shader": "res://effects/16_ui/08_button_shine/effect.gdshader",
+  "readme": "res://effects/16_ui/08_button_shine/README.md",
+  "scene": "res://effects/16_ui/08_button_shine/demo.tscn",
+  "shape": "sphere",
+  "amount": 0.55,
+  "keywords": "ui button_shine canvas",
+  "text": false
+}

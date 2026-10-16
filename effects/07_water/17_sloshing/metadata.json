@@ -1,0 +1,21 @@
+{
+  "number": 128,
+  "name": "液面晃动",
+  "slug": "sloshing",
+  "category": "水体与液体表面",
+  "category_slug": "water",
+  "category_number": 7,
+  "kind": "spatial",
+  "implementation": "演示近似",
+  "approximation": true,
+  "summary": "液面一边倾斜，一边起伏。",
+  "directory": "res://effects/07_water/17_sloshing",
+  "shader": "res://effects/07_water/17_sloshing/effect.gdshader",
+  "readme": "res://effects/07_water/17_sloshing/README.md",
+  "scene": "res://effects/07_water/17_sloshing/demo.tscn",
+  "shape": "plane",
+  "amount": 0.55,
+  "keywords": "water sloshing spatial",
+  "text": false,
+  "rocks": true
+}

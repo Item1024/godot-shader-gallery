@@ -1,0 +1,20 @@
+{
+  "number": 146,
+  "name": "喷气尾焰",
+  "slug": "jet",
+  "category": "火焰、烟雾与爆炸",
+  "category_slug": "fire",
+  "category_number": 8,
+  "kind": "canvas",
+  "implementation": "二维 Shader",
+  "approximation": false,
+  "summary": "火焰呈现喷射尾焰的图案。",
+  "directory": "res://effects/08_fire/16_jet",
+  "shader": "res://effects/08_fire/16_jet/effect.gdshader",
+  "readme": "res://effects/08_fire/16_jet/README.md",
+  "scene": "res://effects/08_fire/16_jet/demo.tscn",
+  "shape": "sphere",
+  "amount": 0.55,
+  "keywords": "fire jet canvas",
+  "text": false
+}

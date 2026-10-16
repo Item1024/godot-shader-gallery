@@ -1,0 +1,20 @@
+{
+  "number": 106,
+  "name": "色散",
+  "slug": "dispersion",
+  "category": "透明、折射与反射",
+  "category_slug": "glass",
+  "category_number": 6,
+  "kind": "spatial",
+  "implementation": "三维材质",
+  "approximation": false,
+  "summary": "玻璃边缘出现红蓝分开的彩边。",
+  "directory": "res://effects/06_glass/11_dispersion",
+  "shader": "res://effects/06_glass/11_dispersion/effect.gdshader",
+  "readme": "res://effects/06_glass/11_dispersion/README.md",
+  "scene": "res://effects/06_glass/11_dispersion/demo.tscn",
+  "shape": "sphere",
+  "amount": 0.55,
+  "keywords": "glass dispersion spatial",
+  "text": false
+}

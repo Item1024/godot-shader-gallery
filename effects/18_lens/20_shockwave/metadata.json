@@ -1,0 +1,20 @@
+{
+  "number": 345,
+  "name": "冲击波扭曲",
+  "slug": "shockwave",
+  "category": "模糊、镜头与扭曲",
+  "category_slug": "lens",
+  "category_number": 18,
+  "kind": "post",
+  "implementation": "屏幕后处理",
+  "approximation": false,
+  "summary": "一个扩散圆环经过时，背景被推歪一下。",
+  "directory": "res://effects/18_lens/20_shockwave",
+  "shader": "res://effects/18_lens/20_shockwave/effect.gdshader",
+  "readme": "res://effects/18_lens/20_shockwave/README.md",
+  "scene": "res://effects/18_lens/20_shockwave/demo.tscn",
+  "shape": "sphere",
+  "amount": 0.55,
+  "keywords": "lens shockwave post",
+  "text": false
+}

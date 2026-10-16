@@ -1,0 +1,20 @@
+{
+  "number": 31,
+  "name": "靠近相机淡出",
+  "slug": "camera_fade",
+  "category": "描边、轮廓与遮挡",
+  "category_slug": "outline",
+  "category_number": 2,
+  "kind": "spatial",
+  "implementation": "三维材质",
+  "approximation": false,
+  "summary": "模型离相机近时逐渐变淡。",
+  "directory": "res://effects/02_outline/15_camera_fade",
+  "shader": "res://effects/02_outline/15_camera_fade/effect.gdshader",
+  "readme": "res://effects/02_outline/15_camera_fade/README.md",
+  "scene": "res://effects/02_outline/15_camera_fade/demo.tscn",
+  "shape": "sphere",
+  "amount": 0.55,
+  "keywords": "outline camera_fade spatial",
+  "text": false
+}

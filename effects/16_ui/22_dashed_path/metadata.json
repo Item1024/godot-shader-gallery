@@ -1,0 +1,20 @@
+{
+  "number": 305,
+  "name": "行军虚线",
+  "slug": "dashed_path",
+  "category": "UI、文字与地图",
+  "category_slug": "ui",
+  "category_number": 16,
+  "kind": "canvas",
+  "implementation": "二维 Shader",
+  "approximation": false,
+  "summary": "弯曲路线上的短线持续前进。",
+  "directory": "res://effects/16_ui/22_dashed_path",
+  "shader": "res://effects/16_ui/22_dashed_path/effect.gdshader",
+  "readme": "res://effects/16_ui/22_dashed_path/README.md",
+  "scene": "res://effects/16_ui/22_dashed_path/demo.tscn",
+  "shape": "sphere",
+  "amount": 0.55,
+  "keywords": "ui dashed_path canvas",
+  "text": false
+}

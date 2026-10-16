@@ -1,0 +1,20 @@
+{
+  "number": 383,
+  "name": "高光",
+  "slug": "specular",
+  "category": "光照、阴影与空间渲染",
+  "category_slug": "lighting",
+  "category_number": 21,
+  "kind": "spatial",
+  "implementation": "三维材质",
+  "approximation": false,
+  "summary": "模型上出现随灯光和视角变化的亮斑。",
+  "directory": "res://effects/21_lighting/02_specular",
+  "shader": "res://effects/21_lighting/02_specular/effect.gdshader",
+  "readme": "res://effects/21_lighting/02_specular/README.md",
+  "scene": "res://effects/21_lighting/02_specular/demo.tscn",
+  "shape": "sphere",
+  "amount": 0.55,
+  "keywords": "lighting specular spatial",
+  "text": false
+}

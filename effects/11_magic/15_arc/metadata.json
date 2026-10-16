@@ -1,0 +1,20 @@
+{
+  "number": 202,
+  "name": "电弧",
+  "slug": "arc",
+  "category": "科幻、能量与魔法",
+  "category_slug": "magic",
+  "category_number": 11,
+  "kind": "canvas",
+  "implementation": "二维 Shader",
+  "approximation": false,
+  "summary": "亮线像电弧一样不规则弯折。",
+  "directory": "res://effects/11_magic/15_arc",
+  "shader": "res://effects/11_magic/15_arc/effect.gdshader",
+  "readme": "res://effects/11_magic/15_arc/README.md",
+  "scene": "res://effects/11_magic/15_arc/demo.tscn",
+  "shape": "sphere",
+  "amount": 0.55,
+  "keywords": "magic arc canvas",
+  "text": false
+}

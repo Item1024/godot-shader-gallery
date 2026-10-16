@@ -1,0 +1,20 @@
+{
+  "number": 38,
+  "name": "边框流光",
+  "slug": "border",
+  "category": "发光、流光与扫光",
+  "category_slug": "emission",
+  "category_number": 3,
+  "kind": "canvas",
+  "implementation": "二维 Shader",
+  "approximation": false,
+  "summary": "一个亮点沿圆形边框绕圈。",
+  "directory": "res://effects/03_emission/06_border",
+  "shader": "res://effects/03_emission/06_border/effect.gdshader",
+  "readme": "res://effects/03_emission/06_border/README.md",
+  "scene": "res://effects/03_emission/06_border/demo.tscn",
+  "shape": "sphere",
+  "amount": 0.55,
+  "keywords": "emission border canvas",
+  "text": false
+}

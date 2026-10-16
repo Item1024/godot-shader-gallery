@@ -1,0 +1,20 @@
+{
+  "number": 161,
+  "name": "油污",
+  "slug": "oil",
+  "category": "地表与表面变化",
+  "category_slug": "terrain",
+  "category_number": 9,
+  "kind": "spatial",
+  "implementation": "三维材质",
+  "approximation": false,
+  "summary": "表面出现带彩色变化的油污斑块。",
+  "directory": "res://effects/09_terrain/15_oil",
+  "shader": "res://effects/09_terrain/15_oil/effect.gdshader",
+  "readme": "res://effects/09_terrain/15_oil/README.md",
+  "scene": "res://effects/09_terrain/15_oil/demo.tscn",
+  "shape": "plane",
+  "amount": 0.55,
+  "keywords": "terrain oil spatial",
+  "text": false
+}

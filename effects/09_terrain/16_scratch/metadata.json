@@ -1,0 +1,20 @@
+{
+  "number": 162,
+  "name": "划痕",
+  "slug": "scratch",
+  "category": "地表与表面变化",
+  "category_slug": "terrain",
+  "category_number": 9,
+  "kind": "spatial",
+  "implementation": "三维材质",
+  "approximation": false,
+  "summary": "地表出现零碎细长划痕。",
+  "directory": "res://effects/09_terrain/16_scratch",
+  "shader": "res://effects/09_terrain/16_scratch/effect.gdshader",
+  "readme": "res://effects/09_terrain/16_scratch/README.md",
+  "scene": "res://effects/09_terrain/16_scratch/demo.tscn",
+  "shape": "plane",
+  "amount": 0.55,
+  "keywords": "terrain scratch spatial",
+  "text": false
+}

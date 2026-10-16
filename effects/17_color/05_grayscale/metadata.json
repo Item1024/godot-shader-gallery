@@ -1,0 +1,20 @@
+{
+  "number": 311,
+  "name": "灰度",
+  "slug": "grayscale",
+  "category": "屏幕调色",
+  "category_slug": "color",
+  "category_number": 17,
+  "kind": "post",
+  "implementation": "屏幕后处理",
+  "approximation": false,
+  "summary": "彩色画面逐渐变成黑白。",
+  "directory": "res://effects/17_color/05_grayscale",
+  "shader": "res://effects/17_color/05_grayscale/effect.gdshader",
+  "readme": "res://effects/17_color/05_grayscale/README.md",
+  "scene": "res://effects/17_color/05_grayscale/demo.tscn",
+  "shape": "sphere",
+  "amount": 0.55,
+  "keywords": "color grayscale post",
+  "text": false
+}

@@ -1,0 +1,20 @@
+{
+  "number": 279,
+  "name": "纸片弯曲",
+  "slug": "bend",
+  "category": "2D精灵与像素画",
+  "category_slug": "sprite",
+  "category_number": 15,
+  "kind": "sprite",
+  "implementation": "二维 Shader",
+  "approximation": false,
+  "summary": "图片像一张被轻轻弯动的纸。",
+  "directory": "res://effects/15_sprite/13_bend",
+  "shader": "res://effects/15_sprite/13_bend/effect.gdshader",
+  "readme": "res://effects/15_sprite/13_bend/README.md",
+  "scene": "res://effects/15_sprite/13_bend/demo.tscn",
+  "shape": "sphere",
+  "amount": 0.55,
+  "keywords": "sprite bend sprite",
+  "text": false
+}

@@ -1,0 +1,20 @@
+{
+  "number": 204,
+  "name": "蓄力光圈",
+  "slug": "charge",
+  "category": "科幻、能量与魔法",
+  "category_slug": "magic",
+  "category_number": 11,
+  "kind": "canvas",
+  "implementation": "二维 Shader",
+  "approximation": false,
+  "summary": "固定亮圈旁不断出现扩散的圆环。",
+  "directory": "res://effects/11_magic/17_charge",
+  "shader": "res://effects/11_magic/17_charge/effect.gdshader",
+  "readme": "res://effects/11_magic/17_charge/README.md",
+  "scene": "res://effects/11_magic/17_charge/demo.tscn",
+  "shape": "sphere",
+  "amount": 0.55,
+  "keywords": "magic charge canvas",
+  "text": false
+}

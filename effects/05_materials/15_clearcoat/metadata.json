@@ -1,0 +1,20 @@
+{
+  "number": 82,
+  "name": "清漆",
+  "slug": "clearcoat",
+  "category": "真实与半真实材质",
+  "category_slug": "materials",
+  "category_number": 5,
+  "kind": "spatial",
+  "implementation": "三维材质",
+  "approximation": false,
+  "summary": "模型像在底漆外面刷了一层亮清漆。",
+  "directory": "res://effects/05_materials/15_clearcoat",
+  "shader": "res://effects/05_materials/15_clearcoat/effect.gdshader",
+  "readme": "res://effects/05_materials/15_clearcoat/README.md",
+  "scene": "res://effects/05_materials/15_clearcoat/demo.tscn",
+  "shape": "sphere",
+  "amount": 0.55,
+  "keywords": "materials clearcoat spatial",
+  "text": false
+}

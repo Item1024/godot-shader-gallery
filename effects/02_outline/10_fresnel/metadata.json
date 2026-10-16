@@ -1,0 +1,20 @@
+{
+  "number": 26,
+  "name": "菲涅尔边缘光",
+  "slug": "fresnel",
+  "category": "描边、轮廓与遮挡",
+  "category_slug": "outline",
+  "category_number": 2,
+  "kind": "spatial",
+  "implementation": "三维材质",
+  "approximation": false,
+  "summary": "换个角度看，模型边缘的颜色就不同。",
+  "directory": "res://effects/02_outline/10_fresnel",
+  "shader": "res://effects/02_outline/10_fresnel/effect.gdshader",
+  "readme": "res://effects/02_outline/10_fresnel/README.md",
+  "scene": "res://effects/02_outline/10_fresnel/demo.tscn",
+  "shape": "sphere",
+  "amount": 0.55,
+  "keywords": "outline fresnel spatial",
+  "text": false
+}

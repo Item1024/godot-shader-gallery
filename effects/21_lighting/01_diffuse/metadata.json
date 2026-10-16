@@ -1,0 +1,20 @@
+{
+  "number": 382,
+  "name": "漫反射",
+  "slug": "diffuse",
+  "category": "光照、阴影与空间渲染",
+  "category_slug": "lighting",
+  "category_number": 21,
+  "kind": "spatial",
+  "implementation": "三维材质",
+  "approximation": false,
+  "summary": "模型表面的亮暗跟着受光方向变化。",
+  "directory": "res://effects/21_lighting/01_diffuse",
+  "shader": "res://effects/21_lighting/01_diffuse/effect.gdshader",
+  "readme": "res://effects/21_lighting/01_diffuse/README.md",
+  "scene": "res://effects/21_lighting/01_diffuse/demo.tscn",
+  "shape": "sphere",
+  "amount": 0.55,
+  "keywords": "lighting diffuse spatial",
+  "text": false
+}

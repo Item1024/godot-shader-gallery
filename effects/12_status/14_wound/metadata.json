@@ -1,0 +1,20 @@
+{
+  "number": 225,
+  "name": "伤口显现",
+  "slug": "wound",
+  "category": "角色受击与状态",
+  "category_slug": "status",
+  "category_number": 12,
+  "kind": "spatial",
+  "implementation": "三维材质",
+  "approximation": false,
+  "summary": "模型上出现一条细长红色伤口。",
+  "directory": "res://effects/12_status/14_wound",
+  "shader": "res://effects/12_status/14_wound/effect.gdshader",
+  "readme": "res://effects/12_status/14_wound/README.md",
+  "scene": "res://effects/12_status/14_wound/demo.tscn",
+  "shape": "sphere",
+  "amount": 0.55,
+  "keywords": "status wound spatial",
+  "text": false
+}

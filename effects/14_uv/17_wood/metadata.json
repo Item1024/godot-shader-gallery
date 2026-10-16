@@ -1,0 +1,20 @@
+{
+  "number": 261,
+  "name": "木纹",
+  "slug": "wood",
+  "category": "UV、视差与程序纹理",
+  "category_slug": "uv",
+  "category_number": 14,
+  "kind": "canvas",
+  "implementation": "二维 Shader",
+  "approximation": false,
+  "summary": "画面像有弯弯曲曲的木纹。",
+  "directory": "res://effects/14_uv/17_wood",
+  "shader": "res://effects/14_uv/17_wood/effect.gdshader",
+  "readme": "res://effects/14_uv/17_wood/README.md",
+  "scene": "res://effects/14_uv/17_wood/demo.tscn",
+  "shape": "sphere",
+  "amount": 0.55,
+  "keywords": "uv wood canvas",
+  "text": false
+}

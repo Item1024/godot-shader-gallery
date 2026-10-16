@@ -1,0 +1,20 @@
+{
+  "number": 14,
+  "name": "传送显现",
+  "slug": "teleport",
+  "category": "溶解、显隐与侵蚀",
+  "category_slug": "dissolve",
+  "category_number": 1,
+  "kind": "sprite",
+  "implementation": "二维 Shader",
+  "approximation": false,
+  "summary": "图片按一段段横条显现或消失。",
+  "directory": "res://effects/01_dissolve/14_teleport",
+  "shader": "res://effects/01_dissolve/14_teleport/effect.gdshader",
+  "readme": "res://effects/01_dissolve/14_teleport/README.md",
+  "scene": "res://effects/01_dissolve/14_teleport/demo.tscn",
+  "shape": "sphere",
+  "amount": 0.32,
+  "keywords": "dissolve teleport sprite",
+  "text": false
+}

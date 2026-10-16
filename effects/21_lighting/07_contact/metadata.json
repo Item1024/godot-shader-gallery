@@ -1,0 +1,20 @@
+{
+  "number": 388,
+  "name": "接触阴影",
+  "slug": "contact",
+  "category": "光照、阴影与空间渲染",
+  "category_slug": "lighting",
+  "category_number": 21,
+  "kind": "pipeline",
+  "implementation": "演示近似",
+  "approximation": true,
+  "summary": "物体靠近地面的地方能借阴影看出贴地感。",
+  "directory": "res://effects/21_lighting/07_contact",
+  "shader": "res://effects/21_lighting/07_contact/effect.gdshader",
+  "readme": "res://effects/21_lighting/07_contact/README.md",
+  "scene": "res://effects/21_lighting/07_contact/demo.tscn",
+  "shape": "sphere",
+  "amount": 0.55,
+  "keywords": "lighting contact pipeline",
+  "text": false
+}

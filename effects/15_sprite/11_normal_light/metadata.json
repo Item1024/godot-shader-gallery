@@ -1,0 +1,20 @@
+{
+  "number": 277,
+  "name": "2D法线光照",
+  "slug": "normal_light",
+  "category": "2D精灵与像素画",
+  "category_slug": "sprite",
+  "category_number": 15,
+  "kind": "sprite",
+  "implementation": "演示近似",
+  "approximation": true,
+  "summary": "图片边缘像有一点立体受光。",
+  "directory": "res://effects/15_sprite/11_normal_light",
+  "shader": "res://effects/15_sprite/11_normal_light/effect.gdshader",
+  "readme": "res://effects/15_sprite/11_normal_light/README.md",
+  "scene": "res://effects/15_sprite/11_normal_light/demo.tscn",
+  "shape": "sphere",
+  "amount": 0.55,
+  "keywords": "sprite normal_light sprite",
+  "text": false
+}

@@ -1,0 +1,20 @@
+{
+  "number": 89,
+  "name": "法线贴图",
+  "slug": "normal",
+  "category": "真实与半真实材质",
+  "category_slug": "materials",
+  "category_number": 5,
+  "kind": "spatial",
+  "implementation": "三维材质",
+  "approximation": false,
+  "summary": "模型看起来有条纹凹凸，外轮廓却没变。",
+  "directory": "res://effects/05_materials/22_normal",
+  "shader": "res://effects/05_materials/22_normal/effect.gdshader",
+  "readme": "res://effects/05_materials/22_normal/README.md",
+  "scene": "res://effects/05_materials/22_normal/demo.tscn",
+  "shape": "sphere",
+  "amount": 0.55,
+  "keywords": "materials normal spatial",
+  "text": false
+}

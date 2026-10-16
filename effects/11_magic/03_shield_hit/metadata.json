@@ -1,0 +1,20 @@
+{
+  "number": 190,
+  "name": "护盾受击波纹",
+  "slug": "shield_hit",
+  "category": "科幻、能量与魔法",
+  "category_slug": "magic",
+  "category_number": 11,
+  "kind": "spatial",
+  "implementation": "三维材质",
+  "approximation": false,
+  "summary": "护盾上有一圈从命中处扩散的亮纹。",
+  "directory": "res://effects/11_magic/03_shield_hit",
+  "shader": "res://effects/11_magic/03_shield_hit/effect.gdshader",
+  "readme": "res://effects/11_magic/03_shield_hit/README.md",
+  "scene": "res://effects/11_magic/03_shield_hit/demo.tscn",
+  "shape": "sphere",
+  "amount": 0.55,
+  "keywords": "magic shield_hit spatial",
+  "text": false
+}

@@ -1,0 +1,20 @@
+{
+  "number": 376,
+  "name": "水波转场",
+  "slug": "ripple",
+  "category": "场景切换与转场",
+  "category_slug": "transition",
+  "category_number": 20,
+  "kind": "post",
+  "implementation": "屏幕后处理",
+  "approximation": false,
+  "summary": "新画面沿一圈带水纹的边界扩散。",
+  "directory": "res://effects/20_transition/11_ripple",
+  "shader": "res://effects/20_transition/11_ripple/effect.gdshader",
+  "readme": "res://effects/20_transition/11_ripple/README.md",
+  "scene": "res://effects/20_transition/11_ripple/demo.tscn",
+  "shape": "sphere",
+  "amount": 0.55,
+  "keywords": "transition ripple post",
+  "text": false
+}

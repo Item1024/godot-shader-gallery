@@ -1,0 +1,20 @@
+{
+  "number": 176,
+  "name": "体积云",
+  "slug": "volume_clouds",
+  "category": "天空、天气与大气",
+  "category_slug": "sky",
+  "category_number": 10,
+  "kind": "canvas",
+  "implementation": "演示近似",
+  "approximation": true,
+  "summary": "云看起来比单层云更厚。",
+  "directory": "res://effects/10_sky/09_volume_clouds",
+  "shader": "res://effects/10_sky/09_volume_clouds/effect.gdshader",
+  "readme": "res://effects/10_sky/09_volume_clouds/README.md",
+  "scene": "res://effects/10_sky/09_volume_clouds/demo.tscn",
+  "shape": "sphere",
+  "amount": 0.55,
+  "keywords": "sky volume_clouds canvas",
+  "text": false
+}

@@ -1,0 +1,20 @@
+{
+  "number": 248,
+  "name": "UV扭曲",
+  "slug": "distort",
+  "category": "UV、视差与程序纹理",
+  "category_slug": "uv",
+  "category_number": 14,
+  "kind": "canvas",
+  "implementation": "二维 Shader",
+  "approximation": false,
+  "summary": "表面图案像软纸一样扭动。",
+  "directory": "res://effects/14_uv/04_distort",
+  "shader": "res://effects/14_uv/04_distort/effect.gdshader",
+  "readme": "res://effects/14_uv/04_distort/README.md",
+  "scene": "res://effects/14_uv/04_distort/demo.tscn",
+  "shape": "sphere",
+  "amount": 0.55,
+  "keywords": "uv distort canvas",
+  "text": false
+}

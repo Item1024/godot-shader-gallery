@@ -1,0 +1,20 @@
+{
+  "number": 242,
+  "name": "顶点吸附",
+  "slug": "snap",
+  "category": "顶点变形与模型运动",
+  "category_slug": "vertex",
+  "category_number": 13,
+  "kind": "spatial",
+  "implementation": "三维材质",
+  "approximation": false,
+  "summary": "模型的小点像被吸到格子交点上。",
+  "directory": "res://effects/13_vertex/14_snap",
+  "shader": "res://effects/13_vertex/14_snap/effect.gdshader",
+  "readme": "res://effects/13_vertex/14_snap/README.md",
+  "scene": "res://effects/13_vertex/14_snap/demo.tscn",
+  "shape": "sphere",
+  "amount": 0.55,
+  "keywords": "vertex snap spatial",
+  "text": false
+}

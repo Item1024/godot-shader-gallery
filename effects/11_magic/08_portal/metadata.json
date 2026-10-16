@@ -1,0 +1,20 @@
+{
+  "number": 195,
+  "name": "传送门",
+  "slug": "portal",
+  "category": "科幻、能量与魔法",
+  "category_slug": "magic",
+  "category_number": 11,
+  "kind": "canvas",
+  "implementation": "二维 Shader",
+  "approximation": false,
+  "summary": "一个边缘翻动的发光圆环像传送门。",
+  "directory": "res://effects/11_magic/08_portal",
+  "shader": "res://effects/11_magic/08_portal/effect.gdshader",
+  "readme": "res://effects/11_magic/08_portal/README.md",
+  "scene": "res://effects/11_magic/08_portal/demo.tscn",
+  "shape": "sphere",
+  "amount": 0.55,
+  "keywords": "magic portal canvas",
+  "text": false
+}

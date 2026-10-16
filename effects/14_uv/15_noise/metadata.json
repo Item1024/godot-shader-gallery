@@ -1,0 +1,20 @@
+{
+  "number": 259,
+  "name": "噪声",
+  "slug": "noise",
+  "category": "UV、视差与程序纹理",
+  "category_slug": "uv",
+  "category_number": 14,
+  "kind": "canvas",
+  "implementation": "二维 Shader",
+  "approximation": false,
+  "summary": "画面出现连续变化的不规则云纹。",
+  "directory": "res://effects/14_uv/15_noise",
+  "shader": "res://effects/14_uv/15_noise/effect.gdshader",
+  "readme": "res://effects/14_uv/15_noise/README.md",
+  "scene": "res://effects/14_uv/15_noise/demo.tscn",
+  "shape": "sphere",
+  "amount": 0.55,
+  "keywords": "uv noise canvas",
+  "text": false
+}

@@ -1,0 +1,20 @@
+{
+  "number": 62,
+  "name": "炭笔",
+  "slug": "charcoal",
+  "category": "卡通与绘画风格",
+  "category_slug": "stylized",
+  "category_number": 4,
+  "kind": "post",
+  "implementation": "演示近似",
+  "approximation": true,
+  "summary": "照片变成粗糙的黑白炭笔画。",
+  "directory": "res://effects/04_stylized/14_charcoal",
+  "shader": "res://effects/04_stylized/14_charcoal/effect.gdshader",
+  "readme": "res://effects/04_stylized/14_charcoal/README.md",
+  "scene": "res://effects/04_stylized/14_charcoal/demo.tscn",
+  "shape": "sphere",
+  "amount": 0.55,
+  "keywords": "stylized charcoal post",
+  "text": false
+}

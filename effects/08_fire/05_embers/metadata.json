@@ -1,0 +1,20 @@
+{
+  "number": 135,
+  "name": "余烬",
+  "slug": "embers",
+  "category": "火焰、烟雾与爆炸",
+  "category_slug": "fire",
+  "category_number": 8,
+  "kind": "canvas",
+  "implementation": "二维 Shader",
+  "approximation": false,
+  "summary": "细小亮点不断向上飘并消失。",
+  "directory": "res://effects/08_fire/05_embers",
+  "shader": "res://effects/08_fire/05_embers/effect.gdshader",
+  "readme": "res://effects/08_fire/05_embers/README.md",
+  "scene": "res://effects/08_fire/05_embers/demo.tscn",
+  "shape": "sphere",
+  "amount": 0.55,
+  "keywords": "fire embers canvas",
+  "text": false
+}

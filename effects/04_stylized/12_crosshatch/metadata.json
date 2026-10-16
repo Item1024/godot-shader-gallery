@@ -1,0 +1,20 @@
+{
+  "number": 60,
+  "name": "交叉排线",
+  "slug": "crosshatch",
+  "category": "卡通与绘画风格",
+  "category_slug": "stylized",
+  "category_number": 4,
+  "kind": "post",
+  "implementation": "演示近似",
+  "approximation": true,
+  "summary": "暗处叠着两个方向的线，像交叉排线。",
+  "directory": "res://effects/04_stylized/12_crosshatch",
+  "shader": "res://effects/04_stylized/12_crosshatch/effect.gdshader",
+  "readme": "res://effects/04_stylized/12_crosshatch/README.md",
+  "scene": "res://effects/04_stylized/12_crosshatch/demo.tscn",
+  "shape": "sphere",
+  "amount": 0.55,
+  "keywords": "stylized crosshatch post",
+  "text": false
+}

@@ -1,0 +1,20 @@
+{
+  "number": 96,
+  "name": "透明玻璃",
+  "slug": "clear",
+  "category": "透明、折射与反射",
+  "category_slug": "glass",
+  "category_number": 6,
+  "kind": "spatial",
+  "implementation": "三维材质",
+  "approximation": false,
+  "summary": "透过玻璃看，后面的景物发生轻微弯曲。",
+  "directory": "res://effects/06_glass/01_clear",
+  "shader": "res://effects/06_glass/01_clear/effect.gdshader",
+  "readme": "res://effects/06_glass/01_clear/README.md",
+  "scene": "res://effects/06_glass/01_clear/demo.tscn",
+  "shape": "sphere",
+  "amount": 0.55,
+  "keywords": "glass clear spatial",
+  "text": false
+}

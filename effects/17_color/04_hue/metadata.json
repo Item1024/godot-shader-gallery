@@ -1,0 +1,20 @@
+{
+  "number": 310,
+  "name": "色相旋转",
+  "slug": "hue",
+  "category": "屏幕调色",
+  "category_slug": "color",
+  "category_number": 17,
+  "kind": "post",
+  "implementation": "屏幕后处理",
+  "approximation": false,
+  "summary": "画面的颜色整体轮换，红色能转向其他颜色。",
+  "directory": "res://effects/17_color/04_hue",
+  "shader": "res://effects/17_color/04_hue/effect.gdshader",
+  "readme": "res://effects/17_color/04_hue/README.md",
+  "scene": "res://effects/17_color/04_hue/demo.tscn",
+  "shape": "sphere",
+  "amount": 0.55,
+  "keywords": "color hue post",
+  "text": false
+}

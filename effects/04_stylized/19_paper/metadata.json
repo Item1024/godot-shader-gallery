@@ -1,0 +1,20 @@
+{
+  "number": 67,
+  "name": "剪纸风格",
+  "slug": "paper",
+  "category": "卡通与绘画风格",
+  "category_slug": "stylized",
+  "category_number": 4,
+  "kind": "post",
+  "implementation": "演示近似",
+  "approximation": true,
+  "summary": "照片变成几种颜色拼成的大片形状。",
+  "directory": "res://effects/04_stylized/19_paper",
+  "shader": "res://effects/04_stylized/19_paper/effect.gdshader",
+  "readme": "res://effects/04_stylized/19_paper/README.md",
+  "scene": "res://effects/04_stylized/19_paper/demo.tscn",
+  "shape": "sphere",
+  "amount": 0.55,
+  "keywords": "stylized paper post",
+  "text": false
+}

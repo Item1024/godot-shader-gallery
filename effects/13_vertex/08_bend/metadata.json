@@ -1,0 +1,20 @@
+{
+  "number": 236,
+  "name": "弯曲",
+  "slug": "bend",
+  "category": "顶点变形与模型运动",
+  "category_slug": "vertex",
+  "category_number": 13,
+  "kind": "spatial",
+  "implementation": "三维材质",
+  "approximation": false,
+  "summary": "模型沿高度逐渐弯曲。",
+  "directory": "res://effects/13_vertex/08_bend",
+  "shader": "res://effects/13_vertex/08_bend/effect.gdshader",
+  "readme": "res://effects/13_vertex/08_bend/README.md",
+  "scene": "res://effects/13_vertex/08_bend/demo.tscn",
+  "shape": "cloth",
+  "amount": 0.55,
+  "keywords": "vertex bend spatial",
+  "text": false
+}

@@ -1,0 +1,20 @@
+{
+  "number": 365,
+  "name": "仿射纹理变形",
+  "slug": "affine",
+  "category": "复古、故障与显示器",
+  "category_slug": "retro",
+  "category_number": 19,
+  "kind": "spatial",
+  "implementation": "三维材质",
+  "approximation": false,
+  "summary": "模型表面的方格展示一种不同的贴图换算方式。",
+  "directory": "res://effects/19_retro/18_affine",
+  "shader": "res://effects/19_retro/18_affine/effect.gdshader",
+  "readme": "res://effects/19_retro/18_affine/README.md",
+  "scene": "res://effects/19_retro/18_affine/demo.tscn",
+  "shape": "sphere",
+  "amount": 0.55,
+  "keywords": "retro affine spatial",
+  "text": false
+}

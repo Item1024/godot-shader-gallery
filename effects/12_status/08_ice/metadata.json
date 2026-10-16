@@ -1,0 +1,20 @@
+{
+  "number": 219,
+  "name": "冰层覆盖",
+  "slug": "ice",
+  "category": "角色受击与状态",
+  "category_slug": "status",
+  "category_number": 12,
+  "kind": "spatial",
+  "implementation": "三维材质",
+  "approximation": false,
+  "summary": "模型像裹了一层亮蓝色冰皮。",
+  "directory": "res://effects/12_status/08_ice",
+  "shader": "res://effects/12_status/08_ice/effect.gdshader",
+  "readme": "res://effects/12_status/08_ice/README.md",
+  "scene": "res://effects/12_status/08_ice/demo.tscn",
+  "shape": "sphere",
+  "amount": 0.55,
+  "keywords": "status ice spatial",
+  "text": false
+}

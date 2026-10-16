@@ -1,0 +1,20 @@
+{
+  "number": 205,
+  "name": "冲击环",
+  "slug": "shock_ring",
+  "category": "科幻、能量与魔法",
+  "category_slug": "magic",
+  "category_number": 11,
+  "kind": "canvas",
+  "implementation": "二维 Shader",
+  "approximation": false,
+  "summary": "一圈很亮的能量向外冲开。",
+  "directory": "res://effects/11_magic/18_shock_ring",
+  "shader": "res://effects/11_magic/18_shock_ring/effect.gdshader",
+  "readme": "res://effects/11_magic/18_shock_ring/README.md",
+  "scene": "res://effects/11_magic/18_shock_ring/demo.tscn",
+  "shape": "sphere",
+  "amount": 0.55,
+  "keywords": "magic shock_ring canvas",
+  "text": false
+}

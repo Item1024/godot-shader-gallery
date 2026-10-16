@@ -1,0 +1,20 @@
+{
+  "number": 380,
+  "name": "翻页转场",
+  "slug": "page",
+  "category": "场景切换与转场",
+  "category_slug": "transition",
+  "category_number": 20,
+  "kind": "post",
+  "implementation": "屏幕后处理",
+  "approximation": false,
+  "summary": "新画面像从翻页边缘露出。",
+  "directory": "res://effects/20_transition/15_page",
+  "shader": "res://effects/20_transition/15_page/effect.gdshader",
+  "readme": "res://effects/20_transition/15_page/README.md",
+  "scene": "res://effects/20_transition/15_page/demo.tscn",
+  "shape": "sphere",
+  "amount": 0.55,
+  "keywords": "transition page post",
+  "text": false
+}

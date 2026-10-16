@@ -1,0 +1,20 @@
+{
+  "number": 153,
+  "name": "结霜",
+  "slug": "frost",
+  "category": "地表与表面变化",
+  "category_slug": "terrain",
+  "category_number": 9,
+  "kind": "spatial",
+  "implementation": "三维材质",
+  "approximation": false,
+  "summary": "地表出现浅蓝白色的霜斑。",
+  "directory": "res://effects/09_terrain/07_frost",
+  "shader": "res://effects/09_terrain/07_frost/effect.gdshader",
+  "readme": "res://effects/09_terrain/07_frost/README.md",
+  "scene": "res://effects/09_terrain/07_frost/demo.tscn",
+  "shape": "plane",
+  "amount": 0.55,
+  "keywords": "terrain frost spatial",
+  "text": false
+}

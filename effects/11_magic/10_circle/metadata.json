@@ -1,0 +1,20 @@
+{
+  "number": 197,
+  "name": "魔法阵",
+  "slug": "circle",
+  "category": "科幻、能量与魔法",
+  "category_slug": "magic",
+  "category_number": 11,
+  "kind": "canvas",
+  "implementation": "二维 Shader",
+  "approximation": false,
+  "summary": "几圈发光圆环配上旋转小刻度，像魔法阵。",
+  "directory": "res://effects/11_magic/10_circle",
+  "shader": "res://effects/11_magic/10_circle/effect.gdshader",
+  "readme": "res://effects/11_magic/10_circle/README.md",
+  "scene": "res://effects/11_magic/10_circle/demo.tscn",
+  "shape": "sphere",
+  "amount": 0.55,
+  "keywords": "magic circle canvas",
+  "text": false
+}

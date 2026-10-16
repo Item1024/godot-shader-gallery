@@ -1,0 +1,20 @@
+{
+  "number": 397,
+  "name": "SDF距离场图形",
+  "slug": "sdf",
+  "category": "程序化与体积进阶",
+  "category_slug": "advanced",
+  "category_number": 22,
+  "kind": "canvas",
+  "implementation": "二维 Shader",
+  "approximation": false,
+  "summary": "圆和方形能柔和地融成一个形状。",
+  "directory": "res://effects/22_advanced/01_sdf",
+  "shader": "res://effects/22_advanced/01_sdf/effect.gdshader",
+  "readme": "res://effects/22_advanced/01_sdf/README.md",
+  "scene": "res://effects/22_advanced/01_sdf/demo.tscn",
+  "shape": "sphere",
+  "amount": 0.55,
+  "keywords": "advanced sdf canvas",
+  "text": false
+}

@@ -1,0 +1,20 @@
+{
+  "number": 339,
+  "name": "暗角",
+  "slug": "vignette",
+  "category": "模糊、镜头与扭曲",
+  "category_slug": "lens",
+  "category_number": 18,
+  "kind": "post",
+  "implementation": "屏幕后处理",
+  "approximation": false,
+  "summary": "画面四角和边缘变暗。",
+  "directory": "res://effects/18_lens/14_vignette",
+  "shader": "res://effects/18_lens/14_vignette/effect.gdshader",
+  "readme": "res://effects/18_lens/14_vignette/README.md",
+  "scene": "res://effects/18_lens/14_vignette/demo.tscn",
+  "shape": "sphere",
+  "amount": 0.55,
+  "keywords": "lens vignette post",
+  "text": false
+}

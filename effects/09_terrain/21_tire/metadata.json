@@ -1,0 +1,20 @@
+{
+  "number": 167,
+  "name": "车辙",
+  "slug": "tire",
+  "category": "地表与表面变化",
+  "category_slug": "terrain",
+  "category_number": 9,
+  "kind": "spatial",
+  "implementation": "演示近似",
+  "approximation": true,
+  "summary": "地面上有重复排列的轮胎花纹。",
+  "directory": "res://effects/09_terrain/21_tire",
+  "shader": "res://effects/09_terrain/21_tire/effect.gdshader",
+  "readme": "res://effects/09_terrain/21_tire/README.md",
+  "scene": "res://effects/09_terrain/21_tire/demo.tscn",
+  "shape": "plane",
+  "amount": 0.55,
+  "keywords": "terrain tire spatial",
+  "text": false
+}

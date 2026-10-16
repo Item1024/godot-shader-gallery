@@ -1,0 +1,23 @@
+{
+  "number": 391,
+  "name": "屏幕空间反射SSR",
+  "slug": "ssr",
+  "category": "光照、阴影与空间渲染",
+  "category_slug": "lighting",
+  "category_number": 21,
+  "kind": "pipeline",
+  "implementation": "管线功能",
+  "approximation": false,
+  "summary": "光滑表面能映出画面里其他东西。",
+  "directory": "res://effects/21_lighting/10_ssr",
+  "shader": "res://effects/21_lighting/10_ssr/effect.gdshader",
+  "readme": "res://effects/21_lighting/10_ssr/README.md",
+  "scene": "res://effects/21_lighting/10_ssr/demo.tscn",
+  "shape": "sphere",
+  "amount": 0.55,
+  "keywords": "lighting ssr pipeline",
+  "text": false,
+  "environment": {
+    "ssr_enabled": true
+  }
+}

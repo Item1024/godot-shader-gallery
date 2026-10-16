@@ -1,0 +1,20 @@
+{
+  "number": 23,
+  "name": "脉冲描边",
+  "slug": "pulse",
+  "category": "描边、轮廓与遮挡",
+  "category_slug": "outline",
+  "category_number": 2,
+  "kind": "sprite",
+  "implementation": "二维 Shader",
+  "approximation": false,
+  "summary": "描边一明一暗地跳动。",
+  "directory": "res://effects/02_outline/07_pulse",
+  "shader": "res://effects/02_outline/07_pulse/effect.gdshader",
+  "readme": "res://effects/02_outline/07_pulse/README.md",
+  "scene": "res://effects/02_outline/07_pulse/demo.tscn",
+  "shape": "sphere",
+  "amount": 0.55,
+  "keywords": "outline pulse sprite",
+  "text": false
+}

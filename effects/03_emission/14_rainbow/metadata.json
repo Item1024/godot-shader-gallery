@@ -1,0 +1,20 @@
+{
+  "number": 46,
+  "name": "彩虹流光",
+  "slug": "rainbow",
+  "category": "发光、流光与扫光",
+  "category_slug": "emission",
+  "category_number": 3,
+  "kind": "canvas",
+  "implementation": "二维 Shader",
+  "approximation": false,
+  "summary": "图案表面的彩色光不断流动。",
+  "directory": "res://effects/03_emission/14_rainbow",
+  "shader": "res://effects/03_emission/14_rainbow/effect.gdshader",
+  "readme": "res://effects/03_emission/14_rainbow/README.md",
+  "scene": "res://effects/03_emission/14_rainbow/demo.tscn",
+  "shape": "sphere",
+  "amount": 0.55,
+  "keywords": "emission rainbow canvas",
+  "text": false
+}

@@ -1,0 +1,20 @@
+{
+  "number": 45,
+  "name": "发光裂缝",
+  "slug": "cracks",
+  "category": "发光、流光与扫光",
+  "category_slug": "emission",
+  "category_number": 3,
+  "kind": "canvas",
+  "implementation": "二维 Shader",
+  "approximation": false,
+  "summary": "不规则裂缝里透出亮光。",
+  "directory": "res://effects/03_emission/13_cracks",
+  "shader": "res://effects/03_emission/13_cracks/effect.gdshader",
+  "readme": "res://effects/03_emission/13_cracks/README.md",
+  "scene": "res://effects/03_emission/13_cracks/demo.tscn",
+  "shape": "sphere",
+  "amount": 0.55,
+  "keywords": "emission cracks canvas",
+  "text": false
+}

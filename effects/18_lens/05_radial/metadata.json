@@ -1,0 +1,20 @@
+{
+  "number": 330,
+  "name": "径向模糊",
+  "slug": "radial",
+  "category": "模糊、镜头与扭曲",
+  "category_slug": "lens",
+  "category_number": 18,
+  "kind": "post",
+  "implementation": "屏幕后处理",
+  "approximation": false,
+  "summary": "画面像绕中心旋转时留下拖影。",
+  "directory": "res://effects/18_lens/05_radial",
+  "shader": "res://effects/18_lens/05_radial/effect.gdshader",
+  "readme": "res://effects/18_lens/05_radial/README.md",
+  "scene": "res://effects/18_lens/05_radial/demo.tscn",
+  "shape": "sphere",
+  "amount": 0.55,
+  "keywords": "lens radial post",
+  "text": false
+}

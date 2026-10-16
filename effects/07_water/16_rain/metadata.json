@@ -1,0 +1,21 @@
+{
+  "number": 127,
+  "name": "雨滴波纹",
+  "slug": "rain",
+  "category": "水体与液体表面",
+  "category_slug": "water",
+  "category_number": 7,
+  "kind": "spatial",
+  "implementation": "三维材质",
+  "approximation": false,
+  "summary": "水面不断出现一圈圈雨滴波纹。",
+  "directory": "res://effects/07_water/16_rain",
+  "shader": "res://effects/07_water/16_rain/effect.gdshader",
+  "readme": "res://effects/07_water/16_rain/README.md",
+  "scene": "res://effects/07_water/16_rain/demo.tscn",
+  "shape": "plane",
+  "amount": 0.55,
+  "keywords": "water rain spatial",
+  "text": false,
+  "rocks": true
+}

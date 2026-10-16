@@ -1,0 +1,20 @@
+{
+  "number": 322,
+  "name": "局部调色",
+  "slug": "local",
+  "category": "屏幕调色",
+  "category_slug": "color",
+  "category_number": 17,
+  "kind": "post",
+  "implementation": "演示近似",
+  "approximation": true,
+  "summary": "只有点击位置附近的颜色被改变。",
+  "directory": "res://effects/17_color/16_local",
+  "shader": "res://effects/17_color/16_local/effect.gdshader",
+  "readme": "res://effects/17_color/16_local/README.md",
+  "scene": "res://effects/17_color/16_local/demo.tscn",
+  "shape": "sphere",
+  "amount": 0.55,
+  "keywords": "color local post",
+  "text": false
+}

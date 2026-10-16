@@ -1,0 +1,20 @@
+{
+  "number": 231,
+  "name": "草木风摆",
+  "slug": "wind",
+  "category": "顶点变形与模型运动",
+  "category_slug": "vertex",
+  "category_number": 13,
+  "kind": "spatial",
+  "implementation": "三维材质",
+  "approximation": false,
+  "summary": "布面像植物一样被风吹弯。",
+  "directory": "res://effects/13_vertex/03_wind",
+  "shader": "res://effects/13_vertex/03_wind/effect.gdshader",
+  "readme": "res://effects/13_vertex/03_wind/README.md",
+  "scene": "res://effects/13_vertex/03_wind/demo.tscn",
+  "shape": "cloth",
+  "amount": 0.55,
+  "keywords": "vertex wind spatial",
+  "text": false
+}

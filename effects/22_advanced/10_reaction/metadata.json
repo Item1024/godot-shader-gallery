@@ -1,0 +1,20 @@
+{
+  "number": 406,
+  "name": "反应扩散纹理",
+  "slug": "reaction",
+  "category": "程序化与体积进阶",
+  "category_slug": "advanced",
+  "category_number": 22,
+  "kind": "canvas",
+  "implementation": "演示近似",
+  "approximation": true,
+  "summary": "画面出现会变化的迷宫状斑纹。",
+  "directory": "res://effects/22_advanced/10_reaction",
+  "shader": "res://effects/22_advanced/10_reaction/effect.gdshader",
+  "readme": "res://effects/22_advanced/10_reaction/README.md",
+  "scene": "res://effects/22_advanced/10_reaction/demo.tscn",
+  "shape": "sphere",
+  "amount": 0.55,
+  "keywords": "advanced reaction canvas",
+  "text": false
+}

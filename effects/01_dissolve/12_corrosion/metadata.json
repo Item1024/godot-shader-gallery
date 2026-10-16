@@ -1,0 +1,20 @@
+{
+  "number": 12,
+  "name": "腐蚀消失",
+  "slug": "corrosion",
+  "category": "溶解、显隐与侵蚀",
+  "category_slug": "dissolve",
+  "category_number": 1,
+  "kind": "sprite",
+  "implementation": "二维 Shader",
+  "approximation": false,
+  "summary": "图片像被腐蚀出许多小洞。",
+  "directory": "res://effects/01_dissolve/12_corrosion",
+  "shader": "res://effects/01_dissolve/12_corrosion/effect.gdshader",
+  "readme": "res://effects/01_dissolve/12_corrosion/README.md",
+  "scene": "res://effects/01_dissolve/12_corrosion/demo.tscn",
+  "shape": "sphere",
+  "amount": 0.32,
+  "keywords": "dissolve corrosion sprite",
+  "text": false
+}

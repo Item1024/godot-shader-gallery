@@ -1,0 +1,20 @@
+{
+  "number": 282,
+  "name": "精灵扭曲",
+  "slug": "distort",
+  "category": "2D精灵与像素画",
+  "category_slug": "sprite",
+  "category_number": 15,
+  "kind": "sprite",
+  "implementation": "二维 Shader",
+  "approximation": false,
+  "summary": "图片像被柔软波纹推来推去。",
+  "directory": "res://effects/15_sprite/16_distort",
+  "shader": "res://effects/15_sprite/16_distort/effect.gdshader",
+  "readme": "res://effects/15_sprite/16_distort/README.md",
+  "scene": "res://effects/15_sprite/16_distort/demo.tscn",
+  "shape": "sphere",
+  "amount": 0.55,
+  "keywords": "sprite distort sprite",
+  "text": false
+}

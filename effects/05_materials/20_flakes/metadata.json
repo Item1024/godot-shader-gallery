@@ -1,0 +1,20 @@
+{
+  "number": 87,
+  "name": "金属闪片",
+  "slug": "flakes",
+  "category": "真实与半真实材质",
+  "category_slug": "materials",
+  "category_number": 5,
+  "kind": "spatial",
+  "implementation": "三维材质",
+  "approximation": false,
+  "summary": "模型表面像撒了许多金属亮片。",
+  "directory": "res://effects/05_materials/20_flakes",
+  "shader": "res://effects/05_materials/20_flakes/effect.gdshader",
+  "readme": "res://effects/05_materials/20_flakes/README.md",
+  "scene": "res://effects/05_materials/20_flakes/demo.tscn",
+  "shape": "sphere",
+  "amount": 0.55,
+  "keywords": "materials flakes spatial",
+  "text": false
+}

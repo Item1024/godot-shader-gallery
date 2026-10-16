@@ -1,0 +1,20 @@
+{
+  "number": 77,
+  "name": "丝绸",
+  "slug": "silk",
+  "category": "真实与半真实材质",
+  "category_slug": "materials",
+  "category_number": 5,
+  "kind": "spatial",
+  "implementation": "三维材质",
+  "approximation": false,
+  "summary": "模型像有顺滑亮边的丝绸。",
+  "directory": "res://effects/05_materials/10_silk",
+  "shader": "res://effects/05_materials/10_silk/effect.gdshader",
+  "readme": "res://effects/05_materials/10_silk/README.md",
+  "scene": "res://effects/05_materials/10_silk/demo.tscn",
+  "shape": "sphere",
+  "amount": 0.55,
+  "keywords": "materials silk spatial",
+  "text": false
+}

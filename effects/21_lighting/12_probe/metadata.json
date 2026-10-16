@@ -1,0 +1,21 @@
+{
+  "number": 393,
+  "name": "反射探针混合",
+  "slug": "probe",
+  "category": "光照、阴影与空间渲染",
+  "category_slug": "lighting",
+  "category_number": 21,
+  "kind": "pipeline",
+  "implementation": "管线功能",
+  "approximation": false,
+  "summary": "模型能反射附近不同位置记录的环境。",
+  "directory": "res://effects/21_lighting/12_probe",
+  "shader": "res://effects/21_lighting/12_probe/effect.gdshader",
+  "readme": "res://effects/21_lighting/12_probe/README.md",
+  "scene": "res://effects/21_lighting/12_probe/demo.tscn",
+  "shape": "sphere",
+  "amount": 0.55,
+  "keywords": "lighting probe pipeline",
+  "text": false,
+  "reflection_probes": true
+}

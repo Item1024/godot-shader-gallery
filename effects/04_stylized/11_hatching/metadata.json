@@ -1,0 +1,20 @@
+{
+  "number": 59,
+  "name": "排线",
+  "slug": "hatching",
+  "category": "卡通与绘画风格",
+  "category_slug": "stylized",
+  "category_number": 4,
+  "kind": "post",
+  "implementation": "演示近似",
+  "approximation": true,
+  "summary": "照片像用一排排斜线画出来。",
+  "directory": "res://effects/04_stylized/11_hatching",
+  "shader": "res://effects/04_stylized/11_hatching/effect.gdshader",
+  "readme": "res://effects/04_stylized/11_hatching/README.md",
+  "scene": "res://effects/04_stylized/11_hatching/demo.tscn",
+  "shape": "sphere",
+  "amount": 0.55,
+  "keywords": "stylized hatching post",
+  "text": false
+}

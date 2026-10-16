@@ -1,0 +1,20 @@
+{
+  "number": 16,
+  "name": "抖动透明",
+  "slug": "dither",
+  "category": "溶解、显隐与侵蚀",
+  "category_slug": "dissolve",
+  "category_number": 1,
+  "kind": "sprite",
+  "implementation": "二维 Shader",
+  "approximation": false,
+  "summary": "图片通过越来越多的小孔变得若隐若现。",
+  "directory": "res://effects/01_dissolve/16_dither",
+  "shader": "res://effects/01_dissolve/16_dither/effect.gdshader",
+  "readme": "res://effects/01_dissolve/16_dither/README.md",
+  "scene": "res://effects/01_dissolve/16_dither/demo.tscn",
+  "shape": "sphere",
+  "amount": 0.32,
+  "keywords": "dissolve dither sprite",
+  "text": false
+}

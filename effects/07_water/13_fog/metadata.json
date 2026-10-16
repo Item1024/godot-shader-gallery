@@ -1,0 +1,29 @@
+{
+  "number": 124,
+  "name": "水下雾",
+  "slug": "fog",
+  "category": "水体与液体表面",
+  "category_slug": "water",
+  "category_number": 7,
+  "kind": "pipeline",
+  "implementation": "管线功能",
+  "approximation": false,
+  "summary": "场景像浸在蓝绿色水雾中。",
+  "directory": "res://effects/07_water/13_fog",
+  "shader": "res://effects/07_water/13_fog/effect.gdshader",
+  "readme": "res://effects/07_water/13_fog/README.md",
+  "scene": "res://effects/07_water/13_fog/demo.tscn",
+  "shape": "sphere",
+  "amount": 0.55,
+  "keywords": "water fog pipeline",
+  "text": false,
+  "environment": {
+    "fog_enabled": true,
+    "fog_light_color": [
+      0.1,
+      0.45,
+      0.52,
+      1
+    ]
+  }
+}

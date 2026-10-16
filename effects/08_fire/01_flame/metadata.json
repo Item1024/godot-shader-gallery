@@ -1,0 +1,20 @@
+{
+  "number": 131,
+  "name": "写实火焰",
+  "slug": "flame",
+  "category": "火焰、烟雾与爆炸",
+  "category_slug": "fire",
+  "category_number": 8,
+  "kind": "canvas",
+  "implementation": "演示近似",
+  "approximation": true,
+  "summary": "火焰边缘不断翻动，内部由红变黄。",
+  "directory": "res://effects/08_fire/01_flame",
+  "shader": "res://effects/08_fire/01_flame/effect.gdshader",
+  "readme": "res://effects/08_fire/01_flame/README.md",
+  "scene": "res://effects/08_fire/01_flame/demo.tscn",
+  "shape": "sphere",
+  "amount": 0.55,
+  "keywords": "fire flame canvas",
+  "text": false
+}

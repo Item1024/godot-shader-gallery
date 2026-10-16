@@ -1,0 +1,20 @@
+{
+  "number": 53,
+  "name": "卡通高光",
+  "slug": "highlight",
+  "category": "卡通与绘画风格",
+  "category_slug": "stylized",
+  "category_number": 4,
+  "kind": "spatial",
+  "implementation": "三维材质",
+  "approximation": false,
+  "summary": "模型上出现边缘很硬的卡通高光。",
+  "directory": "res://effects/04_stylized/05_highlight",
+  "shader": "res://effects/04_stylized/05_highlight/effect.gdshader",
+  "readme": "res://effects/04_stylized/05_highlight/README.md",
+  "scene": "res://effects/04_stylized/05_highlight/demo.tscn",
+  "shape": "sphere",
+  "amount": 0.55,
+  "keywords": "stylized highlight spatial",
+  "text": false
+}

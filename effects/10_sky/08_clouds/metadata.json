@@ -1,0 +1,20 @@
+{
+  "number": 175,
+  "name": "流动云层",
+  "slug": "clouds",
+  "category": "天空、天气与大气",
+  "category_slug": "sky",
+  "category_number": 10,
+  "kind": "canvas",
+  "implementation": "二维 Shader",
+  "approximation": false,
+  "summary": "云层在天空中缓慢飘动。",
+  "directory": "res://effects/10_sky/08_clouds",
+  "shader": "res://effects/10_sky/08_clouds/effect.gdshader",
+  "readme": "res://effects/10_sky/08_clouds/README.md",
+  "scene": "res://effects/10_sky/08_clouds/demo.tscn",
+  "shape": "sphere",
+  "amount": 0.55,
+  "keywords": "sky clouds canvas",
+  "text": false
+}

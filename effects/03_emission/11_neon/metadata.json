@@ -1,0 +1,20 @@
+{
+  "number": 43,
+  "name": "霓虹灯",
+  "slug": "neon",
+  "category": "发光、流光与扫光",
+  "category_slug": "emission",
+  "category_number": 3,
+  "kind": "canvas",
+  "implementation": "二维 Shader",
+  "approximation": false,
+  "summary": "圆环像霓虹灯管一样明亮。",
+  "directory": "res://effects/03_emission/11_neon",
+  "shader": "res://effects/03_emission/11_neon/effect.gdshader",
+  "readme": "res://effects/03_emission/11_neon/README.md",
+  "scene": "res://effects/03_emission/11_neon/demo.tscn",
+  "shape": "sphere",
+  "amount": 0.55,
+  "keywords": "emission neon canvas",
+  "text": false
+}

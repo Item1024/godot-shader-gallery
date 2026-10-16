@@ -1,0 +1,24 @@
+{
+  "number": 390,
+  "name": "屏幕空间环境遮蔽SSAO",
+  "slug": "ssao",
+  "category": "光照、阴影与空间渲染",
+  "category_slug": "lighting",
+  "category_number": 21,
+  "kind": "pipeline",
+  "implementation": "管线功能",
+  "approximation": false,
+  "summary": "物体交接和缝隙位置更显阴暗。",
+  "directory": "res://effects/21_lighting/09_ssao",
+  "shader": "res://effects/21_lighting/09_ssao/effect.gdshader",
+  "readme": "res://effects/21_lighting/09_ssao/README.md",
+  "scene": "res://effects/21_lighting/09_ssao/demo.tscn",
+  "shape": "sphere",
+  "amount": 0.55,
+  "keywords": "lighting ssao pipeline",
+  "text": false,
+  "environment": {
+    "ssao_enabled": true,
+    "ssao_radius": 1.5
+  }
+}

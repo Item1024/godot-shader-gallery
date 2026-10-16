@@ -1,0 +1,20 @@
+{
+  "number": 140,
+  "name": "爆炸火球",
+  "slug": "explosion",
+  "category": "火焰、烟雾与爆炸",
+  "category_slug": "fire",
+  "category_number": 8,
+  "kind": "canvas",
+  "implementation": "演示近似",
+  "approximation": true,
+  "summary": "一个不规则火球迅速膨胀再消失。",
+  "directory": "res://effects/08_fire/10_explosion",
+  "shader": "res://effects/08_fire/10_explosion/effect.gdshader",
+  "readme": "res://effects/08_fire/10_explosion/README.md",
+  "scene": "res://effects/08_fire/10_explosion/demo.tscn",
+  "shape": "sphere",
+  "amount": 0.55,
+  "keywords": "fire explosion canvas",
+  "text": false
+}

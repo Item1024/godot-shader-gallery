@@ -1,0 +1,21 @@
+{
+  "number": 122,
+  "name": "水下焦散",
+  "slug": "caustics",
+  "category": "水体与液体表面",
+  "category_slug": "water",
+  "category_number": 7,
+  "kind": "spatial",
+  "implementation": "三维材质",
+  "approximation": false,
+  "summary": "水面上出现游动的亮色网纹。",
+  "directory": "res://effects/07_water/11_caustics",
+  "shader": "res://effects/07_water/11_caustics/effect.gdshader",
+  "readme": "res://effects/07_water/11_caustics/README.md",
+  "scene": "res://effects/07_water/11_caustics/demo.tscn",
+  "shape": "plane",
+  "amount": 0.55,
+  "keywords": "water caustics spatial",
+  "text": false,
+  "rocks": true
+}

@@ -1,0 +1,20 @@
+{
+  "number": 334,
+  "name": "散景",
+  "slug": "bokeh",
+  "category": "模糊、镜头与扭曲",
+  "category_slug": "lens",
+  "category_number": 18,
+  "kind": "depth",
+  "implementation": "演示近似",
+  "approximation": true,
+  "summary": "离焦区域的亮点像摊成了小光斑。",
+  "directory": "res://effects/18_lens/09_bokeh",
+  "shader": "res://effects/18_lens/09_bokeh/effect.gdshader",
+  "readme": "res://effects/18_lens/09_bokeh/README.md",
+  "scene": "res://effects/18_lens/09_bokeh/demo.tscn",
+  "shape": "sphere",
+  "amount": 0.55,
+  "keywords": "lens bokeh depth",
+  "text": false
+}

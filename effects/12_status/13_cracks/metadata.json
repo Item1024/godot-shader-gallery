@@ -1,0 +1,20 @@
+{
+  "number": 224,
+  "name": "身体裂痕",
+  "slug": "cracks",
+  "category": "角色受击与状态",
+  "category_slug": "status",
+  "category_number": 12,
+  "kind": "spatial",
+  "implementation": "三维材质",
+  "approximation": false,
+  "summary": "模型出现带亮光的裂纹。",
+  "directory": "res://effects/12_status/13_cracks",
+  "shader": "res://effects/12_status/13_cracks/effect.gdshader",
+  "readme": "res://effects/12_status/13_cracks/README.md",
+  "scene": "res://effects/12_status/13_cracks/demo.tscn",
+  "shape": "sphere",
+  "amount": 0.55,
+  "keywords": "status cracks spatial",
+  "text": false
+}

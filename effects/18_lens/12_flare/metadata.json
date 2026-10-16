@@ -1,0 +1,20 @@
+{
+  "number": 337,
+  "name": "镜头光晕",
+  "slug": "flare",
+  "category": "模糊、镜头与扭曲",
+  "category_slug": "lens",
+  "category_number": 18,
+  "kind": "post",
+  "implementation": "演示近似",
+  "approximation": true,
+  "summary": "画面上出现暖色光斑和细亮横线。",
+  "directory": "res://effects/18_lens/12_flare",
+  "shader": "res://effects/18_lens/12_flare/effect.gdshader",
+  "readme": "res://effects/18_lens/12_flare/README.md",
+  "scene": "res://effects/18_lens/12_flare/demo.tscn",
+  "shape": "sphere",
+  "amount": 0.55,
+  "keywords": "lens flare post",
+  "text": false
+}

@@ -1,0 +1,20 @@
+{
+  "number": 309,
+  "name": "饱和度",
+  "slug": "saturation",
+  "category": "屏幕调色",
+  "category_slug": "color",
+  "category_number": 17,
+  "kind": "post",
+  "implementation": "屏幕后处理",
+  "approximation": false,
+  "summary": "画面可以变灰，也可以变得鲜艳。",
+  "directory": "res://effects/17_color/03_saturation",
+  "shader": "res://effects/17_color/03_saturation/effect.gdshader",
+  "readme": "res://effects/17_color/03_saturation/README.md",
+  "scene": "res://effects/17_color/03_saturation/demo.tscn",
+  "shape": "sphere",
+  "amount": 0.55,
+  "keywords": "color saturation post",
+  "text": false
+}

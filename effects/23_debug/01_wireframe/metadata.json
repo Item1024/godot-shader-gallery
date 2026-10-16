@@ -1,0 +1,22 @@
+{
+  "number": 411,
+  "name": "线框",
+  "slug": "wireframe",
+  "category": "辅助显示与可视化",
+  "category_slug": "debug",
+  "category_number": 23,
+  "kind": "spatial",
+  "implementation": "三维材质",
+  "approximation": false,
+  "summary": "模型显示出每个三角面的边。",
+  "directory": "res://effects/23_debug/01_wireframe",
+  "shader": "res://effects/23_debug/01_wireframe/effect.gdshader",
+  "readme": "res://effects/23_debug/01_wireframe/README.md",
+  "scene": "res://effects/23_debug/01_wireframe/demo.tscn",
+  "shape": "sphere",
+  "amount": 0.55,
+  "keywords": "debug wireframe spatial",
+  "text": false,
+  "vertex_colors": true,
+  "barycentric": true
+}

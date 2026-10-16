@@ -1,0 +1,20 @@
+{
+  "number": 9,
+  "name": "发光边缘溶解",
+  "slug": "glow",
+  "category": "溶解、显隐与侵蚀",
+  "category_slug": "dissolve",
+  "category_number": 1,
+  "kind": "sprite",
+  "implementation": "二维 Shader",
+  "approximation": false,
+  "summary": "图片消失时，边缘留下一圈亮光。",
+  "directory": "res://effects/01_dissolve/09_glow",
+  "shader": "res://effects/01_dissolve/09_glow/effect.gdshader",
+  "readme": "res://effects/01_dissolve/09_glow/README.md",
+  "scene": "res://effects/01_dissolve/09_glow/demo.tscn",
+  "shape": "sphere",
+  "amount": 0.32,
+  "keywords": "dissolve glow sprite",
+  "text": false
+}

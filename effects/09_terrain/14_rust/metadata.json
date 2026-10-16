@@ -1,0 +1,20 @@
+{
+  "number": 160,
+  "name": "锈蚀",
+  "slug": "rust",
+  "category": "地表与表面变化",
+  "category_slug": "terrain",
+  "category_number": 9,
+  "kind": "spatial",
+  "implementation": "三维材质",
+  "approximation": false,
+  "summary": "金属色表面出现棕红锈斑。",
+  "directory": "res://effects/09_terrain/14_rust",
+  "shader": "res://effects/09_terrain/14_rust/effect.gdshader",
+  "readme": "res://effects/09_terrain/14_rust/README.md",
+  "scene": "res://effects/09_terrain/14_rust/demo.tscn",
+  "shape": "plane",
+  "amount": 0.55,
+  "keywords": "terrain rust spatial",
+  "text": false
+}

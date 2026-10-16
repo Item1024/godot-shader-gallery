@@ -1,0 +1,20 @@
+{
+  "number": 47,
+  "name": "闪粉",
+  "slug": "glitter",
+  "category": "发光、流光与扫光",
+  "category_slug": "emission",
+  "category_number": 3,
+  "kind": "canvas",
+  "implementation": "二维 Shader",
+  "approximation": false,
+  "summary": "图案上零星亮点时不时闪一下。",
+  "directory": "res://effects/03_emission/15_glitter",
+  "shader": "res://effects/03_emission/15_glitter/effect.gdshader",
+  "readme": "res://effects/03_emission/15_glitter/README.md",
+  "scene": "res://effects/03_emission/15_glitter/demo.tscn",
+  "shape": "sphere",
+  "amount": 0.55,
+  "keywords": "emission glitter canvas",
+  "text": false
+}

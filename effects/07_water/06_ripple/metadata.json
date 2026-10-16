@@ -1,0 +1,21 @@
+{
+  "number": 117,
+  "name": "水波纹",
+  "slug": "ripple",
+  "category": "水体与液体表面",
+  "category_slug": "water",
+  "category_number": 7,
+  "kind": "spatial",
+  "implementation": "三维材质",
+  "approximation": false,
+  "summary": "一圈圈水纹从中心向外跑。",
+  "directory": "res://effects/07_water/06_ripple",
+  "shader": "res://effects/07_water/06_ripple/effect.gdshader",
+  "readme": "res://effects/07_water/06_ripple/README.md",
+  "scene": "res://effects/07_water/06_ripple/demo.tscn",
+  "shape": "plane",
+  "amount": 0.55,
+  "keywords": "water ripple spatial",
+  "text": false,
+  "rocks": true
+}

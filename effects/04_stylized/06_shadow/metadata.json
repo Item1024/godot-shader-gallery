@@ -1,0 +1,20 @@
+{
+  "number": 54,
+  "name": "卡通阴影",
+  "slug": "shadow",
+  "category": "卡通与绘画风格",
+  "category_slug": "stylized",
+  "category_number": 4,
+  "kind": "spatial",
+  "implementation": "三维材质",
+  "approximation": false,
+  "summary": "模型阴影像动画色块一样整齐。",
+  "directory": "res://effects/04_stylized/06_shadow",
+  "shader": "res://effects/04_stylized/06_shadow/effect.gdshader",
+  "readme": "res://effects/04_stylized/06_shadow/README.md",
+  "scene": "res://effects/04_stylized/06_shadow/demo.tscn",
+  "shape": "sphere",
+  "amount": 0.55,
+  "keywords": "stylized shadow spatial",
+  "text": false
+}

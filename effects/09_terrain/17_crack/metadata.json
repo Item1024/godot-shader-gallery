@@ -1,0 +1,20 @@
+{
+  "number": 163,
+  "name": "裂纹",
+  "slug": "crack",
+  "category": "地表与表面变化",
+  "category_slug": "terrain",
+  "category_number": 9,
+  "kind": "spatial",
+  "implementation": "三维材质",
+  "approximation": false,
+  "summary": "地面出现不规则裂纹。",
+  "directory": "res://effects/09_terrain/17_crack",
+  "shader": "res://effects/09_terrain/17_crack/effect.gdshader",
+  "readme": "res://effects/09_terrain/17_crack/README.md",
+  "scene": "res://effects/09_terrain/17_crack/demo.tscn",
+  "shape": "plane",
+  "amount": 0.55,
+  "keywords": "terrain crack spatial",
+  "text": false
+}

@@ -1,0 +1,20 @@
+{
+  "number": 136,
+  "name": "熔岩",
+  "slug": "lava",
+  "category": "火焰、烟雾与爆炸",
+  "category_slug": "fire",
+  "category_number": 8,
+  "kind": "canvas",
+  "implementation": "二维 Shader",
+  "approximation": false,
+  "summary": "暗色硬壳之间透着橙红热光。",
+  "directory": "res://effects/08_fire/06_lava",
+  "shader": "res://effects/08_fire/06_lava/effect.gdshader",
+  "readme": "res://effects/08_fire/06_lava/README.md",
+  "scene": "res://effects/08_fire/06_lava/demo.tscn",
+  "shape": "sphere",
+  "amount": 0.55,
+  "keywords": "fire lava canvas",
+  "text": false
+}

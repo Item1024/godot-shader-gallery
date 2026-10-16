@@ -1,0 +1,20 @@
+{
+  "number": 329,
+  "name": "方向模糊",
+  "slug": "directional",
+  "category": "模糊、镜头与扭曲",
+  "category_slug": "lens",
+  "category_number": 18,
+  "kind": "post",
+  "implementation": "屏幕后处理",
+  "approximation": false,
+  "summary": "画面沿一个方向被拖开。",
+  "directory": "res://effects/18_lens/04_directional",
+  "shader": "res://effects/18_lens/04_directional/effect.gdshader",
+  "readme": "res://effects/18_lens/04_directional/README.md",
+  "scene": "res://effects/18_lens/04_directional/demo.tscn",
+  "shape": "sphere",
+  "amount": 0.55,
+  "keywords": "lens directional post",
+  "text": false
+}

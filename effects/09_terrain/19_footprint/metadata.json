@@ -1,0 +1,20 @@
+{
+  "number": 165,
+  "name": "脚印",
+  "slug": "footprint",
+  "category": "地表与表面变化",
+  "category_slug": "terrain",
+  "category_number": 9,
+  "kind": "spatial",
+  "implementation": "演示近似",
+  "approximation": true,
+  "summary": "地面排列着椭圆形脚印。",
+  "directory": "res://effects/09_terrain/19_footprint",
+  "shader": "res://effects/09_terrain/19_footprint/effect.gdshader",
+  "readme": "res://effects/09_terrain/19_footprint/README.md",
+  "scene": "res://effects/09_terrain/19_footprint/demo.tscn",
+  "shape": "plane",
+  "amount": 0.55,
+  "keywords": "terrain footprint spatial",
+  "text": false
+}

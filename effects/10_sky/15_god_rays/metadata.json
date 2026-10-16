@@ -1,0 +1,23 @@
+{
+  "number": 182,
+  "name": "丁达尔光",
+  "slug": "god_rays",
+  "category": "天空、天气与大气",
+  "category_slug": "sky",
+  "category_number": 10,
+  "kind": "pipeline",
+  "implementation": "演示近似",
+  "approximation": true,
+  "summary": "雾中可能看到被遮挡物分开的光路。",
+  "directory": "res://effects/10_sky/15_god_rays",
+  "shader": "res://effects/10_sky/15_god_rays/effect.gdshader",
+  "readme": "res://effects/10_sky/15_god_rays/README.md",
+  "scene": "res://effects/10_sky/15_god_rays/demo.tscn",
+  "shape": "sphere",
+  "amount": 0.55,
+  "keywords": "sky god_rays pipeline",
+  "text": false,
+  "environment": {
+    "volumetric_fog_enabled": true
+  }
+}

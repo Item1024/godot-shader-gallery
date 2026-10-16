@@ -1,0 +1,20 @@
+{
+  "number": 51,
+  "name": "二段三段明暗",
+  "slug": "bands",
+  "category": "卡通与绘画风格",
+  "category_slug": "stylized",
+  "category_number": 4,
+  "kind": "spatial",
+  "implementation": "三维材质",
+  "approximation": false,
+  "summary": "模型的明暗一档一档变化。",
+  "directory": "res://effects/04_stylized/03_bands",
+  "shader": "res://effects/04_stylized/03_bands/effect.gdshader",
+  "readme": "res://effects/04_stylized/03_bands/README.md",
+  "scene": "res://effects/04_stylized/03_bands/demo.tscn",
+  "shape": "sphere",
+  "amount": 0.55,
+  "keywords": "stylized bands spatial",
+  "text": false
+}

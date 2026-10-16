@@ -1,0 +1,20 @@
+{
+  "number": 108,
+  "name": "模糊反射",
+  "slug": "blurred",
+  "category": "透明、折射与反射",
+  "category_slug": "glass",
+  "category_number": 6,
+  "kind": "spatial",
+  "implementation": "三维材质",
+  "approximation": false,
+  "summary": "反射中的环境变得模糊。",
+  "directory": "res://effects/06_glass/13_blurred",
+  "shader": "res://effects/06_glass/13_blurred/effect.gdshader",
+  "readme": "res://effects/06_glass/13_blurred/README.md",
+  "scene": "res://effects/06_glass/13_blurred/demo.tscn",
+  "shape": "sphere",
+  "amount": 0.55,
+  "keywords": "glass blurred spatial",
+  "text": false
+}

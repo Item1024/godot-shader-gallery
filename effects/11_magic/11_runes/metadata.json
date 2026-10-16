@@ -1,0 +1,20 @@
+{
+  "number": 198,
+  "name": "旋转符文",
+  "slug": "runes",
+  "category": "科幻、能量与魔法",
+  "category_slug": "magic",
+  "category_number": 11,
+  "kind": "canvas",
+  "implementation": "二维 Shader",
+  "approximation": false,
+  "summary": "圆环上的短条纹像符文一样旋转。",
+  "directory": "res://effects/11_magic/11_runes",
+  "shader": "res://effects/11_magic/11_runes/effect.gdshader",
+  "readme": "res://effects/11_magic/11_runes/README.md",
+  "scene": "res://effects/11_magic/11_runes/demo.tscn",
+  "shape": "sphere",
+  "amount": 0.55,
+  "keywords": "magic runes canvas",
+  "text": false
+}

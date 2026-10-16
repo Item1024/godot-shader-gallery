@@ -1,0 +1,20 @@
+{
+  "number": 253,
+  "name": "三平面映射",
+  "slug": "triplanar",
+  "category": "UV、视差与程序纹理",
+  "category_slug": "uv",
+  "category_number": 14,
+  "kind": "spatial",
+  "implementation": "三维材质",
+  "approximation": false,
+  "summary": "模型从多个方向都能铺上纹理。",
+  "directory": "res://effects/14_uv/09_triplanar",
+  "shader": "res://effects/14_uv/09_triplanar/effect.gdshader",
+  "readme": "res://effects/14_uv/09_triplanar/README.md",
+  "scene": "res://effects/14_uv/09_triplanar/demo.tscn",
+  "shape": "sphere",
+  "amount": 0.55,
+  "keywords": "uv triplanar spatial",
+  "text": false
+}

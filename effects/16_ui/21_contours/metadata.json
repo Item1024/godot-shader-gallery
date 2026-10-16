@@ -1,0 +1,20 @@
+{
+  "number": 304,
+  "name": "地图等高线",
+  "slug": "contours",
+  "category": "UI、文字与地图",
+  "category_slug": "ui",
+  "category_number": 16,
+  "kind": "canvas",
+  "implementation": "二维 Shader",
+  "approximation": false,
+  "summary": "地图上出现一圈圈等高线。",
+  "directory": "res://effects/16_ui/21_contours",
+  "shader": "res://effects/16_ui/21_contours/effect.gdshader",
+  "readme": "res://effects/16_ui/21_contours/README.md",
+  "scene": "res://effects/16_ui/21_contours/demo.tscn",
+  "shape": "sphere",
+  "amount": 0.55,
+  "keywords": "ui contours canvas",
+  "text": false
+}

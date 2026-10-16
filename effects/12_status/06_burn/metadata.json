@@ -1,0 +1,20 @@
+{
+  "number": 217,
+  "name": "灼烧",
+  "slug": "burn",
+  "category": "角色受击与状态",
+  "category_slug": "status",
+  "category_number": 12,
+  "kind": "spatial",
+  "implementation": "三维材质",
+  "approximation": false,
+  "summary": "模型变得焦黑，裂缝里透出红光。",
+  "directory": "res://effects/12_status/06_burn",
+  "shader": "res://effects/12_status/06_burn/effect.gdshader",
+  "readme": "res://effects/12_status/06_burn/README.md",
+  "scene": "res://effects/12_status/06_burn/demo.tscn",
+  "shape": "sphere",
+  "amount": 0.55,
+  "keywords": "status burn spatial",
+  "text": false
+}

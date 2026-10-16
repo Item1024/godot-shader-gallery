@@ -1,0 +1,20 @@
+{
+  "number": 174,
+  "name": "月亮光晕",
+  "slug": "moon",
+  "category": "天空、天气与大气",
+  "category_slug": "sky",
+  "category_number": 10,
+  "kind": "canvas",
+  "implementation": "二维 Shader",
+  "approximation": false,
+  "summary": "夜空里出现带浅纹理的月亮和光晕。",
+  "directory": "res://effects/10_sky/07_moon",
+  "shader": "res://effects/10_sky/07_moon/effect.gdshader",
+  "readme": "res://effects/10_sky/07_moon/README.md",
+  "scene": "res://effects/10_sky/07_moon/demo.tscn",
+  "shape": "sphere",
+  "amount": 0.55,
+  "keywords": "sky moon canvas",
+  "text": false
+}

@@ -1,0 +1,20 @@
+{
+  "number": 389,
+  "name": "环境遮蔽",
+  "slug": "ao",
+  "category": "光照、阴影与空间渲染",
+  "category_slug": "lighting",
+  "category_number": 21,
+  "kind": "spatial",
+  "implementation": "三维材质",
+  "approximation": false,
+  "summary": "表面的细小纹缝显得更暗。",
+  "directory": "res://effects/21_lighting/08_ao",
+  "shader": "res://effects/21_lighting/08_ao/effect.gdshader",
+  "readme": "res://effects/21_lighting/08_ao/README.md",
+  "scene": "res://effects/21_lighting/08_ao/demo.tscn",
+  "shape": "sphere",
+  "amount": 0.55,
+  "keywords": "lighting ao spatial",
+  "text": false
+}

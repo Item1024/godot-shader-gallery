@@ -1,0 +1,20 @@
+{
+  "number": 49,
+  "name": "Toon卡通渲染",
+  "slug": "toon",
+  "category": "卡通与绘画风格",
+  "category_slug": "stylized",
+  "category_number": 4,
+  "kind": "spatial",
+  "implementation": "三维材质",
+  "approximation": false,
+  "summary": "模型的明暗像动画片一样分成几大块。",
+  "directory": "res://effects/04_stylized/01_toon",
+  "shader": "res://effects/04_stylized/01_toon/effect.gdshader",
+  "readme": "res://effects/04_stylized/01_toon/README.md",
+  "scene": "res://effects/04_stylized/01_toon/demo.tscn",
+  "shape": "sphere",
+  "amount": 0.55,
+  "keywords": "stylized toon spatial",
+  "text": false
+}

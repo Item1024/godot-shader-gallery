@@ -1,0 +1,21 @@
+{
+  "number": 116,
+  "name": "漩涡",
+  "slug": "vortex",
+  "category": "水体与液体表面",
+  "category_slug": "water",
+  "category_number": 7,
+  "kind": "spatial",
+  "implementation": "三维材质",
+  "approximation": false,
+  "summary": "水面出现旋转的螺旋纹。",
+  "directory": "res://effects/07_water/05_vortex",
+  "shader": "res://effects/07_water/05_vortex/effect.gdshader",
+  "readme": "res://effects/07_water/05_vortex/README.md",
+  "scene": "res://effects/07_water/05_vortex/demo.tscn",
+  "shape": "plane",
+  "amount": 0.55,
+  "keywords": "water vortex spatial",
+  "text": false,
+  "rocks": true
+}

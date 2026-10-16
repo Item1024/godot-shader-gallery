@@ -1,0 +1,20 @@
+{
+  "number": 385,
+  "name": "自阴影",
+  "slug": "self_shadow",
+  "category": "光照、阴影与空间渲染",
+  "category_slug": "lighting",
+  "category_number": 21,
+  "kind": "pipeline",
+  "implementation": "管线功能",
+  "approximation": false,
+  "summary": "模型自己凸出的部分能挡住照向自己的光。",
+  "directory": "res://effects/21_lighting/04_self_shadow",
+  "shader": "res://effects/21_lighting/04_self_shadow/effect.gdshader",
+  "readme": "res://effects/21_lighting/04_self_shadow/README.md",
+  "scene": "res://effects/21_lighting/04_self_shadow/demo.tscn",
+  "shape": "sphere",
+  "amount": 0.55,
+  "keywords": "lighting self_shadow pipeline",
+  "text": false
+}

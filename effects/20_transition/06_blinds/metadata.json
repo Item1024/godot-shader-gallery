@@ -1,0 +1,20 @@
+{
+  "number": 371,
+  "name": "百叶窗",
+  "slug": "blinds",
+  "category": "场景切换与转场",
+  "category_slug": "transition",
+  "category_number": 20,
+  "kind": "post",
+  "implementation": "屏幕后处理",
+  "approximation": false,
+  "summary": "新画面像百叶窗一样分条展开。",
+  "directory": "res://effects/20_transition/06_blinds",
+  "shader": "res://effects/20_transition/06_blinds/effect.gdshader",
+  "readme": "res://effects/20_transition/06_blinds/README.md",
+  "scene": "res://effects/20_transition/06_blinds/demo.tscn",
+  "shape": "sphere",
+  "amount": 0.55,
+  "keywords": "transition blinds post",
+  "text": false
+}

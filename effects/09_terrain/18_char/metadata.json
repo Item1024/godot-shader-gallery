@@ -1,0 +1,20 @@
+{
+  "number": 164,
+  "name": "烧焦",
+  "slug": "char",
+  "category": "地表与表面变化",
+  "category_slug": "terrain",
+  "category_number": 9,
+  "kind": "spatial",
+  "implementation": "三维材质",
+  "approximation": false,
+  "summary": "表面出现大片焦黑区域。",
+  "directory": "res://effects/09_terrain/18_char",
+  "shader": "res://effects/09_terrain/18_char/effect.gdshader",
+  "readme": "res://effects/09_terrain/18_char/README.md",
+  "scene": "res://effects/09_terrain/18_char/demo.tscn",
+  "shape": "plane",
+  "amount": 0.55,
+  "keywords": "terrain char spatial",
+  "text": false
+}

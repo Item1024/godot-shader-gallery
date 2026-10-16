@@ -1,0 +1,20 @@
+{
+  "number": 341,
+  "name": "鱼眼",
+  "slug": "fisheye",
+  "category": "模糊、镜头与扭曲",
+  "category_slug": "lens",
+  "category_number": 18,
+  "kind": "post",
+  "implementation": "屏幕后处理",
+  "approximation": false,
+  "summary": "画面像从广角鱼眼镜头里看出去。",
+  "directory": "res://effects/18_lens/16_fisheye",
+  "shader": "res://effects/18_lens/16_fisheye/effect.gdshader",
+  "readme": "res://effects/18_lens/16_fisheye/README.md",
+  "scene": "res://effects/18_lens/16_fisheye/demo.tscn",
+  "shape": "sphere",
+  "amount": 0.55,
+  "keywords": "lens fisheye post",
+  "text": false
+}

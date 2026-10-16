@@ -1,0 +1,20 @@
+{
+  "number": 189,
+  "name": "六边形护盾",
+  "slug": "hex_shield",
+  "category": "科幻、能量与魔法",
+  "category_slug": "magic",
+  "category_number": 11,
+  "kind": "spatial",
+  "implementation": "三维材质",
+  "approximation": false,
+  "summary": "护盾表面出现蜂窝感的重复花纹。",
+  "directory": "res://effects/11_magic/02_hex_shield",
+  "shader": "res://effects/11_magic/02_hex_shield/effect.gdshader",
+  "readme": "res://effects/11_magic/02_hex_shield/README.md",
+  "scene": "res://effects/11_magic/02_hex_shield/demo.tscn",
+  "shape": "sphere",
+  "amount": 0.55,
+  "keywords": "magic hex_shield spatial",
+  "text": false
+}

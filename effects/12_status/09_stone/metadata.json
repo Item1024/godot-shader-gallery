@@ -1,0 +1,20 @@
+{
+  "number": 220,
+  "name": "石化",
+  "slug": "stone",
+  "category": "角色受击与状态",
+  "category_slug": "status",
+  "category_number": 12,
+  "kind": "spatial",
+  "implementation": "三维材质",
+  "approximation": false,
+  "summary": "模型变成粗糙灰石。",
+  "directory": "res://effects/12_status/09_stone",
+  "shader": "res://effects/12_status/09_stone/effect.gdshader",
+  "readme": "res://effects/12_status/09_stone/README.md",
+  "scene": "res://effects/12_status/09_stone/demo.tscn",
+  "shape": "sphere",
+  "amount": 0.55,
+  "keywords": "status stone spatial",
+  "text": false
+}

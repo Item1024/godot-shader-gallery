@@ -1,0 +1,20 @@
+{
+  "number": 299,
+  "name": "血条闪烁",
+  "slug": "health",
+  "category": "UI、文字与地图",
+  "category_slug": "ui",
+  "category_number": 16,
+  "kind": "canvas",
+  "implementation": "二维 Shader",
+  "approximation": false,
+  "summary": "血条随进度缩短，低血量时变红并闪动。",
+  "directory": "res://effects/16_ui/16_health",
+  "shader": "res://effects/16_ui/16_health/effect.gdshader",
+  "readme": "res://effects/16_ui/16_health/README.md",
+  "scene": "res://effects/16_ui/16_health/demo.tscn",
+  "shape": "sphere",
+  "amount": 0.55,
+  "keywords": "ui health canvas",
+  "text": false
+}

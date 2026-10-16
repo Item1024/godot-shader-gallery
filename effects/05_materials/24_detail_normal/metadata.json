@@ -1,0 +1,20 @@
+{
+  "number": 91,
+  "name": "细节法线",
+  "slug": "detail_normal",
+  "category": "真实与半真实材质",
+  "category_slug": "materials",
+  "category_number": 5,
+  "kind": "spatial",
+  "implementation": "三维材质",
+  "approximation": false,
+  "summary": "模型同时有大纹路和细纹路。",
+  "directory": "res://effects/05_materials/24_detail_normal",
+  "shader": "res://effects/05_materials/24_detail_normal/effect.gdshader",
+  "readme": "res://effects/05_materials/24_detail_normal/README.md",
+  "scene": "res://effects/05_materials/24_detail_normal/demo.tscn",
+  "shape": "sphere",
+  "amount": 0.55,
+  "keywords": "materials detail_normal spatial",
+  "text": false
+}

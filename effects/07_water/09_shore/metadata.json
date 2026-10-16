@@ -1,0 +1,21 @@
+{
+  "number": 120,
+  "name": "岸边泡沫",
+  "slug": "shore",
+  "category": "水体与液体表面",
+  "category_slug": "water",
+  "category_number": 7,
+  "kind": "spatial",
+  "implementation": "三维材质",
+  "approximation": false,
+  "summary": "水和物体交接处出现泡沫。",
+  "directory": "res://effects/07_water/09_shore",
+  "shader": "res://effects/07_water/09_shore/effect.gdshader",
+  "readme": "res://effects/07_water/09_shore/README.md",
+  "scene": "res://effects/07_water/09_shore/demo.tscn",
+  "shape": "plane",
+  "amount": 0.55,
+  "keywords": "water shore spatial",
+  "text": false,
+  "rocks": true
+}

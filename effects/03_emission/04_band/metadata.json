@@ -1,0 +1,20 @@
+{
+  "number": 36,
+  "name": "条带扫光",
+  "slug": "band",
+  "category": "发光、流光与扫光",
+  "category_slug": "emission",
+  "category_number": 3,
+  "kind": "canvas",
+  "implementation": "二维 Shader",
+  "approximation": false,
+  "summary": "一条亮带从图案上扫过。",
+  "directory": "res://effects/03_emission/04_band",
+  "shader": "res://effects/03_emission/04_band/effect.gdshader",
+  "readme": "res://effects/03_emission/04_band/README.md",
+  "scene": "res://effects/03_emission/04_band/demo.tscn",
+  "shape": "sphere",
+  "amount": 0.55,
+  "keywords": "emission band canvas",
+  "text": false
+}

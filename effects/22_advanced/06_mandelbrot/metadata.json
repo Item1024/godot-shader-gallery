@@ -1,0 +1,20 @@
+{
+  "number": 402,
+  "name": "Mandelbrot",
+  "slug": "mandelbrot",
+  "category": "程序化与体积进阶",
+  "category_slug": "advanced",
+  "category_number": 22,
+  "kind": "canvas",
+  "implementation": "二维 Shader",
+  "approximation": false,
+  "summary": "画面出现有细密边缘的经典分形。",
+  "directory": "res://effects/22_advanced/06_mandelbrot",
+  "shader": "res://effects/22_advanced/06_mandelbrot/effect.gdshader",
+  "readme": "res://effects/22_advanced/06_mandelbrot/README.md",
+  "scene": "res://effects/22_advanced/06_mandelbrot/demo.tscn",
+  "shape": "sphere",
+  "amount": 0.55,
+  "keywords": "advanced mandelbrot canvas",
+  "text": false
+}

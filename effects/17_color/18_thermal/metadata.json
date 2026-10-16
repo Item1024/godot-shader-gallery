@@ -1,0 +1,20 @@
+{
+  "number": 324,
+  "name": "热成像风格",
+  "slug": "thermal",
+  "category": "屏幕调色",
+  "category_slug": "color",
+  "category_number": 17,
+  "kind": "post",
+  "implementation": "演示近似",
+  "approximation": true,
+  "summary": "画面像热成像一样出现冷暖色带。",
+  "directory": "res://effects/17_color/18_thermal",
+  "shader": "res://effects/17_color/18_thermal/effect.gdshader",
+  "readme": "res://effects/17_color/18_thermal/README.md",
+  "scene": "res://effects/17_color/18_thermal/demo.tscn",
+  "shape": "sphere",
+  "amount": 0.55,
+  "keywords": "color thermal post",
+  "text": false
+}

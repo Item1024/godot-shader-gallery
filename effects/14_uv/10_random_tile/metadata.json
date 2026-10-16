@@ -1,0 +1,20 @@
+{
+  "number": 254,
+  "name": "随机平铺",
+  "slug": "random_tile",
+  "category": "UV、视差与程序纹理",
+  "category_slug": "uv",
+  "category_number": 14,
+  "kind": "canvas",
+  "implementation": "二维 Shader",
+  "approximation": false,
+  "summary": "重复纹理的每块位置稍有变化。",
+  "directory": "res://effects/14_uv/10_random_tile",
+  "shader": "res://effects/14_uv/10_random_tile/effect.gdshader",
+  "readme": "res://effects/14_uv/10_random_tile/README.md",
+  "scene": "res://effects/14_uv/10_random_tile/demo.tscn",
+  "shape": "sphere",
+  "amount": 0.55,
+  "keywords": "uv random_tile canvas",
+  "text": false
+}

@@ -1,0 +1,20 @@
+{
+  "number": 249,
+  "name": "极坐标变换",
+  "slug": "polar",
+  "category": "UV、视差与程序纹理",
+  "category_slug": "uv",
+  "category_number": 14,
+  "kind": "canvas",
+  "implementation": "二维 Shader",
+  "approximation": false,
+  "summary": "直线和方格图案变成环绕中心的图案。",
+  "directory": "res://effects/14_uv/05_polar",
+  "shader": "res://effects/14_uv/05_polar/effect.gdshader",
+  "readme": "res://effects/14_uv/05_polar/README.md",
+  "scene": "res://effects/14_uv/05_polar/demo.tscn",
+  "shape": "sphere",
+  "amount": 0.55,
+  "keywords": "uv polar canvas",
+  "text": false
+}

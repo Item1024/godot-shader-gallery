@@ -1,0 +1,20 @@
+{
+  "number": 183,
+  "name": "极光",
+  "slug": "aurora",
+  "category": "天空、天气与大气",
+  "category_slug": "sky",
+  "category_number": 10,
+  "kind": "canvas",
+  "implementation": "二维 Shader",
+  "approximation": false,
+  "summary": "夜空里出现起伏的彩色光幕。",
+  "directory": "res://effects/10_sky/16_aurora",
+  "shader": "res://effects/10_sky/16_aurora/effect.gdshader",
+  "readme": "res://effects/10_sky/16_aurora/README.md",
+  "scene": "res://effects/10_sky/16_aurora/demo.tscn",
+  "shape": "sphere",
+  "amount": 0.55,
+  "keywords": "sky aurora canvas",
+  "text": false
+}

@@ -1,0 +1,20 @@
+{
+  "number": 211,
+  "name": "星云",
+  "slug": "nebula",
+  "category": "科幻、能量与魔法",
+  "category_slug": "magic",
+  "category_number": 11,
+  "kind": "canvas",
+  "implementation": "二维 Shader",
+  "approximation": false,
+  "summary": "彩色云雾里散着小亮星，像星云。",
+  "directory": "res://effects/11_magic/24_nebula",
+  "shader": "res://effects/11_magic/24_nebula/effect.gdshader",
+  "readme": "res://effects/11_magic/24_nebula/README.md",
+  "scene": "res://effects/11_magic/24_nebula/demo.tscn",
+  "shape": "sphere",
+  "amount": 0.55,
+  "keywords": "magic nebula canvas",
+  "text": false
+}

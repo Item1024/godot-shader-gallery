@@ -1,0 +1,20 @@
+{
+  "number": 2,
+  "name": "方向溶解",
+  "slug": "direction",
+  "category": "溶解、显隐与侵蚀",
+  "category_slug": "dissolve",
+  "category_number": 1,
+  "kind": "sprite",
+  "implementation": "二维 Shader",
+  "approximation": false,
+  "summary": "图片从一侧逐渐消失。",
+  "directory": "res://effects/01_dissolve/02_direction",
+  "shader": "res://effects/01_dissolve/02_direction/effect.gdshader",
+  "readme": "res://effects/01_dissolve/02_direction/README.md",
+  "scene": "res://effects/01_dissolve/02_direction/demo.tscn",
+  "shape": "sphere",
+  "amount": 0.32,
+  "keywords": "dissolve direction sprite",
+  "text": false
+}

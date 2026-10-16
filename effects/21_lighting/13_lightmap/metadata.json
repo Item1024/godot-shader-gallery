@@ -1,0 +1,20 @@
+{
+  "number": 394,
+  "name": "光照贴图混合",
+  "slug": "lightmap",
+  "category": "光照、阴影与空间渲染",
+  "category_slug": "lighting",
+  "category_number": 21,
+  "kind": "spatial",
+  "implementation": "演示近似",
+  "approximation": true,
+  "summary": "模型像带着提前画好的光照颜色。",
+  "directory": "res://effects/21_lighting/13_lightmap",
+  "shader": "res://effects/21_lighting/13_lightmap/effect.gdshader",
+  "readme": "res://effects/21_lighting/13_lightmap/README.md",
+  "scene": "res://effects/21_lighting/13_lightmap/demo.tscn",
+  "shape": "sphere",
+  "amount": 0.55,
+  "keywords": "lighting lightmap spatial",
+  "text": false
+}

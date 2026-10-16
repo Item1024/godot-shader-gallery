@@ -1,0 +1,20 @@
+{
+  "number": 276,
+  "name": "像素风光照",
+  "slug": "pixel_light",
+  "category": "2D精灵与像素画",
+  "category_slug": "sprite",
+  "category_number": 15,
+  "kind": "sprite",
+  "implementation": "二维 Shader",
+  "approximation": false,
+  "summary": "图片像被一盏像素风灯照亮。",
+  "directory": "res://effects/15_sprite/10_pixel_light",
+  "shader": "res://effects/15_sprite/10_pixel_light/effect.gdshader",
+  "readme": "res://effects/15_sprite/10_pixel_light/README.md",
+  "scene": "res://effects/15_sprite/10_pixel_light/demo.tscn",
+  "shape": "sphere",
+  "amount": 0.55,
+  "keywords": "sprite pixel_light sprite",
+  "text": false
+}

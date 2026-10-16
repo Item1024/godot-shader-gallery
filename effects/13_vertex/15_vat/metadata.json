@@ -1,0 +1,20 @@
+{
+  "number": 243,
+  "name": "顶点动画贴图VAT播放",
+  "slug": "vat",
+  "category": "顶点变形与模型运动",
+  "category_slug": "vertex",
+  "category_number": 13,
+  "kind": "spatial",
+  "implementation": "三维材质",
+  "approximation": false,
+  "summary": "模型照着一张动画表持续变形。",
+  "directory": "res://effects/13_vertex/15_vat",
+  "shader": "res://effects/13_vertex/15_vat/effect.gdshader",
+  "readme": "res://effects/13_vertex/15_vat/README.md",
+  "scene": "res://effects/13_vertex/15_vat/demo.tscn",
+  "shape": "cloth",
+  "amount": 0.55,
+  "keywords": "vertex vat spatial",
+  "text": false
+}

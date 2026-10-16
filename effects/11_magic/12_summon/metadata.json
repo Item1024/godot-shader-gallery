@@ -1,0 +1,20 @@
+{
+  "number": 199,
+  "name": "召唤阵",
+  "slug": "summon",
+  "category": "科幻、能量与魔法",
+  "category_slug": "magic",
+  "category_number": 11,
+  "kind": "canvas",
+  "implementation": "二维 Shader",
+  "approximation": false,
+  "summary": "同心圆和放射线组成召唤阵。",
+  "directory": "res://effects/11_magic/12_summon",
+  "shader": "res://effects/11_magic/12_summon/effect.gdshader",
+  "readme": "res://effects/11_magic/12_summon/README.md",
+  "scene": "res://effects/11_magic/12_summon/demo.tscn",
+  "shape": "sphere",
+  "amount": 0.55,
+  "keywords": "magic summon canvas",
+  "text": false
+}

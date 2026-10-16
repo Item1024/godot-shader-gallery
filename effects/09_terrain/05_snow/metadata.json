@@ -1,0 +1,20 @@
+{
+  "number": 151,
+  "name": "积雪覆盖",
+  "slug": "snow",
+  "category": "地表与表面变化",
+  "category_slug": "terrain",
+  "category_number": 9,
+  "kind": "spatial",
+  "implementation": "三维材质",
+  "approximation": false,
+  "summary": "地面部分区域被白色覆盖。",
+  "directory": "res://effects/09_terrain/05_snow",
+  "shader": "res://effects/09_terrain/05_snow/effect.gdshader",
+  "readme": "res://effects/09_terrain/05_snow/README.md",
+  "scene": "res://effects/09_terrain/05_snow/demo.tscn",
+  "shape": "plane",
+  "amount": 0.55,
+  "keywords": "terrain snow spatial",
+  "text": false
+}

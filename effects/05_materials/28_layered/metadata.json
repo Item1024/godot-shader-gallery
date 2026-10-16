@@ -1,0 +1,20 @@
+{
+  "number": 95,
+  "name": "多层材质",
+  "slug": "layered",
+  "category": "真实与半真实材质",
+  "category_slug": "materials",
+  "category_number": 5,
+  "kind": "spatial",
+  "implementation": "三维材质",
+  "approximation": false,
+  "summary": "模型像两种材质斑驳地叠在一起。",
+  "directory": "res://effects/05_materials/28_layered",
+  "shader": "res://effects/05_materials/28_layered/effect.gdshader",
+  "readme": "res://effects/05_materials/28_layered/README.md",
+  "scene": "res://effects/05_materials/28_layered/demo.tscn",
+  "shape": "sphere",
+  "amount": 0.55,
+  "keywords": "materials layered spatial",
+  "text": false
+}

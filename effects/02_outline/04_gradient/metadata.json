@@ -1,0 +1,20 @@
+{
+  "number": 20,
+  "name": "渐变描边",
+  "slug": "gradient",
+  "category": "描边、轮廓与遮挡",
+  "category_slug": "outline",
+  "category_number": 2,
+  "kind": "sprite",
+  "implementation": "二维 Shader",
+  "approximation": false,
+  "summary": "描边从上到下逐渐换色。",
+  "directory": "res://effects/02_outline/04_gradient",
+  "shader": "res://effects/02_outline/04_gradient/effect.gdshader",
+  "readme": "res://effects/02_outline/04_gradient/README.md",
+  "scene": "res://effects/02_outline/04_gradient/demo.tscn",
+  "shape": "sphere",
+  "amount": 0.55,
+  "keywords": "outline gradient sprite",
+  "text": false
+}

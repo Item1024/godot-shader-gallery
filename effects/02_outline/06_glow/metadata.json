@@ -1,0 +1,20 @@
+{
+  "number": 22,
+  "name": "发光描边",
+  "slug": "glow",
+  "category": "描边、轮廓与遮挡",
+  "category_slug": "outline",
+  "category_number": 2,
+  "kind": "sprite",
+  "implementation": "二维 Shader",
+  "approximation": false,
+  "summary": "轮廓外面有一圈很亮的颜色。",
+  "directory": "res://effects/02_outline/06_glow",
+  "shader": "res://effects/02_outline/06_glow/effect.gdshader",
+  "readme": "res://effects/02_outline/06_glow/README.md",
+  "scene": "res://effects/02_outline/06_glow/demo.tscn",
+  "shape": "sphere",
+  "amount": 0.55,
+  "keywords": "outline glow sprite",
+  "text": false
+}

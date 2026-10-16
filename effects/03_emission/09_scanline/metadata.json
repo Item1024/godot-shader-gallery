@@ -1,0 +1,20 @@
+{
+  "number": 41,
+  "name": "扫描线",
+  "slug": "scanline",
+  "category": "发光、流光与扫光",
+  "category_slug": "emission",
+  "category_number": 3,
+  "kind": "canvas",
+  "implementation": "二维 Shader",
+  "approximation": false,
+  "summary": "许多细亮线不断移动。",
+  "directory": "res://effects/03_emission/09_scanline",
+  "shader": "res://effects/03_emission/09_scanline/effect.gdshader",
+  "readme": "res://effects/03_emission/09_scanline/README.md",
+  "scene": "res://effects/03_emission/09_scanline/demo.tscn",
+  "shape": "sphere",
+  "amount": 0.55,
+  "keywords": "emission scanline canvas",
+  "text": false
+}

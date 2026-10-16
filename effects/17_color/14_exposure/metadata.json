@@ -1,0 +1,20 @@
+{
+  "number": 320,
+  "name": "曝光",
+  "slug": "exposure",
+  "category": "屏幕调色",
+  "category_slug": "color",
+  "category_number": 17,
+  "kind": "post",
+  "implementation": "屏幕后处理",
+  "approximation": false,
+  "summary": "画面像相机曝光增加或减少。",
+  "directory": "res://effects/17_color/14_exposure",
+  "shader": "res://effects/17_color/14_exposure/effect.gdshader",
+  "readme": "res://effects/17_color/14_exposure/README.md",
+  "scene": "res://effects/17_color/14_exposure/demo.tscn",
+  "shape": "sphere",
+  "amount": 0.55,
+  "keywords": "color exposure post",
+  "text": false
+}

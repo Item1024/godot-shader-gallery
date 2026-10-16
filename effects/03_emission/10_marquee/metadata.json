@@ -1,0 +1,20 @@
+{
+  "number": 42,
+  "name": "跑马灯",
+  "slug": "marquee",
+  "category": "发光、流光与扫光",
+  "category_slug": "emission",
+  "category_number": 3,
+  "kind": "canvas",
+  "implementation": "二维 Shader",
+  "approximation": false,
+  "summary": "圆圈上一段亮、一段暗，像跑马灯。",
+  "directory": "res://effects/03_emission/10_marquee",
+  "shader": "res://effects/03_emission/10_marquee/effect.gdshader",
+  "readme": "res://effects/03_emission/10_marquee/README.md",
+  "scene": "res://effects/03_emission/10_marquee/demo.tscn",
+  "shape": "sphere",
+  "amount": 0.55,
+  "keywords": "emission marquee canvas",
+  "text": false
+}

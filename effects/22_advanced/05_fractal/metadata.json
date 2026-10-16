@@ -1,0 +1,20 @@
+{
+  "number": 401,
+  "name": "分形图形",
+  "slug": "fractal",
+  "category": "程序化与体积进阶",
+  "category_slug": "advanced",
+  "category_number": 22,
+  "kind": "canvas",
+  "implementation": "二维 Shader",
+  "approximation": false,
+  "summary": "画面里出现不断嵌套的复杂花纹。",
+  "directory": "res://effects/22_advanced/05_fractal",
+  "shader": "res://effects/22_advanced/05_fractal/effect.gdshader",
+  "readme": "res://effects/22_advanced/05_fractal/README.md",
+  "scene": "res://effects/22_advanced/05_fractal/demo.tscn",
+  "shape": "sphere",
+  "amount": 0.55,
+  "keywords": "advanced fractal canvas",
+  "text": false
+}

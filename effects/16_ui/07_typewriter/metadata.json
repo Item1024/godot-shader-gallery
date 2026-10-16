@@ -1,0 +1,20 @@
+{
+  "number": 290,
+  "name": "打字显现遮罩",
+  "slug": "typewriter",
+  "category": "UI、文字与地图",
+  "category_slug": "ui",
+  "category_number": 16,
+  "kind": "sprite",
+  "implementation": "演示近似",
+  "approximation": true,
+  "summary": "文字从左到右一点点露出。",
+  "directory": "res://effects/16_ui/07_typewriter",
+  "shader": "res://effects/16_ui/07_typewriter/effect.gdshader",
+  "readme": "res://effects/16_ui/07_typewriter/README.md",
+  "scene": "res://effects/16_ui/07_typewriter/demo.tscn",
+  "shape": "sphere",
+  "amount": 0.55,
+  "keywords": "ui typewriter sprite",
+  "text": true
+}

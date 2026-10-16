@@ -1,0 +1,20 @@
+{
+  "number": 271,
+  "name": "局部换色",
+  "slug": "recolor",
+  "category": "2D精灵与像素画",
+  "category_slug": "sprite",
+  "category_number": 15,
+  "kind": "sprite",
+  "implementation": "二维 Shader",
+  "approximation": false,
+  "summary": "图片里某一类颜色被换掉。",
+  "directory": "res://effects/15_sprite/05_recolor",
+  "shader": "res://effects/15_sprite/05_recolor/effect.gdshader",
+  "readme": "res://effects/15_sprite/05_recolor/README.md",
+  "scene": "res://effects/15_sprite/05_recolor/demo.tscn",
+  "shape": "sphere",
+  "amount": 0.55,
+  "keywords": "sprite recolor sprite",
+  "text": false
+}

@@ -1,0 +1,20 @@
+{
+  "number": 245,
+  "name": "UV滚动",
+  "slug": "scroll",
+  "category": "UV、视差与程序纹理",
+  "category_slug": "uv",
+  "category_number": 14,
+  "kind": "canvas",
+  "implementation": "二维 Shader",
+  "approximation": false,
+  "summary": "表面图案不断平移。",
+  "directory": "res://effects/14_uv/01_scroll",
+  "shader": "res://effects/14_uv/01_scroll/effect.gdshader",
+  "readme": "res://effects/14_uv/01_scroll/README.md",
+  "scene": "res://effects/14_uv/01_scroll/demo.tscn",
+  "shape": "sphere",
+  "amount": 0.55,
+  "keywords": "uv scroll canvas",
+  "text": false
+}

@@ -1,0 +1,20 @@
+{
+  "number": 152,
+  "name": "融雪",
+  "slug": "melt",
+  "category": "地表与表面变化",
+  "category_slug": "terrain",
+  "category_number": 9,
+  "kind": "spatial",
+  "implementation": "三维材质",
+  "approximation": false,
+  "summary": "地面的白色覆盖逐渐改变范围。",
+  "directory": "res://effects/09_terrain/06_melt",
+  "shader": "res://effects/09_terrain/06_melt/effect.gdshader",
+  "readme": "res://effects/09_terrain/06_melt/README.md",
+  "scene": "res://effects/09_terrain/06_melt/demo.tscn",
+  "shape": "plane",
+  "amount": 0.55,
+  "keywords": "terrain melt spatial",
+  "text": false
+}

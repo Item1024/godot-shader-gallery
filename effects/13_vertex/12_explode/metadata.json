@@ -1,0 +1,20 @@
+{
+  "number": 240,
+  "name": "顶点散开",
+  "slug": "explode",
+  "category": "顶点变形与模型运动",
+  "category_slug": "vertex",
+  "category_number": 13,
+  "kind": "spatial",
+  "implementation": "演示近似",
+  "approximation": true,
+  "summary": "模型表面像被向外撑散。",
+  "directory": "res://effects/13_vertex/12_explode",
+  "shader": "res://effects/13_vertex/12_explode/effect.gdshader",
+  "readme": "res://effects/13_vertex/12_explode/README.md",
+  "scene": "res://effects/13_vertex/12_explode/demo.tscn",
+  "shape": "sphere",
+  "amount": 0.55,
+  "keywords": "vertex explode spatial",
+  "text": false
+}

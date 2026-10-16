@@ -1,0 +1,20 @@
+{
+  "number": 68,
+  "name": "金属",
+  "slug": "metal",
+  "category": "真实与半真实材质",
+  "category_slug": "materials",
+  "category_number": 5,
+  "kind": "spatial",
+  "implementation": "三维材质",
+  "approximation": false,
+  "summary": "模型像一颗金属球。",
+  "directory": "res://effects/05_materials/01_metal",
+  "shader": "res://effects/05_materials/01_metal/effect.gdshader",
+  "readme": "res://effects/05_materials/01_metal/README.md",
+  "scene": "res://effects/05_materials/01_metal/demo.tscn",
+  "shape": "sphere",
+  "amount": 0.55,
+  "keywords": "materials metal spatial",
+  "text": false
+}

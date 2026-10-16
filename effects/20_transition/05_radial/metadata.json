@@ -1,0 +1,20 @@
+{
+  "number": 370,
+  "name": "扇形展开",
+  "slug": "radial",
+  "category": "场景切换与转场",
+  "category_slug": "transition",
+  "category_number": 20,
+  "kind": "post",
+  "implementation": "屏幕后处理",
+  "approximation": false,
+  "summary": "新画面像扇形一样绕中心展开。",
+  "directory": "res://effects/20_transition/05_radial",
+  "shader": "res://effects/20_transition/05_radial/effect.gdshader",
+  "readme": "res://effects/20_transition/05_radial/README.md",
+  "scene": "res://effects/20_transition/05_radial/demo.tscn",
+  "shape": "sphere",
+  "amount": 0.55,
+  "keywords": "transition radial post",
+  "text": false
+}

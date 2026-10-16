@@ -1,0 +1,20 @@
+{
+  "number": 13,
+  "name": "扫描显现",
+  "slug": "scan",
+  "category": "溶解、显隐与侵蚀",
+  "category_slug": "dissolve",
+  "category_number": 1,
+  "kind": "sprite",
+  "implementation": "二维 Shader",
+  "approximation": false,
+  "summary": "一条带着细小起伏的边界扫过图片。",
+  "directory": "res://effects/01_dissolve/13_scan",
+  "shader": "res://effects/01_dissolve/13_scan/effect.gdshader",
+  "readme": "res://effects/01_dissolve/13_scan/README.md",
+  "scene": "res://effects/01_dissolve/13_scan/demo.tscn",
+  "shape": "sphere",
+  "amount": 0.32,
+  "keywords": "dissolve scan sprite",
+  "text": false
+}

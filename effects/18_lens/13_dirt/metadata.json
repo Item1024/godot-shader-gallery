@@ -1,0 +1,20 @@
+{
+  "number": 338,
+  "name": "镜头污渍",
+  "slug": "dirt",
+  "category": "模糊、镜头与扭曲",
+  "category_slug": "lens",
+  "category_number": 18,
+  "kind": "post",
+  "implementation": "演示近似",
+  "approximation": true,
+  "summary": "亮处像透过镜头上的细碎污点。",
+  "directory": "res://effects/18_lens/13_dirt",
+  "shader": "res://effects/18_lens/13_dirt/effect.gdshader",
+  "readme": "res://effects/18_lens/13_dirt/README.md",
+  "scene": "res://effects/18_lens/13_dirt/demo.tscn",
+  "shape": "sphere",
+  "amount": 0.55,
+  "keywords": "lens dirt post",
+  "text": false
+}

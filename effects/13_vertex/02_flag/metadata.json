@@ -1,0 +1,20 @@
+{
+  "number": 230,
+  "name": "旗帜飘动",
+  "slug": "flag",
+  "category": "顶点变形与模型运动",
+  "category_slug": "vertex",
+  "category_number": 13,
+  "kind": "spatial",
+  "implementation": "三维材质",
+  "approximation": false,
+  "summary": "布面像旗帜一样摆动，一侧动得少、另一侧动得多。",
+  "directory": "res://effects/13_vertex/02_flag",
+  "shader": "res://effects/13_vertex/02_flag/effect.gdshader",
+  "readme": "res://effects/13_vertex/02_flag/README.md",
+  "scene": "res://effects/13_vertex/02_flag/demo.tscn",
+  "shape": "cloth",
+  "amount": 0.55,
+  "keywords": "vertex flag spatial",
+  "text": false
+}

@@ -1,0 +1,20 @@
+{
+  "number": 11,
+  "name": "沙化消散",
+  "slug": "sand",
+  "category": "溶解、显隐与侵蚀",
+  "category_slug": "dissolve",
+  "category_number": 1,
+  "kind": "sprite",
+  "implementation": "演示近似",
+  "approximation": true,
+  "summary": "图片像细沙一样散掉。",
+  "directory": "res://effects/01_dissolve/11_sand",
+  "shader": "res://effects/01_dissolve/11_sand/effect.gdshader",
+  "readme": "res://effects/01_dissolve/11_sand/README.md",
+  "scene": "res://effects/01_dissolve/11_sand/demo.tscn",
+  "shape": "sphere",
+  "amount": 0.32,
+  "keywords": "dissolve sand sprite",
+  "text": false
+}

@@ -1,0 +1,20 @@
+{
+  "number": 142,
+  "name": "尘土",
+  "slug": "dust",
+  "category": "火焰、烟雾与爆炸",
+  "category_slug": "fire",
+  "category_number": 8,
+  "kind": "canvas",
+  "implementation": "演示近似",
+  "approximation": true,
+  "summary": "土黄色的尘团向上散开。",
+  "directory": "res://effects/08_fire/12_dust",
+  "shader": "res://effects/08_fire/12_dust/effect.gdshader",
+  "readme": "res://effects/08_fire/12_dust/README.md",
+  "scene": "res://effects/08_fire/12_dust/demo.tscn",
+  "shape": "sphere",
+  "amount": 0.55,
+  "keywords": "fire dust canvas",
+  "text": false
+}

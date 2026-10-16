@@ -1,0 +1,20 @@
+{
+  "number": 364,
+  "name": "PS1顶点抖动",
+  "slug": "ps1",
+  "category": "复古、故障与显示器",
+  "category_slug": "retro",
+  "category_number": 19,
+  "kind": "spatial",
+  "implementation": "三维材质",
+  "approximation": false,
+  "summary": "模型移动和转动时带着早期游戏的跳动感。",
+  "directory": "res://effects/19_retro/17_ps1",
+  "shader": "res://effects/19_retro/17_ps1/effect.gdshader",
+  "readme": "res://effects/19_retro/17_ps1/README.md",
+  "scene": "res://effects/19_retro/17_ps1/demo.tscn",
+  "shape": "sphere",
+  "amount": 0.55,
+  "keywords": "retro ps1 spatial",
+  "text": false
+}

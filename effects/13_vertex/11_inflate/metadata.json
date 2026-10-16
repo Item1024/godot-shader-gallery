@@ -1,0 +1,20 @@
+{
+  "number": 239,
+  "name": "膨胀收缩",
+  "slug": "inflate",
+  "category": "顶点变形与模型运动",
+  "category_slug": "vertex",
+  "category_number": 13,
+  "kind": "spatial",
+  "implementation": "三维材质",
+  "approximation": false,
+  "summary": "模型像充气一样向外鼓。",
+  "directory": "res://effects/13_vertex/11_inflate",
+  "shader": "res://effects/13_vertex/11_inflate/effect.gdshader",
+  "readme": "res://effects/13_vertex/11_inflate/README.md",
+  "scene": "res://effects/13_vertex/11_inflate/demo.tscn",
+  "shape": "sphere",
+  "amount": 0.55,
+  "keywords": "vertex inflate spatial",
+  "text": false
+}

@@ -1,0 +1,20 @@
+{
+  "number": 228,
+  "name": "死亡消散",
+  "slug": "death",
+  "category": "角色受击与状态",
+  "category_slug": "status",
+  "category_number": 12,
+  "kind": "spatial",
+  "implementation": "三维材质",
+  "approximation": false,
+  "summary": "模型像死亡时被能量逐渐分解。",
+  "directory": "res://effects/12_status/17_death",
+  "shader": "res://effects/12_status/17_death/effect.gdshader",
+  "readme": "res://effects/12_status/17_death/README.md",
+  "scene": "res://effects/12_status/17_death/demo.tscn",
+  "shape": "sphere",
+  "amount": 0.55,
+  "keywords": "status death spatial",
+  "text": false
+}

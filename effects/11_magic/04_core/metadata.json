@@ -1,0 +1,20 @@
+{
+  "number": 191,
+  "name": "能量核心",
+  "slug": "core",
+  "category": "科幻、能量与魔法",
+  "category_slug": "magic",
+  "category_number": 11,
+  "kind": "canvas",
+  "implementation": "二维 Shader",
+  "approximation": false,
+  "summary": "中心亮、外圈跳动，像一颗能量核心。",
+  "directory": "res://effects/11_magic/04_core",
+  "shader": "res://effects/11_magic/04_core/effect.gdshader",
+  "readme": "res://effects/11_magic/04_core/README.md",
+  "scene": "res://effects/11_magic/04_core/demo.tscn",
+  "shape": "sphere",
+  "amount": 0.55,
+  "keywords": "magic core canvas",
+  "text": false
+}

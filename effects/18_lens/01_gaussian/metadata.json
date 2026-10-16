@@ -1,0 +1,20 @@
+{
+  "number": 326,
+  "name": "高斯模糊",
+  "slug": "gaussian",
+  "category": "模糊、镜头与扭曲",
+  "category_slug": "lens",
+  "category_number": 18,
+  "kind": "post",
+  "implementation": "屏幕后处理",
+  "approximation": false,
+  "summary": "画面像隔着一层柔焦玻璃。",
+  "directory": "res://effects/18_lens/01_gaussian",
+  "shader": "res://effects/18_lens/01_gaussian/effect.gdshader",
+  "readme": "res://effects/18_lens/01_gaussian/README.md",
+  "scene": "res://effects/18_lens/01_gaussian/demo.tscn",
+  "shape": "sphere",
+  "amount": 0.55,
+  "keywords": "lens gaussian post",
+  "text": false
+}

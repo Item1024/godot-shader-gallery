@@ -1,0 +1,20 @@
+{
+  "number": 209,
+  "name": "残影",
+  "slug": "afterimage",
+  "category": "科幻、能量与魔法",
+  "category_slug": "magic",
+  "category_number": 11,
+  "kind": "canvas",
+  "implementation": "演示近似",
+  "approximation": true,
+  "summary": "一条弯动光带模拟残影观感。",
+  "directory": "res://effects/11_magic/22_afterimage",
+  "shader": "res://effects/11_magic/22_afterimage/effect.gdshader",
+  "readme": "res://effects/11_magic/22_afterimage/README.md",
+  "scene": "res://effects/11_magic/22_afterimage/demo.tscn",
+  "shape": "sphere",
+  "amount": 0.55,
+  "keywords": "magic afterimage canvas",
+  "text": false
+}

@@ -1,0 +1,21 @@
+{
+  "number": 417,
+  "name": "顶点色显示",
+  "slug": "vertex",
+  "category": "辅助显示与可视化",
+  "category_slug": "debug",
+  "category_number": 23,
+  "kind": "spatial",
+  "implementation": "三维材质",
+  "approximation": false,
+  "summary": "模型上预先存的小点颜色直接显现出来。",
+  "directory": "res://effects/23_debug/07_vertex",
+  "shader": "res://effects/23_debug/07_vertex/effect.gdshader",
+  "readme": "res://effects/23_debug/07_vertex/README.md",
+  "scene": "res://effects/23_debug/07_vertex/demo.tscn",
+  "shape": "sphere",
+  "amount": 0.55,
+  "keywords": "debug vertex spatial",
+  "text": false,
+  "vertex_colors": true
+}

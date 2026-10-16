@@ -1,0 +1,20 @@
+{
+  "number": 367,
+  "name": "交叉渐变",
+  "slug": "crossfade",
+  "category": "场景切换与转场",
+  "category_slug": "transition",
+  "category_number": 20,
+  "kind": "post",
+  "implementation": "屏幕后处理",
+  "approximation": false,
+  "summary": "两张画面像叠在一起慢慢交接。",
+  "directory": "res://effects/20_transition/02_crossfade",
+  "shader": "res://effects/20_transition/02_crossfade/effect.gdshader",
+  "readme": "res://effects/20_transition/02_crossfade/README.md",
+  "scene": "res://effects/20_transition/02_crossfade/demo.tscn",
+  "shape": "sphere",
+  "amount": 0.55,
+  "keywords": "transition crossfade post",
+  "text": false
+}

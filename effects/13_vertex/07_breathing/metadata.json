@@ -1,0 +1,20 @@
+{
+  "number": 235,
+  "name": "呼吸鼓胀",
+  "slug": "breathing",
+  "category": "顶点变形与模型运动",
+  "category_slug": "vertex",
+  "category_number": 13,
+  "kind": "spatial",
+  "implementation": "三维材质",
+  "approximation": false,
+  "summary": "模型像呼吸一样整体鼓起又缩回。",
+  "directory": "res://effects/13_vertex/07_breathing",
+  "shader": "res://effects/13_vertex/07_breathing/effect.gdshader",
+  "readme": "res://effects/13_vertex/07_breathing/README.md",
+  "scene": "res://effects/13_vertex/07_breathing/demo.tscn",
+  "shape": "sphere",
+  "amount": 0.55,
+  "keywords": "vertex breathing spatial",
+  "text": false
+}

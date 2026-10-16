@@ -1,0 +1,25 @@
+{
+  "number": 178,
+  "name": "高度雾",
+  "slug": "height_fog",
+  "category": "天空、天气与大气",
+  "category_slug": "sky",
+  "category_number": 10,
+  "kind": "pipeline",
+  "implementation": "管线功能",
+  "approximation": false,
+  "summary": "低处和高处的雾浓度不同。",
+  "directory": "res://effects/10_sky/11_height_fog",
+  "shader": "res://effects/10_sky/11_height_fog/effect.gdshader",
+  "readme": "res://effects/10_sky/11_height_fog/README.md",
+  "scene": "res://effects/10_sky/11_height_fog/demo.tscn",
+  "shape": "sphere",
+  "amount": 0.55,
+  "keywords": "sky height_fog pipeline",
+  "text": false,
+  "environment": {
+    "fog_enabled": true,
+    "fog_height": 1.2,
+    "fog_height_density": 0.8
+  }
+}

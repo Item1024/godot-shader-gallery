@@ -1,0 +1,20 @@
+{
+  "number": 203,
+  "name": "闪电",
+  "slug": "lightning",
+  "category": "科幻、能量与魔法",
+  "category_slug": "magic",
+  "category_number": 11,
+  "kind": "canvas",
+  "implementation": "二维 Shader",
+  "approximation": false,
+  "summary": "闪电路径快速变来变去。",
+  "directory": "res://effects/11_magic/16_lightning",
+  "shader": "res://effects/11_magic/16_lightning/effect.gdshader",
+  "readme": "res://effects/11_magic/16_lightning/README.md",
+  "scene": "res://effects/11_magic/16_lightning/demo.tscn",
+  "shape": "sphere",
+  "amount": 0.55,
+  "keywords": "magic lightning canvas",
+  "text": false
+}

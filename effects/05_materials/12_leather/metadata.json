@@ -1,0 +1,20 @@
+{
+  "number": 79,
+  "name": "皮革",
+  "slug": "leather",
+  "category": "真实与半真实材质",
+  "category_slug": "materials",
+  "category_number": 5,
+  "kind": "spatial",
+  "implementation": "三维材质",
+  "approximation": false,
+  "summary": "模型像带细小皮纹的皮革。",
+  "directory": "res://effects/05_materials/12_leather",
+  "shader": "res://effects/05_materials/12_leather/effect.gdshader",
+  "readme": "res://effects/05_materials/12_leather/README.md",
+  "scene": "res://effects/05_materials/12_leather/demo.tscn",
+  "shape": "sphere",
+  "amount": 0.55,
+  "keywords": "materials leather spatial",
+  "text": false
+}

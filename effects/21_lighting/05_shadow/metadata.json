@@ -1,0 +1,20 @@
+{
+  "number": 386,
+  "name": "投影",
+  "slug": "shadow",
+  "category": "光照、阴影与空间渲染",
+  "category_slug": "lighting",
+  "category_number": 21,
+  "kind": "pipeline",
+  "implementation": "管线功能",
+  "approximation": false,
+  "summary": "物体会把影子投到别的表面。",
+  "directory": "res://effects/21_lighting/05_shadow",
+  "shader": "res://effects/21_lighting/05_shadow/effect.gdshader",
+  "readme": "res://effects/21_lighting/05_shadow/README.md",
+  "scene": "res://effects/21_lighting/05_shadow/demo.tscn",
+  "shape": "sphere",
+  "amount": 0.55,
+  "keywords": "lighting shadow pipeline",
+  "text": false
+}

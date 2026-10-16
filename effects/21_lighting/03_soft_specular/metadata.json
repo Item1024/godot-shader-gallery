@@ -1,0 +1,20 @@
+{
+  "number": 384,
+  "name": "柔和高光",
+  "slug": "soft_specular",
+  "category": "光照、阴影与空间渲染",
+  "category_slug": "lighting",
+  "category_number": 21,
+  "kind": "spatial",
+  "implementation": "三维材质",
+  "approximation": false,
+  "summary": "模型上的高光从集中变得柔和。",
+  "directory": "res://effects/21_lighting/03_soft_specular",
+  "shader": "res://effects/21_lighting/03_soft_specular/effect.gdshader",
+  "readme": "res://effects/21_lighting/03_soft_specular/README.md",
+  "scene": "res://effects/21_lighting/03_soft_specular/demo.tscn",
+  "shape": "sphere",
+  "amount": 0.55,
+  "keywords": "lighting soft_specular spatial",
+  "text": false
+}

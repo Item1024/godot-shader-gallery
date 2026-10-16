@@ -1,0 +1,20 @@
+{
+  "number": 56,
+  "name": "低多边形色块",
+  "slug": "low_poly",
+  "category": "卡通与绘画风格",
+  "category_slug": "stylized",
+  "category_number": 4,
+  "kind": "spatial",
+  "implementation": "三维材质",
+  "approximation": false,
+  "summary": "模型像低多边形作品，面与面颜色分明。",
+  "directory": "res://effects/04_stylized/08_low_poly",
+  "shader": "res://effects/04_stylized/08_low_poly/effect.gdshader",
+  "readme": "res://effects/04_stylized/08_low_poly/README.md",
+  "scene": "res://effects/04_stylized/08_low_poly/demo.tscn",
+  "shape": "sphere",
+  "amount": 0.55,
+  "keywords": "stylized low_poly spatial",
+  "text": false
+}

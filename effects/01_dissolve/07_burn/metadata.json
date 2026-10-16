@@ -1,0 +1,20 @@
+{
+  "number": 7,
+  "name": "燃烧溶解",
+  "slug": "burn",
+  "category": "溶解、显隐与侵蚀",
+  "category_slug": "dissolve",
+  "category_number": 1,
+  "kind": "sprite",
+  "implementation": "二维 Shader",
+  "approximation": false,
+  "summary": "图片像沿着不规则边缘烧掉。",
+  "directory": "res://effects/01_dissolve/07_burn",
+  "shader": "res://effects/01_dissolve/07_burn/effect.gdshader",
+  "readme": "res://effects/01_dissolve/07_burn/README.md",
+  "scene": "res://effects/01_dissolve/07_burn/demo.tscn",
+  "shape": "sphere",
+  "amount": 0.32,
+  "keywords": "dissolve burn sprite",
+  "text": false
+}

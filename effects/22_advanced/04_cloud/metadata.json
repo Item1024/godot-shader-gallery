@@ -1,0 +1,20 @@
+{
+  "number": 400,
+  "name": "体积烟云",
+  "slug": "cloud",
+  "category": "程序化与体积进阶",
+  "category_slug": "advanced",
+  "category_number": 22,
+  "kind": "canvas",
+  "implementation": "演示近似",
+  "approximation": true,
+  "summary": "几团球状形体合成一朵立体云。",
+  "directory": "res://effects/22_advanced/04_cloud",
+  "shader": "res://effects/22_advanced/04_cloud/effect.gdshader",
+  "readme": "res://effects/22_advanced/04_cloud/README.md",
+  "scene": "res://effects/22_advanced/04_cloud/demo.tscn",
+  "shape": "sphere",
+  "amount": 0.55,
+  "keywords": "advanced cloud canvas",
+  "text": false
+}

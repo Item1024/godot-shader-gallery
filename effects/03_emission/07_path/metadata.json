@@ -1,0 +1,20 @@
+{
+  "number": 39,
+  "name": "沿路径流光",
+  "slug": "path",
+  "category": "发光、流光与扫光",
+  "category_slug": "emission",
+  "category_number": 3,
+  "kind": "canvas",
+  "implementation": "二维 Shader",
+  "approximation": false,
+  "summary": "一小段光沿圆环前进。",
+  "directory": "res://effects/03_emission/07_path",
+  "shader": "res://effects/03_emission/07_path/effect.gdshader",
+  "readme": "res://effects/03_emission/07_path/README.md",
+  "scene": "res://effects/03_emission/07_path/demo.tscn",
+  "shape": "sphere",
+  "amount": 0.55,
+  "keywords": "emission path canvas",
+  "text": false
+}

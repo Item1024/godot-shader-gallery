@@ -1,0 +1,20 @@
+{
+  "number": 34,
+  "name": "呼吸发光",
+  "slug": "breathing",
+  "category": "发光、流光与扫光",
+  "category_slug": "emission",
+  "category_number": 3,
+  "kind": "canvas",
+  "implementation": "二维 Shader",
+  "approximation": false,
+  "summary": "图案像呼吸一样慢慢亮起又暗下去。",
+  "directory": "res://effects/03_emission/02_breathing",
+  "shader": "res://effects/03_emission/02_breathing/effect.gdshader",
+  "readme": "res://effects/03_emission/02_breathing/README.md",
+  "scene": "res://effects/03_emission/02_breathing/demo.tscn",
+  "shape": "sphere",
+  "amount": 0.55,
+  "keywords": "emission breathing canvas",
+  "text": false
+}

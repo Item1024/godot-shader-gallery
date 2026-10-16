@@ -1,0 +1,20 @@
+{
+  "number": 132,
+  "name": "卡通火焰",
+  "slug": "toon_flame",
+  "category": "火焰、烟雾与爆炸",
+  "category_slug": "fire",
+  "category_number": 8,
+  "kind": "canvas",
+  "implementation": "二维 Shader",
+  "approximation": false,
+  "summary": "火焰变成边界清楚的卡通色块。",
+  "directory": "res://effects/08_fire/02_toon_flame",
+  "shader": "res://effects/08_fire/02_toon_flame/effect.gdshader",
+  "readme": "res://effects/08_fire/02_toon_flame/README.md",
+  "scene": "res://effects/08_fire/02_toon_flame/demo.tscn",
+  "shape": "sphere",
+  "amount": 0.55,
+  "keywords": "fire toon_flame canvas",
+  "text": false
+}

@@ -1,0 +1,20 @@
+{
+  "number": 173,
+  "name": "太阳光晕",
+  "slug": "sun",
+  "category": "天空、天气与大气",
+  "category_slug": "sky",
+  "category_number": 10,
+  "kind": "canvas",
+  "implementation": "二维 Shader",
+  "approximation": false,
+  "summary": "太阳圆盘周围有一圈暖色光晕。",
+  "directory": "res://effects/10_sky/06_sun",
+  "shader": "res://effects/10_sky/06_sun/effect.gdshader",
+  "readme": "res://effects/10_sky/06_sun/README.md",
+  "scene": "res://effects/10_sky/06_sun/demo.tscn",
+  "shape": "sphere",
+  "amount": 0.55,
+  "keywords": "sky sun canvas",
+  "text": false
+}

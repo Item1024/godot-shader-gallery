@@ -1,0 +1,20 @@
+{
+  "number": 194,
+  "name": "数字化身体",
+  "slug": "digital",
+  "category": "科幻、能量与魔法",
+  "category_slug": "magic",
+  "category_number": 11,
+  "kind": "spatial",
+  "implementation": "三维材质",
+  "approximation": false,
+  "summary": "模型像由不断跳动的小数据块组成。",
+  "directory": "res://effects/11_magic/07_digital",
+  "shader": "res://effects/11_magic/07_digital/effect.gdshader",
+  "readme": "res://effects/11_magic/07_digital/README.md",
+  "scene": "res://effects/11_magic/07_digital/demo.tscn",
+  "shape": "sphere",
+  "amount": 0.55,
+  "keywords": "magic digital spatial",
+  "text": false
+}
