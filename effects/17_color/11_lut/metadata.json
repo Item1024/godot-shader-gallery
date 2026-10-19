@@ -16,5 +16,43 @@
   "shape": "sphere",
   "amount": 0.55,
   "keywords": "color lut post",
-  "text": false
+  "text": false,
+  "parameters": [
+    {
+      "key": "u_amount",
+      "label": "混合强度",
+      "type": "float",
+      "target": "material",
+      "min": 0,
+      "max": 1,
+      "step": 0.01,
+      "default": 1,
+      "unit": "",
+      "help": "0 为起点，1 为终点；端点不受其他参数影响。",
+      "advanced": false
+    },
+    {
+      "key": "lut_texture",
+      "label": "颜色表",
+      "type": "texture",
+      "target": "material",
+      "options": [
+        {
+          "label": "暖色 LUT",
+          "value": "res://assets/warm_lut.png"
+        },
+        {
+          "label": "中性 LUT",
+          "value": "res://assets/neutral_lut.png"
+        }
+      ],
+      "default": "res://assets/warm_lut.png",
+      "unit": "",
+      "help": "",
+      "advanced": false
+    }
+  ],
+  "animated": false,
+  "action": "",
+  "profile_note": "16³ 颜色表横排 16 个蓝色切片；红绿双线性、蓝色两片插值，采样限制在各片中心。PNG 按原始 RGB 数据读取。"
 }

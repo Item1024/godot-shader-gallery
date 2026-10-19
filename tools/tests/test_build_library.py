@@ -215,7 +215,7 @@ class GenerationSafetyTests(unittest.TestCase):
         self.assertEqual(result, 0, output)
 
     def test_isolated_checkout_cli_needs_no_sibling_blender_project(self):
-        for name in ["build_library.py", "effect_catalog.py", "plain_language.py"]:
+        for name in ["build_library.py", "effect_catalog.py", "plain_language.py", "effect_profiles.py"]:
             shutil.copy2(TOOLS / name, self.root / "tools" / name)
         self.assertFalse((self.root.parent / "blender-cottage-demo").exists())
         before = self.snapshot()

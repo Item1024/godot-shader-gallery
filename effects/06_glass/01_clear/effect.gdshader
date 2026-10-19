@@ -1,5 +1,5 @@
 // 透明玻璃 | 三维材质
-// Adjust u_amount, u_speed, u_scale and u_color in the gallery.
+// Parameters and defaults: metadata.json
 shader_type spatial;
 render_mode unshaded, cull_disabled;
 
@@ -8,8 +8,10 @@ uniform float u_amount : hint_range(0.0, 1.0) = 0.55;
 uniform float u_speed : hint_range(0.0, 3.0) = 1.0;
 uniform float u_scale : hint_range(0.4, 3.0) = 1.0;
 uniform bool u_enabled = true;
-uniform vec4 u_color : source_color = vec4(0.33, 0.91, 0.73, 1.0);
+uniform vec4 u_color : source_color = vec4(0.7019607843137254,0.9019607843137255,0.9490196078431372,1.0);
 uniform vec2 u_mouse = vec2(0.5);
+uniform float u_distortion : hint_range(0.0,0.08,0.001) = 0.025;
+uniform float u_opacity : hint_range(0.0,1.0,0.01) = 0.85;
 const float TAU_ = 6.28318530718;
 
 float h21(vec2 p) {
@@ -72,7 +74,7 @@ vec4 blur9(sampler2D image, vec2 uv, vec2 offset) {
     value += texture(image,uv+vec2(-offset.x,offset.y))*0.08;
     return value;
 }
-uniform sampler2D screen_texture : hint_screen_texture, filter_linear_mipmap;
+uniform sampler2D screen_texture : hint_screen_texture, repeat_disable, filter_linear;
 
 varying vec3 v_world;
 varying vec3 v_local;
@@ -91,6 +93,6 @@ void fragment() {
     ALBEDO=vec3(0.12,0.58,0.48);
     ROUGHNESS=0.42;
     if (u_enabled) {
-vec2 offset=NORMAL.xy*0.03*u_amount; vec3 refracted=textureLod(screen_texture,SCREEN_UV+offset,0.0).rgb; ALBEDO=refracted*vec3(0.7,0.9,0.95); EMISSION=vec3(0.7,0.9,0.95)*rim*0.35; ALPHA=0.85; ROUGHNESS=0.05;
+vec2 half_pixel=0.5/vec2(textureSize(screen_texture,0)); vec2 sample_uv=clamp(SCREEN_UV+NORMAL.xy*u_distortion,half_pixel,1.0-half_pixel); ALBEDO=textureLod(screen_texture,sample_uv,0.0).rgb*u_color.rgb; ALPHA=u_opacity;
     }
 }

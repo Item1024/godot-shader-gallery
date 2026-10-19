@@ -16,5 +16,46 @@
   "shape": "sphere",
   "amount": 0.55,
   "keywords": "glass clear spatial",
-  "text": false
+  "text": false,
+  "parameters": [
+    {
+      "key": "u_distortion",
+      "label": "折弯强度",
+      "type": "float",
+      "target": "material",
+      "min": 0,
+      "max": 0.08,
+      "step": 0.001,
+      "default": 0.025,
+      "unit": "屏幕比例",
+      "help": "",
+      "advanced": false
+    },
+    {
+      "key": "u_color",
+      "label": "染色",
+      "type": "color",
+      "target": "material",
+      "default": "#b3e6f2",
+      "unit": "",
+      "help": "",
+      "advanced": false
+    },
+    {
+      "key": "u_opacity",
+      "label": "不透明度",
+      "type": "float",
+      "target": "material",
+      "min": 0,
+      "max": 1,
+      "step": 0.01,
+      "default": 0.85,
+      "unit": "",
+      "help": "",
+      "advanced": false
+    }
+  ],
+  "animated": false,
+  "action": "",
+  "profile_note": "屏幕折射只能读取已画出的背景；镜头外内容和完整物理玻璃未实现。"
 }

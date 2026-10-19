@@ -17,5 +17,75 @@
   "amount": 0.55,
   "keywords": "water interactive spatial",
   "text": false,
+  "parameters": [
+    {
+      "key": "u_ripple_speed",
+      "label": "扩散速度",
+      "type": "float",
+      "target": "material",
+      "min": 0.1,
+      "max": 2,
+      "step": 0.01,
+      "default": 0.6,
+      "unit": "场景单位/秒",
+      "help": "",
+      "advanced": false
+    },
+    {
+      "key": "u_ripple_width",
+      "label": "波纹宽度",
+      "type": "float",
+      "target": "material",
+      "min": 0.01,
+      "max": 0.2,
+      "step": 0.001,
+      "default": 0.04,
+      "unit": "场景单位",
+      "help": "",
+      "advanced": false
+    },
+    {
+      "key": "u_duration",
+      "label": "持续时间",
+      "type": "float",
+      "target": "material",
+      "min": 0.2,
+      "max": 3,
+      "step": 0.01,
+      "default": 1,
+      "unit": "秒",
+      "help": "",
+      "advanced": false
+    },
+    {
+      "key": "u_strength",
+      "label": "强度",
+      "type": "float",
+      "target": "material",
+      "min": 0,
+      "max": 1,
+      "step": 0.01,
+      "default": 0.6,
+      "unit": "",
+      "help": "",
+      "advanced": false
+    },
+    {
+      "key": "u_wave_height",
+      "label": "波高",
+      "type": "float",
+      "target": "material",
+      "min": 0,
+      "max": 0.25,
+      "step": 0.001,
+      "default": 0.04,
+      "unit": "场景单位",
+      "help": "0 为平面；波形幅度上界为此值。",
+      "advanced": false
+    }
+  ],
+  "animated": true,
+  "action": "",
+  "profile_note": "点击起伏水面触发一次；最新点击替换旧圈。继承平静水面默认波长 1。",
   "rocks": true
 }

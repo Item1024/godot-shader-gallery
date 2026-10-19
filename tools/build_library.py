@@ -4,6 +4,7 @@ import argparse
 import hashlib
 import json
 import math
+import re
 import struct
 import sys
 import tempfile
@@ -12,6 +13,7 @@ import zlib
 sys.dont_write_bytecode = True
 from effect_catalog import CATEGORIES
 from plain_language import PRINCIPLES
+from effect_profiles import PROFILES, parameter_notes
 
 ROOT = Path(__file__).resolve().parents[1]
 COMMON = """
@@ -128,6 +130,176 @@ void fragment() {
     }
 }
 """ + light
+
+
+def refined_shader(group, slug):
+    """M3 formulas; other 401 effects retain their original generation path."""
+    key = group + "/" + slug
+    if group == "dissolve":
+        mask = "fbm(uv*u_noise_scale)" if slug != "direction" else "(dot(uv-0.5,direction)/extent)+0.5"
+        extra = "" if slug != "direction" else "vec2 direction=vec2(cos(radians(u_direction_deg)),sin(radians(u_direction_deg))); float extent=abs(direction.x)+abs(direction.y);"
+        return canvas(f"""
+        {extra}
+        float value={mask};
+        if (u_amount>=1.0) {{ out_color.a=0.0; }}
+        else if (u_amount>0.0) {{
+            float visible=step(u_amount,value);
+            float edge=u_edge_width>0.0 ? 1.0-smoothstep(0.0,u_edge_width,max(value-u_amount,0.0)) : 0.0;
+            out_color.rgb=mix(base.rgb,u_color.rgb*1.8,edge);
+            out_color.a=base.a*visible;
+        }}
+""", sprite=True), "sprite"
+    if group == "outline":
+        treatment = "float alpha=base.a+hi*(1.0-base.a); out_color=vec4((base.rgb*base.a+u_color.rgb*hi*(1.0-base.a))/max(alpha,0.00001),alpha);" if slug == "outer" else "out_color=vec4(mix(base.rgb,u_color.rgb,1.0-lo),base.a);"
+        return canvas("""
+        if (u_width_px>0.0) {
+            float hi=base.a, lo=base.a;
+            for (int i=0;i<32;i++) {
+                float a=float(i)*TAU_/32.0;
+                vec2 direction=vec2(cos(a),sin(a))*TEXTURE_PIXEL_SIZE*u_width_px;
+                float hard=texture(TEXTURE,uv+direction).a;
+                float soft=(hard+texture(TEXTURE,uv+direction*0.75).a+texture(TEXTURE,uv+direction*0.5).a+texture(TEXTURE,uv+direction*0.25).a)*0.25;
+                float coverage=mix(hard,soft,u_softness);
+                hi=max(hi,coverage); lo=min(lo,coverage);
+            }
+""" + treatment + "\n        }", sprite=True), "sprite"
+    if group == "emission":
+        signal = "mix(u_min_brightness,1.0,0.5+0.5*sin(t*TAU_*u_frequency))" if slug == "breathing" else "1.0-smoothstep(0.0,u_band_width*0.5,abs(dot(uv-0.5,direction)-center))"
+        setup = "" if slug == "breathing" else "vec2 direction=vec2(cos(radians(u_angle_deg)),sin(radians(u_angle_deg))); float span=abs(direction.x)+abs(direction.y)+u_band_width; float center=(fract(t/u_period)-0.5)*span;"
+        return canvas(setup + f"\n out_color.rgb=base.rgb+u_color.rgb*({signal})*u_intensity;", sprite=True), "sprite"
+    if key == "sprite/flash":
+        return canvas("float age=u_time-u_event_time; if(u_event_time>=0.0 && age>=0.0 && age<u_duration) { out_color.rgb=mix(base.rgb,u_color.rgb,u_strength*(1.0-age/u_duration)); }", sprite=True, extra="uniform float u_event_time=-1.0;\n"), "sprite"
+    if key == "sprite/recolor":
+        return canvas("float distance_rgb=length(base.rgb-u_source_color.rgb)/sqrt(3.0); float selected=1.0-step(u_tolerance+0.000001,distance_rgb); out_color.rgb=mix(base.rgb,u_color.rgb,selected*u_amount);", sprite=True), "sprite"
+    if group == "ui":
+        setup = "p.x*=SCREEN_PIXEL_SIZE.y/SCREEN_PIXEL_SIZE.x; float radius=length(p); float shape=1.0-smoothstep(0.78,0.78+fwidth(radius),radius);"
+        if slug == "liquid":
+            fill = "float level=(0.78-p.y)/1.56; float wave=sin((p.x/1.56+0.5)*TAU_*u_wave_frequency+t*2.0)*u_wave_height; float fill=u_amount<=0.0 ? 0.0 : (u_amount>=1.0 ? 1.0 : 1.0-step(u_amount+wave,level));"
+        else:
+            fill = "float turn=fract((atan(p.x,-p.y)-radians(u_start_deg))/TAU_); if(!u_clockwise){turn=fract(-turn);} float fill=u_amount<=0.0 ? 0.0 : (u_amount>=1.0 ? 1.0 : 1.0-step(u_amount,turn));"
+            if slug == "ring":
+                setup += "shape*=smoothstep(0.78-u_ring_width*2.0-fwidth(radius),0.78-u_ring_width*2.0,radius);"
+        return canvas(setup + fill + "col=mix(vec3(0.035,0.06,0.10),u_color.rgb,shape*fill);"), "canvas"
+    if group == "water":
+        extra = """
+uniform sampler2D depth_texture : hint_depth_texture, repeat_disable, filter_nearest;
+float water_height(vec2 point, float time) {
+    return (sin(point.x*TAU_/u_wave_length+time*1.4)+sin(point.y*TAU_/u_wave_length-time*1.1)*0.5)*u_wave_height/1.5;
+}
+"""
+        if slug == "interactive":
+            extra = """
+uniform float u_wave_length=1.0;
+uniform vec4 u_shallow_color : source_color = vec4(0.1019608,0.6196078,0.6117647,1.0);
+uniform vec4 u_deep_color : source_color = vec4(0.0156863,0.1215686,0.2705882,1.0);
+uniform float u_depth_distance=2.0;
+uniform vec3 u_hit_position=vec3(0.0);
+uniform float u_event_time=-1.0;
+""" + extra
+        vertex = """
+        VERTEX.y+=water_height(VERTEX.xz,t);
+        float k=TAU_/u_wave_length;
+        NORMAL=normalize(vec3(-cos(VERTEX.x*k+t*1.4)*k*u_wave_height/1.5,1.0,-cos(VERTEX.z*k-t*1.1)*k*u_wave_height/3.0));
+"""
+        body = """
+        float depth_sample=texture(depth_texture,SCREEN_UV).r;
+        vec4 scene=INV_PROJECTION_MATRIX*vec4(SCREEN_UV*2.0-1.0,depth_sample,1.0);
+        float water_depth=max(0.0,(-scene.z/scene.w)-(-VERTEX.z));
+        float depth_mix=clamp(water_depth/u_depth_distance,0.0,1.0);
+        ALBEDO=mix(u_shallow_color.rgb,u_deep_color.rgb,depth_mix);
+        ROUGHNESS=0.18; METALLIC=0.25; ALPHA=1.0;
+"""
+        if slug == "interactive":
+            body += """
+        float age=u_time-u_event_time;
+        if(u_event_time>=0.0 && age>=0.0 && age<u_duration) {
+            float r=length(v_local.xz-u_hit_position.xz);
+            float ring=exp(-pow((r-age*u_ripple_speed)/u_ripple_width,2.0))*(1.0-age/u_duration)*u_strength;
+            ALBEDO+=vec3(ring)*0.55; EMISSION=vec3(ring)*0.15;
+        }
+"""
+        return spatial(body, vertex=vertex, extra=extra, modes="depth_draw_never"), "spatial"
+    if key == "magic/hologram":
+        return spatial("float line=pow(0.5+0.5*sin(v_local.y*TAU_*u_line_density-t*2.0),6.0); ALBEDO=u_color.rgb*(line*u_intensity+rim*u_rim_strength); ALPHA=u_opacity;", modes="unshaded"), "spatial"
+    if key == "magic/shield_hit":
+        return spatial("""
+        ALBEDO=u_color.rgb*0.08; ALPHA=0.12+rim*0.25;
+        float age=u_time-u_event_time;
+        if(u_event_time>=0.0 && age>=0.0 && age<u_duration) {
+            float arc=acos(clamp(dot(normalize(v_local),normalize(u_hit_position)),-1.0,1.0))*0.92;
+            float radius=age/u_duration*2.8;
+            float ring=exp(-pow((arc-radius)/u_ring_width,2.0))*(1.0-age/u_duration);
+            ALBEDO+=u_color.rgb*ring*u_intensity; ALPHA=clamp(ALPHA+ring*0.6,0.0,1.0);
+        }
+""", extra="uniform vec3 u_hit_position=vec3(0.0,0.0,0.92);\nuniform float u_event_time=-1.0;\n", modes="unshaded"), "spatial"
+    if key == "glass/clear":
+        return spatial("vec2 half_pixel=0.5/vec2(textureSize(screen_texture,0)); vec2 sample_uv=clamp(SCREEN_UV+NORMAL.xy*u_distortion,half_pixel,1.0-half_pixel); ALBEDO=textureLod(screen_texture,sample_uv,0.0).rgb*u_color.rgb; ALPHA=u_opacity;", extra="uniform sampler2D screen_texture : hint_screen_texture, repeat_disable, filter_linear;\n", modes="unshaded, cull_disabled"), "spatial"
+    if key == "lens/gaussian":
+        return canvas("""
+        if(u_radius_px>0.0) {
+            int count=u_quality==0 ? 2 : (u_quality==1 ? 4 : 6);
+            vec2 pixel=SCREEN_PIXEL_SIZE;
+            vec2 axis=u_vertical ? vec2(0.0,pixel.y) : vec2(pixel.x,0.0);
+            vec3 sum=base.rgb; float weights=1.0;
+            for(int i=-6;i<=6;i++) {
+                if(i!=0 && abs(i)<=count) {
+                    float x=float(i)/float(count);
+                    float weight=exp(-4.5*x*x);
+                    vec2 sample_uv=clamp(SCREEN_UV+axis*x*u_radius_px,pixel*0.5,1.0-pixel*0.5);
+                    sum+=textureLod(screen_texture,sample_uv,0.0).rgb*weight;
+                    weights+=weight;
+                }
+            }
+            col=sum/weights;
+        }
+""", post=True, extra="uniform bool u_vertical=false;\n"), "post"
+    if key == "color/lut":
+        return canvas("""
+        vec3 input_color=clamp(base.rgb,0.0,1.0);
+        float blue=input_color.b*15.0;
+        float low=floor(blue), high=min(low+1.0,15.0);
+        vec2 within=vec2(input_color.r*15.0+0.5,input_color.g*15.0+0.5);
+        vec3 a=textureLod(lut_texture,(vec2(low*16.0,0.0)+within)/vec2(256.0,16.0),0.0).rgb;
+        vec3 b=textureLod(lut_texture,(vec2(high*16.0,0.0)+within)/vec2(256.0,16.0),0.0).rgb;
+        col=mix(base.rgb,mix(a,b,fract(blue)),u_amount);
+""", post=True, extra="uniform sampler2D lut_texture : filter_linear, repeat_disable;\n"), "post"
+    if key == "retro/crt":
+        return canvas("""
+        vec2 warped=p*(1.0+u_curvature*dot(p,p));
+        vec2 q=warped*0.5+0.5;
+        col=texture(screen_texture,q).rgb;
+        if(any(lessThan(q,vec2(0.0))) || any(greaterThan(q,vec2(1.0)))) { col=vec3(0.0); }
+        float scan=0.5+0.5*cos(FRAGCOORD.y*3.14159265);
+        col*=1.0-u_scanline_strength*scan;
+        col*=1.0-u_vignette*clamp(dot(p,p)*0.5,0.0,1.0);
+        int channel=int(mod(FRAGCOORD.x,3.0));
+        vec3 mask=vec3(channel==0 ? 1.0 : 0.0,channel==1 ? 1.0 : 0.0,channel==2 ? 1.0 : 0.0);
+        col*=mix(vec3(1.0),mask,u_rgb_mask);
+""", post=True), "post"
+    raise ValueError("No refined shader: " + key)
+
+
+def profile_uniforms(source, profile):
+    declarations = []
+    for p in profile["parameters"]:
+        key, kind, value = p["key"], p["type"], p["default"]
+        if kind == "texture":
+            continue
+        if kind == "color":
+            rgb = [int(value[i:i+2], 16)/255 for i in (1, 3, 5)]
+            declaration = f"uniform vec4 {key} : source_color = vec4({','.join(str(v) for v in rgb)},1.0);"
+        elif kind == "bool":
+            declaration = f"uniform bool {key} = {str(value).lower()};"
+        elif kind == "enum":
+            declaration = f"uniform int {key} = {value};"
+        else:
+            declaration = f"uniform float {key} : hint_range({float(p['min'])},{float(p['max'])},{float(p['step'])}) = {float(value)};"
+        pattern = r"uniform \w+ " + key + r"\b[^;]*;"
+        if re.search(pattern, source):
+            source = re.sub(pattern, declaration, source)
+        else:
+            declarations.append(declaration)
+    return source.replace("const float TAU_", "\n".join(declarations) + "\nconst float TAU_")
 
 
 def dissolve(slug, index):
@@ -1022,6 +1194,9 @@ ENVIRONMENTS = {
 
 
 def choose_shader(group,slug,index):
+    if group + "/" + slug in PROFILES:
+        source, kind = refined_shader(group, slug)
+        return profile_uniforms(source, PROFILES[group + "/" + slug]), kind
     direct={
         "dissolve":dissolve, "emission":emission, "materials":pbr,
         "glass":glass, "fire":fire, "terrain":terrain, "status":status,
@@ -1096,6 +1271,12 @@ def assets(output_root):
             r,g,b=(x%16)/15,y/15,(x//16)/15
             lut.extend([round(min(1,r*1.08+0.03)*255),round(min(1,g*0.98+0.015)*255),round(max(0,min(1,b*0.87))*255)])
     write_png(folder/"warm_lut.png",256,16,lut)
+    # RGB data, 16 blue slices horizontally; exact 8-bit identity grid.
+    neutral = []
+    for y in range(16):
+        for x in range(256):
+            neutral.extend([(x % 16)*17, y*17, (x // 16)*17])
+    write_png(folder/"neutral_lut.png",256,16,neutral)
 
 
 def build(output_root):
@@ -1139,6 +1320,9 @@ def build(output_root):
                 "shape":shape,"amount":0.32 if group=="dissolve" else 0.55,"keywords":f"{group} {slug} {kind}",
                 "text":group=="ui" and slug.startswith("text") or group=="ui" and slug in ["gradient_text","typewriter"],
             }
+            profile = PROFILES.get(group + "/" + slug)
+            if profile:
+                entry.update(profile)
             if (group,slug) in ENVIRONMENTS: entry["environment"]=ENVIRONMENTS[(group,slug)]
             if group=="outline" and slug in ["silhouette","occlusion","xray"]: entry["occluder"]=True
             if group=="water" and shape=="plane": entry["rocks"]=True
@@ -1151,7 +1335,8 @@ def build(output_root):
             if group=="debug" and slug=="id": entry["object_ids"]=True
             if slug=="volume_clouds" and group=="sky": entry["approximation"]=True
             source="\n".join(line.rstrip() for line in source.splitlines()).rstrip()+"\n"
-            (folder/"effect.gdshader").write_text(f"// {title} | {implementation}\n// Adjust u_amount, u_speed, u_scale and u_color in the gallery.\n"+source,encoding="utf-8")
+            parameter_comment = "Parameters and defaults: metadata.json" if profile else "Adjust u_amount, u_speed, u_scale and u_color in the gallery."
+            (folder/"effect.gdshader").write_text(f"// {title} | {implementation}\n// {parameter_comment}\n"+source,encoding="utf-8")
             (folder/"metadata.json").write_text(json.dumps(entry,ensure_ascii=False,indent=2),encoding="utf-8")
             (folder/"demo.tscn").write_text(f'''[gd_scene load_steps=2 format=3]
 
@@ -1230,6 +1415,10 @@ metadata_path = "res://{directory}/metadata.json"
 - https://docs.godotengine.org/en/stable/tutorials/shaders/screen-reading_shaders.html
 - https://docs.godotengine.org/en/stable/tutorials/3d/environment_and_post_processing.html
 """
+            if profile:
+                start = notes.index("- 强度 / 进度（u_amount）")
+                end = notes.index("\n## 这个演示做到哪一步？", start)
+                notes = notes[:start] + parameter_notes(profile["parameters"]) + "\n\n" + profile["profile_note"] + "\n" + ("播放区：速度 0–3，默认 1；暂停、调速保持当前时刻。\n" if profile["animated"] else "静态效果不显示播放速度。\n") + ("操作：" + profile["action"] + "。\n" if profile["action"] else "") + "重置恢复以上元数据默认值、播放时刻和效果开关，并清除事件。\n" + notes[end:]
             (folder/"README.md").write_text(notes,encoding="utf-8")
             catalog.append(entry)
             index_rows.append(f"| {entry['number']:03d} | {name} | [{title}](../{directory}/README.md) | {implementation} |")
@@ -1253,6 +1442,7 @@ metadata_path = "res://{directory}/metadata.json"
 三维预览支持左键拖动旋转和滚轮缩放。空格暂停动画，Ctrl+F 搜索，左右方向键切换过滤结果。
 点击“启用效果”可比较原始画面。右侧“打开效果目录”打开当前案例所在目录。
 动画速度可以随时调整，设为 0 或暂停会保留当前时刻。交互涟漪与护盾受击需要点击表面触发一次；拖动旋转不会触发，重置参数会清除事件。
+首批 20 项已完成 M3 精修：右侧按各项元数据显示中文参数、范围、单位、步长与默认值，数值可以拖滑块或用键盘输入。静态项隐藏播放速度，其余 401 项保留“基础参数”。受击闪白点击“播放一次”或图案触发；LUT 可选暖色/中性表；高斯使用真正横、竖两遍。
 
 421 项的“原理与限制”及目录 README 都采用大白话：先讲画面像什么，再讲本示例具体怎么画出来。参数和演示局限也用日常语言说明。
 
@@ -1264,11 +1454,13 @@ metadata_path = "res://{directory}/metadata.json"
 - assets/：矢量示例图、文字贴图、VAT、LUT，以及本地 Blender 小屋渲染参考图。
 - docs/INDEX.md：全部目录与实现标签的完整索引。
 - tools/build_library.py 与 effect_catalog.py：维护/重建库的源文件。
+- tools/effect_profiles.py：首批 20 项的参数规格、默认值和说明；公式仍在 build_library.py。
 - tools/plain_language.py：各项大白话解释的维护源。
 - tools/generated_manifest.json：生成文件的上次内容记录，用于保护手改内容。
 - tools/validate.gd：结构、资源和 Shader 语言检查。
 - tools/test_runtime.gd：M2 播放、命中与输入行为检查，报告保存到 artifacts/m2/。
-- docs/OPTIMIZATION_PLAN.md：当前进度、后续里程碑与验收条件；M2 结果见 docs/M2_VERIFICATION.md。
+- tools/test_m3.gd：首批参数、重置、端点、透明边、高斯和 LUT 的实际像素检查，报告及截图在 artifacts/m3/。
+- docs/OPTIMIZATION_PLAN.md：M1–M3 已完成，下一步 M4 可复用材质和最小接入场景；结果见 docs/M3_VERIFICATION.md。
 - artifacts/：实际运行审查输出的报告与截图。
 
 ## 安全重建
@@ -1298,6 +1490,10 @@ SSAO、SSR、SSIL、体积雾等管线案例使用 Godot 内置渲染功能，�
 
     Godot_v4.7.2-stable_win64_console.exe --headless --path . --script res://tools/validate.gd
 
+首批 20 项的真实显卡行为检查（不加 --headless）：
+
+    Godot_v4.7.2-stable_win64_console.exe --path . --script res://tools/test_m3.gd
+
 真实渲染器逐项审查并保存各类截图：
 
     Godot_v4.7.2-stable_win64_console.exe --path . -- --audit --quit-after-audit
@@ -1305,6 +1501,7 @@ SSAO、SSR、SSIL、体积雾等管线案例使用 Godot 内置渲染功能，�
 审查报告写入 artifacts/runtime_audit.json。只在审查真正完成后，才能把报告作为运行结果。
 
 本机已完成的检查及其范围见 [验证记录](docs/VERIFICATION.md)。
+M3 的逐项结论、复查命令、未验证项与限制见 [M3 验收记录](docs/M3_VERIFICATION.md)。M4–M6 尚未实施；全库退出时仍有已知的 7 个 Texture RID 释放警告。
 
 ## 界面与素材说明
 

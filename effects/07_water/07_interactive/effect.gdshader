@@ -1,6 +1,7 @@
 // 交互涟漪 | 三维材质
-// Adjust u_amount, u_speed, u_scale and u_color in the gallery.
+// Parameters and defaults: metadata.json
 shader_type spatial;
+render_mode depth_draw_never;
 
 uniform float u_time = 0.0;
 uniform float u_amount : hint_range(0.0, 1.0) = 0.55;
@@ -9,6 +10,11 @@ uniform float u_scale : hint_range(0.4, 3.0) = 1.0;
 uniform bool u_enabled = true;
 uniform vec4 u_color : source_color = vec4(0.33, 0.91, 0.73, 1.0);
 uniform vec2 u_mouse = vec2(0.5);
+uniform float u_ripple_speed : hint_range(0.1,2.0,0.01) = 0.6;
+uniform float u_ripple_width : hint_range(0.01,0.2,0.001) = 0.04;
+uniform float u_duration : hint_range(0.2,3.0,0.01) = 1.0;
+uniform float u_strength : hint_range(0.0,1.0,0.01) = 0.6;
+uniform float u_wave_height : hint_range(0.0,0.25,0.001) = 0.04;
 const float TAU_ = 6.28318530718;
 
 float h21(vec2 p) {
@@ -71,14 +77,17 @@ vec4 blur9(sampler2D image, vec2 uv, vec2 offset) {
     value += texture(image,uv+vec2(-offset.x,offset.y))*0.08;
     return value;
 }
-uniform sampler2D depth_texture : hint_depth_texture, filter_nearest;
 
-uniform vec3 u_hit_position = vec3(0.0);
-uniform float u_event_time = -1.0;
-uniform float u_duration = 1.0;
-// Keep this wave and its derivatives paired with shared/stage.gd.
+uniform float u_wave_length=1.0;
+uniform vec4 u_shallow_color : source_color = vec4(0.1019608,0.6196078,0.6117647,1.0);
+uniform vec4 u_deep_color : source_color = vec4(0.0156863,0.1215686,0.2705882,1.0);
+uniform float u_depth_distance=2.0;
+uniform vec3 u_hit_position=vec3(0.0);
+uniform float u_event_time=-1.0;
+
+uniform sampler2D depth_texture : hint_depth_texture, repeat_disable, filter_nearest;
 float water_height(vec2 point, float time) {
-    return (sin(point.x*3.0*u_scale+time*1.4)+sin(point.y*4.0-time*1.1)*0.5)*u_amount*0.15;
+    return (sin(point.x*TAU_/u_wave_length+time*1.4)+sin(point.y*TAU_/u_wave_length-time*1.1)*0.5)*u_wave_height/1.5;
 }
 
 varying vec3 v_world;
@@ -88,7 +97,8 @@ void vertex() {
     if (u_enabled) {
 
         VERTEX.y+=water_height(VERTEX.xz,t);
-        NORMAL=normalize(vec3(-cos(VERTEX.x*3.0*u_scale+t*1.4)*u_amount*0.45*u_scale,1.0,-cos(VERTEX.z*4.0-t*1.1)*u_amount*0.3));
+        float k=TAU_/u_wave_length;
+        NORMAL=normalize(vec3(-cos(VERTEX.x*k+t*1.4)*k*u_wave_height/1.5,1.0,-cos(VERTEX.z*k-t*1.1)*k*u_wave_height/3.0));
 
     }
     v_local=VERTEX;
@@ -103,17 +113,18 @@ void fragment() {
     if (u_enabled) {
 
         float depth_sample=texture(depth_texture,SCREEN_UV).r;
-        vec4 scene_position=INV_PROJECTION_MATRIX*vec4(SCREEN_UV*2.0-1.0,depth_sample,1.0);
-        float water_depth=max(0.0,-scene_position.z/scene_position.w+VERTEX.z);
-        ALBEDO=mix(vec3(0.10,0.62,0.61),vec3(0.015,0.12,0.27),smoothstep(0.0,2.0,water_depth));
-        ROUGHNESS=0.14;
-        METALLIC=0.35;
-float pattern=0.0;
+        vec4 scene=INV_PROJECTION_MATRIX*vec4(SCREEN_UV*2.0-1.0,depth_sample,1.0);
+        float water_depth=max(0.0,(-scene.z/scene.w)-(-VERTEX.z));
+        float depth_mix=clamp(water_depth/u_depth_distance,0.0,1.0);
+        ALBEDO=mix(u_shallow_color.rgb,u_deep_color.rgb,depth_mix);
+        ROUGHNESS=0.18; METALLIC=0.25; ALPHA=1.0;
+
         float age=u_time-u_event_time;
-        if (u_event_time>=0.0 && age>=0.0 && age<u_duration) {
+        if(u_event_time>=0.0 && age>=0.0 && age<u_duration) {
             float r=length(v_local.xz-u_hit_position.xz);
-            pattern=exp(-pow((r-age*0.6)/0.04,2.0))*(1.0-age/u_duration)*u_amount;
+            float ring=exp(-pow((r-age*u_ripple_speed)/u_ripple_width,2.0))*(1.0-age/u_duration)*u_strength;
+            ALBEDO+=vec3(ring)*0.55; EMISSION=vec3(ring)*0.15;
         }
- ALBEDO+=vec3(pattern)*0.55; EMISSION=vec3(max(pattern,0.0))*0.15;
+
     }
 }

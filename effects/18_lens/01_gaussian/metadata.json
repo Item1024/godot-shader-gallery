@@ -16,5 +16,47 @@
   "shape": "sphere",
   "amount": 0.55,
   "keywords": "lens gaussian post",
-  "text": false
+  "text": false,
+  "parameters": [
+    {
+      "key": "u_radius_px",
+      "label": "半径",
+      "type": "float",
+      "target": "material",
+      "min": 0,
+      "max": 16,
+      "step": 0.25,
+      "default": 4,
+      "unit": "屏幕像素",
+      "help": "每方向的采样支撑半径；横向后复制屏幕，再做纵向。",
+      "advanced": false
+    },
+    {
+      "key": "u_quality",
+      "label": "质量",
+      "type": "enum",
+      "target": "material",
+      "options": [
+        {
+          "label": "低 · 每方向 5 次",
+          "value": 0
+        },
+        {
+          "label": "中 · 每方向 9 次",
+          "value": 1
+        },
+        {
+          "label": "高 · 每方向 13 次",
+          "value": 2
+        }
+      ],
+      "default": 1,
+      "unit": "",
+      "help": "",
+      "advanced": false
+    }
+  ],
+  "animated": false,
+  "action": "",
+  "profile_note": "两遍归一化高斯权重；低质量大半径可能出现稀疏采样。"
 }

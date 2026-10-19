@@ -1,5 +1,5 @@
 // 全息投影 | 三维材质
-// Adjust u_amount, u_speed, u_scale and u_color in the gallery.
+// Parameters and defaults: metadata.json
 shader_type spatial;
 render_mode unshaded;
 
@@ -8,8 +8,12 @@ uniform float u_amount : hint_range(0.0, 1.0) = 0.55;
 uniform float u_speed : hint_range(0.0, 3.0) = 1.0;
 uniform float u_scale : hint_range(0.4, 3.0) = 1.0;
 uniform bool u_enabled = true;
-uniform vec4 u_color : source_color = vec4(0.33, 0.91, 0.73, 1.0);
+uniform vec4 u_color : source_color = vec4(0.3333333333333333,0.9098039215686274,0.7333333333333333,1.0);
 uniform vec2 u_mouse = vec2(0.5);
+uniform float u_line_density : hint_range(4.0,120.0,1.0) = 40.0;
+uniform float u_intensity : hint_range(0.0,3.0,0.01) = 1.0;
+uniform float u_opacity : hint_range(0.0,1.0,0.01) = 0.25;
+uniform float u_rim_strength : hint_range(0.0,3.0,0.01) = 1.0;
 const float TAU_ = 6.28318530718;
 
 float h21(vec2 p) {
@@ -90,6 +94,6 @@ void fragment() {
     ALBEDO=vec3(0.12,0.58,0.48);
     ROUGHNESS=0.42;
     if (u_enabled) {
-float field=rim+step(0.6,sin(v_world.y*75.0*u_scale-t*5.0))*0.2; ALBEDO=u_color.rgb*(0.12+field*(1.0+u_amount*2.0)); ALPHA=clamp(0.15+field*0.65,0.0,0.9);
+float line=pow(0.5+0.5*sin(v_local.y*TAU_*u_line_density-t*2.0),6.0); ALBEDO=u_color.rgb*(line*u_intensity+rim*u_rim_strength); ALPHA=u_opacity;
     }
 }

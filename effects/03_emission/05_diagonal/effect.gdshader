@@ -1,5 +1,5 @@
 // 斜向扫光 | 二维 Shader
-// Adjust u_amount, u_speed, u_scale and u_color in the gallery.
+// Parameters and defaults: metadata.json
 shader_type canvas_item;
 render_mode unshaded;
 
@@ -10,6 +10,10 @@ uniform float u_scale : hint_range(0.4, 3.0) = 1.0;
 uniform bool u_enabled = true;
 uniform vec4 u_color : source_color = vec4(0.33, 0.91, 0.73, 1.0);
 uniform vec2 u_mouse = vec2(0.5);
+uniform float u_intensity : hint_range(0.0,5.0,0.01) = 2.0;
+uniform float u_band_width : hint_range(0.01,0.5,0.001) = 0.12;
+uniform float u_angle_deg : hint_range(0.0,180.0,1.0) = 45.0;
+uniform float u_period : hint_range(0.2,5.0,0.01) = 1.5;
 const float TAU_ = 6.28318530718;
 
 float h21(vec2 p) {
@@ -80,11 +84,8 @@ void fragment() {
     vec4 out_color=base;
     vec3 col=base.rgb;
     if (u_enabled) {
-
-        float signal=pow(max(0.0,1.0-abs(fract(uv.x+uv.y-t*0.3)-0.5)*10.0),2.0);
-        col=vec3(0.025,0.045,0.075)+u_color.rgb*signal*base.a*(0.45+u_amount*2.0);
-        col += base.rgb*base.a*0.35;
-
+vec2 direction=vec2(cos(radians(u_angle_deg)),sin(radians(u_angle_deg))); float span=abs(direction.x)+abs(direction.y)+u_band_width; float center=(fract(t/u_period)-0.5)*span;
+ out_color.rgb=base.rgb+u_color.rgb*(1.0-smoothstep(0.0,u_band_width*0.5,abs(dot(uv-0.5,direction)-center)))*u_intensity;
     }
-    COLOR=vec4(col,1.0);
+    COLOR=out_color;
 }

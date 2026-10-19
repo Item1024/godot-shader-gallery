@@ -16,5 +16,46 @@
   "shape": "sphere",
   "amount": 0.55,
   "keywords": "outline outer sprite",
-  "text": false
+  "text": false,
+  "parameters": [
+    {
+      "key": "u_width_px",
+      "label": "宽度",
+      "type": "float",
+      "target": "material",
+      "min": 0,
+      "max": 16,
+      "step": 0.5,
+      "default": 3,
+      "unit": "贴图像素",
+      "help": "",
+      "advanced": false
+    },
+    {
+      "key": "u_softness",
+      "label": "柔和程度",
+      "type": "float",
+      "target": "material",
+      "min": 0,
+      "max": 1,
+      "step": 0.01,
+      "default": 0.15,
+      "unit": "",
+      "help": "",
+      "advanced": false
+    },
+    {
+      "key": "u_color",
+      "label": "描边颜色",
+      "type": "color",
+      "target": "material",
+      "default": "#55e8bb",
+      "unit": "",
+      "help": "",
+      "advanced": false
+    }
+  ],
+  "animated": false,
+  "action": "",
+  "profile_note": ""
 }

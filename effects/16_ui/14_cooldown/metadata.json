@@ -16,5 +16,56 @@
   "shape": "sphere",
   "amount": 0.55,
   "keywords": "ui cooldown canvas",
-  "text": false
+  "text": false,
+  "parameters": [
+    {
+      "key": "u_amount",
+      "label": "进度",
+      "type": "float",
+      "target": "material",
+      "min": 0,
+      "max": 1,
+      "step": 0.01,
+      "default": 0.55,
+      "unit": "",
+      "help": "0 为起点，1 为终点；端点不受其他参数影响。",
+      "advanced": false
+    },
+    {
+      "key": "u_start_deg",
+      "label": "起点角度",
+      "type": "float",
+      "target": "material",
+      "min": 0,
+      "max": 360,
+      "step": 1,
+      "default": 0,
+      "unit": "°",
+      "help": "起点 0° 在顶部，正角度沿顺时针。",
+      "advanced": false
+    },
+    {
+      "key": "u_clockwise",
+      "label": "顺时针",
+      "type": "bool",
+      "target": "material",
+      "default": true,
+      "unit": "",
+      "help": "关闭后沿逆时针填充。",
+      "advanced": false
+    },
+    {
+      "key": "u_color",
+      "label": "扇区颜色",
+      "type": "color",
+      "target": "material",
+      "default": "#55e8bb",
+      "unit": "",
+      "help": "",
+      "advanced": false
+    }
+  ],
+  "animated": false,
+  "action": "",
+  "profile_note": ""
 }

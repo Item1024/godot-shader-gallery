@@ -1,15 +1,17 @@
 // 液体进度条 | 二维 Shader
-// Adjust u_amount, u_speed, u_scale and u_color in the gallery.
+// Parameters and defaults: metadata.json
 shader_type canvas_item;
 render_mode unshaded;
 
 uniform float u_time = 0.0;
-uniform float u_amount : hint_range(0.0, 1.0) = 0.55;
+uniform float u_amount : hint_range(0.0,1.0,0.01) = 0.55;
 uniform float u_speed : hint_range(0.0, 3.0) = 1.0;
 uniform float u_scale : hint_range(0.4, 3.0) = 1.0;
 uniform bool u_enabled = true;
-uniform vec4 u_color : source_color = vec4(0.33, 0.91, 0.73, 1.0);
+uniform vec4 u_color : source_color = vec4(0.3333333333333333,0.9098039215686274,0.7333333333333333,1.0);
 uniform vec2 u_mouse = vec2(0.5);
+uniform float u_wave_height : hint_range(0.0,0.08,0.001) = 0.025;
+uniform float u_wave_frequency : hint_range(1.0,8.0,0.1) = 3.0;
 const float TAU_ = 6.28318530718;
 
 float h21(vec2 p) {
@@ -80,7 +82,7 @@ void fragment() {
     vec4 out_color=base;
     vec3 col=base.rgb;
     if (u_enabled) {
-col=vec3(0.025,0.045,0.075);float mask=1.0-smoothstep(0.65,0.66,length(p)); float level=1.0-u_amount+sin(uv.x*18.0+t*3.0)*0.025; col+=mix(vec3(0.08,0.16,0.23),u_color.rgb,step(level,uv.y))*mask;
+p.x*=SCREEN_PIXEL_SIZE.y/SCREEN_PIXEL_SIZE.x; float radius=length(p); float shape=1.0-smoothstep(0.78,0.78+fwidth(radius),radius);float level=(0.78-p.y)/1.56; float wave=sin((p.x/1.56+0.5)*TAU_*u_wave_frequency+t*2.0)*u_wave_height; float fill=u_amount<=0.0 ? 0.0 : (u_amount>=1.0 ? 1.0 : 1.0-step(u_amount+wave,level));col=mix(vec3(0.035,0.06,0.10),u_color.rgb,shape*fill);
     }
     COLOR=vec4(col,1.0);
 }

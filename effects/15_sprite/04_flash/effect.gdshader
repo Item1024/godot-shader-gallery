@@ -1,5 +1,5 @@
 // 受击闪白 | 二维 Shader
-// Adjust u_amount, u_speed, u_scale and u_color in the gallery.
+// Parameters and defaults: metadata.json
 shader_type canvas_item;
 render_mode unshaded;
 
@@ -8,8 +8,10 @@ uniform float u_amount : hint_range(0.0, 1.0) = 0.55;
 uniform float u_speed : hint_range(0.0, 3.0) = 1.0;
 uniform float u_scale : hint_range(0.4, 3.0) = 1.0;
 uniform bool u_enabled = true;
-uniform vec4 u_color : source_color = vec4(0.33, 0.91, 0.73, 1.0);
+uniform vec4 u_color : source_color = vec4(1.0,1.0,1.0,1.0);
 uniform vec2 u_mouse = vec2(0.5);
+uniform float u_strength : hint_range(0.0,1.0,0.01) = 1.0;
+uniform float u_duration : hint_range(0.05,1.0,0.01) = 0.15;
 const float TAU_ = 6.28318530718;
 
 float h21(vec2 p) {
@@ -72,6 +74,7 @@ vec4 blur9(sampler2D image, vec2 uv, vec2 offset) {
     value += texture(image,uv+vec2(-offset.x,offset.y))*0.08;
     return value;
 }
+uniform float u_event_time=-1.0;
 
 void fragment() {
     vec2 uv=UV, p=(UV-0.5)*2.0;
@@ -80,7 +83,7 @@ void fragment() {
     vec4 out_color=base;
     vec3 col=base.rgb;
     if (u_enabled) {
-out_color.rgb=mix(base.rgb,vec3(1),u_amount*(0.5+0.5*sin(t*4.0)));
+float age=u_time-u_event_time; if(u_event_time>=0.0 && age>=0.0 && age<u_duration) { out_color.rgb=mix(base.rgb,u_color.rgb,u_strength*(1.0-age/u_duration)); }
     }
     COLOR=out_color;
 }

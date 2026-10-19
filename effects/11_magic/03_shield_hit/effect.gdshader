@@ -1,5 +1,5 @@
 // 护盾受击波纹 | 三维材质
-// Adjust u_amount, u_speed, u_scale and u_color in the gallery.
+// Parameters and defaults: metadata.json
 shader_type spatial;
 render_mode unshaded;
 
@@ -8,8 +8,11 @@ uniform float u_amount : hint_range(0.0, 1.0) = 0.55;
 uniform float u_speed : hint_range(0.0, 3.0) = 1.0;
 uniform float u_scale : hint_range(0.4, 3.0) = 1.0;
 uniform bool u_enabled = true;
-uniform vec4 u_color : source_color = vec4(0.33, 0.91, 0.73, 1.0);
+uniform vec4 u_color : source_color = vec4(0.3333333333333333,0.9098039215686274,0.7333333333333333,1.0);
 uniform vec2 u_mouse = vec2(0.5);
+uniform float u_duration : hint_range(0.2,2.0,0.01) = 1.0;
+uniform float u_ring_width : hint_range(0.01,0.3,0.001) = 0.08;
+uniform float u_intensity : hint_range(0.0,5.0,0.01) = 1.8;
 const float TAU_ = 6.28318530718;
 
 float h21(vec2 p) {
@@ -72,9 +75,8 @@ vec4 blur9(sampler2D image, vec2 uv, vec2 offset) {
     value += texture(image,uv+vec2(-offset.x,offset.y))*0.08;
     return value;
 }
-uniform vec3 u_hit_position = vec3(0.0,0.0,0.92);
-uniform float u_event_time = -1.0;
-uniform float u_duration = 1.0;
+uniform vec3 u_hit_position=vec3(0.0,0.0,0.92);
+uniform float u_event_time=-1.0;
 
 varying vec3 v_world;
 varying vec3 v_local;
@@ -93,11 +95,15 @@ void fragment() {
     ALBEDO=vec3(0.12,0.58,0.48);
     ROUGHNESS=0.42;
     if (u_enabled) {
-float field=rim;
-            float age=u_time-u_event_time;
-            if (u_event_time>=0.0 && age>=0.0 && age<u_duration) {
-                float arc=acos(clamp(dot(normalize(v_local),normalize(u_hit_position)),-1.0,1.0))*length(u_hit_position);
-                field+=exp(-pow((arc-age*1.5)/0.08,2.0))*(1.0-age/u_duration)*2.0;
-            } ALBEDO=u_color.rgb*(0.12+field*(1.0+u_amount*2.0)); ALPHA=clamp(0.15+field*0.65,0.0,0.9);
+
+        ALBEDO=u_color.rgb*0.08; ALPHA=0.12+rim*0.25;
+        float age=u_time-u_event_time;
+        if(u_event_time>=0.0 && age>=0.0 && age<u_duration) {
+            float arc=acos(clamp(dot(normalize(v_local),normalize(u_hit_position)),-1.0,1.0))*0.92;
+            float radius=age/u_duration*2.8;
+            float ring=exp(-pow((arc-radius)/u_ring_width,2.0))*(1.0-age/u_duration);
+            ALBEDO+=u_color.rgb*ring*u_intensity; ALPHA=clamp(ALPHA+ring*0.6,0.0,1.0);
+        }
+
     }
 }

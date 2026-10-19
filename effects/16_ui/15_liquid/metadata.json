@@ -16,5 +16,59 @@
   "shape": "sphere",
   "amount": 0.55,
   "keywords": "ui liquid canvas",
-  "text": false
+  "text": false,
+  "parameters": [
+    {
+      "key": "u_amount",
+      "label": "液位",
+      "type": "float",
+      "target": "material",
+      "min": 0,
+      "max": 1,
+      "step": 0.01,
+      "default": 0.55,
+      "unit": "",
+      "help": "0 为起点，1 为终点；端点不受其他参数影响。",
+      "advanced": false
+    },
+    {
+      "key": "u_wave_height",
+      "label": "波高",
+      "type": "float",
+      "target": "material",
+      "min": 0,
+      "max": 0.08,
+      "step": 0.001,
+      "default": 0.025,
+      "unit": "区域高度比例",
+      "help": "",
+      "advanced": false
+    },
+    {
+      "key": "u_wave_frequency",
+      "label": "波频",
+      "type": "float",
+      "target": "material",
+      "min": 1,
+      "max": 8,
+      "step": 0.1,
+      "default": 3,
+      "unit": "",
+      "help": "",
+      "advanced": false
+    },
+    {
+      "key": "u_color",
+      "label": "液体颜色",
+      "type": "color",
+      "target": "material",
+      "default": "#55e8bb",
+      "unit": "",
+      "help": "",
+      "advanced": false
+    }
+  ],
+  "animated": true,
+  "action": "",
+  "profile_note": ""
 }

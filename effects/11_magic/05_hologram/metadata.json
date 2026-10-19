@@ -16,5 +16,72 @@
   "shape": "sphere",
   "amount": 0.55,
   "keywords": "magic hologram spatial",
-  "text": false
+  "text": false,
+  "parameters": [
+    {
+      "key": "u_line_density",
+      "label": "扫描线密度",
+      "type": "float",
+      "target": "material",
+      "min": 4,
+      "max": 120,
+      "step": 1,
+      "default": 40,
+      "unit": "条/模型单位",
+      "help": "",
+      "advanced": false
+    },
+    {
+      "key": "u_intensity",
+      "label": "线亮度",
+      "type": "float",
+      "target": "material",
+      "min": 0,
+      "max": 3,
+      "step": 0.01,
+      "default": 1,
+      "unit": "",
+      "help": "",
+      "advanced": false
+    },
+    {
+      "key": "u_opacity",
+      "label": "基础透明度",
+      "type": "float",
+      "target": "material",
+      "min": 0,
+      "max": 1,
+      "step": 0.01,
+      "default": 0.25,
+      "unit": "",
+      "help": "",
+      "advanced": false
+    },
+    {
+      "key": "u_rim_strength",
+      "label": "边缘亮度",
+      "type": "float",
+      "target": "material",
+      "min": 0,
+      "max": 3,
+      "step": 0.01,
+      "default": 1,
+      "unit": "",
+      "help": "",
+      "advanced": false
+    },
+    {
+      "key": "u_color",
+      "label": "全息颜色",
+      "type": "color",
+      "target": "material",
+      "default": "#55e8bb",
+      "unit": "",
+      "help": "",
+      "advanced": false
+    }
+  ],
+  "animated": true,
+  "action": "",
+  "profile_note": "条纹使用模型局部坐标；这是表面着色，不是体积全息。"
 }

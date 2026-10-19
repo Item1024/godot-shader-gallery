@@ -16,5 +16,59 @@
   "shape": "sphere",
   "amount": 0.55,
   "keywords": "magic shield_hit spatial",
-  "text": false
+  "text": false,
+  "parameters": [
+    {
+      "key": "u_duration",
+      "label": "持续时间",
+      "type": "float",
+      "target": "material",
+      "min": 0.2,
+      "max": 2,
+      "step": 0.01,
+      "default": 1,
+      "unit": "秒",
+      "help": "",
+      "advanced": false
+    },
+    {
+      "key": "u_ring_width",
+      "label": "环宽",
+      "type": "float",
+      "target": "material",
+      "min": 0.01,
+      "max": 0.3,
+      "step": 0.001,
+      "default": 0.08,
+      "unit": "场景单位",
+      "help": "",
+      "advanced": false
+    },
+    {
+      "key": "u_intensity",
+      "label": "亮度",
+      "type": "float",
+      "target": "material",
+      "min": 0,
+      "max": 5,
+      "step": 0.01,
+      "default": 1.8,
+      "unit": "",
+      "help": "",
+      "advanced": false
+    },
+    {
+      "key": "u_color",
+      "label": "波纹颜色",
+      "type": "color",
+      "target": "material",
+      "default": "#55e8bb",
+      "unit": "",
+      "help": "",
+      "advanced": false
+    }
+  ],
+  "animated": true,
+  "action": "",
+  "profile_note": "点击球面触发，亮圈沿球面弧长扩散，结束不重复。只支持本例球形命中。"
 }

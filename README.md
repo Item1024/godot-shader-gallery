@@ -12,6 +12,7 @@
 三维预览支持左键拖动旋转和滚轮缩放。空格暂停动画，Ctrl+F 搜索，左右方向键切换过滤结果。
 点击“启用效果”可比较原始画面。右侧“打开效果目录”打开当前案例所在目录。
 动画速度可以随时调整，设为 0 或暂停会保留当前时刻。交互涟漪与护盾受击需要点击表面触发一次；拖动旋转不会触发，重置参数会清除事件。
+首批 20 项已完成 M3 精修：右侧按各项元数据显示中文参数、范围、单位、步长与默认值，数值可以拖滑块或用键盘输入。静态项隐藏播放速度，其余 401 项保留“基础参数”。受击闪白点击“播放一次”或图案触发；LUT 可选暖色/中性表；高斯使用真正横、竖两遍。
 
 421 项的“原理与限制”及目录 README 都采用大白话：先讲画面像什么，再讲本示例具体怎么画出来。参数和演示局限也用日常语言说明。
 
@@ -23,11 +24,13 @@
 - assets/：矢量示例图、文字贴图、VAT、LUT，以及本地 Blender 小屋渲染参考图。
 - docs/INDEX.md：全部目录与实现标签的完整索引。
 - tools/build_library.py 与 effect_catalog.py：维护/重建库的源文件。
+- tools/effect_profiles.py：首批 20 项的参数规格、默认值和说明；公式仍在 build_library.py。
 - tools/plain_language.py：各项大白话解释的维护源。
 - tools/generated_manifest.json：生成文件的上次内容记录，用于保护手改内容。
 - tools/validate.gd：结构、资源和 Shader 语言检查。
 - tools/test_runtime.gd：M2 播放、命中与输入行为检查，报告保存到 artifacts/m2/。
-- docs/OPTIMIZATION_PLAN.md：当前进度、后续里程碑与验收条件；M2 结果见 docs/M2_VERIFICATION.md。
+- tools/test_m3.gd：首批参数、重置、端点、透明边、高斯和 LUT 的实际像素检查，报告及截图在 artifacts/m3/。
+- docs/OPTIMIZATION_PLAN.md：M1–M3 已完成，下一步 M4 可复用材质和最小接入场景；结果见 docs/M3_VERIFICATION.md。
 - artifacts/：实际运行审查输出的报告与截图。
 
 ## 安全重建
@@ -57,6 +60,10 @@ SSAO、SSR、SSIL、体积雾等管线案例使用 Godot 内置渲染功能，�
 
     Godot_v4.7.2-stable_win64_console.exe --headless --path . --script res://tools/validate.gd
 
+首批 20 项的真实显卡行为检查（不加 --headless）：
+
+    Godot_v4.7.2-stable_win64_console.exe --path . --script res://tools/test_m3.gd
+
 真实渲染器逐项审查并保存各类截图：
 
     Godot_v4.7.2-stable_win64_console.exe --path . -- --audit --quit-after-audit
@@ -64,6 +71,7 @@ SSAO、SSR、SSIL、体积雾等管线案例使用 Godot 内置渲染功能，�
 审查报告写入 artifacts/runtime_audit.json。只在审查真正完成后，才能把报告作为运行结果。
 
 本机已完成的检查及其范围见 [验证记录](docs/VERIFICATION.md)。
+M3 的逐项结论、复查命令、未验证项与限制见 [M3 验收记录](docs/M3_VERIFICATION.md)。M4–M6 尚未实施；全库退出时仍有已知的 7 个 Texture RID 释放警告。
 
 ## 界面与素材说明
 

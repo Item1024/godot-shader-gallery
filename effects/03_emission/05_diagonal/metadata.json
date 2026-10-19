@@ -5,7 +5,7 @@
   "category": "发光、流光与扫光",
   "category_slug": "emission",
   "category_number": 3,
-  "kind": "canvas",
+  "kind": "sprite",
   "implementation": "二维 Shader",
   "approximation": false,
   "summary": "亮带斜着扫过图案。",
@@ -15,6 +15,63 @@
   "scene": "res://effects/03_emission/05_diagonal/demo.tscn",
   "shape": "sphere",
   "amount": 0.55,
-  "keywords": "emission diagonal canvas",
-  "text": false
+  "keywords": "emission diagonal sprite",
+  "text": false,
+  "parameters": [
+    {
+      "key": "u_intensity",
+      "label": "强度",
+      "type": "float",
+      "target": "material",
+      "min": 0,
+      "max": 5,
+      "step": 0.01,
+      "default": 2,
+      "unit": "",
+      "help": "",
+      "advanced": false
+    },
+    {
+      "key": "u_band_width",
+      "label": "光带宽度",
+      "type": "float",
+      "target": "material",
+      "min": 0.01,
+      "max": 0.5,
+      "step": 0.001,
+      "default": 0.12,
+      "unit": "UV 比例",
+      "help": "",
+      "advanced": false
+    },
+    {
+      "key": "u_angle_deg",
+      "label": "角度",
+      "type": "float",
+      "target": "material",
+      "min": 0,
+      "max": 180,
+      "step": 1,
+      "default": 45,
+      "unit": "°",
+      "help": "起点 0° 在顶部，正角度沿顺时针。",
+      "advanced": false
+    },
+    {
+      "key": "u_period",
+      "label": "周期",
+      "type": "float",
+      "target": "material",
+      "min": 0.2,
+      "max": 5,
+      "step": 0.01,
+      "default": 1.5,
+      "unit": "秒",
+      "help": "",
+      "advanced": false
+    }
+  ],
+  "animated": true,
+  "action": "",
+  "profile_note": ""
 }

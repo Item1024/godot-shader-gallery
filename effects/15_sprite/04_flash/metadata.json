@@ -8,7 +8,7 @@
   "kind": "sprite",
   "implementation": "二维 Shader",
   "approximation": false,
-  "summary": "图片一阵阵闪白。",
+  "summary": "图片受击后闪白一次再恢复。",
   "directory": "res://effects/15_sprite/04_flash",
   "shader": "res://effects/15_sprite/04_flash/effect.gdshader",
   "readme": "res://effects/15_sprite/04_flash/README.md",
@@ -16,5 +16,46 @@
   "shape": "sphere",
   "amount": 0.55,
   "keywords": "sprite flash sprite",
-  "text": false
+  "text": false,
+  "parameters": [
+    {
+      "key": "u_strength",
+      "label": "强度",
+      "type": "float",
+      "target": "material",
+      "min": 0,
+      "max": 1,
+      "step": 0.01,
+      "default": 1,
+      "unit": "",
+      "help": "",
+      "advanced": false
+    },
+    {
+      "key": "u_duration",
+      "label": "持续时间",
+      "type": "float",
+      "target": "material",
+      "min": 0.05,
+      "max": 1,
+      "step": 0.01,
+      "default": 0.15,
+      "unit": "秒",
+      "help": "",
+      "advanced": false
+    },
+    {
+      "key": "u_color",
+      "label": "闪光颜色",
+      "type": "color",
+      "target": "material",
+      "default": "#ffffff",
+      "unit": "",
+      "help": "",
+      "advanced": false
+    }
+  ],
+  "animated": true,
+  "action": "播放一次",
+  "profile_note": "播放一次或点击图案触发；新事件替换旧事件，暂停时事件也暂停。"
 }

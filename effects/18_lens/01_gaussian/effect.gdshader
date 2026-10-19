@@ -1,5 +1,5 @@
 // 高斯模糊 | 屏幕后处理
-// Adjust u_amount, u_speed, u_scale and u_color in the gallery.
+// Parameters and defaults: metadata.json
 shader_type canvas_item;
 render_mode unshaded;
 uniform sampler2D screen_texture : hint_screen_texture, repeat_disable, filter_linear_mipmap;
@@ -11,6 +11,8 @@ uniform float u_scale : hint_range(0.4, 3.0) = 1.0;
 uniform bool u_enabled = true;
 uniform vec4 u_color : source_color = vec4(0.33, 0.91, 0.73, 1.0);
 uniform vec2 u_mouse = vec2(0.5);
+uniform float u_radius_px : hint_range(0.0,16.0,0.25) = 4.0;
+uniform int u_quality = 1;
 const float TAU_ = 6.28318530718;
 
 float h21(vec2 p) {
@@ -73,6 +75,7 @@ vec4 blur9(sampler2D image, vec2 uv, vec2 offset) {
     value += texture(image,uv+vec2(-offset.x,offset.y))*0.08;
     return value;
 }
+uniform bool u_vertical=false;
 
 void fragment() {
     vec2 uv=UV, p=(UV-0.5)*2.0;
@@ -81,7 +84,24 @@ void fragment() {
     vec4 out_color=base;
     vec3 col=base.rgb;
     if (u_enabled) {
-vec2 radius=SCREEN_PIXEL_SIZE*(1.0+u_amount*12.0); col=blur9(screen_texture,uv,radius).rgb;
+
+        if(u_radius_px>0.0) {
+            int count=u_quality==0 ? 2 : (u_quality==1 ? 4 : 6);
+            vec2 pixel=SCREEN_PIXEL_SIZE;
+            vec2 axis=u_vertical ? vec2(0.0,pixel.y) : vec2(pixel.x,0.0);
+            vec3 sum=base.rgb; float weights=1.0;
+            for(int i=-6;i<=6;i++) {
+                if(i!=0 && abs(i)<=count) {
+                    float x=float(i)/float(count);
+                    float weight=exp(-4.5*x*x);
+                    vec2 sample_uv=clamp(SCREEN_UV+axis*x*u_radius_px,pixel*0.5,1.0-pixel*0.5);
+                    sum+=textureLod(screen_texture,sample_uv,0.0).rgb*weight;
+                    weights+=weight;
+                }
+            }
+            col=sum/weights;
+        }
+
     }
     COLOR=vec4(col,1.0);
 }

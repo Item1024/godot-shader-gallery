@@ -1,5 +1,5 @@
 // 内描边 | 二维 Shader
-// Adjust u_amount, u_speed, u_scale and u_color in the gallery.
+// Parameters and defaults: metadata.json
 shader_type canvas_item;
 render_mode unshaded;
 
@@ -8,8 +8,10 @@ uniform float u_amount : hint_range(0.0, 1.0) = 0.55;
 uniform float u_speed : hint_range(0.0, 3.0) = 1.0;
 uniform float u_scale : hint_range(0.4, 3.0) = 1.0;
 uniform bool u_enabled = true;
-uniform vec4 u_color : source_color = vec4(0.33, 0.91, 0.73, 1.0);
+uniform vec4 u_color : source_color = vec4(0.3333333333333333,0.9098039215686274,0.7333333333333333,1.0);
 uniform vec2 u_mouse = vec2(0.5);
+uniform float u_width_px : hint_range(0.0,16.0,0.5) = 3.0;
+uniform float u_softness : hint_range(0.0,1.0,0.01) = 0.15;
 const float TAU_ = 6.28318530718;
 
 float h21(vec2 p) {
@@ -81,16 +83,18 @@ void fragment() {
     vec3 col=base.rgb;
     if (u_enabled) {
 
-        vec2 off=TEXTURE_PIXEL_SIZE*(2.0+u_amount*16.0);
-        float hi=0.0, lo=1.0;
-        for (int i=0;i<12;i++) {
-            float a=float(i)*TAU_/12.0;
-            float alpha=texture(TEXTURE,uv+vec2(cos(a),sin(a))*off).a;
-            hi=max(hi,alpha); lo=min(lo,alpha);
+        if (u_width_px>0.0) {
+            float hi=base.a, lo=base.a;
+            for (int i=0;i<32;i++) {
+                float a=float(i)*TAU_/32.0;
+                vec2 direction=vec2(cos(a),sin(a))*TEXTURE_PIXEL_SIZE*u_width_px;
+                float hard=texture(TEXTURE,uv+direction).a;
+                float soft=(hard+texture(TEXTURE,uv+direction*0.75).a+texture(TEXTURE,uv+direction*0.5).a+texture(TEXTURE,uv+direction*0.25).a)*0.25;
+                float coverage=mix(hard,soft,u_softness);
+                hi=max(hi,coverage); lo=min(lo,coverage);
+            }
+out_color=vec4(mix(base.rgb,u_color.rgb,1.0-lo),base.a);
         }
-        float outer_alpha=max(hi-base.a,0.0);
-        float inner_edge=max(base.a-lo,0.0);
-out_color=vec4(mix(base.rgb,u_color.rgb,inner_edge),base.a);
     }
     COLOR=out_color;
 }

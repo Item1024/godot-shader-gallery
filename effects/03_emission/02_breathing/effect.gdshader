@@ -1,5 +1,5 @@
 // 呼吸发光 | 二维 Shader
-// Adjust u_amount, u_speed, u_scale and u_color in the gallery.
+// Parameters and defaults: metadata.json
 shader_type canvas_item;
 render_mode unshaded;
 
@@ -8,8 +8,11 @@ uniform float u_amount : hint_range(0.0, 1.0) = 0.55;
 uniform float u_speed : hint_range(0.0, 3.0) = 1.0;
 uniform float u_scale : hint_range(0.4, 3.0) = 1.0;
 uniform bool u_enabled = true;
-uniform vec4 u_color : source_color = vec4(0.33, 0.91, 0.73, 1.0);
+uniform vec4 u_color : source_color = vec4(0.3333333333333333,0.9098039215686274,0.7333333333333333,1.0);
 uniform vec2 u_mouse = vec2(0.5);
+uniform float u_intensity : hint_range(0.0,5.0,0.01) = 1.5;
+uniform float u_frequency : hint_range(0.1,3.0,0.01) = 0.5;
+uniform float u_min_brightness : hint_range(0.0,1.0,0.01) = 0.2;
 const float TAU_ = 6.28318530718;
 
 float h21(vec2 p) {
@@ -81,10 +84,7 @@ void fragment() {
     vec3 col=base.rgb;
     if (u_enabled) {
 
-        float signal=0.5+0.5*sin(t*2.5);
-        col=vec3(0.025,0.045,0.075)+u_color.rgb*signal*base.a*(0.45+u_amount*2.0);
-        col += base.rgb*base.a*0.35;
-
+ out_color.rgb=base.rgb+u_color.rgb*(mix(u_min_brightness,1.0,0.5+0.5*sin(t*TAU_*u_frequency)))*u_intensity;
     }
-    COLOR=vec4(col,1.0);
+    COLOR=out_color;
 }

@@ -77,7 +77,7 @@ func _time_tests() -> void:
 	_near(stage.elapsed, 14.0, "zero speed holds phase")
 	stage.paused = true
 	stage.set_parameter("u_speed", 3.0)
-	stage.set_parameter("u_amount", 0.7)
+	stage.set_parameter("u_intensity", 0.7)
 	stage.set_parameter("u_color", Color.RED)
 	stage._process(10.0)
 	_near(stage.elapsed, 14.0, "pause holds time while speed and parameters change")
@@ -227,7 +227,7 @@ func _hit_tests(number: int) -> void:
 				if number == 118:
 					var point: Vector2 = water_points[sample]
 					# Independent specification, not the function under test.
-					var height := (sin(point.x * 3.0 + 1.7 * 1.4) + sin(point.y * 4.0 - 1.7 * 1.1) * 0.5) * 0.55 * 0.15
+					var height := (sin(point.x * TAU + 1.7 * 1.4) + sin(point.y * TAU - 1.7 * 1.1) * 0.5) * 0.04 / 1.5
 					local = Vector3(point.x, height, point.y)
 				else:
 					var front := stage.interaction_surface.to_local(stage.camera.global_position).normalized()
@@ -323,14 +323,14 @@ func _wave_tests() -> void:
 		stage.environment.background_color = Color.BLACK
 		for instance: MeshInstance3D in stage.find_children("*", "MeshInstance3D", true, false):
 			instance.visible = instance == stage.interaction_surface
-	for amount in [0.0, 0.55, 1.0]:
-		for scale_value in [0.4, 1.0, 3.0]:
+	for amount in [0.0, 0.125, 0.25]:
+		for scale_value in [0.0, 0.6, 1.0]:
 			for time in [0.0, 2.7, 7.2]:
 				stage.elapsed = time
-				stage.set_parameter("u_amount", amount)
-				stage.set_parameter("u_scale", scale_value)
+				stage.set_parameter("u_wave_height", amount)
+				stage.set_parameter("u_strength", scale_value)
 				var point := Vector2(0.6, 0.7)
-				var height: float = (sin(point.x * 3.0 * scale_value + time * 1.4) + sin(point.y * 4.0 - time * 1.1) * 0.5) * amount * 0.15
+				var height: float = (sin(point.x * TAU + time * 1.4) + sin(point.y * TAU - time * 1.1) * 0.5) * amount / 1.5
 				_near(stage.water_height(point), height, "wave CPU specification")
 				var local := Vector3(point.x, height, point.y)
 				var world := stage.interaction_surface.to_global(local)
@@ -342,8 +342,8 @@ func _wave_tests() -> void:
 				if valid:
 					var p: Vector3 = hit["local_position"]
 					valid = absf(p.y - stage.water_height(Vector2(p.x, p.z))) <= 0.001 and stage.camera.global_position.distance_to(hit["world_position"]) <= stage.camera.global_position.distance_to(world) + 0.003
-				_check(valid, "wave hit respects amount, scale, time and mesh transform", {"amount": amount, "scale": scale_value, "time": time, "hit": str(hit)})
-				var record := {"amount": amount, "scale": scale_value, "time": time}
+				_check(valid, "wave hit respects height, independent event strength, time and mesh transform", {"height": amount, "strength": scale_value, "time": time, "hit": str(hit)})
+				var record := {"height": amount, "strength": scale_value, "time": time}
 				if render_checks and not hit.is_empty():
 					stage.trigger_at(pixel)
 					var image := await _capture(stage)
@@ -378,7 +378,7 @@ func _gui_tests() -> void:
 	var stage: Stage = gallery.stage
 	stage.set_process(false)
 	stage.elapsed = 4.0
-	gallery.sliders[1].value = 2.0
+	gallery.parameter_controls["u_speed"]["slider"].value = 2.0
 	_near(stage.speed, 2.0, "gallery speed slider controls clock")
 	_near(stage.elapsed, 4.0, "gallery speed slider preserves phase")
 	gallery._toggle_pause()

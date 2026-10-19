@@ -16,5 +16,62 @@
   "shape": "sphere",
   "amount": 0.55,
   "keywords": "retro crt post",
-  "text": false
+  "text": false,
+  "parameters": [
+    {
+      "key": "u_curvature",
+      "label": "屏幕弯曲",
+      "type": "float",
+      "target": "material",
+      "min": 0,
+      "max": 0.2,
+      "step": 0.001,
+      "default": 0.04,
+      "unit": "",
+      "help": "",
+      "advanced": false
+    },
+    {
+      "key": "u_scanline_strength",
+      "label": "扫描线强度",
+      "type": "float",
+      "target": "material",
+      "min": 0,
+      "max": 1,
+      "step": 0.01,
+      "default": 0.25,
+      "unit": "",
+      "help": "",
+      "advanced": false
+    },
+    {
+      "key": "u_vignette",
+      "label": "暗角",
+      "type": "float",
+      "target": "material",
+      "min": 0,
+      "max": 1,
+      "step": 0.01,
+      "default": 0.3,
+      "unit": "",
+      "help": "",
+      "advanced": false
+    },
+    {
+      "key": "u_rgb_mask",
+      "label": "三色条纹强度",
+      "type": "float",
+      "target": "material",
+      "min": 0,
+      "max": 1,
+      "step": 0.01,
+      "default": 0.15,
+      "unit": "",
+      "help": "",
+      "advanced": false
+    }
+  ],
+  "animated": false,
+  "action": "",
+  "profile_note": ""
 }

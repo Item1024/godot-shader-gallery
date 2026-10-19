@@ -1,15 +1,17 @@
 // 局部换色 | 二维 Shader
-// Adjust u_amount, u_speed, u_scale and u_color in the gallery.
+// Parameters and defaults: metadata.json
 shader_type canvas_item;
 render_mode unshaded;
 
 uniform float u_time = 0.0;
-uniform float u_amount : hint_range(0.0, 1.0) = 0.55;
+uniform float u_amount : hint_range(0.0,1.0,0.01) = 1.0;
 uniform float u_speed : hint_range(0.0, 3.0) = 1.0;
 uniform float u_scale : hint_range(0.4, 3.0) = 1.0;
 uniform bool u_enabled = true;
-uniform vec4 u_color : source_color = vec4(0.33, 0.91, 0.73, 1.0);
+uniform vec4 u_color : source_color = vec4(0.3333333333333333,0.9098039215686274,0.7333333333333333,1.0);
 uniform vec2 u_mouse = vec2(0.5);
+uniform vec4 u_source_color : source_color = vec4(0.6352941176470588,0.9647058823529412,0.8549019607843137,1.0);
+uniform float u_tolerance : hint_range(0.0,1.0,0.01) = 0.2;
 const float TAU_ = 6.28318530718;
 
 float h21(vec2 p) {
@@ -80,7 +82,7 @@ void fragment() {
     vec4 out_color=base;
     vec3 col=base.rgb;
     if (u_enabled) {
-float mask=step(base.g,base.b+0.15)*step(base.r,base.b); out_color.rgb=mix(base.rgb,u_color.rgb,mask*u_amount);
+float distance_rgb=length(base.rgb-u_source_color.rgb)/sqrt(3.0); float selected=1.0-step(u_tolerance+0.000001,distance_rgb); out_color.rgb=mix(base.rgb,u_color.rgb,selected*u_amount);
     }
     COLOR=out_color;
 }

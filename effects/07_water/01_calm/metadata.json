@@ -17,5 +17,69 @@
   "amount": 0.55,
   "keywords": "water calm spatial",
   "text": false,
+  "parameters": [
+    {
+      "key": "u_wave_height",
+      "label": "波高",
+      "type": "float",
+      "target": "material",
+      "min": 0,
+      "max": 0.25,
+      "step": 0.001,
+      "default": 0.04,
+      "unit": "场景单位",
+      "help": "0 为平面；波形幅度上界为此值。",
+      "advanced": false
+    },
+    {
+      "key": "u_wave_length",
+      "label": "波长",
+      "type": "float",
+      "target": "material",
+      "min": 0.25,
+      "max": 4,
+      "step": 0.001,
+      "default": 1,
+      "unit": "场景单位",
+      "help": "",
+      "advanced": false
+    },
+    {
+      "key": "u_shallow_color",
+      "label": "浅水色",
+      "type": "color",
+      "target": "material",
+      "default": "#1a9e9c",
+      "unit": "",
+      "help": "",
+      "advanced": false
+    },
+    {
+      "key": "u_deep_color",
+      "label": "深水色",
+      "type": "color",
+      "target": "material",
+      "default": "#041f45",
+      "unit": "",
+      "help": "",
+      "advanced": false
+    },
+    {
+      "key": "u_depth_distance",
+      "label": "变深距离",
+      "type": "float",
+      "target": "material",
+      "min": 0.2,
+      "max": 5,
+      "step": 0.001,
+      "default": 2,
+      "unit": "场景单位",
+      "help": "",
+      "advanced": false
+    }
+  ],
+  "animated": true,
+  "action": "",
+  "profile_note": "深度来自当前屏幕的不透明物体；不包含水下体积散射。",
   "rocks": true
 }

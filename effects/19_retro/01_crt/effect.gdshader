@@ -1,5 +1,5 @@
 // CRT显像管 | 屏幕后处理
-// Adjust u_amount, u_speed, u_scale and u_color in the gallery.
+// Parameters and defaults: metadata.json
 shader_type canvas_item;
 render_mode unshaded;
 uniform sampler2D screen_texture : hint_screen_texture, repeat_disable, filter_linear_mipmap;
@@ -11,6 +11,10 @@ uniform float u_scale : hint_range(0.4, 3.0) = 1.0;
 uniform bool u_enabled = true;
 uniform vec4 u_color : source_color = vec4(0.33, 0.91, 0.73, 1.0);
 uniform vec2 u_mouse = vec2(0.5);
+uniform float u_curvature : hint_range(0.0,0.2,0.001) = 0.04;
+uniform float u_scanline_strength : hint_range(0.0,1.0,0.01) = 0.25;
+uniform float u_vignette : hint_range(0.0,1.0,0.01) = 0.3;
+uniform float u_rgb_mask : hint_range(0.0,1.0,0.01) = 0.15;
 const float TAU_ = 6.28318530718;
 
 float h21(vec2 p) {
@@ -81,7 +85,18 @@ void fragment() {
     vec4 out_color=base;
     vec3 col=base.rgb;
     if (u_enabled) {
-vec2 q=p*(1.0+dot(p,p)*0.07*u_amount)*0.5+0.5; col=texture(screen_texture,q).rgb; col*=0.82+0.18*sin(FRAGCOORD.y*3.14159); col*=1.0-smoothstep(0.3,0.8,length(p))*0.6;
+
+        vec2 warped=p*(1.0+u_curvature*dot(p,p));
+        vec2 q=warped*0.5+0.5;
+        col=texture(screen_texture,q).rgb;
+        if(any(lessThan(q,vec2(0.0))) || any(greaterThan(q,vec2(1.0)))) { col=vec3(0.0); }
+        float scan=0.5+0.5*cos(FRAGCOORD.y*3.14159265);
+        col*=1.0-u_scanline_strength*scan;
+        col*=1.0-u_vignette*clamp(dot(p,p)*0.5,0.0,1.0);
+        int channel=int(mod(FRAGCOORD.x,3.0));
+        vec3 mask=vec3(channel==0 ? 1.0 : 0.0,channel==1 ? 1.0 : 0.0,channel==2 ? 1.0 : 0.0);
+        col*=mix(vec3(1.0),mask,u_rgb_mask);
+
     }
     COLOR=vec4(col,1.0);
 }

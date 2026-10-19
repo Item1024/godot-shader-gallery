@@ -1,16 +1,17 @@
 // LUT调色 | 屏幕后处理
-// Adjust u_amount, u_speed, u_scale and u_color in the gallery.
+// Parameters and defaults: metadata.json
 shader_type canvas_item;
 render_mode unshaded;
 uniform sampler2D screen_texture : hint_screen_texture, repeat_disable, filter_linear_mipmap;
 
 uniform float u_time = 0.0;
-uniform float u_amount : hint_range(0.0, 1.0) = 0.55;
+uniform float u_amount : hint_range(0.0,1.0,0.01) = 1.0;
 uniform float u_speed : hint_range(0.0, 3.0) = 1.0;
 uniform float u_scale : hint_range(0.4, 3.0) = 1.0;
 uniform bool u_enabled = true;
 uniform vec4 u_color : source_color = vec4(0.33, 0.91, 0.73, 1.0);
 uniform vec2 u_mouse = vec2(0.5);
+
 const float TAU_ = 6.28318530718;
 
 float h21(vec2 p) {
@@ -73,7 +74,7 @@ vec4 blur9(sampler2D image, vec2 uv, vec2 offset) {
     value += texture(image,uv+vec2(-offset.x,offset.y))*0.08;
     return value;
 }
-uniform sampler2D lut_texture : repeat_disable, filter_linear;
+uniform sampler2D lut_texture : filter_linear, repeat_disable;
 
 void fragment() {
     vec2 uv=UV, p=(UV-0.5)*2.0;
@@ -82,7 +83,15 @@ void fragment() {
     vec4 out_color=base;
     vec3 col=base.rgb;
     if (u_enabled) {
-float z=col.b*15.0; vec2 a=vec2((col.r*15.0+floor(z)*16.0+0.5)/256.0,(col.g*15.0+0.5)/16.0); vec2 b=a+vec2(16.0/256.0,0); vec3 mapped=mix(texture(lut_texture,a).rgb,texture(lut_texture,b).rgb,fract(z)); col=mix(col,mapped,u_amount);
+
+        vec3 input_color=clamp(base.rgb,0.0,1.0);
+        float blue=input_color.b*15.0;
+        float low=floor(blue), high=min(low+1.0,15.0);
+        vec2 within=vec2(input_color.r*15.0+0.5,input_color.g*15.0+0.5);
+        vec3 a=textureLod(lut_texture,(vec2(low*16.0,0.0)+within)/vec2(256.0,16.0),0.0).rgb;
+        vec3 b=textureLod(lut_texture,(vec2(high*16.0,0.0)+within)/vec2(256.0,16.0),0.0).rgb;
+        col=mix(base.rgb,mix(a,b,fract(blue)),u_amount);
+
     }
     COLOR=vec4(col,1.0);
 }

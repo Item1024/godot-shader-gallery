@@ -17,7 +17,61 @@
     "shape": "sphere",
     "amount": 0.32,
     "keywords": "dissolve noise sprite",
-    "text": false
+    "text": false,
+    "parameters": [
+      {
+        "key": "u_amount",
+        "label": "消失进度",
+        "type": "float",
+        "target": "material",
+        "min": 0,
+        "max": 1,
+        "step": 0.01,
+        "default": 0.32,
+        "unit": "",
+        "help": "0 为起点，1 为终点；端点不受其他参数影响。",
+        "advanced": false
+      },
+      {
+        "key": "u_noise_scale",
+        "label": "花纹密度",
+        "type": "float",
+        "target": "material",
+        "min": 2,
+        "max": 32,
+        "step": 0.1,
+        "default": 8,
+        "unit": "",
+        "help": "",
+        "advanced": false
+      },
+      {
+        "key": "u_edge_width",
+        "label": "亮边宽度",
+        "type": "float",
+        "target": "material",
+        "min": 0,
+        "max": 0.15,
+        "step": 0.001,
+        "default": 0.04,
+        "unit": "UV 比例",
+        "help": "只扩宽保留侧的交界，不改变消失区域。",
+        "advanced": false
+      },
+      {
+        "key": "u_color",
+        "label": "亮边颜色",
+        "type": "color",
+        "target": "material",
+        "default": "#55e8bb",
+        "unit": "",
+        "help": "",
+        "advanced": false
+      }
+    ],
+    "animated": false,
+    "action": "",
+    "profile_note": ""
   },
   {
     "number": 2,
@@ -29,7 +83,7 @@
     "kind": "sprite",
     "implementation": "二维 Shader",
     "approximation": false,
-    "summary": "图片从一侧逐渐消失。",
+    "summary": "图片从指定方向逐渐消失。",
     "directory": "res://effects/01_dissolve/02_direction",
     "shader": "res://effects/01_dissolve/02_direction/effect.gdshader",
     "readme": "res://effects/01_dissolve/02_direction/README.md",
@@ -37,7 +91,61 @@
     "shape": "sphere",
     "amount": 0.32,
     "keywords": "dissolve direction sprite",
-    "text": false
+    "text": false,
+    "parameters": [
+      {
+        "key": "u_amount",
+        "label": "消失进度",
+        "type": "float",
+        "target": "material",
+        "min": 0,
+        "max": 1,
+        "step": 0.01,
+        "default": 0.32,
+        "unit": "",
+        "help": "0 为起点，1 为终点；端点不受其他参数影响。",
+        "advanced": false
+      },
+      {
+        "key": "u_direction_deg",
+        "label": "方向",
+        "type": "float",
+        "target": "material",
+        "min": 0,
+        "max": 360,
+        "step": 1,
+        "default": 0,
+        "unit": "°",
+        "help": "起点 0° 在顶部，正角度沿顺时针。",
+        "advanced": false
+      },
+      {
+        "key": "u_edge_width",
+        "label": "亮边宽度",
+        "type": "float",
+        "target": "material",
+        "min": 0,
+        "max": 0.15,
+        "step": 0.001,
+        "default": 0.04,
+        "unit": "UV 比例",
+        "help": "只扩宽保留侧的交界，不改变消失区域。",
+        "advanced": false
+      },
+      {
+        "key": "u_color",
+        "label": "亮边颜色",
+        "type": "color",
+        "target": "material",
+        "default": "#55e8bb",
+        "unit": "",
+        "help": "",
+        "advanced": false
+      }
+    ],
+    "animated": false,
+    "action": "",
+    "profile_note": ""
   },
   {
     "number": 3,
@@ -137,7 +245,61 @@
     "shape": "sphere",
     "amount": 0.32,
     "keywords": "dissolve burn sprite",
-    "text": false
+    "text": false,
+    "parameters": [
+      {
+        "key": "u_amount",
+        "label": "消失进度",
+        "type": "float",
+        "target": "material",
+        "min": 0,
+        "max": 1,
+        "step": 0.01,
+        "default": 0.32,
+        "unit": "",
+        "help": "0 为起点，1 为终点；端点不受其他参数影响。",
+        "advanced": false
+      },
+      {
+        "key": "u_noise_scale",
+        "label": "花纹密度",
+        "type": "float",
+        "target": "material",
+        "min": 2,
+        "max": 32,
+        "step": 0.1,
+        "default": 8,
+        "unit": "",
+        "help": "",
+        "advanced": false
+      },
+      {
+        "key": "u_edge_width",
+        "label": "焦边宽度",
+        "type": "float",
+        "target": "material",
+        "min": 0,
+        "max": 0.15,
+        "step": 0.001,
+        "default": 0.05,
+        "unit": "UV 比例",
+        "help": "只扩宽保留侧的交界，不改变消失区域。",
+        "advanced": false
+      },
+      {
+        "key": "u_color",
+        "label": "火边颜色",
+        "type": "color",
+        "target": "material",
+        "default": "#ff5206",
+        "unit": "",
+        "help": "",
+        "advanced": false
+      }
+    ],
+    "animated": false,
+    "action": "",
+    "profile_note": ""
   },
   {
     "number": 8,
@@ -337,7 +499,48 @@
     "shape": "sphere",
     "amount": 0.55,
     "keywords": "outline outer sprite",
-    "text": false
+    "text": false,
+    "parameters": [
+      {
+        "key": "u_width_px",
+        "label": "宽度",
+        "type": "float",
+        "target": "material",
+        "min": 0,
+        "max": 16,
+        "step": 0.5,
+        "default": 3,
+        "unit": "贴图像素",
+        "help": "",
+        "advanced": false
+      },
+      {
+        "key": "u_softness",
+        "label": "柔和程度",
+        "type": "float",
+        "target": "material",
+        "min": 0,
+        "max": 1,
+        "step": 0.01,
+        "default": 0.15,
+        "unit": "",
+        "help": "",
+        "advanced": false
+      },
+      {
+        "key": "u_color",
+        "label": "描边颜色",
+        "type": "color",
+        "target": "material",
+        "default": "#55e8bb",
+        "unit": "",
+        "help": "",
+        "advanced": false
+      }
+    ],
+    "animated": false,
+    "action": "",
+    "profile_note": ""
   },
   {
     "number": 18,
@@ -357,7 +560,48 @@
     "shape": "sphere",
     "amount": 0.55,
     "keywords": "outline inner sprite",
-    "text": false
+    "text": false,
+    "parameters": [
+      {
+        "key": "u_width_px",
+        "label": "宽度",
+        "type": "float",
+        "target": "material",
+        "min": 0,
+        "max": 16,
+        "step": 0.5,
+        "default": 3,
+        "unit": "贴图像素",
+        "help": "",
+        "advanced": false
+      },
+      {
+        "key": "u_softness",
+        "label": "柔和程度",
+        "type": "float",
+        "target": "material",
+        "min": 0,
+        "max": 1,
+        "step": 0.01,
+        "default": 0.15,
+        "unit": "",
+        "help": "",
+        "advanced": false
+      },
+      {
+        "key": "u_color",
+        "label": "描边颜色",
+        "type": "color",
+        "target": "material",
+        "default": "#55e8bb",
+        "unit": "",
+        "help": "",
+        "advanced": false
+      }
+    ],
+    "animated": false,
+    "action": "",
+    "profile_note": ""
   },
   {
     "number": 19,
@@ -669,7 +913,7 @@
     "category": "发光、流光与扫光",
     "category_slug": "emission",
     "category_number": 3,
-    "kind": "canvas",
+    "kind": "sprite",
     "implementation": "二维 Shader",
     "approximation": false,
     "summary": "图案像呼吸一样慢慢亮起又暗下去。",
@@ -679,8 +923,62 @@
     "scene": "res://effects/03_emission/02_breathing/demo.tscn",
     "shape": "sphere",
     "amount": 0.55,
-    "keywords": "emission breathing canvas",
-    "text": false
+    "keywords": "emission breathing sprite",
+    "text": false,
+    "parameters": [
+      {
+        "key": "u_intensity",
+        "label": "发光强度",
+        "type": "float",
+        "target": "material",
+        "min": 0,
+        "max": 5,
+        "step": 0.01,
+        "default": 1.5,
+        "unit": "",
+        "help": "",
+        "advanced": false
+      },
+      {
+        "key": "u_frequency",
+        "label": "频率",
+        "type": "float",
+        "target": "material",
+        "min": 0.1,
+        "max": 3,
+        "step": 0.01,
+        "default": 0.5,
+        "unit": "次/秒",
+        "help": "",
+        "advanced": false
+      },
+      {
+        "key": "u_min_brightness",
+        "label": "最低亮度",
+        "type": "float",
+        "target": "material",
+        "min": 0,
+        "max": 1,
+        "step": 0.01,
+        "default": 0.2,
+        "unit": "",
+        "help": "",
+        "advanced": false
+      },
+      {
+        "key": "u_color",
+        "label": "发光颜色",
+        "type": "color",
+        "target": "material",
+        "default": "#55e8bb",
+        "unit": "",
+        "help": "",
+        "advanced": false
+      }
+    ],
+    "animated": true,
+    "action": "",
+    "profile_note": ""
   },
   {
     "number": 35,
@@ -729,7 +1027,7 @@
     "category": "发光、流光与扫光",
     "category_slug": "emission",
     "category_number": 3,
-    "kind": "canvas",
+    "kind": "sprite",
     "implementation": "二维 Shader",
     "approximation": false,
     "summary": "亮带斜着扫过图案。",
@@ -739,8 +1037,65 @@
     "scene": "res://effects/03_emission/05_diagonal/demo.tscn",
     "shape": "sphere",
     "amount": 0.55,
-    "keywords": "emission diagonal canvas",
-    "text": false
+    "keywords": "emission diagonal sprite",
+    "text": false,
+    "parameters": [
+      {
+        "key": "u_intensity",
+        "label": "强度",
+        "type": "float",
+        "target": "material",
+        "min": 0,
+        "max": 5,
+        "step": 0.01,
+        "default": 2,
+        "unit": "",
+        "help": "",
+        "advanced": false
+      },
+      {
+        "key": "u_band_width",
+        "label": "光带宽度",
+        "type": "float",
+        "target": "material",
+        "min": 0.01,
+        "max": 0.5,
+        "step": 0.001,
+        "default": 0.12,
+        "unit": "UV 比例",
+        "help": "",
+        "advanced": false
+      },
+      {
+        "key": "u_angle_deg",
+        "label": "角度",
+        "type": "float",
+        "target": "material",
+        "min": 0,
+        "max": 180,
+        "step": 1,
+        "default": 45,
+        "unit": "°",
+        "help": "起点 0° 在顶部，正角度沿顺时针。",
+        "advanced": false
+      },
+      {
+        "key": "u_period",
+        "label": "周期",
+        "type": "float",
+        "target": "material",
+        "min": 0.2,
+        "max": 5,
+        "step": 0.01,
+        "default": 1.5,
+        "unit": "秒",
+        "help": "",
+        "advanced": false
+      }
+    ],
+    "animated": true,
+    "action": "",
+    "profile_note": ""
   },
   {
     "number": 38,
@@ -1920,7 +2275,48 @@
     "shape": "sphere",
     "amount": 0.55,
     "keywords": "glass clear spatial",
-    "text": false
+    "text": false,
+    "parameters": [
+      {
+        "key": "u_distortion",
+        "label": "折弯强度",
+        "type": "float",
+        "target": "material",
+        "min": 0,
+        "max": 0.08,
+        "step": 0.001,
+        "default": 0.025,
+        "unit": "屏幕比例",
+        "help": "",
+        "advanced": false
+      },
+      {
+        "key": "u_color",
+        "label": "染色",
+        "type": "color",
+        "target": "material",
+        "default": "#b3e6f2",
+        "unit": "",
+        "help": "",
+        "advanced": false
+      },
+      {
+        "key": "u_opacity",
+        "label": "不透明度",
+        "type": "float",
+        "target": "material",
+        "min": 0,
+        "max": 1,
+        "step": 0.01,
+        "default": 0.85,
+        "unit": "",
+        "help": "",
+        "advanced": false
+      }
+    ],
+    "animated": false,
+    "action": "",
+    "profile_note": "屏幕折射只能读取已画出的背景；镜头外内容和完整物理玻璃未实现。"
   },
   {
     "number": 97,
@@ -2241,6 +2637,70 @@
     "amount": 0.55,
     "keywords": "water calm spatial",
     "text": false,
+    "parameters": [
+      {
+        "key": "u_wave_height",
+        "label": "波高",
+        "type": "float",
+        "target": "material",
+        "min": 0,
+        "max": 0.25,
+        "step": 0.001,
+        "default": 0.04,
+        "unit": "场景单位",
+        "help": "0 为平面；波形幅度上界为此值。",
+        "advanced": false
+      },
+      {
+        "key": "u_wave_length",
+        "label": "波长",
+        "type": "float",
+        "target": "material",
+        "min": 0.25,
+        "max": 4,
+        "step": 0.001,
+        "default": 1,
+        "unit": "场景单位",
+        "help": "",
+        "advanced": false
+      },
+      {
+        "key": "u_shallow_color",
+        "label": "浅水色",
+        "type": "color",
+        "target": "material",
+        "default": "#1a9e9c",
+        "unit": "",
+        "help": "",
+        "advanced": false
+      },
+      {
+        "key": "u_deep_color",
+        "label": "深水色",
+        "type": "color",
+        "target": "material",
+        "default": "#041f45",
+        "unit": "",
+        "help": "",
+        "advanced": false
+      },
+      {
+        "key": "u_depth_distance",
+        "label": "变深距离",
+        "type": "float",
+        "target": "material",
+        "min": 0.2,
+        "max": 5,
+        "step": 0.001,
+        "default": 2,
+        "unit": "场景单位",
+        "help": "",
+        "advanced": false
+      }
+    ],
+    "animated": true,
+    "action": "",
+    "profile_note": "深度来自当前屏幕的不透明物体；不包含水下体积散射。",
     "rocks": true
   },
   {
@@ -2367,6 +2827,76 @@
     "amount": 0.55,
     "keywords": "water interactive spatial",
     "text": false,
+    "parameters": [
+      {
+        "key": "u_ripple_speed",
+        "label": "扩散速度",
+        "type": "float",
+        "target": "material",
+        "min": 0.1,
+        "max": 2,
+        "step": 0.01,
+        "default": 0.6,
+        "unit": "场景单位/秒",
+        "help": "",
+        "advanced": false
+      },
+      {
+        "key": "u_ripple_width",
+        "label": "波纹宽度",
+        "type": "float",
+        "target": "material",
+        "min": 0.01,
+        "max": 0.2,
+        "step": 0.001,
+        "default": 0.04,
+        "unit": "场景单位",
+        "help": "",
+        "advanced": false
+      },
+      {
+        "key": "u_duration",
+        "label": "持续时间",
+        "type": "float",
+        "target": "material",
+        "min": 0.2,
+        "max": 3,
+        "step": 0.01,
+        "default": 1,
+        "unit": "秒",
+        "help": "",
+        "advanced": false
+      },
+      {
+        "key": "u_strength",
+        "label": "强度",
+        "type": "float",
+        "target": "material",
+        "min": 0,
+        "max": 1,
+        "step": 0.01,
+        "default": 0.6,
+        "unit": "",
+        "help": "",
+        "advanced": false
+      },
+      {
+        "key": "u_wave_height",
+        "label": "波高",
+        "type": "float",
+        "target": "material",
+        "min": 0,
+        "max": 0.25,
+        "step": 0.001,
+        "default": 0.04,
+        "unit": "场景单位",
+        "help": "0 为平面；波形幅度上界为此值。",
+        "advanced": false
+      }
+    ],
+    "animated": true,
+    "action": "",
+    "profile_note": "点击起伏水面触发一次；最新点击替换旧圈。继承平静水面默认波长 1。",
     "rocks": true
   },
   {
@@ -3847,7 +4377,61 @@
     "shape": "sphere",
     "amount": 0.55,
     "keywords": "magic shield_hit spatial",
-    "text": false
+    "text": false,
+    "parameters": [
+      {
+        "key": "u_duration",
+        "label": "持续时间",
+        "type": "float",
+        "target": "material",
+        "min": 0.2,
+        "max": 2,
+        "step": 0.01,
+        "default": 1,
+        "unit": "秒",
+        "help": "",
+        "advanced": false
+      },
+      {
+        "key": "u_ring_width",
+        "label": "环宽",
+        "type": "float",
+        "target": "material",
+        "min": 0.01,
+        "max": 0.3,
+        "step": 0.001,
+        "default": 0.08,
+        "unit": "场景单位",
+        "help": "",
+        "advanced": false
+      },
+      {
+        "key": "u_intensity",
+        "label": "亮度",
+        "type": "float",
+        "target": "material",
+        "min": 0,
+        "max": 5,
+        "step": 0.01,
+        "default": 1.8,
+        "unit": "",
+        "help": "",
+        "advanced": false
+      },
+      {
+        "key": "u_color",
+        "label": "波纹颜色",
+        "type": "color",
+        "target": "material",
+        "default": "#55e8bb",
+        "unit": "",
+        "help": "",
+        "advanced": false
+      }
+    ],
+    "animated": true,
+    "action": "",
+    "profile_note": "点击球面触发，亮圈沿球面弧长扩散，结束不重复。只支持本例球形命中。"
   },
   {
     "number": 191,
@@ -3887,7 +4471,74 @@
     "shape": "sphere",
     "amount": 0.55,
     "keywords": "magic hologram spatial",
-    "text": false
+    "text": false,
+    "parameters": [
+      {
+        "key": "u_line_density",
+        "label": "扫描线密度",
+        "type": "float",
+        "target": "material",
+        "min": 4,
+        "max": 120,
+        "step": 1,
+        "default": 40,
+        "unit": "条/模型单位",
+        "help": "",
+        "advanced": false
+      },
+      {
+        "key": "u_intensity",
+        "label": "线亮度",
+        "type": "float",
+        "target": "material",
+        "min": 0,
+        "max": 3,
+        "step": 0.01,
+        "default": 1,
+        "unit": "",
+        "help": "",
+        "advanced": false
+      },
+      {
+        "key": "u_opacity",
+        "label": "基础透明度",
+        "type": "float",
+        "target": "material",
+        "min": 0,
+        "max": 1,
+        "step": 0.01,
+        "default": 0.25,
+        "unit": "",
+        "help": "",
+        "advanced": false
+      },
+      {
+        "key": "u_rim_strength",
+        "label": "边缘亮度",
+        "type": "float",
+        "target": "material",
+        "min": 0,
+        "max": 3,
+        "step": 0.01,
+        "default": 1,
+        "unit": "",
+        "help": "",
+        "advanced": false
+      },
+      {
+        "key": "u_color",
+        "label": "全息颜色",
+        "type": "color",
+        "target": "material",
+        "default": "#55e8bb",
+        "unit": "",
+        "help": "",
+        "advanced": false
+      }
+    ],
+    "animated": true,
+    "action": "",
+    "profile_note": "条纹使用模型局部坐标；这是表面着色，不是体积全息。"
   },
   {
     "number": 193,
@@ -5439,7 +6090,7 @@
     "kind": "sprite",
     "implementation": "二维 Shader",
     "approximation": false,
-    "summary": "图片一阵阵闪白。",
+    "summary": "图片受击后闪白一次再恢复。",
     "directory": "res://effects/15_sprite/04_flash",
     "shader": "res://effects/15_sprite/04_flash/effect.gdshader",
     "readme": "res://effects/15_sprite/04_flash/README.md",
@@ -5447,7 +6098,48 @@
     "shape": "sphere",
     "amount": 0.55,
     "keywords": "sprite flash sprite",
-    "text": false
+    "text": false,
+    "parameters": [
+      {
+        "key": "u_strength",
+        "label": "强度",
+        "type": "float",
+        "target": "material",
+        "min": 0,
+        "max": 1,
+        "step": 0.01,
+        "default": 1,
+        "unit": "",
+        "help": "",
+        "advanced": false
+      },
+      {
+        "key": "u_duration",
+        "label": "持续时间",
+        "type": "float",
+        "target": "material",
+        "min": 0.05,
+        "max": 1,
+        "step": 0.01,
+        "default": 0.15,
+        "unit": "秒",
+        "help": "",
+        "advanced": false
+      },
+      {
+        "key": "u_color",
+        "label": "闪光颜色",
+        "type": "color",
+        "target": "material",
+        "default": "#ffffff",
+        "unit": "",
+        "help": "",
+        "advanced": false
+      }
+    ],
+    "animated": true,
+    "action": "播放一次",
+    "profile_note": "播放一次或点击图案触发；新事件替换旧事件，暂停时事件也暂停。"
   },
   {
     "number": 271,
@@ -5467,7 +6159,58 @@
     "shape": "sphere",
     "amount": 0.55,
     "keywords": "sprite recolor sprite",
-    "text": false
+    "text": false,
+    "parameters": [
+      {
+        "key": "u_source_color",
+        "label": "源颜色",
+        "type": "color",
+        "target": "material",
+        "default": "#a2f6da",
+        "unit": "",
+        "help": "",
+        "advanced": false
+      },
+      {
+        "key": "u_color",
+        "label": "目标色",
+        "type": "color",
+        "target": "material",
+        "default": "#55e8bb",
+        "unit": "",
+        "help": "",
+        "advanced": false
+      },
+      {
+        "key": "u_tolerance",
+        "label": "容差",
+        "type": "float",
+        "target": "material",
+        "min": 0,
+        "max": 1,
+        "step": 0.01,
+        "default": 0.2,
+        "unit": "",
+        "help": "按 RGB 距离选择颜色；0 只选择完全相同的颜色。",
+        "advanced": false
+      },
+      {
+        "key": "u_amount",
+        "label": "混合强度",
+        "type": "float",
+        "target": "material",
+        "min": 0,
+        "max": 1,
+        "step": 0.01,
+        "default": 1,
+        "unit": "",
+        "help": "0 为起点，1 为终点；端点不受其他参数影响。",
+        "advanced": false
+      }
+    ],
+    "animated": false,
+    "action": "",
+    "profile_note": ""
   },
   {
     "number": 272,
@@ -5967,7 +6710,71 @@
     "shape": "sphere",
     "amount": 0.55,
     "keywords": "ui ring canvas",
-    "text": false
+    "text": false,
+    "parameters": [
+      {
+        "key": "u_amount",
+        "label": "进度",
+        "type": "float",
+        "target": "material",
+        "min": 0,
+        "max": 1,
+        "step": 0.01,
+        "default": 0.55,
+        "unit": "",
+        "help": "0 为起点，1 为终点；端点不受其他参数影响。",
+        "advanced": false
+      },
+      {
+        "key": "u_ring_width",
+        "label": "环宽",
+        "type": "float",
+        "target": "material",
+        "min": 0.01,
+        "max": 0.3,
+        "step": 0.001,
+        "default": 0.07,
+        "unit": "UV 比例",
+        "help": "",
+        "advanced": false
+      },
+      {
+        "key": "u_start_deg",
+        "label": "起点角度",
+        "type": "float",
+        "target": "material",
+        "min": 0,
+        "max": 360,
+        "step": 1,
+        "default": 0,
+        "unit": "°",
+        "help": "起点 0° 在顶部，正角度沿顺时针。",
+        "advanced": false
+      },
+      {
+        "key": "u_clockwise",
+        "label": "顺时针",
+        "type": "bool",
+        "target": "material",
+        "default": true,
+        "unit": "",
+        "help": "关闭后沿逆时针填充。",
+        "advanced": false
+      },
+      {
+        "key": "u_color",
+        "label": "进度颜色",
+        "type": "color",
+        "target": "material",
+        "default": "#55e8bb",
+        "unit": "",
+        "help": "",
+        "advanced": false
+      }
+    ],
+    "animated": false,
+    "action": "",
+    "profile_note": ""
   },
   {
     "number": 297,
@@ -5987,7 +6794,58 @@
     "shape": "sphere",
     "amount": 0.55,
     "keywords": "ui cooldown canvas",
-    "text": false
+    "text": false,
+    "parameters": [
+      {
+        "key": "u_amount",
+        "label": "进度",
+        "type": "float",
+        "target": "material",
+        "min": 0,
+        "max": 1,
+        "step": 0.01,
+        "default": 0.55,
+        "unit": "",
+        "help": "0 为起点，1 为终点；端点不受其他参数影响。",
+        "advanced": false
+      },
+      {
+        "key": "u_start_deg",
+        "label": "起点角度",
+        "type": "float",
+        "target": "material",
+        "min": 0,
+        "max": 360,
+        "step": 1,
+        "default": 0,
+        "unit": "°",
+        "help": "起点 0° 在顶部，正角度沿顺时针。",
+        "advanced": false
+      },
+      {
+        "key": "u_clockwise",
+        "label": "顺时针",
+        "type": "bool",
+        "target": "material",
+        "default": true,
+        "unit": "",
+        "help": "关闭后沿逆时针填充。",
+        "advanced": false
+      },
+      {
+        "key": "u_color",
+        "label": "扇区颜色",
+        "type": "color",
+        "target": "material",
+        "default": "#55e8bb",
+        "unit": "",
+        "help": "",
+        "advanced": false
+      }
+    ],
+    "animated": false,
+    "action": "",
+    "profile_note": ""
   },
   {
     "number": 298,
@@ -6007,7 +6865,61 @@
     "shape": "sphere",
     "amount": 0.55,
     "keywords": "ui liquid canvas",
-    "text": false
+    "text": false,
+    "parameters": [
+      {
+        "key": "u_amount",
+        "label": "液位",
+        "type": "float",
+        "target": "material",
+        "min": 0,
+        "max": 1,
+        "step": 0.01,
+        "default": 0.55,
+        "unit": "",
+        "help": "0 为起点，1 为终点；端点不受其他参数影响。",
+        "advanced": false
+      },
+      {
+        "key": "u_wave_height",
+        "label": "波高",
+        "type": "float",
+        "target": "material",
+        "min": 0,
+        "max": 0.08,
+        "step": 0.001,
+        "default": 0.025,
+        "unit": "区域高度比例",
+        "help": "",
+        "advanced": false
+      },
+      {
+        "key": "u_wave_frequency",
+        "label": "波频",
+        "type": "float",
+        "target": "material",
+        "min": 1,
+        "max": 8,
+        "step": 0.1,
+        "default": 3,
+        "unit": "",
+        "help": "",
+        "advanced": false
+      },
+      {
+        "key": "u_color",
+        "label": "液体颜色",
+        "type": "color",
+        "target": "material",
+        "default": "#55e8bb",
+        "unit": "",
+        "help": "",
+        "advanced": false
+      }
+    ],
+    "animated": true,
+    "action": "",
+    "profile_note": ""
   },
   {
     "number": 299,
@@ -6387,7 +7299,45 @@
     "shape": "sphere",
     "amount": 0.55,
     "keywords": "color lut post",
-    "text": false
+    "text": false,
+    "parameters": [
+      {
+        "key": "u_amount",
+        "label": "混合强度",
+        "type": "float",
+        "target": "material",
+        "min": 0,
+        "max": 1,
+        "step": 0.01,
+        "default": 1,
+        "unit": "",
+        "help": "0 为起点，1 为终点；端点不受其他参数影响。",
+        "advanced": false
+      },
+      {
+        "key": "lut_texture",
+        "label": "颜色表",
+        "type": "texture",
+        "target": "material",
+        "options": [
+          {
+            "label": "暖色 LUT",
+            "value": "res://assets/warm_lut.png"
+          },
+          {
+            "label": "中性 LUT",
+            "value": "res://assets/neutral_lut.png"
+          }
+        ],
+        "default": "res://assets/warm_lut.png",
+        "unit": "",
+        "help": "",
+        "advanced": false
+      }
+    ],
+    "animated": false,
+    "action": "",
+    "profile_note": "16³ 颜色表横排 16 个蓝色切片；红绿双线性、蓝色两片插值，采样限制在各片中心。PNG 按原始 RGB 数据读取。"
   },
   {
     "number": 318,
@@ -6567,7 +7517,49 @@
     "shape": "sphere",
     "amount": 0.55,
     "keywords": "lens gaussian post",
-    "text": false
+    "text": false,
+    "parameters": [
+      {
+        "key": "u_radius_px",
+        "label": "半径",
+        "type": "float",
+        "target": "material",
+        "min": 0,
+        "max": 16,
+        "step": 0.25,
+        "default": 4,
+        "unit": "屏幕像素",
+        "help": "每方向的采样支撑半径；横向后复制屏幕，再做纵向。",
+        "advanced": false
+      },
+      {
+        "key": "u_quality",
+        "label": "质量",
+        "type": "enum",
+        "target": "material",
+        "options": [
+          {
+            "label": "低 · 每方向 5 次",
+            "value": 0
+          },
+          {
+            "label": "中 · 每方向 9 次",
+            "value": 1
+          },
+          {
+            "label": "高 · 每方向 13 次",
+            "value": 2
+          }
+        ],
+        "default": 1,
+        "unit": "",
+        "help": "",
+        "advanced": false
+      }
+    ],
+    "animated": false,
+    "action": "",
+    "profile_note": "两遍归一化高斯权重；低质量大半径可能出现稀疏采样。"
   },
   {
     "number": 327,
@@ -7007,7 +7999,64 @@
     "shape": "sphere",
     "amount": 0.55,
     "keywords": "retro crt post",
-    "text": false
+    "text": false,
+    "parameters": [
+      {
+        "key": "u_curvature",
+        "label": "屏幕弯曲",
+        "type": "float",
+        "target": "material",
+        "min": 0,
+        "max": 0.2,
+        "step": 0.001,
+        "default": 0.04,
+        "unit": "",
+        "help": "",
+        "advanced": false
+      },
+      {
+        "key": "u_scanline_strength",
+        "label": "扫描线强度",
+        "type": "float",
+        "target": "material",
+        "min": 0,
+        "max": 1,
+        "step": 0.01,
+        "default": 0.25,
+        "unit": "",
+        "help": "",
+        "advanced": false
+      },
+      {
+        "key": "u_vignette",
+        "label": "暗角",
+        "type": "float",
+        "target": "material",
+        "min": 0,
+        "max": 1,
+        "step": 0.01,
+        "default": 0.3,
+        "unit": "",
+        "help": "",
+        "advanced": false
+      },
+      {
+        "key": "u_rgb_mask",
+        "label": "三色条纹强度",
+        "type": "float",
+        "target": "material",
+        "min": 0,
+        "max": 1,
+        "step": 0.01,
+        "default": 0.15,
+        "unit": "",
+        "help": "",
+        "advanced": false
+      }
+    ],
+    "animated": false,
+    "action": "",
+    "profile_note": ""
   },
   {
     "number": 349,

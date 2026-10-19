@@ -1,15 +1,17 @@
 // 扇形冷却 | 二维 Shader
-// Adjust u_amount, u_speed, u_scale and u_color in the gallery.
+// Parameters and defaults: metadata.json
 shader_type canvas_item;
 render_mode unshaded;
 
 uniform float u_time = 0.0;
-uniform float u_amount : hint_range(0.0, 1.0) = 0.55;
+uniform float u_amount : hint_range(0.0,1.0,0.01) = 0.55;
 uniform float u_speed : hint_range(0.0, 3.0) = 1.0;
 uniform float u_scale : hint_range(0.4, 3.0) = 1.0;
 uniform bool u_enabled = true;
-uniform vec4 u_color : source_color = vec4(0.33, 0.91, 0.73, 1.0);
+uniform vec4 u_color : source_color = vec4(0.3333333333333333,0.9098039215686274,0.7333333333333333,1.0);
 uniform vec2 u_mouse = vec2(0.5);
+uniform float u_start_deg : hint_range(0.0,360.0,1.0) = 0.0;
+uniform bool u_clockwise = true;
 const float TAU_ = 6.28318530718;
 
 float h21(vec2 p) {
@@ -80,7 +82,7 @@ void fragment() {
     vec4 out_color=base;
     vec3 col=base.rgb;
     if (u_enabled) {
-col=vec3(0.025,0.045,0.075);float angle=fract(atan(p.x,-p.y)/TAU_+1.0); float disk=1.0-smoothstep(0.55,0.56,length(p)); col+=mix(vec3(0.08,0.13,0.2),u_color.rgb,step(angle,u_amount))*disk;
+p.x*=SCREEN_PIXEL_SIZE.y/SCREEN_PIXEL_SIZE.x; float radius=length(p); float shape=1.0-smoothstep(0.78,0.78+fwidth(radius),radius);float turn=fract((atan(p.x,-p.y)-radians(u_start_deg))/TAU_); if(!u_clockwise){turn=fract(-turn);} float fill=u_amount<=0.0 ? 0.0 : (u_amount>=1.0 ? 1.0 : 1.0-step(u_amount,turn));col=mix(vec3(0.035,0.06,0.10),u_color.rgb,shape*fill);
     }
     COLOR=vec4(col,1.0);
 }

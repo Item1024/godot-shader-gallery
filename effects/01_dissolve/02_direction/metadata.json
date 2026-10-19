@@ -8,7 +8,7 @@
   "kind": "sprite",
   "implementation": "二维 Shader",
   "approximation": false,
-  "summary": "图片从一侧逐渐消失。",
+  "summary": "图片从指定方向逐渐消失。",
   "directory": "res://effects/01_dissolve/02_direction",
   "shader": "res://effects/01_dissolve/02_direction/effect.gdshader",
   "readme": "res://effects/01_dissolve/02_direction/README.md",
@@ -16,5 +16,59 @@
   "shape": "sphere",
   "amount": 0.32,
   "keywords": "dissolve direction sprite",
-  "text": false
+  "text": false,
+  "parameters": [
+    {
+      "key": "u_amount",
+      "label": "消失进度",
+      "type": "float",
+      "target": "material",
+      "min": 0,
+      "max": 1,
+      "step": 0.01,
+      "default": 0.32,
+      "unit": "",
+      "help": "0 为起点，1 为终点；端点不受其他参数影响。",
+      "advanced": false
+    },
+    {
+      "key": "u_direction_deg",
+      "label": "方向",
+      "type": "float",
+      "target": "material",
+      "min": 0,
+      "max": 360,
+      "step": 1,
+      "default": 0,
+      "unit": "°",
+      "help": "起点 0° 在顶部，正角度沿顺时针。",
+      "advanced": false
+    },
+    {
+      "key": "u_edge_width",
+      "label": "亮边宽度",
+      "type": "float",
+      "target": "material",
+      "min": 0,
+      "max": 0.15,
+      "step": 0.001,
+      "default": 0.04,
+      "unit": "UV 比例",
+      "help": "只扩宽保留侧的交界，不改变消失区域。",
+      "advanced": false
+    },
+    {
+      "key": "u_color",
+      "label": "亮边颜色",
+      "type": "color",
+      "target": "material",
+      "default": "#55e8bb",
+      "unit": "",
+      "help": "",
+      "advanced": false
+    }
+  ],
+  "animated": false,
+  "action": "",
+  "profile_note": ""
 }

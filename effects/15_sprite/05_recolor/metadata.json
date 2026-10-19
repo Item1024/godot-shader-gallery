@@ -16,5 +16,56 @@
   "shape": "sphere",
   "amount": 0.55,
   "keywords": "sprite recolor sprite",
-  "text": false
+  "text": false,
+  "parameters": [
+    {
+      "key": "u_source_color",
+      "label": "源颜色",
+      "type": "color",
+      "target": "material",
+      "default": "#a2f6da",
+      "unit": "",
+      "help": "",
+      "advanced": false
+    },
+    {
+      "key": "u_color",
+      "label": "目标色",
+      "type": "color",
+      "target": "material",
+      "default": "#55e8bb",
+      "unit": "",
+      "help": "",
+      "advanced": false
+    },
+    {
+      "key": "u_tolerance",
+      "label": "容差",
+      "type": "float",
+      "target": "material",
+      "min": 0,
+      "max": 1,
+      "step": 0.01,
+      "default": 0.2,
+      "unit": "",
+      "help": "按 RGB 距离选择颜色；0 只选择完全相同的颜色。",
+      "advanced": false
+    },
+    {
+      "key": "u_amount",
+      "label": "混合强度",
+      "type": "float",
+      "target": "material",
+      "min": 0,
+      "max": 1,
+      "step": 0.01,
+      "default": 1,
+      "unit": "",
+      "help": "0 为起点，1 为终点；端点不受其他参数影响。",
+      "advanced": false
+    }
+  ],
+  "animated": false,
+  "action": "",
+  "profile_note": ""
 }

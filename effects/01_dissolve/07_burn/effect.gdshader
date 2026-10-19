@@ -1,15 +1,17 @@
 // 燃烧溶解 | 二维 Shader
-// Adjust u_amount, u_speed, u_scale and u_color in the gallery.
+// Parameters and defaults: metadata.json
 shader_type canvas_item;
 render_mode unshaded;
 
 uniform float u_time = 0.0;
-uniform float u_amount : hint_range(0.0, 1.0) = 0.55;
+uniform float u_amount : hint_range(0.0,1.0,0.01) = 0.32;
 uniform float u_speed : hint_range(0.0, 3.0) = 1.0;
 uniform float u_scale : hint_range(0.4, 3.0) = 1.0;
 uniform bool u_enabled = true;
-uniform vec4 u_color : source_color = vec4(0.33, 0.91, 0.73, 1.0);
+uniform vec4 u_color : source_color = vec4(1.0,0.3215686274509804,0.023529411764705882,1.0);
 uniform vec2 u_mouse = vec2(0.5);
+uniform float u_noise_scale : hint_range(2.0,32.0,0.1) = 8.0;
+uniform float u_edge_width : hint_range(0.0,0.15,0.001) = 0.05;
 const float TAU_ = 6.28318530718;
 
 float h21(vec2 p) {
@@ -81,12 +83,15 @@ void fragment() {
     vec3 col=base.rgb;
     if (u_enabled) {
 
-        float mask_value=fbm(uv*8.0*u_scale)+0.24*(1.0-uv.y);
-        float threshold=u_amount;
-        float visible=step(threshold,mask_value);
-        float edge=1.0-smoothstep(0.0,0.065,mask_value-threshold);
-        out_color.rgb=mix(base.rgb,vec3(1.0,0.32,0.025)*1.8,edge);
-        out_color.a=base.a*visible;
+
+        float value=fbm(uv*u_noise_scale);
+        if (u_amount>=1.0) { out_color.a=0.0; }
+        else if (u_amount>0.0) {
+            float visible=step(u_amount,value);
+            float edge=u_edge_width>0.0 ? 1.0-smoothstep(0.0,u_edge_width,max(value-u_amount,0.0)) : 0.0;
+            out_color.rgb=mix(base.rgb,u_color.rgb*1.8,edge);
+            out_color.a=base.a*visible;
+        }
 
     }
     COLOR=out_color;

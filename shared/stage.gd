@@ -26,6 +26,9 @@ var distance := 5.0
 var canvas_root: Control
 var canvas_picture: TextureRect
 var interaction_surface: MeshInstance3D
+var parameter_values: Dictionary = {}
+var uniform_names: Dictionary = {}
+var vertical_material: ShaderMaterial
 var _pointer_down := false
 var _dragging := false
 var _press_position := Vector2.ZERO
@@ -51,10 +54,14 @@ func configure(data: Dictionary) -> void:
 	for child in get_children():
 		child.free()
 	entry = data
+	parameter_values.clear()
+	uniform_names.clear()
+	vertical_material = null
 	player.reset()
 	cancel_pointer()
 	orbit = 0.0
 	amount = float(data.get("amount", 0.55))
+	scale_value = 1.0
 	enabled = true
 	subject = null
 	camera = null
@@ -63,6 +70,8 @@ func configure(data: Dictionary) -> void:
 	interaction_surface = null
 	shader_material = ShaderMaterial.new()
 	shader_material.shader = load(str(data["shader"]))
+	for uniform: Dictionary in shader_material.shader.get_shader_uniform_list():
+		uniform_names[str(uniform["name"])] = true
 	player.bind_materials([shader_material])
 	if data["category_slug"] == "vertex" and data["slug"] == "vat":
 		shader_material.set_shader_parameter("vat_texture", load("res://assets/vat.png"))
@@ -85,6 +94,10 @@ func _set_uniforms() -> void:
 	shader_material.set_shader_parameter("u_scale", scale_value)
 	shader_material.set_shader_parameter("u_enabled", enabled)
 	shader_material.set_shader_parameter("u_color", Color("#55e8bb"))
+	if vertical_material:
+		vertical_material.set_shader_parameter("u_enabled", enabled)
+	for parameter: Dictionary in entry.get("parameters", []):
+		set_parameter(parameter["key"], parameter["default"])
 
 
 func _build_canvas(kind: String) -> void:
@@ -108,6 +121,19 @@ func _build_canvas(kind: String) -> void:
 		effect.material = shader_material
 		effect.mouse_filter = Control.MOUSE_FILTER_IGNORE
 		canvas_root.add_child(effect)
+		if entry.get("category_slug") == "lens" and entry.get("slug") == "gaussian":
+			# The second screen sampler must see the completed horizontal pass.
+			var copy := BackBufferCopy.new()
+			copy.copy_mode = BackBufferCopy.COPY_MODE_VIEWPORT
+			canvas_root.add_child(copy)
+			vertical_material = shader_material.duplicate() as ShaderMaterial
+			vertical_material.set_shader_parameter("u_vertical", true)
+			var vertical := ColorRect.new()
+			vertical.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+			vertical.material = vertical_material
+			vertical.mouse_filter = Control.MOUSE_FILTER_IGNORE
+			canvas_root.add_child(vertical)
+			player.bind_materials([shader_material, vertical_material])
 	else:
 		var picture := TextureRect.new()
 		canvas_picture = picture
@@ -330,17 +356,52 @@ func _position_camera() -> void:
 		camera.look_at(Vector3(0, -0.05, 0))
 
 
-func set_parameter(key: String, value: Variant) -> void:
+func set_parameter(key: String, value: Variant) -> bool:
 	if key == "u_speed":
+		if not (value is float or value is int) or not is_finite(float(value)) or float(value) < 0.0 or float(value) > 3.0:
+			return false
 		speed = float(value)
-		return
+		return true
+	if entry.has("parameters"):
+		var specification: Dictionary = {}
+		for parameter: Dictionary in entry["parameters"]:
+			if parameter["key"] == key:
+				specification = parameter
+				break
+		if not specification.is_empty():
+			match specification["type"]:
+				"float":
+					if not (value is float or value is int) or not is_finite(float(value)) or float(value) < float(specification["min"]) or float(value) > float(specification["max"]):
+						return false
+					value = float(value)
+				"bool":
+					if not value is bool: return false
+				"color":
+					if value is String and Color.html_is_valid(value): value = Color(value)
+					if not value is Color: return false
+				"enum", "texture":
+					var valid := false
+					for option: Dictionary in specification["options"]:
+						if option["value"] == value: valid = true
+					if not valid: return false
+					value = load(value) if specification["type"] == "texture" else int(value)
+		elif key not in ["u_enabled", "u_mouse", "u_hit_position"]:
+			return false
+		if not uniform_names.has(key): return false
+		parameter_values[key] = value
 	match key:
 		"u_amount": amount = float(value)
 		"u_scale": scale_value = float(value)
 		"u_enabled": enabled = bool(value)
-	if shader_material:
-		shader_material.set_shader_parameter(key, value)
+	for material: ShaderMaterial in player.materials:
+		material.set_shader_parameter(key, value)
 	_apply_pipeline()
+	return true
+
+
+func play_once() -> void:
+	if enabled and entry.get("action", "") == "播放一次":
+		player.trigger_event()
 
 
 func reset() -> void:
@@ -416,17 +477,20 @@ func trigger_at(pixel: Vector2) -> bool:
 		if not region.has_point(pixel):
 			return false
 		set_parameter("u_mouse", (pixel - region.position) / region.size)
+		play_once()
 	return true
 
 
 func water_height(point: Vector2) -> float:
 	if not enabled:
 		return 0.0
-	return (sin(point.x * 3.0 * scale_value + elapsed * 1.4) + sin(point.y * 4.0 - elapsed * 1.1) * 0.5) * amount * 0.15
+	var k := TAU / float(parameter_values.get("u_wave_length", 1.0))
+	return (sin(point.x * k + elapsed * 1.4) + sin(point.y * k - elapsed * 1.1) * 0.5) * float(parameter_values.get("u_wave_height", 0.04)) / 1.5
 
 
 func _water_gradient(point: Vector2) -> Vector2:
-	return Vector2(cos(point.x * 3.0 * scale_value + elapsed * 1.4) * scale_value * 3.0, cos(point.y * 4.0 - elapsed * 1.1) * 2.0) * amount * 0.15
+	var k := TAU / float(parameter_values.get("u_wave_length", 1.0))
+	return Vector2(cos(point.x * k + elapsed * 1.4) * k, cos(point.y * k - elapsed * 1.1) * k * 0.5) * float(parameter_values.get("u_wave_height", 0.04)) / 1.5
 
 
 func surface_hit(pixel: Vector2) -> Dictionary:
@@ -440,18 +504,55 @@ func surface_hit(pixel: Vector2) -> Dictionary:
 		if absf(direction.y) < 0.00001:
 			return {}
 		travel = -origin.y / direction.y
+		# Bracket the nearest crossing inside the finite wave volume before
+		# Newton refinement. Steep waves can otherwise send Newton off-plane.
+		var height := float(parameter_values.get("u_wave_height", 0.04)) if enabled else 0.0
+		var extent: Vector2 = interaction_surface.mesh.size * 0.5
+		var low := maxf(0.0, minf((-height-origin.y)/direction.y, (height-origin.y)/direction.y))
+		var high := maxf((-height-origin.y)/direction.y, (height-origin.y)/direction.y)
+		for axis in [0, 2]:
+			var bound: float = extent.x if axis==0 else extent.y
+			if absf(direction[axis])<0.00001:
+				if absf(origin[axis])>bound: return {}
+			else:
+				var a: float = (-bound-origin[axis])/direction[axis]
+				var b: float = (bound-origin[axis])/direction[axis]
+				low=maxf(low,minf(a,b))
+				high=minf(high,maxf(a,b))
+		if high<low: return {}
+		var start := origin+direction*low
+		var residual_low := start.y-water_height(Vector2(start.x,start.z))
+		var samples := maxi(1, int(ceil((high-low)*Vector2(direction.x,direction.z).length()*16.0/float(parameter_values.get("u_wave_length",1.0)))))
+		var previous := low
+		var found := false
+		for sample in range(1,samples+1):
+			var next := lerpf(low,high,float(sample)/samples)
+			var point := origin+direction*next
+			var residual := point.y-water_height(Vector2(point.x,point.z))
+			if residual_low*residual<=0.0:
+				low=previous
+				high=next
+				found=true
+				break
+			previous=next
+			residual_low=residual
+		if not found: return {}
+		travel=clampf(travel,low,high)
 		for iteration in range(8):
 			var point := origin + direction * travel
 			var residual := point.y - water_height(Vector2(point.x, point.z))
 			if absf(residual) <= 0.00001:
 				break
+			if residual*residual_low>0.0:
+				low=travel
+				residual_low=residual
+			else:
+				high=travel
 			var gradient := _water_gradient(Vector2(point.x, point.z))
 			var slope := direction.y - gradient.dot(Vector2(direction.x, direction.z))
-			if absf(slope) < 0.00001:
-				return {}
-			travel -= residual / slope
+			var candidate := travel-residual/slope if absf(slope)>=0.00001 else INF
+			travel=candidate if candidate>low and candidate<high else (low+high)*0.5
 		var point := origin + direction * travel
-		var extent: Vector2 = interaction_surface.mesh.size * 0.5
 		if absf(point.x) > extent.x or absf(point.z) > extent.y or absf(point.y - water_height(Vector2(point.x, point.z))) > 0.001:
 			return {}
 	elif interaction_surface.mesh is SphereMesh:

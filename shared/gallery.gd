@@ -21,10 +21,10 @@ var badge: Label
 var path_label: Label
 var notes: RichTextLabel
 var code: CodeEdit
-var sliders: Array[HSlider] = []
 var pause_button: Button
 var compare_button: CheckButton
-var color_button: ColorPickerButton
+var parameter_panel: VBoxContainer
+var parameter_controls: Dictionary = {}
 var screenshot_pending := false
 
 
@@ -208,20 +208,17 @@ func _build_ui() -> void:
 	var inspector_panel := _panel()
 	inspector_panel.custom_minimum_size.x = 248
 	body.add_child(inspector_panel)
+	var scroll := ScrollContainer.new()
+	scroll.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
+	inspector_panel.add_child(scroll)
 	var inspector := VBoxContainer.new()
+	inspector.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	inspector.add_theme_constant_override("separation", 16)
-	inspector_panel.add_child(inspector)
+	scroll.add_child(inspector)
 	inspector.add_child(_label("实时参数", 18))
-	_add_slider(inspector, "强度 / 进度", "u_amount", 0.0, 1.0, 0.55)
-	_add_slider(inspector, "动画速度", "u_speed", 0.0, 3.0, 1.0)
-	_add_slider(inspector, "纹理 / 图案尺度", "u_scale", 0.4, 3.0, 1.0)
-	inspector.add_child(_label("强调色", 14, MUTED))
-	color_button = ColorPickerButton.new()
-	color_button.color = ACCENT
-	color_button.custom_minimum_size.y = 38
-	color_button.edit_alpha = false
-	color_button.color_changed.connect(func(value): stage.set_parameter("u_color", value))
-	inspector.add_child(color_button)
+	parameter_panel = VBoxContainer.new()
+	parameter_panel.add_theme_constant_override("separation", 10)
+	inspector.add_child(parameter_panel)
 	pause_button = _button("暂停动画", _toggle_pause)
 	inspector.add_child(pause_button)
 	compare_button = CheckButton.new()
@@ -242,26 +239,105 @@ func _build_ui() -> void:
 	inspector.add_child(helper)
 
 
-func _add_slider(parent: VBoxContainer, title: String, key: String, low: float, high: float, initial: float) -> void:
-	var row := HBoxContainer.new()
-	parent.add_child(row)
-	var label := _label(title, 14, MUTED)
-	label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	row.add_child(label)
-	var value_label := _label("%.2f" % initial, 13, ACCENT)
-	row.add_child(value_label)
-	var slider := HSlider.new()
-	slider.min_value = low
-	slider.max_value = high
-	slider.step = 0.01
-	slider.value = initial
-	slider.custom_minimum_size.y = 26
-	slider.value_changed.connect(func(value):
-		value_label.text = "%.2f" % value
-		if stage: stage.set_parameter(key, value)
-	)
-	parent.add_child(slider)
-	sliders.append(slider)
+func _parameter_control(parent: VBoxContainer, p: Dictionary) -> void:
+	var key: String = p["key"]
+	parent.add_child(_label(p["label"], 14, TEXT))
+	var detail := "%s · 默认 %s %s" % [p["type"], str(p["default"]), p.get("unit", "")]
+	if p["type"] in ["enum", "texture"]:
+		for option: Dictionary in p["options"]:
+			if option["value"] == p["default"]: detail="%s · 默认 %s" % ["贴图" if p["type"]=="texture" else "选项",option["label"]]
+	elif p["type"]=="color": detail="颜色 · 默认 "+str(p["default"])
+	elif p["type"]=="bool": detail="开关 · 默认 "+("开启" if p["default"] else "关闭")
+	if p["type"] == "float":
+		detail = "%s–%s %s · 步长 %s\n默认 %s · 数值" % [p["min"], p["max"], p.get("unit", ""), p["step"], p["default"]]
+	var description := _label(detail, 12, MUTED)
+	description.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	parent.add_child(description)
+	match p["type"]:
+		"float":
+			var row := HBoxContainer.new()
+			parent.add_child(row)
+			var slider := HSlider.new()
+			slider.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+			slider.custom_minimum_size = Vector2(60, 32)
+			var spin := SpinBox.new()
+			spin.custom_minimum_size.x = 90
+			for control: Range in [slider, spin]:
+				control.min_value = p["min"]
+				control.max_value = p["max"]
+				control.step = p["step"]
+				control.value = p["default"]
+			row.add_child(slider)
+			row.add_child(spin)
+			slider.value_changed.connect(func(value):
+				spin.set_value_no_signal(value)
+				stage.set_parameter(key, value))
+			spin.value_changed.connect(func(value):
+				slider.set_value_no_signal(value)
+				stage.set_parameter(key, value))
+			parameter_controls[key] = {"slider": slider, "input": spin}
+		"color":
+			var picker := ColorPickerButton.new()
+			picker.color = Color(p["default"])
+			picker.edit_alpha = false
+			picker.custom_minimum_size.y = 36
+			picker.color_changed.connect(func(value): stage.set_parameter(key, value))
+			parent.add_child(picker)
+			parameter_controls[key] = {"input": picker}
+		"bool":
+			var toggle := CheckButton.new()
+			toggle.text = p["label"]
+			toggle.button_pressed = p["default"]
+			toggle.toggled.connect(func(value): stage.set_parameter(key, value))
+			parent.add_child(toggle)
+			parameter_controls[key] = {"input": toggle}
+		"enum", "texture":
+			var select := OptionButton.new()
+			for option: Dictionary in p["options"]:
+				select.add_item(option["label"])
+				if option["value"] == p["default"]: select.selected = select.item_count - 1
+			select.item_selected.connect(func(index): stage.set_parameter(key, p["options"][index]["value"]))
+			parent.add_child(select)
+			parameter_controls[key] = {"input": select}
+	if not str(p.get("help", "")).is_empty():
+		var help := _label(p["help"], 12, MUTED)
+		help.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+		parent.add_child(help)
+
+
+func _build_parameters() -> void:
+	for child in parameter_panel.get_children(): child.free()
+	parameter_controls.clear()
+	var parameters: Array = current.get("parameters", [])
+	if not current.has("parameters"):
+		parameter_panel.add_child(_label("基础参数", 14, ACCENT))
+		parameters = [
+			{"key": "u_amount", "label": "强度 / 进度", "type": "float", "min": 0.0, "max": 1.0, "step": 0.01, "default": current.get("amount", 0.55)},
+			{"key": "u_scale", "label": "纹理 / 图案尺度", "type": "float", "min": 0.4, "max": 3.0, "step": 0.01, "default": 1.0},
+			{"key": "u_color", "label": "强调色", "type": "color", "default": "#55e8bb"}]
+	var advanced := VBoxContainer.new()
+	var advanced_toggle := CheckButton.new()
+	advanced_toggle.text = "更多参数"
+	advanced_toggle.toggled.connect(func(value): advanced.visible = value)
+	for p: Dictionary in parameters:
+		_parameter_control(advanced if p.get("advanced", false) else parameter_panel, p)
+	if advanced.get_child_count() > 0:
+		parameter_panel.add_child(advanced_toggle)
+		parameter_panel.add_child(advanced)
+		advanced.hide()
+	else:
+		advanced.free()
+		advanced_toggle.free()
+	if not str(current.get("profile_note", "")).is_empty():
+		var note := _label(current["profile_note"], 12, MUTED)
+		note.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+		parameter_panel.add_child(note)
+	if current.get("action", "") == "播放一次":
+		parameter_panel.add_child(_button("播放一次", stage.play_once))
+	pause_button.visible = current.get("animated", true)
+	if pause_button.visible:
+		parameter_panel.add_child(_label("播放", 16, ACCENT))
+		_parameter_control(parameter_panel, {"key": "u_speed", "label": "播放速度", "type": "float", "target": "player", "min": 0.0, "max": 3.0, "step": 0.01, "default": 1.0, "help": "0 停在当前时刻；改速度不会跳帧。"})
 
 
 func _filter() -> void:
@@ -282,6 +358,24 @@ func _filter() -> void:
 	if not results.is_empty():
 		items.select(0)
 		_show(catalog[results[0]])
+	else:
+		current = {}
+		var empty_materials: Array[ShaderMaterial] = []
+		stage.player.bind_materials(empty_materials)
+		for child in stage.get_children(): child.free()
+		stage.camera = null
+		stage.shader_material = null
+		stage.interaction_surface = null
+		stage.canvas_picture = null
+		heading.text = "没有匹配的效果"
+		subtitle.text = "请修改关键词或分类。"
+		badge.text = ""
+		code.text = ""
+		notes.text = ""
+		path_label.text = ""
+		for child in parameter_panel.get_children(): child.free()
+		parameter_controls.clear()
+		pause_button.hide()
 
 
 func _show(entry: Dictionary) -> void:
@@ -297,16 +391,15 @@ func _show(entry: Dictionary) -> void:
 
 
 func _reset() -> void:
-	sliders[0].value = float(current.get("amount", 0.55))
-	sliders[1].value = 1.0
-	sliders[2].value = 1.0
+	if current.is_empty(): return
 	stage.reset()
-	color_button.color = ACCENT
+	_build_parameters()
 	pause_button.text = "暂停动画"
 	compare_button.button_pressed = true
 
 
 func _toggle_pause() -> void:
+	if current.is_empty(): return
 	stage.paused = not stage.paused
 	pause_button.text = "继续动画" if stage.paused else "暂停动画"
 
@@ -323,11 +416,13 @@ func _navigate(direction: int) -> void:
 
 
 func _open_folder() -> void:
+	if current.is_empty(): return
 	OS.shell_open(ProjectSettings.globalize_path(current["directory"]))
 
 
 func _unhandled_key_input(event: InputEvent) -> void:
 	if event is InputEventKey and event.pressed and not event.echo:
+		if get_viewport().gui_get_focus_owner() is LineEdit and not (event.keycode==KEY_F and event.ctrl_pressed): return
 		if event.keycode == KEY_SPACE and not search.has_focus():
 			_toggle_pause()
 		elif event.keycode == KEY_F and event.ctrl_pressed:
