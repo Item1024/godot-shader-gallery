@@ -1,5 +1,7 @@
 # 验证记录
 
+2026-10-19 新增生成安全、独立重建及 20 项固定画面样本的检查，详见 [M1 验收记录](M1_VERIFICATION.md)。以下为初版图鉴的验证记录。
+
 验证环境：Windows，Godot 4.7.2.stable.official.ed1daf0bf，NVIDIA GeForce RTX 5060，Vulkan 1.4 / Forward+。
 
 ## 已完成

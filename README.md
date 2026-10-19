@@ -22,8 +22,25 @@
 - assets/：矢量示例图、文字贴图、VAT、LUT，以及本地 Blender 小屋渲染参考图。
 - docs/INDEX.md：全部目录与实现标签的完整索引。
 - tools/build_library.py 与 effect_catalog.py：维护/重建库的源文件。
+- tools/plain_language.py：各项大白话解释的维护源。
+- tools/generated_manifest.json：生成文件的上次内容记录，用于保护手改内容。
 - tools/validate.gd：结构、资源和 Shader 语言检查。
 - artifacts/：实际运行审查输出的报告与截图。
+
+## 安全重建
+
+在工程根目录运行（仅需 Python 标准库）：
+
+    python tools/build_library.py --check
+    python tools/build_library.py --effect dissolve/noise
+    python tools/build_library.py
+
+第一条只检查，不修改工程文件；第二条只更新指定案例与确有变化的总索引；第三条全量重建。也可以组合 --check --effect dissolve/noise。
+生成结果先写到系统临时目录，通过手改检查后才写回有变化的文件。发现将被更新的文件已被修改或删除，会列出并停止；不会静默覆盖。请先备份、合回生成源，再按需从 Git 恢复受影响的生成文件；不要为绕过保护删除清单。
+退出码：0 为一致或生成成功，1 为检查发现待生成的变化，2 为手改冲突或配置错误。
+清单只管理生成文件，不包含人工方案、验证记录和画面样本。内容比较兼容 LF / CRLF 换行；空格、文字和二进制内容仍逐项检查。
+assets/cottage.png 是仓库内输入素材，正常重建不访问相邻 Blender 工程，也不重写这张图片。
+生成器安全检查：python -B -m unittest discover -s tools/tests -v。M1 的实施与样本记录见 [M1 验收记录](docs/M1_VERIFICATION.md)。
 
 ## 实现边界
 

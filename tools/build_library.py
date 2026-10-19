@@ -1,10 +1,15 @@
 """Generate independent, readable Godot examples from the requested catalogue."""
 from pathlib import Path
+import argparse
+import hashlib
 import json
 import math
-import shutil
 import struct
+import sys
+import tempfile
 import zlib
+
+sys.dont_write_bytecode = True
 from effect_catalog import CATEGORIES
 from plain_language import PRINCIPLES
 
@@ -1017,8 +1022,10 @@ def write_png(path,width,height,pixels):
     path.write_bytes(b"\x89PNG\r\n\x1a\n"+chunk(b"IHDR",struct.pack(">IIBBBBB",width,height,8,2,0,0,0))+chunk(b"IDAT",zlib.compress(raw))+chunk(b"IEND",b""))
 
 
-def assets():
-    folder=ROOT/"assets"
+def assets(output_root):
+    if not (ROOT/"assets"/"cottage.png").is_file():
+        raise FileNotFoundError("Missing repository asset: assets/cottage.png. Restore it from Git before building.")
+    folder=output_root/"assets"
     folder.mkdir(exist_ok=True)
     (folder/"icon.svg").write_text('''<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64"><rect width="64" height="64" rx="15" fill="#162a39"/><path d="M32 8 54 20v24L32 56 10 44V20Z" fill="none" stroke="#55e8bb" stroke-width="3"/><path d="m16 24 16 9 16-9M32 33v18" fill="none" stroke="#55e8bb" stroke-width="3"/><circle cx="32" cy="20" r="4" fill="#e5b574"/></svg>''',encoding="utf-8")
     (folder/"subject.svg").write_text('''<svg xmlns="http://www.w3.org/2000/svg" width="640" height="560" viewBox="0 0 640 560">
@@ -1064,14 +1071,10 @@ def assets():
             r,g,b=(x%16)/15,y/15,(x//16)/15
             lut.extend([round(min(1,r*1.08+0.03)*255),round(min(1,g*0.98+0.015)*255),round(max(0,min(1,b*0.87))*255)])
     write_png(folder/"warm_lut.png",256,16,lut)
-    source=ROOT.parent/"blender-cottage-demo"/"cottage_render.png"
-    if not source.exists():
-        raise FileNotFoundError("The locally authored cottage render is required as the post-process reference image.")
-    shutil.copy2(source,folder/"cottage.png")
 
 
-def build():
-    assets()
+def build(output_root):
+    assets(output_root)
     catalog,groups=[],[]
     index_rows=[]
     for category_number,(group,name,encoded) in enumerate(CATEGORIES,1):
@@ -1080,7 +1083,7 @@ def build():
         for local_index,(slug,title) in enumerate(cases,1):
             source,kind=choose_shader(group,slug,local_index-1)
             directory=f"effects/{category_number:02d}_{group}/{local_index:02d}_{slug}"
-            folder=ROOT/directory
+            folder=output_root/directory
             folder.mkdir(parents=True,exist_ok=True)
             limit=LIMITS.get((group,slug),"")
             if kind=="pipeline" and slug=="contact":
@@ -1151,7 +1154,8 @@ metadata_path = "res://{directory}/metadata.json"
 
 - 图鉴入口：打开 project.godot，按 F5，搜索“{title}”或“{slug}”。
 - 单独查看：打开本目录 demo.tscn，按 F6。
-- 修改效果：编辑本目录 effect.gdshader。
+- 临时试效果：可编辑本目录 effect.gdshader；要长期保存，请把改动合回 tools/build_library.py 对应公式后再重建。
+- 重建前检查：python tools/build_library.py --check。检测到手改文件时会停止覆盖，先确认并保留改动。
 - 每个效果的代码保存在本目录 effect.gdshader；展示场景共用 shared/ 里的脚本。
 - 先关掉“启用效果”看原样，再打开比较；想看清静止画面时点“暂停动画”。
 
@@ -1200,13 +1204,13 @@ metadata_path = "res://{directory}/metadata.json"
             (folder/"README.md").write_text(notes,encoding="utf-8")
             catalog.append(entry)
             index_rows.append(f"| {entry['number']:03d} | {name} | [{title}](../{directory}/README.md) | {implementation} |")
-    (ROOT/"catalog.json").write_text(json.dumps(catalog,ensure_ascii=False,indent=2),encoding="utf-8")
-    (ROOT/"categories.json").write_text(json.dumps(groups,ensure_ascii=False,indent=2),encoding="utf-8")
-    docs=ROOT/"docs"
+    (output_root/"catalog.json").write_text(json.dumps(catalog,ensure_ascii=False,indent=2),encoding="utf-8")
+    (output_root/"categories.json").write_text(json.dumps(groups,ensure_ascii=False,indent=2),encoding="utf-8")
+    docs=output_root/"docs"
     docs.mkdir(exist_ok=True)
     (docs/"INDEX.md").write_text("# 全部效果索引\n\n| 编号 | 分类 | 效果与目录 | 实现 |\n|---|---|---|---|\n"+"\n".join(index_rows)+"\n",encoding="utf-8")
     approximate=sum(item["approximation"] for item in catalog)
-    (ROOT/"README.md").write_text(f"""# Shader Atlas · Godot 效果图鉴
+    (output_root/"README.md").write_text(f"""# Shader Atlas · Godot 效果图鉴
 
 {len(catalog)} 个独立效果目录，覆盖对话中的 23 类。使用 Godot 4.7.2 标准版，无外部插件、网络依赖或 .NET 依赖。
 
@@ -1230,8 +1234,25 @@ metadata_path = "res://{directory}/metadata.json"
 - assets/：矢量示例图、文字贴图、VAT、LUT，以及本地 Blender 小屋渲染参考图。
 - docs/INDEX.md：全部目录与实现标签的完整索引。
 - tools/build_library.py 与 effect_catalog.py：维护/重建库的源文件。
+- tools/plain_language.py：各项大白话解释的维护源。
+- tools/generated_manifest.json：生成文件的上次内容记录，用于保护手改内容。
 - tools/validate.gd：结构、资源和 Shader 语言检查。
 - artifacts/：实际运行审查输出的报告与截图。
+
+## 安全重建
+
+在工程根目录运行（仅需 Python 标准库）：
+
+    python tools/build_library.py --check
+    python tools/build_library.py --effect dissolve/noise
+    python tools/build_library.py
+
+第一条只检查，不修改工程文件；第二条只更新指定案例与确有变化的总索引；第三条全量重建。也可以组合 --check --effect dissolve/noise。
+生成结果先写到系统临时目录，通过手改检查后才写回有变化的文件。发现将被更新的文件已被修改或删除，会列出并停止；不会静默覆盖。请先备份、合回生成源，再按需从 Git 恢复受影响的生成文件；不要为绕过保护删除清单。
+退出码：0 为一致或生成成功，1 为检查发现待生成的变化，2 为手改冲突或配置错误。
+清单只管理生成文件，不包含人工方案、验证记录和画面样本。内容比较兼容 LF / CRLF 换行；空格、文字和二进制内容仍逐项检查。
+assets/cottage.png 是仓库内输入素材，正常重建不访问相邻 Blender 工程，也不重写这张图片。
+生成器安全检查：python -B -m unittest discover -s tools/tests -v。M1 的实施与样本记录见 [M1 验收记录](docs/M1_VERIFICATION.md)。
 
 ## 实现边界
 
@@ -1263,8 +1284,121 @@ SSAO、SSR、SSIL、体积雾等管线案例使用 Godot 内置渲染功能，�
 - https://docs.godotengine.org/en/stable/tutorials/shaders/screen-reading_shaders.html
 - https://docs.godotengine.org/en/stable/tutorials/shaders/advanced_postprocessing.html
 """,encoding="utf-8")
-    print(json.dumps({"effects":len(catalog),"categories":len(groups),"approximations":approximate,"kinds":{kind:sum(item["kind"]==kind for item in catalog) for kind in ["sprite","canvas","spatial","post","pipeline","depth"]}},ensure_ascii=False))
+    return {"effects":len(catalog),"categories":len(groups),"approximations":approximate,"kinds":{kind:sum(item["kind"]==kind for item in catalog) for kind in ["sprite","canvas","spatial","post","pipeline","depth"]}}
+
+
+MANIFEST_PATH = "tools/generated_manifest.json"
+TEXT_SUFFIXES = {".gdshader", ".tscn", ".json", ".md", ".svg"}
+INDEX_PATHS = {"catalog.json", "categories.json", "docs/INDEX.md", "README.md"}
+
+
+class BuildError(Exception):
+    pass
+
+
+def content_hash(path):
+    data = path.read_bytes()
+    if path.suffix in TEXT_SUFFIXES:
+        data = data.replace(b"\r\n", b"\n")
+    return hashlib.sha256(data).hexdigest()
+
+
+def managed_path(root, relative):
+    path = Path(relative)
+    if (not path.parts or path.is_absolute() or path.drive or "\\" in relative
+            or ".." in path.parts or path.parts[0] == ".git"
+            or path.as_posix() != relative):
+        raise BuildError("Invalid generated path: " + relative)
+    target = root / path
+    if target.resolve() != target.absolute():
+        raise BuildError("Generated paths must not traverse links: " + relative)
+    return target
+
+
+def read_manifest(root):
+    path = root / MANIFEST_PATH
+    if not path.is_file():
+        raise BuildError("Missing " + MANIFEST_PATH + "; restore the reviewed manifest from Git. It cannot be re-created by trusting current files.")
+    manifest = json.loads(path.read_text(encoding="utf-8"))
+    if (not isinstance(manifest, dict) or manifest.get("version") != 1 or manifest.get("hash_algorithm") != "sha256-lf-text"
+            or not isinstance(manifest.get("files"), dict)):
+        raise BuildError("Unsupported generated manifest format")
+    for name, digest in manifest["files"].items():
+        managed_path(root, name)
+        if not isinstance(digest, str) or len(digest) != 64 or any(c not in "0123456789abcdef" for c in digest):
+            raise BuildError("Invalid generated hash: " + name)
+    return manifest
+
+
+def apply_generated(root, staged, manifest, effect=None, check=False):
+    outputs = {path.relative_to(staged).as_posix(): path for path in staged.rglob("*") if path.is_file()}
+    if effect:
+        catalog = json.loads((staged / "catalog.json").read_text(encoding="utf-8"))
+        entry = next(item for item in catalog if item["category_slug"] + "/" + item["slug"] == effect)
+        prefix = entry["directory"].removeprefix("res://") + "/"
+        selected = {name for name in outputs if name.startswith(prefix) or name in INDEX_PATHS}
+    else:
+        selected = set(outputs)
+        obsolete = set(manifest["files"]) - selected
+        if obsolete:
+            raise BuildError("Generator no longer produces these files; review their removal and manifest explicitly:\n" + "\n".join(sorted(obsolete)))
+
+    desired = {name: content_hash(outputs[name]) for name in selected}
+    current = {}
+    conflicts = []
+    for name in sorted(selected):
+        target = managed_path(root, name)
+        current[name] = content_hash(target) if target.is_file() else None
+        if name in manifest["files"]:
+            if current[name] != manifest["files"][name]:
+                conflicts.append(name + (" (deleted or not a regular file)" if current[name] is None else " (locally modified)"))
+        elif target.exists() and current[name] != desired[name]:
+            conflicts.append(name + " (unmanaged file already exists)")
+    if conflicts:
+        raise BuildError("Protected files; nothing was written:\n" + "\n".join(conflicts)
+                         + "\nPreserve your edits, merge them into the generator sources, then restore the affected generated files from Git before rebuilding. Do not delete the manifest to bypass protection.")
+
+    changed = sorted(name for name in selected if current[name] != desired[name])
+    updated_manifest = dict(manifest)
+    updated_manifest["files"] = dict(sorted((manifest["files"] | desired).items()))
+    manifest_text = json.dumps(updated_manifest, ensure_ascii=False, indent=2) + "\n"
+    manifest_changed = (root / MANIFEST_PATH).read_text(encoding="utf-8") != manifest_text
+    if check:
+        for name in changed:
+            print("UPDATE " + name)
+        if manifest_changed:
+            print("UPDATE " + MANIFEST_PATH)
+        print("CHECK " + ("DIFFERENT" if changed or manifest_changed else "OK") + " files=" + str(len(selected)))
+        return 1 if changed or manifest_changed else 0
+
+    for name in changed:
+        target = managed_path(root, name)
+        target.parent.mkdir(parents=True, exist_ok=True)
+        target.write_bytes(outputs[name].read_bytes())
+    if manifest_changed:
+        (root / MANIFEST_PATH).write_text(manifest_text, encoding="utf-8")
+    print("BUILD OK scope=" + (effect or "all") + " files=" + str(len(selected)) + " updated=" + str(len(changed)))
+    return 0
+
+
+def main(argv=None):
+    parser = argparse.ArgumentParser(description="Safely generate the Shader Atlas library.")
+    parser.add_argument("--check", action="store_true", help="Compare temporary output without writing project files; exit 1 if different.")
+    parser.add_argument("--effect", metavar="CATEGORY/SLUG", help="Update one effect and changed shared indexes, leaving other effects and shared assets untouched.")
+    arguments = parser.parse_args(argv)
+    try:
+        keys = {group + "/" + pair.strip().split("=", 1)[0]
+                for group, _, encoded in CATEGORIES for pair in encoded.strip().split("|")}
+        if arguments.effect is not None and arguments.effect not in keys:
+            raise BuildError("Unknown effect: " + arguments.effect + ". Use CATEGORY/SLUG, for example dissolve/noise.")
+        manifest = read_manifest(ROOT)
+        with tempfile.TemporaryDirectory(prefix="shader-atlas-build-") as temporary:
+            build(Path(temporary))
+            return apply_generated(ROOT, Path(temporary), manifest, arguments.effect, arguments.check)
+    except (BuildError, OSError, ValueError) as error:
+        print("BUILD ERROR: " + str(error), file=sys.stderr)
+        return 2
 
 
 if __name__=="__main__":
-    build()
+    sys.exit(main())

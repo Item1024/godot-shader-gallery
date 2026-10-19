@@ -7,7 +7,8 @@
 
 - 图鉴入口：打开 project.godot，按 F5，搜索“Spine特效材质”或“spine”。
 - 单独查看：打开本目录 demo.tscn，按 F6。
-- 修改效果：编辑本目录 effect.gdshader。
+- 临时试效果：可编辑本目录 effect.gdshader；要长期保存，请把改动合回 tools/build_library.py 对应公式后再重建。
+- 重建前检查：python tools/build_library.py --check。检测到手改文件时会停止覆盖，先确认并保留改动。
 - 每个效果的代码保存在本目录 effect.gdshader；展示场景共用 shared/ 里的脚本。
 - 先关掉“启用效果”看原样，再打开比较；想看清静止画面时点“暂停动画”。
 
