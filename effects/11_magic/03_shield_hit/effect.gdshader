@@ -72,6 +72,9 @@ vec4 blur9(sampler2D image, vec2 uv, vec2 offset) {
     value += texture(image,uv+vec2(-offset.x,offset.y))*0.08;
     return value;
 }
+uniform vec3 u_hit_position = vec3(0.0,0.0,0.92);
+uniform float u_event_time = -1.0;
+uniform float u_duration = 1.0;
 
 varying vec3 v_world;
 varying vec3 v_local;
@@ -90,6 +93,11 @@ void fragment() {
     ALBEDO=vec3(0.12,0.58,0.48);
     ROUGHNESS=0.42;
     if (u_enabled) {
-float r=length(SCREEN_UV-u_mouse); float age=fract(t*0.6); float field=rim+exp(-abs(r-age*0.4)*85.0)*(1.0-age)*2.0; ALBEDO=u_color.rgb*(0.12+field*(1.0+u_amount*2.0)); ALPHA=clamp(0.15+field*0.65,0.0,0.9);
+float field=rim;
+            float age=u_time-u_event_time;
+            if (u_event_time>=0.0 && age>=0.0 && age<u_duration) {
+                float arc=acos(clamp(dot(normalize(v_local),normalize(u_hit_position)),-1.0,1.0))*length(u_hit_position);
+                field+=exp(-pow((arc-age*1.5)/0.08,2.0))*(1.0-age/u_duration)*2.0;
+            } ALBEDO=u_color.rgb*(0.12+field*(1.0+u_amount*2.0)); ALPHA=clamp(0.15+field*0.65,0.0,0.9);
     }
 }

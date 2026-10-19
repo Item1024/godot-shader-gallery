@@ -343,7 +343,12 @@ def water(slug, index):
         "waterfall": "float pattern=pow(n2(uv*vec2(45.0,4.0)-vec2(0,t*5.0)),3.0);",
         "vortex": "vec2 q=uv-0.5; float pattern=sin(atan(q.y,q.x)*6.0+length(q)*35.0-t*4.0)*0.25;",
         "ripple": "float pattern=sin(length(uv-0.5)*80.0-t*5.0)*0.18;",
-        "interactive": "float r=length(UV-u_mouse); float pattern=sin(r*80.0-t*6.0)*exp(-r*4.0)*0.3;",
+        "interactive": """float pattern=0.0;
+        float age=u_time-u_event_time;
+        if (u_event_time>=0.0 && age>=0.0 && age<u_duration) {
+            float r=length(v_local.xz-u_hit_position.xz);
+            pattern=exp(-pow((r-age*0.6)/0.04,2.0))*(1.0-age/u_duration)*u_amount;
+        }""",
         "depth": "float pattern=0.0;",
         "shore": "float pattern=step(water_depth+fbm(uv*15.0+t*0.3)*0.15,0.27+u_amount*0.25);",
         "crest": "float pattern=step(0.7,sin(v_local.x*8.0+t*2.0)+sin(v_local.z*10.0-t)*0.5);",
@@ -354,6 +359,20 @@ def water(slug, index):
         "container": "float pattern=step(0.47,fract(uv.y*12.0+t*0.1))*0.08;",
         "slime": "float pattern=fbm(uv*9.0+t*0.3);",
     }[slug]
+    if slug == "interactive":
+        extra += """
+uniform vec3 u_hit_position = vec3(0.0);
+uniform float u_event_time = -1.0;
+uniform float u_duration = 1.0;
+// Keep this wave and its derivatives paired with shared/stage.gd.
+float water_height(vec2 point, float time) {
+    return (sin(point.x*3.0*u_scale+time*1.4)+sin(point.y*4.0-time*1.1)*0.5)*u_amount*0.15;
+}
+"""
+        vertex = """
+        VERTEX.y+=water_height(VERTEX.xz,t);
+        NORMAL=normalize(vec3(-cos(VERTEX.x*3.0*u_scale+t*1.4)*u_amount*0.45*u_scale,1.0,-cos(VERTEX.z*4.0-t*1.1)*u_amount*0.3));
+"""
     body = """
         float depth_sample=texture(depth_texture,SCREEN_UV).r;
         vec4 scene_position=INV_PROJECTION_MATRIX*vec4(SCREEN_UV*2.0-1.0,depth_sample,1.0);
@@ -487,13 +506,19 @@ def magic(slug, index):
         patterns={
             "shield": "float field=0.1+rim;",
             "hex_shield": "vec2 q=uv*vec2(22.0,13.0); q.x+=mod(floor(q.y),2.0)*0.5; float field=0.1+rim+0.5*(1.0-smoothstep(0.38,0.46,length(fract(q)-0.5)));",
-            "shield_hit": "float r=length(SCREEN_UV-u_mouse); float age=fract(t*0.6); float field=rim+exp(-abs(r-age*0.4)*85.0)*(1.0-age)*2.0;",
+            "shield_hit": """float field=rim;
+            float age=u_time-u_event_time;
+            if (u_event_time>=0.0 && age>=0.0 && age<u_duration) {
+                float arc=acos(clamp(dot(normalize(v_local),normalize(u_hit_position)),-1.0,1.0))*length(u_hit_position);
+                field+=exp(-pow((arc-age*1.5)/0.08,2.0))*(1.0-age/u_duration)*2.0;
+            }""",
             "hologram": "float field=rim+step(0.6,sin(v_world.y*75.0*u_scale-t*5.0))*0.2;",
             "holo_scan": "float field=rim+exp(-abs(v_local.y-(fract(t*0.3)*2.0-1.0))*25.0);",
             "digital": "float field=step(0.45,h21(floor(uv*vec2(45,28))+floor(t*4.0)))*(0.25+rim);",
         }
         body=patterns[slug]+" ALBEDO=u_color.rgb*(0.12+field*(1.0+u_amount*2.0)); ALPHA=clamp(0.15+field*0.65,0.0,0.9);"
-        return spatial(body,modes="unshaded"),"spatial"
+        extra = "uniform vec3 u_hit_position = vec3(0.0,0.0,0.92);\nuniform float u_event_time = -1.0;\nuniform float u_duration = 1.0;\n" if slug == "shield_hit" else ""
+        return spatial(body,extra=extra,modes="unshaded"),"spatial"
     if slug in ["beam","laser","arc","lightning","slash","sword","trail","afterimage"]:
         center = "sin(uv.y*24.0+t*4.0)*0.015"
         if slug in ["arc","lightning"]: center="(fbm(vec2(uv.y*18.0,floor(t*12.0)))-0.5)*0.45"
@@ -1145,6 +1170,10 @@ metadata_path = "res://{directory}/metadata.json"
             pipeline=json.dumps(entry.get("environment",{}),ensure_ascii=False,indent=2)
             if kind=="pipeline":
                 (folder/"environment.json").write_text(pipeline,encoding="utf-8")
+            interaction_notes={
+                ("water","interactive"): "点击当前预览的起伏水面才触发一次涟漪，拖动只旋转相机。命中针对本例有限平面和同一套波形求解，不包含任意模型碰撞或多次点击叠加；新点击替换上一圈。",
+                ("magic","shield_hit"): "点击本例球形护盾触发一次沿球面扩散的亮圈，结束后不自动重播。新点击替换上一圈；其他形状需要另外实现命中方法。",
+            }.get((group,slug),"")
             notes=f"""# {title}
 
 编号：{entry['number']:03d}  |  分类：{name}
@@ -1174,16 +1203,16 @@ metadata_path = "res://{directory}/metadata.json"
 ## 右侧参数怎么理解？
 
 - 强度 / 进度（u_amount）：从 0 到 1，表示效果有多强或走到哪一步；具体含义看上面的解释。
-- 动画速度（u_speed）：控制随时间变化的快慢；0 会停下这类变化。
+- 动画速度：控制播放时间前进的快慢；0 会停下。改速度不会跳到另一个时刻，材质的 u_speed 固定为 1，避免重复乘速度。
 - 纹理 / 图案尺度（u_scale）：调图案的疏密或大小；本效果用到它时才会变化。
 - 强调色（u_color）：调亮边、花纹等使用的颜色；本效果用到它时才会变化。
 - 启用效果（u_enabled）：开关效果，方便和原样比较。
-- 点击位置（u_mouse）：支持交互的案例会把点击处当作中心、命中点或光源位置。
+- 点击位置：{('使用三维表面命中点 u_hit_position；u_event_time 记录点击时刻，u_duration 默认为 1 秒。按下并释放才触发，拖动不触发。' if (group,slug) in [('water','interactive'),('magic','shield_hit')] else '支持二维位置交互的案例使用 u_mouse；它是当前预览内的点击位置比例。')}
 - 播放时间（u_time）：告诉效果现在播放到几秒，暂停动画时这个数字也停下。
 
 ## 这个演示做到哪一步？
 
-{limit or '这里演示画面变化的方法。放进游戏时，还要由游戏代码决定何时出现、变化多久，并按实际模型和画面大小调整。'}
+{limit or interaction_notes or '这里演示画面变化的方法。放进游戏时，还要由游戏代码决定何时出现、变化多久，并按实际模型和画面大小调整。'}
 
 {('这项使用 Godot 自带的场景渲染功能。下面的配置负责打开和调整它，单独复制 Shader 文件不能带走整个效果。') if kind=='pipeline' else ''}
 {('取的是当前预览已经画出的背景颜色。镜头外没画出来的内容，单靠这张图无法补出来。') if 'hint_screen_texture' in source else ''}
@@ -1223,6 +1252,7 @@ metadata_path = "res://{directory}/metadata.json"
 
 三维预览支持左键拖动旋转和滚轮缩放。空格暂停动画，Ctrl+F 搜索，左右方向键切换过滤结果。
 点击“启用效果”可比较原始画面。右侧“打开效果目录”打开当前案例所在目录。
+动画速度可以随时调整，设为 0 或暂停会保留当前时刻。交互涟漪与护盾受击需要点击表面触发一次；拖动旋转不会触发，重置参数会清除事件。
 
 421 项的“原理与限制”及目录 README 都采用大白话：先讲画面像什么，再讲本示例具体怎么画出来。参数和演示局限也用日常语言说明。
 
@@ -1237,6 +1267,8 @@ metadata_path = "res://{directory}/metadata.json"
 - tools/plain_language.py：各项大白话解释的维护源。
 - tools/generated_manifest.json：生成文件的上次内容记录，用于保护手改内容。
 - tools/validate.gd：结构、资源和 Shader 语言检查。
+- tools/test_runtime.gd：M2 播放、命中与输入行为检查，报告保存到 artifacts/m2/。
+- docs/OPTIMIZATION_PLAN.md：当前进度、后续里程碑与验收条件；M2 结果见 docs/M2_VERIFICATION.md。
 - artifacts/：实际运行审查输出的报告与截图。
 
 ## 安全重建

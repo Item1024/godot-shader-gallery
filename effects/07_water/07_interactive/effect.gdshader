@@ -73,15 +73,22 @@ vec4 blur9(sampler2D image, vec2 uv, vec2 offset) {
 }
 uniform sampler2D depth_texture : hint_depth_texture, filter_nearest;
 
+uniform vec3 u_hit_position = vec3(0.0);
+uniform float u_event_time = -1.0;
+uniform float u_duration = 1.0;
+// Keep this wave and its derivatives paired with shared/stage.gd.
+float water_height(vec2 point, float time) {
+    return (sin(point.x*3.0*u_scale+time*1.4)+sin(point.y*4.0-time*1.1)*0.5)*u_amount*0.15;
+}
+
 varying vec3 v_world;
 varying vec3 v_local;
 void vertex() {
     float t=u_time*u_speed;
     if (u_enabled) {
 
-        float wave=sin(VERTEX.x*3.0*u_scale+t*1.4)+sin(VERTEX.z*4.0-t*1.1)*0.5;
-        VERTEX.y+=wave*u_amount*0.15;
-        NORMAL=normalize(vec3(-cos(VERTEX.x*3.0*u_scale+t*1.4)*u_amount*0.45,1.0,-cos(VERTEX.z*4.0-t*1.1)*u_amount*0.3));
+        VERTEX.y+=water_height(VERTEX.xz,t);
+        NORMAL=normalize(vec3(-cos(VERTEX.x*3.0*u_scale+t*1.4)*u_amount*0.45*u_scale,1.0,-cos(VERTEX.z*4.0-t*1.1)*u_amount*0.3));
 
     }
     v_local=VERTEX;
@@ -101,7 +108,12 @@ void fragment() {
         ALBEDO=mix(vec3(0.10,0.62,0.61),vec3(0.015,0.12,0.27),smoothstep(0.0,2.0,water_depth));
         ROUGHNESS=0.14;
         METALLIC=0.35;
-float r=length(UV-u_mouse); float pattern=sin(r*80.0-t*6.0)*exp(-r*4.0)*0.3;
+float pattern=0.0;
+        float age=u_time-u_event_time;
+        if (u_event_time>=0.0 && age>=0.0 && age<u_duration) {
+            float r=length(v_local.xz-u_hit_position.xz);
+            pattern=exp(-pow((r-age*0.6)/0.04,2.0))*(1.0-age/u_duration)*u_amount;
+        }
  ALBEDO+=vec3(pattern)*0.55; EMISSION=vec3(max(pattern,0.0))*0.15;
     }
 }

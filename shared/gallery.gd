@@ -190,7 +190,7 @@ func _build_ui() -> void:
 	preview.add_child(footer)
 	footer.add_child(_button("← 上一项", func(): _navigate(-1)))
 	footer.add_child(_button("下一项 →", func(): _navigate(1)))
-	var tip := _label("3D：左键拖动旋转 · 滚轮缩放", 12, MUTED)
+	var tip := _label("点击触发交互 · 拖动旋转 · 滚轮缩放", 12, MUTED)
 	tip.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	tip.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT
 	footer.add_child(tip)
@@ -300,14 +300,10 @@ func _reset() -> void:
 	sliders[0].value = float(current.get("amount", 0.55))
 	sliders[1].value = 1.0
 	sliders[2].value = 1.0
-	stage.elapsed = 0.0
-	stage.speed = 1.0
-	stage.scale_value = 1.0
-	stage.paused = false
+	stage.reset()
 	color_button.color = ACCENT
 	pause_button.text = "暂停动画"
 	compare_button.button_pressed = true
-	stage._set_uniforms()
 
 
 func _toggle_pause() -> void:

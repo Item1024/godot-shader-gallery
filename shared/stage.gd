@@ -1,20 +1,35 @@
 extends SubViewport
 
+const EffectPlayer = preload("res://shared/effect_player.gd")
+
 var entry: Dictionary = {}
 var shader_material: ShaderMaterial
 var environment: Environment
 var subject: Node3D
 var camera: Camera3D
-var elapsed := 0.0
-var paused := false
+var player = EffectPlayer.new()
+var elapsed: float:
+	get: return player.effect_time
+	set(value): player.seek(value)
+var paused: bool:
+	get: return player.paused
+	set(value): player.paused = value
 var enabled := true
 var amount := 0.55
-var speed := 1.0
+var speed: float:
+	get: return player.playback_speed
+	set(value): player.playback_speed = value
 var scale_value := 1.0
 var orbit := 0.0
 var elevation := 0.28
 var distance := 5.0
 var canvas_root: Control
+var canvas_picture: TextureRect
+var interaction_surface: MeshInstance3D
+var _pointer_down := false
+var _dragging := false
+var _press_position := Vector2.ZERO
+var _last_pointer := Vector2.ZERO
 
 
 func _init() -> void:
@@ -25,19 +40,30 @@ func _init() -> void:
 	transparent_bg = false
 
 
+func _ready() -> void:
+	get_window().focus_exited.connect(cancel_pointer)
+	if get_parent() is SubViewportContainer:
+		get_parent().visibility_changed.connect(cancel_pointer)
+
+
 func configure(data: Dictionary) -> void:
+	player.bind_materials([])
 	for child in get_children():
 		child.free()
 	entry = data
-	elapsed = 0.0
+	player.reset()
+	cancel_pointer()
 	orbit = 0.0
 	amount = float(data.get("amount", 0.55))
 	enabled = true
 	subject = null
 	camera = null
 	environment = null
+	canvas_picture = null
+	interaction_surface = null
 	shader_material = ShaderMaterial.new()
 	shader_material.shader = load(str(data["shader"]))
+	player.bind_materials([shader_material])
 	if data["category_slug"] == "vertex" and data["slug"] == "vat":
 		shader_material.set_shader_parameter("vat_texture", load("res://assets/vat.png"))
 	if data["category_slug"] == "color" and data["slug"] == "lut":
@@ -55,9 +81,7 @@ func configure(data: Dictionary) -> void:
 func _set_uniforms() -> void:
 	if shader_material == null:
 		return
-	shader_material.set_shader_parameter("u_time", elapsed)
 	shader_material.set_shader_parameter("u_amount", amount)
-	shader_material.set_shader_parameter("u_speed", speed)
 	shader_material.set_shader_parameter("u_scale", scale_value)
 	shader_material.set_shader_parameter("u_enabled", enabled)
 	shader_material.set_shader_parameter("u_color", Color("#55e8bb"))
@@ -86,6 +110,7 @@ func _build_canvas(kind: String) -> void:
 		canvas_root.add_child(effect)
 	else:
 		var picture := TextureRect.new()
+		canvas_picture = picture
 		picture.texture = load("res://assets/lettering.svg" if entry.get("text", false) else "res://assets/subject.svg")
 		picture.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
 		picture.stretch_mode = TextureRect.STRETCH_SCALE
@@ -194,6 +219,7 @@ func _build_3d() -> void:
 		plane.subdivide_width = 70
 		plane.subdivide_depth = 70
 		var surface := _mesh(subject, _colored_mesh(plane) if entry.get("vertex_colors", false) else plane, Vector3.ZERO, shader_material)
+		interaction_surface = surface
 		if shape == "cloth":
 			surface.rotation_degrees.x = 80
 	else:
@@ -202,7 +228,7 @@ func _build_3d() -> void:
 		sphere.height = 1.84
 		sphere.radial_segments = 64
 		sphere.rings = 40
-		_mesh(subject, _colored_mesh(sphere) if entry.get("vertex_colors", false) else sphere, Vector3(0, 0.10, 0), shader_material)
+		interaction_surface = _mesh(subject, _colored_mesh(sphere) if entry.get("vertex_colors", false) else sphere, Vector3(0, 0.10, 0), shader_material)
 		var torus := TorusMesh.new()
 		torus.inner_radius = 0.19
 		torus.outer_radius = 0.34
@@ -305,9 +331,11 @@ func _position_camera() -> void:
 
 
 func set_parameter(key: String, value: Variant) -> void:
+	if key == "u_speed":
+		speed = float(value)
+		return
 	match key:
 		"u_amount": amount = float(value)
-		"u_speed": speed = float(value)
 		"u_scale": scale_value = float(value)
 		"u_enabled": enabled = bool(value)
 	if shader_material:
@@ -315,25 +343,133 @@ func set_parameter(key: String, value: Variant) -> void:
 	_apply_pipeline()
 
 
+func reset() -> void:
+	player.reset()
+	cancel_pointer()
+	amount = float(entry.get("amount", 0.55))
+	scale_value = 1.0
+	enabled = true
+	_set_uniforms()
+	shader_material.set_shader_parameter("u_mouse", Vector2(0.5, 0.5))
+
+
+func cancel_pointer() -> void:
+	_pointer_down = false
+	_dragging = false
+
+
+func viewport_position(control_position: Vector2) -> Vector2:
+	var container := get_parent() as SubViewportContainer
+	if container != null and container.stretch:
+		return control_position * Vector2(size) / container.size
+	return control_position
+
+
 func orbit_input(event: InputEvent) -> void:
-	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
-		set_parameter("u_mouse", event.position / Vector2(size))
-	if camera == null:
-		return
-	if event is InputEventMouseMotion and event.button_mask & MOUSE_BUTTON_MASK_LEFT:
-		orbit -= event.relative.x * 0.008
-		elevation = clampf(elevation + event.relative.y * 0.003, -0.05, 1.0)
-		_position_camera()
-	if event is InputEventMouseButton and event.pressed:
-		if event.button_index == MOUSE_BUTTON_WHEEL_UP:
-			distance = maxf(3.2, distance - 0.3)
-		elif event.button_index == MOUSE_BUTTON_WHEEL_DOWN:
-			distance = minf(9.0, distance + 0.3)
-		_position_camera()
+	# gui_input positions are local to the container; the 4 px threshold stays
+	# in UI units even when stretch_shrink reduces the actual render resolution.
+	if event is InputEventMouseButton:
+		if event.button_index == MOUSE_BUTTON_LEFT:
+			if event.pressed:
+				_pointer_down = true
+				_dragging = false
+				_press_position = event.position
+				_last_pointer = event.position
+			else:
+				if _pointer_down and not _dragging and event.position.distance_to(_press_position) <= 4.0:
+					trigger_at(viewport_position(event.position))
+				cancel_pointer()
+		elif event.pressed and camera != null:
+			if event.button_index == MOUSE_BUTTON_WHEEL_UP:
+				distance = maxf(3.2, distance - 0.3)
+			elif event.button_index == MOUSE_BUTTON_WHEEL_DOWN:
+				distance = minf(9.0, distance + 0.3)
+			cancel_pointer()
+			_position_camera()
+	elif event is InputEventMouseMotion and _pointer_down:
+		if not event.button_mask & MOUSE_BUTTON_MASK_LEFT:
+			cancel_pointer()
+			return
+		if not _dragging and event.position.distance_to(_press_position) > 4.0:
+			_dragging = true
+		if _dragging and camera != null:
+			var movement: Vector2 = event.position - _last_pointer
+			orbit -= movement.x * 0.008
+			elevation = clampf(elevation + movement.y * 0.003, -0.05, 1.0)
+			_position_camera()
+		_last_pointer = event.position
+
+
+func trigger_at(pixel: Vector2) -> bool:
+	if not enabled or not Rect2(Vector2.ZERO, Vector2(size)).has_point(pixel):
+		return false
+	if entry.get("category_slug") == "water" and entry.get("slug") == "interactive" or entry.get("category_slug") == "magic" and entry.get("slug") == "shield_hit":
+		var hit := surface_hit(pixel)
+		if hit.is_empty():
+			return false
+		shader_material.set_shader_parameter("u_hit_position", hit["local_position"])
+		player.trigger_event()
+	else:
+		var region := Rect2(Vector2.ZERO, Vector2(size))
+		if canvas_picture != null:
+			region = canvas_picture.get_global_rect()
+		if not region.has_point(pixel):
+			return false
+		set_parameter("u_mouse", (pixel - region.position) / region.size)
+	return true
+
+
+func water_height(point: Vector2) -> float:
+	if not enabled:
+		return 0.0
+	return (sin(point.x * 3.0 * scale_value + elapsed * 1.4) + sin(point.y * 4.0 - elapsed * 1.1) * 0.5) * amount * 0.15
+
+
+func _water_gradient(point: Vector2) -> Vector2:
+	return Vector2(cos(point.x * 3.0 * scale_value + elapsed * 1.4) * scale_value * 3.0, cos(point.y * 4.0 - elapsed * 1.1) * 2.0) * amount * 0.15
+
+
+func surface_hit(pixel: Vector2) -> Dictionary:
+	if camera == null or interaction_surface == null:
+		return {}
+	var inverse := interaction_surface.global_transform.affine_inverse()
+	var origin := inverse * camera.project_ray_origin(pixel)
+	var direction := (inverse.basis * camera.project_ray_normal(pixel)).normalized()
+	var travel: float
+	if interaction_surface.mesh is PlaneMesh:
+		if absf(direction.y) < 0.00001:
+			return {}
+		travel = -origin.y / direction.y
+		for iteration in range(8):
+			var point := origin + direction * travel
+			var residual := point.y - water_height(Vector2(point.x, point.z))
+			if absf(residual) <= 0.00001:
+				break
+			var gradient := _water_gradient(Vector2(point.x, point.z))
+			var slope := direction.y - gradient.dot(Vector2(direction.x, direction.z))
+			if absf(slope) < 0.00001:
+				return {}
+			travel -= residual / slope
+		var point := origin + direction * travel
+		var extent: Vector2 = interaction_surface.mesh.size * 0.5
+		if absf(point.x) > extent.x or absf(point.z) > extent.y or absf(point.y - water_height(Vector2(point.x, point.z))) > 0.001:
+			return {}
+	elif interaction_surface.mesh is SphereMesh:
+		var radius: float = interaction_surface.mesh.radius
+		var projected := origin.dot(direction)
+		var discriminant := projected * projected - (origin.length_squared() - radius * radius)
+		if discriminant < 0.0:
+			return {}
+		travel = -projected - sqrt(discriminant)
+		if travel <= 0.0:
+			travel = -projected + sqrt(discriminant)
+	else:
+		return {}
+	if travel <= 0.0:
+		return {}
+	var local_position := origin + direction * travel
+	return {"local_position": local_position, "world_position": interaction_surface.to_global(local_position)}
 
 
 func _process(delta: float) -> void:
-	if not paused:
-		elapsed += delta
-	if shader_material:
-		shader_material.set_shader_parameter("u_time", elapsed)
+	player.advance(delta)
