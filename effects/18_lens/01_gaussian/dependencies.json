@@ -1,0 +1,18 @@
+{
+  "version": 1,
+  "scene": "res://effects/18_lens/01_gaussian/usage.tscn",
+  "files": [
+    "res://assets/cottage.png",
+    "res://effects/18_lens/01_gaussian/effect.gdshader",
+    "res://effects/18_lens/01_gaussian/material.tres",
+    "res://effects/18_lens/01_gaussian/material_vertical.tres",
+    "res://effects/18_lens/01_gaussian/usage.tscn"
+  ],
+  "verified_platform": "Windows / Godot 4.7.2 / Forward+ / RTX 5060",
+  "unverified_platforms": [
+    "其他显卡与系统",
+    "Mobile",
+    "Compatibility",
+    "Web"
+  ]
+}

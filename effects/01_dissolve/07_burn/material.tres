@@ -1,0 +1,14 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3]
+
+[ext_resource type="Shader" path="res://effects/01_dissolve/07_burn/effect.gdshader" id="1"]
+
+[resource]
+resource_local_to_scene = true
+shader = ExtResource("1")
+shader_parameter/u_enabled = true
+shader_parameter/u_time = 0.0
+shader_parameter/u_speed = 1.0
+shader_parameter/u_amount = 0.32
+shader_parameter/u_noise_scale = 8.0
+shader_parameter/u_edge_width = 0.05
+shader_parameter/u_color = Color(1.0, 0.3215686274509804, 0.023529411764705882, 1.0)

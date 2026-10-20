@@ -14,6 +14,7 @@ sys.dont_write_bytecode = True
 from effect_catalog import CATEGORIES
 from plain_language import PRINCIPLES
 from effect_profiles import PROFILES, parameter_notes
+from usage_assets import generate_usage
 
 ROOT = Path(__file__).resolve().parents[1]
 COMMON = """
@@ -1419,6 +1420,7 @@ metadata_path = "res://{directory}/metadata.json"
                 start = notes.index("- 强度 / 进度（u_amount）")
                 end = notes.index("\n## 这个演示做到哪一步？", start)
                 notes = notes[:start] + parameter_notes(profile["parameters"]) + "\n\n" + profile["profile_note"] + "\n" + ("播放区：速度 0–3，默认 1；暂停、调速保持当前时刻。\n" if profile["animated"] else "静态效果不显示播放速度。\n") + ("操作：" + profile["action"] + "。\n" if profile["action"] else "") + "重置恢复以上元数据默认值、播放时刻和效果开关，并清除事件。\n" + notes[end:]
+                notes += generate_usage(output_root, entry)
             (folder/"README.md").write_text(notes,encoding="utf-8")
             catalog.append(entry)
             index_rows.append(f"| {entry['number']:03d} | {name} | [{title}](../{directory}/README.md) | {implementation} |")
@@ -1443,6 +1445,7 @@ metadata_path = "res://{directory}/metadata.json"
 点击“启用效果”可比较原始画面。右侧“打开效果目录”打开当前案例所在目录。
 动画速度可以随时调整，设为 0 或暂停会保留当前时刻。交互涟漪与护盾受击需要点击表面触发一次；拖动旋转不会触发，重置参数会清除事件。
 首批 20 项已完成 M3 精修：右侧按各项元数据显示中文参数、范围、单位、步长与默认值，数值可以拖滑块或用键盘输入。静态项隐藏播放速度，其余 401 项保留“基础参数”。受击闪白点击“播放一次”或图案触发；LUT 可选暖色/中性表；高斯使用真正横、竖两遍。
+首批 20 项已实现 M4 可复用资产：各目录的 usage.tscn 可按 F6 运行，material.tres 保存默认参数，dependencies.json 列出复制所需文件。动态案例附带连续时间播放器；最小接入场景不依赖图库 UI、catalog 或 stage.gd，已逐项在独立空工程验证。M4 最终全库回归因系统内存不足中断，尚未完成验收；接入方法和平台限制见对应 README。
 
 421 项的“原理与限制”及目录 README 都采用大白话：先讲画面像什么，再讲本示例具体怎么画出来。参数和演示局限也用日常语言说明。
 
@@ -1450,17 +1453,21 @@ metadata_path = "res://{directory}/metadata.json"
 
 - effects/01_dissolve/01_noise/ 这样的目录：每个效果一个文件夹。
 - 每个文件夹：effect.gdshader、demo.tscn、metadata.json、README.md；管线案例另有 environment.json。
+- 首批 20 个文件夹另有 material.tres、usage.tscn、dependencies.json；高斯额外提供 material_vertical.tres。
 - shared/：通用场景、展示入口与参数控制，不放具体效果公式。
 - assets/：矢量示例图、文字贴图、VAT、LUT，以及本地 Blender 小屋渲染参考图。
 - docs/INDEX.md：全部目录与实现标签的完整索引。
 - tools/build_library.py 与 effect_catalog.py：维护/重建库的源文件。
 - tools/effect_profiles.py：首批 20 项的参数规格、默认值和说明；公式仍在 build_library.py。
+- tools/usage_assets.py：首批可复制材质、接入场景、依赖清单与中文接入说明的生成源。
 - tools/plain_language.py：各项大白话解释的维护源。
 - tools/generated_manifest.json：生成文件的上次内容记录，用于保护手改内容。
 - tools/validate.gd：结构、资源和 Shader 语言检查。
 - tools/test_runtime.gd：M2 播放、命中与输入行为检查，报告保存到 artifacts/m2/。
 - tools/test_m3.gd：首批参数、重置、端点、透明边、高斯和 LUT 的实际像素检查，报告及截图在 artifacts/m3/。
-- docs/OPTIMIZATION_PLAN.md：M1–M3 已完成，下一步 M4 可复用材质和最小接入场景；结果见 docs/M3_VERIFICATION.md。
+- tools/test_m4.py 与 tools/test_m4.gd：按依赖清单逐项创建空工程，导入后实际渲染检查；结果与复制工程在 artifacts/m4/。
+- shared/usage_player.gd 与 shared/surface_hit.gd：独立接入场景的时间/输入适配和水面/球面命中，与图库复用同一播放器和求交公式。
+- docs/OPTIMIZATION_PLAN.md：M1–M3 已完成；M4 实现和空工程检查已完成，最终全库回归待补，之后进入 M5 的 140 状态画面回归。
 - artifacts/：实际运行审查输出的报告与截图。
 
 ## 安全重建
@@ -1494,6 +1501,10 @@ SSAO、SSR、SSIL、体积雾等管线案例使用 Godot 内置渲染功能，�
 
     Godot_v4.7.2-stable_win64_console.exe --path . --script res://tools/test_m3.gd
 
+首批 20 项逐项复制到独立空工程并检查真实渲染（Python 标准库，Godot 路径可用 --godot 指定）：
+
+    python tools/test_m4.py
+
 真实渲染器逐项审查并保存各类截图：
 
     Godot_v4.7.2-stable_win64_console.exe --path . -- --audit --quit-after-audit
@@ -1501,7 +1512,7 @@ SSAO、SSR、SSIL、体积雾等管线案例使用 Godot 内置渲染功能，�
 审查报告写入 artifacts/runtime_audit.json。只在审查真正完成后，才能把报告作为运行结果。
 
 本机已完成的检查及其范围见 [验证记录](docs/VERIFICATION.md)。
-M3 的逐项结论、复查命令、未验证项与限制见 [M3 验收记录](docs/M3_VERIFICATION.md)。M4–M6 尚未实施；全库退出时仍有已知的 7 个 Texture RID 释放警告。
+M3 的参数与画面结论见 [M3 验收记录](docs/M3_VERIFICATION.md)，M4 的资产、空工程验证及限制见 [M4 验收记录](docs/M4_VERIFICATION.md)。M5–M6 尚未实施；全库退出时仍有已知的 7 个 Texture RID 释放警告。
 
 ## 界面与素材说明
 
@@ -1517,7 +1528,7 @@ M3 的逐项结论、复查命令、未验证项与限制见 [M3 验收记录](d
 
 
 MANIFEST_PATH = "tools/generated_manifest.json"
-TEXT_SUFFIXES = {".gdshader", ".tscn", ".json", ".md", ".svg"}
+TEXT_SUFFIXES = {".gdshader", ".tscn", ".tres", ".json", ".md", ".svg"}
 INDEX_PATHS = {"catalog.json", "categories.json", "docs/INDEX.md", "README.md"}
 
 

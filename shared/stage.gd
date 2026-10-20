@@ -1,6 +1,7 @@
 extends SubViewport
 
 const EffectPlayer = preload("res://shared/effect_player.gd")
+const SurfaceHit = preload("res://shared/surface_hit.gd")
 
 var entry: Dictionary = {}
 var shader_material: ShaderMaterial
@@ -482,94 +483,11 @@ func trigger_at(pixel: Vector2) -> bool:
 
 
 func water_height(point: Vector2) -> float:
-	if not enabled:
-		return 0.0
-	var k := TAU / float(parameter_values.get("u_wave_length", 1.0))
-	return (sin(point.x * k + elapsed * 1.4) + sin(point.y * k - elapsed * 1.1) * 0.5) * float(parameter_values.get("u_wave_height", 0.04)) / 1.5
-
-
-func _water_gradient(point: Vector2) -> Vector2:
-	var k := TAU / float(parameter_values.get("u_wave_length", 1.0))
-	return Vector2(cos(point.x * k + elapsed * 1.4) * k, cos(point.y * k - elapsed * 1.1) * k * 0.5) * float(parameter_values.get("u_wave_height", 0.04)) / 1.5
+	return SurfaceHit.water_height(point, elapsed, float(parameter_values.get("u_wave_height", 0.04)) if enabled else 0.0, float(parameter_values.get("u_wave_length", 1.0)))
 
 
 func surface_hit(pixel: Vector2) -> Dictionary:
-	if camera == null or interaction_surface == null:
-		return {}
-	var inverse := interaction_surface.global_transform.affine_inverse()
-	var origin := inverse * camera.project_ray_origin(pixel)
-	var direction := (inverse.basis * camera.project_ray_normal(pixel)).normalized()
-	var travel: float
-	if interaction_surface.mesh is PlaneMesh:
-		if absf(direction.y) < 0.00001:
-			return {}
-		travel = -origin.y / direction.y
-		# Bracket the nearest crossing inside the finite wave volume before
-		# Newton refinement. Steep waves can otherwise send Newton off-plane.
-		var height := float(parameter_values.get("u_wave_height", 0.04)) if enabled else 0.0
-		var extent: Vector2 = interaction_surface.mesh.size * 0.5
-		var low := maxf(0.0, minf((-height-origin.y)/direction.y, (height-origin.y)/direction.y))
-		var high := maxf((-height-origin.y)/direction.y, (height-origin.y)/direction.y)
-		for axis in [0, 2]:
-			var bound: float = extent.x if axis==0 else extent.y
-			if absf(direction[axis])<0.00001:
-				if absf(origin[axis])>bound: return {}
-			else:
-				var a: float = (-bound-origin[axis])/direction[axis]
-				var b: float = (bound-origin[axis])/direction[axis]
-				low=maxf(low,minf(a,b))
-				high=minf(high,maxf(a,b))
-		if high<low: return {}
-		var start := origin+direction*low
-		var residual_low := start.y-water_height(Vector2(start.x,start.z))
-		var samples := maxi(1, int(ceil((high-low)*Vector2(direction.x,direction.z).length()*16.0/float(parameter_values.get("u_wave_length",1.0)))))
-		var previous := low
-		var found := false
-		for sample in range(1,samples+1):
-			var next := lerpf(low,high,float(sample)/samples)
-			var point := origin+direction*next
-			var residual := point.y-water_height(Vector2(point.x,point.z))
-			if residual_low*residual<=0.0:
-				low=previous
-				high=next
-				found=true
-				break
-			previous=next
-			residual_low=residual
-		if not found: return {}
-		travel=clampf(travel,low,high)
-		for iteration in range(8):
-			var point := origin + direction * travel
-			var residual := point.y - water_height(Vector2(point.x, point.z))
-			if absf(residual) <= 0.00001:
-				break
-			if residual*residual_low>0.0:
-				low=travel
-				residual_low=residual
-			else:
-				high=travel
-			var gradient := _water_gradient(Vector2(point.x, point.z))
-			var slope := direction.y - gradient.dot(Vector2(direction.x, direction.z))
-			var candidate := travel-residual/slope if absf(slope)>=0.00001 else INF
-			travel=candidate if candidate>low and candidate<high else (low+high)*0.5
-		var point := origin + direction * travel
-		if absf(point.x) > extent.x or absf(point.z) > extent.y or absf(point.y - water_height(Vector2(point.x, point.z))) > 0.001:
-			return {}
-	elif interaction_surface.mesh is SphereMesh:
-		var radius: float = interaction_surface.mesh.radius
-		var projected := origin.dot(direction)
-		var discriminant := projected * projected - (origin.length_squared() - radius * radius)
-		if discriminant < 0.0:
-			return {}
-		travel = -projected - sqrt(discriminant)
-		if travel <= 0.0:
-			travel = -projected + sqrt(discriminant)
-	else:
-		return {}
-	if travel <= 0.0:
-		return {}
-	var local_position := origin + direction * travel
-	return {"local_position": local_position, "world_position": interaction_surface.to_global(local_position)}
+	return SurfaceHit.solve(camera, interaction_surface, pixel, elapsed, float(parameter_values.get("u_wave_height", 0.04)) if enabled else 0.0, float(parameter_values.get("u_wave_length", 1.0)))
 
 
 func _process(delta: float) -> void:

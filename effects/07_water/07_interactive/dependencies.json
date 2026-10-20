@@ -1,0 +1,19 @@
+{
+  "version": 1,
+  "scene": "res://effects/07_water/07_interactive/usage.tscn",
+  "files": [
+    "res://effects/07_water/07_interactive/effect.gdshader",
+    "res://effects/07_water/07_interactive/material.tres",
+    "res://effects/07_water/07_interactive/usage.tscn",
+    "res://shared/effect_player.gd",
+    "res://shared/surface_hit.gd",
+    "res://shared/usage_player.gd"
+  ],
+  "verified_platform": "Windows / Godot 4.7.2 / Forward+ / RTX 5060",
+  "unverified_platforms": [
+    "其他显卡与系统",
+    "Mobile",
+    "Compatibility",
+    "Web"
+  ]
+}

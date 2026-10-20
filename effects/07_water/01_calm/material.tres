@@ -1,0 +1,15 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3]
+
+[ext_resource type="Shader" path="res://effects/07_water/01_calm/effect.gdshader" id="1"]
+
+[resource]
+resource_local_to_scene = true
+shader = ExtResource("1")
+shader_parameter/u_enabled = true
+shader_parameter/u_time = 0.0
+shader_parameter/u_speed = 1.0
+shader_parameter/u_wave_height = 0.04
+shader_parameter/u_wave_length = 1.0
+shader_parameter/u_shallow_color = Color(0.10196078431372549, 0.6196078431372549, 0.611764705882353, 1.0)
+shader_parameter/u_deep_color = Color(0.01568627450980392, 0.12156862745098039, 0.27058823529411763, 1.0)
+shader_parameter/u_depth_distance = 2.0

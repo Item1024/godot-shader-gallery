@@ -1,0 +1,13 @@
+[gd_resource type="ShaderMaterial" load_steps=3 format=3]
+
+[ext_resource type="Shader" path="res://effects/17_color/11_lut/effect.gdshader" id="1"]
+[ext_resource type="Texture2D" path="res://assets/warm_lut.png" id="2"]
+
+[resource]
+resource_local_to_scene = true
+shader = ExtResource("1")
+shader_parameter/u_enabled = true
+shader_parameter/u_time = 0.0
+shader_parameter/u_speed = 1.0
+shader_parameter/u_amount = 1.0
+shader_parameter/lut_texture = ExtResource("2")

@@ -1,0 +1,19 @@
+{
+  "version": 1,
+  "scene": "res://effects/17_color/11_lut/usage.tscn",
+  "files": [
+    "res://assets/cottage.png",
+    "res://assets/neutral_lut.png",
+    "res://assets/warm_lut.png",
+    "res://effects/17_color/11_lut/effect.gdshader",
+    "res://effects/17_color/11_lut/material.tres",
+    "res://effects/17_color/11_lut/usage.tscn"
+  ],
+  "verified_platform": "Windows / Godot 4.7.2 / Forward+ / RTX 5060",
+  "unverified_platforms": [
+    "其他显卡与系统",
+    "Mobile",
+    "Compatibility",
+    "Web"
+  ]
+}

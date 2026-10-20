@@ -1,0 +1,13 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3]
+
+[ext_resource type="Shader" path="res://effects/06_glass/01_clear/effect.gdshader" id="1"]
+
+[resource]
+resource_local_to_scene = true
+shader = ExtResource("1")
+shader_parameter/u_enabled = true
+shader_parameter/u_time = 0.0
+shader_parameter/u_speed = 1.0
+shader_parameter/u_distortion = 0.025
+shader_parameter/u_color = Color(0.7019607843137254, 0.9019607843137255, 0.9490196078431372, 1.0)
+shader_parameter/u_opacity = 0.85

@@ -1,0 +1,39 @@
+[gd_scene load_steps=3 format=3]
+
+[ext_resource type="Material" path="res://effects/16_ui/15_liquid/material.tres" id="Material"]
+[ext_resource type="Script" path="res://shared/usage_player.gd" id="Player"]
+
+
+[node name="Usage" type="Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Background" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0.0392, 0.0706, 0.1255, 1)
+
+[node name="Effect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+material = ExtResource("Material")
+
+[node name="Player" type="Node" parent="."]
+script = ExtResource("Player")
+material_targets = Array[NodePath]([NodePath("../Effect")])
+interaction = "none"

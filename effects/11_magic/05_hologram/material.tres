@@ -1,0 +1,15 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3]
+
+[ext_resource type="Shader" path="res://effects/11_magic/05_hologram/effect.gdshader" id="1"]
+
+[resource]
+resource_local_to_scene = true
+shader = ExtResource("1")
+shader_parameter/u_enabled = true
+shader_parameter/u_time = 0.0
+shader_parameter/u_speed = 1.0
+shader_parameter/u_line_density = 40.0
+shader_parameter/u_intensity = 1.0
+shader_parameter/u_opacity = 0.25
+shader_parameter/u_rim_strength = 1.0
+shader_parameter/u_color = Color(0.3333333333333333, 0.9098039215686274, 0.7333333333333333, 1.0)

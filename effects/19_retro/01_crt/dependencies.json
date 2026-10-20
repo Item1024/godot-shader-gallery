@@ -1,0 +1,17 @@
+{
+  "version": 1,
+  "scene": "res://effects/19_retro/01_crt/usage.tscn",
+  "files": [
+    "res://assets/cottage.png",
+    "res://effects/19_retro/01_crt/effect.gdshader",
+    "res://effects/19_retro/01_crt/material.tres",
+    "res://effects/19_retro/01_crt/usage.tscn"
+  ],
+  "verified_platform": "Windows / Godot 4.7.2 / Forward+ / RTX 5060",
+  "unverified_platforms": [
+    "其他显卡与系统",
+    "Mobile",
+    "Compatibility",
+    "Web"
+  ]
+}

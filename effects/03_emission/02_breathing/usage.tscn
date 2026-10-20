@@ -1,0 +1,44 @@
+[gd_scene load_steps=4 format=3]
+
+[ext_resource type="Material" path="res://effects/03_emission/02_breathing/material.tres" id="Material"]
+[ext_resource type="Script" path="res://shared/usage_player.gd" id="Player"]
+[ext_resource type="Texture2D" path="res://assets/subject.svg" id="Picture"]
+
+
+[node name="Usage" type="Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Background" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0.0392, 0.0706, 0.1255, 1)
+
+[node name="Center" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+mouse_filter = 2
+
+[node name="Effect" type="Sprite2D" parent="Center"]
+texture = ExtResource("Picture")
+material = ExtResource("Material")
+scale = Vector2(0.74, 0.74)
+
+[node name="Player" type="Node" parent="."]
+script = ExtResource("Player")
+material_targets = Array[NodePath]([NodePath("../Center/Effect")])
+interaction = "none"

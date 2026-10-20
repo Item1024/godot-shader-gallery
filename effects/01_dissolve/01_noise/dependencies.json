@@ -1,0 +1,17 @@
+{
+  "version": 1,
+  "scene": "res://effects/01_dissolve/01_noise/usage.tscn",
+  "files": [
+    "res://assets/subject.svg",
+    "res://effects/01_dissolve/01_noise/effect.gdshader",
+    "res://effects/01_dissolve/01_noise/material.tres",
+    "res://effects/01_dissolve/01_noise/usage.tscn"
+  ],
+  "verified_platform": "Windows / Godot 4.7.2 / Forward+ / RTX 5060",
+  "unverified_platforms": [
+    "其他显卡与系统",
+    "Mobile",
+    "Compatibility",
+    "Web"
+  ]
+}

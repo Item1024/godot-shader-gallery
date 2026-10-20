@@ -1,0 +1,17 @@
+{
+  "version": 1,
+  "scene": "res://effects/02_outline/02_inner/usage.tscn",
+  "files": [
+    "res://assets/subject.svg",
+    "res://effects/02_outline/02_inner/effect.gdshader",
+    "res://effects/02_outline/02_inner/material.tres",
+    "res://effects/02_outline/02_inner/usage.tscn"
+  ],
+  "verified_platform": "Windows / Godot 4.7.2 / Forward+ / RTX 5060",
+  "unverified_platforms": [
+    "其他显卡与系统",
+    "Mobile",
+    "Compatibility",
+    "Web"
+  ]
+}

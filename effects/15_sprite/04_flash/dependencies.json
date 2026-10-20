@@ -1,0 +1,20 @@
+{
+  "version": 1,
+  "scene": "res://effects/15_sprite/04_flash/usage.tscn",
+  "files": [
+    "res://assets/subject.svg",
+    "res://effects/15_sprite/04_flash/effect.gdshader",
+    "res://effects/15_sprite/04_flash/material.tres",
+    "res://effects/15_sprite/04_flash/usage.tscn",
+    "res://shared/effect_player.gd",
+    "res://shared/surface_hit.gd",
+    "res://shared/usage_player.gd"
+  ],
+  "verified_platform": "Windows / Godot 4.7.2 / Forward+ / RTX 5060",
+  "unverified_platforms": [
+    "其他显卡与系统",
+    "Mobile",
+    "Compatibility",
+    "Web"
+  ]
+}

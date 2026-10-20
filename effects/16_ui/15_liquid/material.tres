@@ -1,0 +1,14 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3]
+
+[ext_resource type="Shader" path="res://effects/16_ui/15_liquid/effect.gdshader" id="1"]
+
+[resource]
+resource_local_to_scene = true
+shader = ExtResource("1")
+shader_parameter/u_enabled = true
+shader_parameter/u_time = 0.0
+shader_parameter/u_speed = 1.0
+shader_parameter/u_amount = 0.55
+shader_parameter/u_wave_height = 0.025
+shader_parameter/u_wave_frequency = 3.0
+shader_parameter/u_color = Color(0.3333333333333333, 0.9098039215686274, 0.7333333333333333, 1.0)

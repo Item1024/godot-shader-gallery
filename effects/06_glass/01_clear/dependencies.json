@@ -1,0 +1,16 @@
+{
+  "version": 1,
+  "scene": "res://effects/06_glass/01_clear/usage.tscn",
+  "files": [
+    "res://effects/06_glass/01_clear/effect.gdshader",
+    "res://effects/06_glass/01_clear/material.tres",
+    "res://effects/06_glass/01_clear/usage.tscn"
+  ],
+  "verified_platform": "Windows / Godot 4.7.2 / Forward+ / RTX 5060",
+  "unverified_platforms": [
+    "其他显卡与系统",
+    "Mobile",
+    "Compatibility",
+    "Web"
+  ]
+}

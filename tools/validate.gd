@@ -26,6 +26,15 @@ func _run() -> void:
 			failures.append("Shader failed to compile: " + entry["shader"])
 		if entry.has("parameters"):
 			profiles += 1
+			for file in ["material.tres", "usage.tscn", "dependencies.json"]:
+				if not FileAccess.file_exists(path.path_join(file)): failures.append(path+" missing M4 "+file)
+			var dependencies: Dictionary = JSON.parse_string(FileAccess.get_file_as_string(path.path_join("dependencies.json")))
+			for dependency: String in dependencies.get("files", []):
+				if not dependency.begins_with("res://") or ".." in dependency or not FileAccess.file_exists(dependency): failures.append(path+" invalid/missing dependency "+dependency)
+				if dependency in ["res://catalog.json", "res://shared/stage.gd", "res://shared/gallery.gd", "res://shared/standalone.gd"]: failures.append(path+" contains gallery dependency")
+			if load(path.path_join("usage.tscn")) == null: failures.append(path+" usage scene failed to load")
+			var preset: ShaderMaterial = load(path.path_join("material.tres"))
+			if preset == null or not preset.resource_local_to_scene: failures.append(path+" missing/ non-local material preset")
 			var uniforms := {}
 			for uniform: Dictionary in shader.get_shader_uniform_list(): uniforms[uniform["name"]]=uniform
 			var keys := {}
@@ -33,6 +42,10 @@ func _run() -> void:
 				var key: String = p.get("key", "")
 				if key.is_empty() or keys.has(key) or not uniforms.has(key): failures.append(path+" invalid/duplicate uniform "+key)
 				keys[key]=true
+				var expected: Variant = p["default"]
+				if p["type"]=="color": expected=Color(expected)
+				if p["type"]=="texture": expected=load(expected)
+				if preset != null and preset.get_shader_parameter(key)!=expected: failures.append(path+" preset default differs: "+key)
 				for field in ["label","type","target","default","unit","help","advanced"]:
 					if not p.has(field): failures.append(path+" parameter missing "+field)
 				if p.get("target")!="material" or key=="u_speed": failures.append(path+" invalid parameter target")

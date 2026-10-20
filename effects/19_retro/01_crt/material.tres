@@ -1,0 +1,14 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3]
+
+[ext_resource type="Shader" path="res://effects/19_retro/01_crt/effect.gdshader" id="1"]
+
+[resource]
+resource_local_to_scene = true
+shader = ExtResource("1")
+shader_parameter/u_enabled = true
+shader_parameter/u_time = 0.0
+shader_parameter/u_speed = 1.0
+shader_parameter/u_curvature = 0.04
+shader_parameter/u_scanline_strength = 0.25
+shader_parameter/u_vignette = 0.3
+shader_parameter/u_rgb_mask = 0.15

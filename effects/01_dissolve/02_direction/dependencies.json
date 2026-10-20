@@ -1,0 +1,17 @@
+{
+  "version": 1,
+  "scene": "res://effects/01_dissolve/02_direction/usage.tscn",
+  "files": [
+    "res://assets/subject.svg",
+    "res://effects/01_dissolve/02_direction/effect.gdshader",
+    "res://effects/01_dissolve/02_direction/material.tres",
+    "res://effects/01_dissolve/02_direction/usage.tscn"
+  ],
+  "verified_platform": "Windows / Godot 4.7.2 / Forward+ / RTX 5060",
+  "unverified_platforms": [
+    "其他显卡与系统",
+    "Mobile",
+    "Compatibility",
+    "Web"
+  ]
+}

@@ -1,0 +1,20 @@
+{
+  "version": 1,
+  "scene": "res://effects/03_emission/02_breathing/usage.tscn",
+  "files": [
+    "res://assets/subject.svg",
+    "res://effects/03_emission/02_breathing/effect.gdshader",
+    "res://effects/03_emission/02_breathing/material.tres",
+    "res://effects/03_emission/02_breathing/usage.tscn",
+    "res://shared/effect_player.gd",
+    "res://shared/surface_hit.gd",
+    "res://shared/usage_player.gd"
+  ],
+  "verified_platform": "Windows / Godot 4.7.2 / Forward+ / RTX 5060",
+  "unverified_platforms": [
+    "其他显卡与系统",
+    "Mobile",
+    "Compatibility",
+    "Web"
+  ]
+}

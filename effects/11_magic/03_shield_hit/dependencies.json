@@ -1,0 +1,19 @@
+{
+  "version": 1,
+  "scene": "res://effects/11_magic/03_shield_hit/usage.tscn",
+  "files": [
+    "res://effects/11_magic/03_shield_hit/effect.gdshader",
+    "res://effects/11_magic/03_shield_hit/material.tres",
+    "res://effects/11_magic/03_shield_hit/usage.tscn",
+    "res://shared/effect_player.gd",
+    "res://shared/surface_hit.gd",
+    "res://shared/usage_player.gd"
+  ],
+  "verified_platform": "Windows / Godot 4.7.2 / Forward+ / RTX 5060",
+  "unverified_platforms": [
+    "其他显卡与系统",
+    "Mobile",
+    "Compatibility",
+    "Web"
+  ]
+}

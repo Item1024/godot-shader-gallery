@@ -1,0 +1,18 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3]
+
+[ext_resource type="Shader" path="res://effects/07_water/07_interactive/effect.gdshader" id="1"]
+
+[resource]
+resource_local_to_scene = true
+shader = ExtResource("1")
+shader_parameter/u_enabled = true
+shader_parameter/u_time = 0.0
+shader_parameter/u_speed = 1.0
+shader_parameter/u_ripple_speed = 0.6
+shader_parameter/u_ripple_width = 0.04
+shader_parameter/u_duration = 1.0
+shader_parameter/u_strength = 0.6
+shader_parameter/u_wave_height = 0.04
+shader_parameter/u_event_time = -1.0
+shader_parameter/u_hit_position = Vector3(0, 0, 0)
+shader_parameter/u_wave_length = 1.0

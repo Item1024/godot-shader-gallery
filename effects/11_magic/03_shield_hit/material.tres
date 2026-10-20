@@ -1,0 +1,16 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3]
+
+[ext_resource type="Shader" path="res://effects/11_magic/03_shield_hit/effect.gdshader" id="1"]
+
+[resource]
+resource_local_to_scene = true
+shader = ExtResource("1")
+shader_parameter/u_enabled = true
+shader_parameter/u_time = 0.0
+shader_parameter/u_speed = 1.0
+shader_parameter/u_duration = 1.0
+shader_parameter/u_ring_width = 0.08
+shader_parameter/u_intensity = 1.8
+shader_parameter/u_color = Color(0.3333333333333333, 0.9098039215686274, 0.7333333333333333, 1.0)
+shader_parameter/u_event_time = -1.0
+shader_parameter/u_hit_position = Vector3(0, 0, 0)

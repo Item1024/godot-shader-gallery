@@ -199,6 +199,23 @@ class GenerationSafetyTests(unittest.TestCase):
         self.assertIn("Unknown effect", output)
         self.assertEqual(before, self.snapshot())
 
+    def test_m4_material_hand_edit_blocks_all_writes(self):
+        material = self.root / "effects/18_lens/01_gaussian/material_vertical.tres"
+        material.write_text(material.read_text(encoding="utf-8") + "# hand edit\n", encoding="utf-8")
+        before = self.snapshot()
+        result, output = self.call()
+        self.assertEqual(result, 2, output)
+        self.assertIn("material_vertical.tres (locally modified)", output)
+        self.assertEqual(before, self.snapshot())
+
+    def test_m4_material_crlf_is_read_only_and_consistent(self):
+        material = self.root / "effects/01_dissolve/01_noise/material.tres"
+        material.write_bytes(material.read_bytes().replace(b"\r\n", b"\n").replace(b"\n", b"\r\n"))
+        before = self.snapshot()
+        result, output = self.call("--check")
+        self.assertEqual(result, 0, output)
+        self.assertEqual(before, self.snapshot())
+
     def test_missing_repository_asset_is_reported_without_changes(self):
         (self.root / "assets/cottage.png").unlink()
         before = self.snapshot()
@@ -215,7 +232,7 @@ class GenerationSafetyTests(unittest.TestCase):
         self.assertEqual(result, 0, output)
 
     def test_isolated_checkout_cli_needs_no_sibling_blender_project(self):
-        for name in ["build_library.py", "effect_catalog.py", "plain_language.py", "effect_profiles.py"]:
+        for name in ["build_library.py", "effect_catalog.py", "plain_language.py", "effect_profiles.py", "usage_assets.py"]:
             shutil.copy2(TOOLS / name, self.root / "tools" / name)
         self.assertFalse((self.root.parent / "blender-cottage-demo").exists())
         before = self.snapshot()
