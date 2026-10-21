@@ -1,0 +1,2095 @@
+{
+  "version": 1,
+  "viewport_size": [
+    640,
+    480
+  ],
+  "seed": 20261021,
+  "scope": "20 effects x 7 canonical states; diagnostic probes are counted separately",
+  "effects": [
+    {
+      "number": 1,
+      "name": "噪声溶解",
+      "slug": "noise",
+      "fixture": "transparent_subject",
+      "primary": "u_amount",
+      "region": [
+        90,
+        60,
+        460,
+        360
+      ],
+      "animated": false,
+      "states": [
+        {
+          "id": "off",
+          "time": 1,
+          "enabled": false,
+          "event": false
+        },
+        {
+          "id": "default",
+          "time": 1,
+          "enabled": true,
+          "event": false
+        },
+        {
+          "id": "min",
+          "time": 1,
+          "enabled": true,
+          "event": false,
+          "parameters": {
+            "u_amount": 0
+          }
+        },
+        {
+          "id": "max",
+          "time": 1,
+          "enabled": true,
+          "event": false,
+          "parameters": {
+            "u_amount": 1
+          }
+        },
+        {
+          "id": "secondary",
+          "time": 1,
+          "enabled": true,
+          "event": false,
+          "parameters": {
+            "u_noise_scale": 18
+          }
+        },
+        {
+          "id": "early",
+          "time": 0.5,
+          "enabled": true,
+          "event": false
+        },
+        {
+          "id": "late",
+          "time": 2,
+          "enabled": true,
+          "event": false
+        }
+      ],
+      "checks": [
+        {
+          "kind": "different",
+          "a": "min",
+          "b": "max",
+          "name": "Primary endpoints produce a visible change",
+          "min_mean": 1e-05
+        },
+        {
+          "kind": "different",
+          "a": "secondary",
+          "b": "default",
+          "name": "Specified secondary parameter produces a visible change",
+          "min_mean": 1e-05
+        },
+        {
+          "kind": "same",
+          "a": "early",
+          "b": "late",
+          "name": "Declared time behavior"
+        },
+        {
+          "kind": "same",
+          "a": "min",
+          "b": "off",
+          "name": "Zero progress/width/strength/radius restores original"
+        },
+        {
+          "kind": "empty_alpha",
+          "a": "max",
+          "b": "off",
+          "name": "Complete dissolve has no remaining alpha"
+        }
+      ]
+    },
+    {
+      "number": 2,
+      "name": "方向溶解",
+      "slug": "direction",
+      "fixture": "transparent_subject",
+      "primary": "u_amount",
+      "region": [
+        90,
+        60,
+        460,
+        360
+      ],
+      "animated": false,
+      "states": [
+        {
+          "id": "off",
+          "time": 1,
+          "enabled": false,
+          "event": false
+        },
+        {
+          "id": "default",
+          "time": 1,
+          "enabled": true,
+          "event": false
+        },
+        {
+          "id": "min",
+          "time": 1,
+          "enabled": true,
+          "event": false,
+          "parameters": {
+            "u_amount": 0
+          }
+        },
+        {
+          "id": "max",
+          "time": 1,
+          "enabled": true,
+          "event": false,
+          "parameters": {
+            "u_amount": 1
+          }
+        },
+        {
+          "id": "secondary",
+          "time": 1,
+          "enabled": true,
+          "event": false,
+          "parameters": {
+            "u_direction_deg": 90
+          }
+        },
+        {
+          "id": "early",
+          "time": 0.5,
+          "enabled": true,
+          "event": false
+        },
+        {
+          "id": "late",
+          "time": 2,
+          "enabled": true,
+          "event": false
+        }
+      ],
+      "checks": [
+        {
+          "kind": "different",
+          "a": "min",
+          "b": "max",
+          "name": "Primary endpoints produce a visible change",
+          "min_mean": 1e-05
+        },
+        {
+          "kind": "different",
+          "a": "secondary",
+          "b": "default",
+          "name": "Specified secondary parameter produces a visible change",
+          "min_mean": 1e-05
+        },
+        {
+          "kind": "same",
+          "a": "early",
+          "b": "late",
+          "name": "Declared time behavior"
+        },
+        {
+          "kind": "same",
+          "a": "min",
+          "b": "off",
+          "name": "Zero progress/width/strength/radius restores original"
+        },
+        {
+          "kind": "empty_alpha",
+          "a": "max",
+          "b": "off",
+          "name": "Complete dissolve has no remaining alpha"
+        }
+      ]
+    },
+    {
+      "number": 7,
+      "name": "燃烧溶解",
+      "slug": "burn",
+      "fixture": "transparent_subject",
+      "primary": "u_amount",
+      "region": [
+        90,
+        60,
+        460,
+        360
+      ],
+      "animated": false,
+      "states": [
+        {
+          "id": "off",
+          "time": 1,
+          "enabled": false,
+          "event": false
+        },
+        {
+          "id": "default",
+          "time": 1,
+          "enabled": true,
+          "event": false
+        },
+        {
+          "id": "min",
+          "time": 1,
+          "enabled": true,
+          "event": false,
+          "parameters": {
+            "u_amount": 0
+          }
+        },
+        {
+          "id": "max",
+          "time": 1,
+          "enabled": true,
+          "event": false,
+          "parameters": {
+            "u_amount": 1
+          }
+        },
+        {
+          "id": "secondary",
+          "time": 1,
+          "enabled": true,
+          "event": false,
+          "parameters": {
+            "u_noise_scale": 18
+          }
+        },
+        {
+          "id": "early",
+          "time": 0.5,
+          "enabled": true,
+          "event": false
+        },
+        {
+          "id": "late",
+          "time": 2,
+          "enabled": true,
+          "event": false
+        }
+      ],
+      "checks": [
+        {
+          "kind": "different",
+          "a": "min",
+          "b": "max",
+          "name": "Primary endpoints produce a visible change",
+          "min_mean": 1e-05
+        },
+        {
+          "kind": "different",
+          "a": "secondary",
+          "b": "default",
+          "name": "Specified secondary parameter produces a visible change",
+          "min_mean": 1e-05
+        },
+        {
+          "kind": "same",
+          "a": "early",
+          "b": "late",
+          "name": "Declared time behavior"
+        },
+        {
+          "kind": "same",
+          "a": "min",
+          "b": "off",
+          "name": "Zero progress/width/strength/radius restores original"
+        },
+        {
+          "kind": "empty_alpha",
+          "a": "max",
+          "b": "off",
+          "name": "Complete dissolve has no remaining alpha"
+        }
+      ]
+    },
+    {
+      "number": 17,
+      "name": "外描边",
+      "slug": "outer",
+      "fixture": "transparent_subject",
+      "primary": "u_width_px",
+      "region": [
+        90,
+        60,
+        460,
+        360
+      ],
+      "animated": false,
+      "states": [
+        {
+          "id": "off",
+          "time": 1,
+          "enabled": false,
+          "event": false
+        },
+        {
+          "id": "default",
+          "time": 1,
+          "enabled": true,
+          "event": false
+        },
+        {
+          "id": "min",
+          "time": 1,
+          "enabled": true,
+          "event": false,
+          "parameters": {
+            "u_width_px": 0
+          }
+        },
+        {
+          "id": "max",
+          "time": 1,
+          "enabled": true,
+          "event": false,
+          "parameters": {
+            "u_width_px": 16
+          }
+        },
+        {
+          "id": "secondary",
+          "time": 1,
+          "enabled": true,
+          "event": false,
+          "parameters": {
+            "u_softness": 1
+          }
+        },
+        {
+          "id": "early",
+          "time": 0.5,
+          "enabled": true,
+          "event": false
+        },
+        {
+          "id": "late",
+          "time": 2,
+          "enabled": true,
+          "event": false
+        }
+      ],
+      "checks": [
+        {
+          "kind": "different",
+          "a": "min",
+          "b": "max",
+          "name": "Primary endpoints produce a visible change",
+          "min_mean": 1e-05
+        },
+        {
+          "kind": "different",
+          "a": "secondary",
+          "b": "default",
+          "name": "Specified secondary parameter produces a visible change",
+          "min_mean": 1e-05
+        },
+        {
+          "kind": "same",
+          "a": "early",
+          "b": "late",
+          "name": "Declared time behavior"
+        },
+        {
+          "kind": "same",
+          "a": "min",
+          "b": "off",
+          "name": "Zero progress/width/strength/radius restores original"
+        },
+        {
+          "kind": "outer_outline",
+          "a": "default",
+          "b": "off",
+          "name": "Outer outline extends alpha and preserves opaque interior"
+        }
+      ]
+    },
+    {
+      "number": 18,
+      "name": "内描边",
+      "slug": "inner",
+      "fixture": "transparent_subject",
+      "primary": "u_width_px",
+      "region": [
+        90,
+        60,
+        460,
+        360
+      ],
+      "animated": false,
+      "states": [
+        {
+          "id": "off",
+          "time": 1,
+          "enabled": false,
+          "event": false
+        },
+        {
+          "id": "default",
+          "time": 1,
+          "enabled": true,
+          "event": false
+        },
+        {
+          "id": "min",
+          "time": 1,
+          "enabled": true,
+          "event": false,
+          "parameters": {
+            "u_width_px": 0
+          }
+        },
+        {
+          "id": "max",
+          "time": 1,
+          "enabled": true,
+          "event": false,
+          "parameters": {
+            "u_width_px": 16
+          }
+        },
+        {
+          "id": "secondary",
+          "time": 1,
+          "enabled": true,
+          "event": false,
+          "parameters": {
+            "u_softness": 1
+          }
+        },
+        {
+          "id": "early",
+          "time": 0.5,
+          "enabled": true,
+          "event": false
+        },
+        {
+          "id": "late",
+          "time": 2,
+          "enabled": true,
+          "event": false
+        }
+      ],
+      "checks": [
+        {
+          "kind": "different",
+          "a": "min",
+          "b": "max",
+          "name": "Primary endpoints produce a visible change",
+          "min_mean": 1e-05
+        },
+        {
+          "kind": "different",
+          "a": "secondary",
+          "b": "default",
+          "name": "Specified secondary parameter produces a visible change",
+          "min_mean": 1e-05
+        },
+        {
+          "kind": "same",
+          "a": "early",
+          "b": "late",
+          "name": "Declared time behavior"
+        },
+        {
+          "kind": "same",
+          "a": "min",
+          "b": "off",
+          "name": "Zero progress/width/strength/radius restores original"
+        },
+        {
+          "kind": "alpha_same",
+          "a": "default",
+          "b": "off",
+          "name": "Effect preserves original transparency",
+          "region": [
+            0,
+            0,
+            640,
+            480
+          ]
+        }
+      ]
+    },
+    {
+      "number": 34,
+      "name": "呼吸发光",
+      "slug": "breathing",
+      "fixture": "transparent_subject",
+      "primary": "u_intensity",
+      "region": [
+        90,
+        60,
+        460,
+        360
+      ],
+      "animated": true,
+      "states": [
+        {
+          "id": "off",
+          "time": 1,
+          "enabled": false,
+          "event": false
+        },
+        {
+          "id": "default",
+          "time": 1,
+          "enabled": true,
+          "event": false
+        },
+        {
+          "id": "min",
+          "time": 1,
+          "enabled": true,
+          "event": false,
+          "parameters": {
+            "u_intensity": 0
+          }
+        },
+        {
+          "id": "max",
+          "time": 1,
+          "enabled": true,
+          "event": false,
+          "parameters": {
+            "u_intensity": 5
+          }
+        },
+        {
+          "id": "secondary",
+          "time": 1,
+          "enabled": true,
+          "event": false,
+          "parameters": {
+            "u_frequency": 0.8
+          }
+        },
+        {
+          "id": "early",
+          "time": 0.5,
+          "enabled": true,
+          "event": false
+        },
+        {
+          "id": "late",
+          "time": 2,
+          "enabled": true,
+          "event": false
+        }
+      ],
+      "checks": [
+        {
+          "kind": "different",
+          "a": "min",
+          "b": "max",
+          "name": "Primary endpoints produce a visible change",
+          "min_mean": 1e-05
+        },
+        {
+          "kind": "different",
+          "a": "secondary",
+          "b": "default",
+          "name": "Specified secondary parameter produces a visible change",
+          "min_mean": 1e-05
+        },
+        {
+          "kind": "different",
+          "a": "early",
+          "b": "late",
+          "name": "Declared time behavior",
+          "min_mean": 1e-05
+        },
+        {
+          "kind": "alpha_same",
+          "a": "default",
+          "b": "off",
+          "name": "Effect preserves original transparency",
+          "region": [
+            0,
+            0,
+            640,
+            480
+          ]
+        }
+      ]
+    },
+    {
+      "number": 37,
+      "name": "斜向扫光",
+      "slug": "diagonal",
+      "fixture": "transparent_subject",
+      "primary": "u_intensity",
+      "region": [
+        90,
+        60,
+        460,
+        360
+      ],
+      "animated": true,
+      "states": [
+        {
+          "id": "off",
+          "time": 1,
+          "enabled": false,
+          "event": false
+        },
+        {
+          "id": "default",
+          "time": 1,
+          "enabled": true,
+          "event": false
+        },
+        {
+          "id": "min",
+          "time": 1,
+          "enabled": true,
+          "event": false,
+          "parameters": {
+            "u_intensity": 0
+          }
+        },
+        {
+          "id": "max",
+          "time": 1,
+          "enabled": true,
+          "event": false,
+          "parameters": {
+            "u_intensity": 5
+          }
+        },
+        {
+          "id": "secondary",
+          "time": 1,
+          "enabled": true,
+          "event": false,
+          "parameters": {
+            "u_angle_deg": 90
+          }
+        },
+        {
+          "id": "early",
+          "time": 0.5,
+          "enabled": true,
+          "event": false
+        },
+        {
+          "id": "late",
+          "time": 2,
+          "enabled": true,
+          "event": false
+        }
+      ],
+      "checks": [
+        {
+          "kind": "different",
+          "a": "min",
+          "b": "max",
+          "name": "Primary endpoints produce a visible change",
+          "min_mean": 1e-05
+        },
+        {
+          "kind": "different",
+          "a": "secondary",
+          "b": "default",
+          "name": "Specified secondary parameter produces a visible change",
+          "min_mean": 1e-05
+        },
+        {
+          "kind": "same",
+          "a": "early",
+          "b": "late",
+          "name": "Sweep returns after its 1.5 second period (8-bit phase rounding)",
+          "max_channel": 0.00392156862745098
+        },
+        {
+          "kind": "different",
+          "a": "early",
+          "b": "default",
+          "name": "Sweep moves between distinct phases",
+          "min_mean": 1e-05
+        },
+        {
+          "kind": "alpha_same",
+          "a": "default",
+          "b": "off",
+          "name": "Effect preserves original transparency",
+          "region": [
+            0,
+            0,
+            640,
+            480
+          ]
+        }
+      ]
+    },
+    {
+      "number": 270,
+      "name": "受击闪白",
+      "slug": "flash",
+      "fixture": "transparent_subject",
+      "primary": "u_strength",
+      "region": [
+        90,
+        60,
+        460,
+        360
+      ],
+      "animated": true,
+      "states": [
+        {
+          "id": "off",
+          "time": 0.075,
+          "enabled": false,
+          "event": false
+        },
+        {
+          "id": "default",
+          "time": 0.075,
+          "enabled": true,
+          "event": true
+        },
+        {
+          "id": "min",
+          "time": 0.075,
+          "enabled": true,
+          "event": true,
+          "parameters": {
+            "u_strength": 0
+          }
+        },
+        {
+          "id": "max",
+          "time": 0.075,
+          "enabled": true,
+          "event": true,
+          "parameters": {
+            "u_strength": 1
+          }
+        },
+        {
+          "id": "secondary",
+          "time": 0.075,
+          "enabled": true,
+          "event": true,
+          "parameters": {
+            "u_duration": 1
+          }
+        },
+        {
+          "id": "early",
+          "time": 0,
+          "enabled": true,
+          "event": false
+        },
+        {
+          "id": "late",
+          "time": 2,
+          "enabled": true,
+          "event": true
+        }
+      ],
+      "checks": [
+        {
+          "kind": "different",
+          "a": "min",
+          "b": "max",
+          "name": "Primary endpoints produce a visible change",
+          "min_mean": 1e-05
+        },
+        {
+          "kind": "different",
+          "a": "secondary",
+          "b": "default",
+          "name": "Specified secondary parameter produces a visible change",
+          "min_mean": 1e-05
+        },
+        {
+          "kind": "same",
+          "a": "min",
+          "b": "off",
+          "name": "Zero progress/width/strength/radius restores original"
+        },
+        {
+          "kind": "alpha_same",
+          "a": "default",
+          "b": "off",
+          "name": "Effect preserves original transparency",
+          "region": [
+            0,
+            0,
+            640,
+            480
+          ]
+        },
+        {
+          "kind": "different",
+          "a": "early",
+          "b": "default",
+          "name": "A single trigger is visible",
+          "min_mean": 1e-05
+        },
+        {
+          "kind": "same",
+          "a": "early",
+          "b": "off",
+          "name": "Flash before trigger is original"
+        },
+        {
+          "kind": "same",
+          "a": "late",
+          "b": "off",
+          "name": "Flash after expiry is original"
+        }
+      ]
+    },
+    {
+      "number": 271,
+      "name": "局部换色",
+      "slug": "recolor",
+      "fixture": "transparent_subject",
+      "primary": "u_amount",
+      "region": [
+        90,
+        60,
+        460,
+        360
+      ],
+      "animated": false,
+      "states": [
+        {
+          "id": "off",
+          "time": 1,
+          "enabled": false,
+          "event": false
+        },
+        {
+          "id": "default",
+          "time": 1,
+          "enabled": true,
+          "event": false
+        },
+        {
+          "id": "min",
+          "time": 1,
+          "enabled": true,
+          "event": false,
+          "parameters": {
+            "u_amount": 0
+          }
+        },
+        {
+          "id": "max",
+          "time": 1,
+          "enabled": true,
+          "event": false,
+          "parameters": {
+            "u_amount": 1
+          }
+        },
+        {
+          "id": "secondary",
+          "time": 1,
+          "enabled": true,
+          "event": false,
+          "parameters": {
+            "u_tolerance": 1
+          }
+        },
+        {
+          "id": "early",
+          "time": 0.5,
+          "enabled": true,
+          "event": false
+        },
+        {
+          "id": "late",
+          "time": 2,
+          "enabled": true,
+          "event": false
+        }
+      ],
+      "checks": [
+        {
+          "kind": "different",
+          "a": "min",
+          "b": "max",
+          "name": "Primary endpoints produce a visible change",
+          "min_mean": 1e-05
+        },
+        {
+          "kind": "different",
+          "a": "secondary",
+          "b": "default",
+          "name": "Specified secondary parameter produces a visible change",
+          "min_mean": 1e-05
+        },
+        {
+          "kind": "same",
+          "a": "early",
+          "b": "late",
+          "name": "Declared time behavior"
+        },
+        {
+          "kind": "same",
+          "a": "min",
+          "b": "off",
+          "name": "Zero progress/width/strength/radius restores original"
+        },
+        {
+          "kind": "alpha_same",
+          "a": "default",
+          "b": "off",
+          "name": "Effect preserves original transparency",
+          "region": [
+            0,
+            0,
+            640,
+            480
+          ]
+        }
+      ]
+    },
+    {
+      "number": 296,
+      "name": "环形进度",
+      "slug": "ring",
+      "fixture": "gallery",
+      "primary": "u_amount",
+      "region": [
+        0,
+        0,
+        640,
+        480
+      ],
+      "animated": false,
+      "states": [
+        {
+          "id": "off",
+          "time": 1,
+          "enabled": false,
+          "event": false
+        },
+        {
+          "id": "default",
+          "time": 1,
+          "enabled": true,
+          "event": false
+        },
+        {
+          "id": "min",
+          "time": 1,
+          "enabled": true,
+          "event": false,
+          "parameters": {
+            "u_amount": 0
+          }
+        },
+        {
+          "id": "max",
+          "time": 1,
+          "enabled": true,
+          "event": false,
+          "parameters": {
+            "u_amount": 1
+          }
+        },
+        {
+          "id": "secondary",
+          "time": 1,
+          "enabled": true,
+          "event": false,
+          "parameters": {
+            "u_clockwise": false
+          }
+        },
+        {
+          "id": "early",
+          "time": 0.5,
+          "enabled": true,
+          "event": false
+        },
+        {
+          "id": "late",
+          "time": 2,
+          "enabled": true,
+          "event": false
+        }
+      ],
+      "checks": [
+        {
+          "kind": "different",
+          "a": "min",
+          "b": "max",
+          "name": "Primary endpoints produce a visible change",
+          "min_mean": 1e-05
+        },
+        {
+          "kind": "different",
+          "a": "secondary",
+          "b": "default",
+          "name": "Specified secondary parameter produces a visible change",
+          "min_mean": 1e-05
+        },
+        {
+          "kind": "same",
+          "a": "early",
+          "b": "late",
+          "name": "Declared time behavior"
+        },
+        {
+          "kind": "progress_endpoints",
+          "a": "min",
+          "b": "max",
+          "name": "Empty has no completed pixels and full covers the circle interior"
+        },
+        {
+          "kind": "different",
+          "a": "default",
+          "b": "min",
+          "name": "Partial progress differs from empty",
+          "min_mean": 0.0001
+        },
+        {
+          "kind": "different",
+          "a": "default",
+          "b": "max",
+          "name": "Partial progress differs from full",
+          "min_mean": 0.0001
+        }
+      ]
+    },
+    {
+      "number": 297,
+      "name": "扇形冷却",
+      "slug": "cooldown",
+      "fixture": "gallery",
+      "primary": "u_amount",
+      "region": [
+        0,
+        0,
+        640,
+        480
+      ],
+      "animated": false,
+      "states": [
+        {
+          "id": "off",
+          "time": 1,
+          "enabled": false,
+          "event": false
+        },
+        {
+          "id": "default",
+          "time": 1,
+          "enabled": true,
+          "event": false
+        },
+        {
+          "id": "min",
+          "time": 1,
+          "enabled": true,
+          "event": false,
+          "parameters": {
+            "u_amount": 0
+          }
+        },
+        {
+          "id": "max",
+          "time": 1,
+          "enabled": true,
+          "event": false,
+          "parameters": {
+            "u_amount": 1
+          }
+        },
+        {
+          "id": "secondary",
+          "time": 1,
+          "enabled": true,
+          "event": false,
+          "parameters": {
+            "u_start_deg": 90
+          }
+        },
+        {
+          "id": "early",
+          "time": 0.5,
+          "enabled": true,
+          "event": false
+        },
+        {
+          "id": "late",
+          "time": 2,
+          "enabled": true,
+          "event": false
+        }
+      ],
+      "checks": [
+        {
+          "kind": "different",
+          "a": "min",
+          "b": "max",
+          "name": "Primary endpoints produce a visible change",
+          "min_mean": 1e-05
+        },
+        {
+          "kind": "different",
+          "a": "secondary",
+          "b": "default",
+          "name": "Specified secondary parameter produces a visible change",
+          "min_mean": 1e-05
+        },
+        {
+          "kind": "same",
+          "a": "early",
+          "b": "late",
+          "name": "Declared time behavior"
+        },
+        {
+          "kind": "progress_endpoints",
+          "a": "min",
+          "b": "max",
+          "name": "Empty has no completed pixels and full covers the circle interior"
+        },
+        {
+          "kind": "different",
+          "a": "default",
+          "b": "min",
+          "name": "Partial progress differs from empty",
+          "min_mean": 0.0001
+        },
+        {
+          "kind": "different",
+          "a": "default",
+          "b": "max",
+          "name": "Partial progress differs from full",
+          "min_mean": 0.0001
+        }
+      ]
+    },
+    {
+      "number": 298,
+      "name": "液体进度条",
+      "slug": "liquid",
+      "fixture": "gallery",
+      "primary": "u_amount",
+      "region": [
+        0,
+        0,
+        640,
+        480
+      ],
+      "animated": true,
+      "states": [
+        {
+          "id": "off",
+          "time": 1,
+          "enabled": false,
+          "event": false
+        },
+        {
+          "id": "default",
+          "time": 1,
+          "enabled": true,
+          "event": false
+        },
+        {
+          "id": "min",
+          "time": 1,
+          "enabled": true,
+          "event": false,
+          "parameters": {
+            "u_amount": 0
+          }
+        },
+        {
+          "id": "max",
+          "time": 1,
+          "enabled": true,
+          "event": false,
+          "parameters": {
+            "u_amount": 1
+          }
+        },
+        {
+          "id": "secondary",
+          "time": 1,
+          "enabled": true,
+          "event": false,
+          "parameters": {
+            "u_wave_height": 0.08
+          }
+        },
+        {
+          "id": "early",
+          "time": 0.5,
+          "enabled": true,
+          "event": false
+        },
+        {
+          "id": "late",
+          "time": 2,
+          "enabled": true,
+          "event": false
+        }
+      ],
+      "checks": [
+        {
+          "kind": "different",
+          "a": "min",
+          "b": "max",
+          "name": "Primary endpoints produce a visible change",
+          "min_mean": 1e-05
+        },
+        {
+          "kind": "different",
+          "a": "secondary",
+          "b": "default",
+          "name": "Specified secondary parameter produces a visible change",
+          "min_mean": 1e-05
+        },
+        {
+          "kind": "different",
+          "a": "early",
+          "b": "late",
+          "name": "Declared time behavior",
+          "min_mean": 1e-05
+        },
+        {
+          "kind": "progress_endpoints",
+          "a": "min",
+          "b": "max",
+          "name": "Empty has no completed pixels and full covers the circle interior"
+        },
+        {
+          "kind": "different",
+          "a": "default",
+          "b": "min",
+          "name": "Partial progress differs from empty",
+          "min_mean": 0.0001
+        },
+        {
+          "kind": "different",
+          "a": "default",
+          "b": "max",
+          "name": "Partial progress differs from full",
+          "min_mean": 0.0001
+        }
+      ]
+    },
+    {
+      "number": 112,
+      "name": "平静水面",
+      "slug": "calm",
+      "fixture": "gallery",
+      "primary": "u_wave_height",
+      "region": [
+        160,
+        75,
+        320,
+        300
+      ],
+      "animated": true,
+      "states": [
+        {
+          "id": "off",
+          "time": 1,
+          "enabled": false,
+          "event": false
+        },
+        {
+          "id": "default",
+          "time": 1,
+          "enabled": true,
+          "event": false
+        },
+        {
+          "id": "min",
+          "time": 1,
+          "enabled": true,
+          "event": false,
+          "parameters": {
+            "u_wave_height": 0
+          }
+        },
+        {
+          "id": "max",
+          "time": 1,
+          "enabled": true,
+          "event": false,
+          "parameters": {
+            "u_wave_height": 0.25
+          }
+        },
+        {
+          "id": "secondary",
+          "time": 1,
+          "enabled": true,
+          "event": false,
+          "parameters": {
+            "u_deep_color": "#ff0000"
+          }
+        },
+        {
+          "id": "early",
+          "time": 0.5,
+          "enabled": true,
+          "event": false
+        },
+        {
+          "id": "late",
+          "time": 2,
+          "enabled": true,
+          "event": false
+        }
+      ],
+      "checks": [
+        {
+          "kind": "different",
+          "a": "min",
+          "b": "max",
+          "name": "Primary endpoints produce a visible change",
+          "min_mean": 1e-05
+        },
+        {
+          "kind": "different",
+          "a": "secondary",
+          "b": "default",
+          "name": "Specified secondary parameter produces a visible change",
+          "min_mean": 1e-05
+        },
+        {
+          "kind": "different",
+          "a": "early",
+          "b": "late",
+          "name": "Declared time behavior",
+          "min_mean": 1e-05
+        },
+        {
+          "kind": "same",
+          "a": "min",
+          "b": "flat_late",
+          "name": "Zero wave height is time invariant"
+        }
+      ]
+    },
+    {
+      "number": 118,
+      "name": "交互涟漪",
+      "slug": "interactive",
+      "fixture": "gallery",
+      "primary": "u_strength",
+      "region": [
+        160,
+        75,
+        320,
+        300
+      ],
+      "animated": true,
+      "states": [
+        {
+          "id": "off",
+          "time": 0.25,
+          "enabled": false,
+          "event": false
+        },
+        {
+          "id": "default",
+          "time": 0.25,
+          "enabled": true,
+          "event": true
+        },
+        {
+          "id": "min",
+          "time": 0.25,
+          "enabled": true,
+          "event": true,
+          "parameters": {
+            "u_strength": 0
+          }
+        },
+        {
+          "id": "max",
+          "time": 0.25,
+          "enabled": true,
+          "event": true,
+          "parameters": {
+            "u_strength": 1
+          }
+        },
+        {
+          "id": "secondary",
+          "time": 0.25,
+          "enabled": true,
+          "event": true,
+          "parameters": {
+            "u_ripple_width": 0.2
+          }
+        },
+        {
+          "id": "early",
+          "time": 0,
+          "enabled": true,
+          "event": false
+        },
+        {
+          "id": "late",
+          "time": 2,
+          "enabled": true,
+          "event": true
+        }
+      ],
+      "checks": [
+        {
+          "kind": "different",
+          "a": "min",
+          "b": "max",
+          "name": "Primary endpoints produce a visible change",
+          "min_mean": 1e-05
+        },
+        {
+          "kind": "different",
+          "a": "secondary",
+          "b": "default",
+          "name": "Specified secondary parameter produces a visible change",
+          "min_mean": 1e-05
+        },
+        {
+          "kind": "same",
+          "a": "late",
+          "b": "no_event_late",
+          "name": "Expired event does not repeat"
+        },
+        {
+          "kind": "different",
+          "a": "early",
+          "b": "default",
+          "name": "A single trigger is visible",
+          "min_mean": 1e-05
+        }
+      ],
+      "hit_local": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "number": 192,
+      "name": "全息投影",
+      "slug": "hologram",
+      "fixture": "gallery",
+      "primary": "u_opacity",
+      "region": [
+        160,
+        75,
+        320,
+        300
+      ],
+      "animated": true,
+      "states": [
+        {
+          "id": "off",
+          "time": 1,
+          "enabled": false,
+          "event": false
+        },
+        {
+          "id": "default",
+          "time": 1,
+          "enabled": true,
+          "event": false
+        },
+        {
+          "id": "min",
+          "time": 1,
+          "enabled": true,
+          "event": false,
+          "parameters": {
+            "u_opacity": 0
+          }
+        },
+        {
+          "id": "max",
+          "time": 1,
+          "enabled": true,
+          "event": false,
+          "parameters": {
+            "u_opacity": 1
+          }
+        },
+        {
+          "id": "secondary",
+          "time": 1,
+          "enabled": true,
+          "event": false,
+          "parameters": {
+            "u_line_density": 12
+          }
+        },
+        {
+          "id": "early",
+          "time": 0.5,
+          "enabled": true,
+          "event": false
+        },
+        {
+          "id": "late",
+          "time": 2,
+          "enabled": true,
+          "event": false
+        }
+      ],
+      "checks": [
+        {
+          "kind": "different",
+          "a": "min",
+          "b": "max",
+          "name": "Primary endpoints produce a visible change",
+          "min_mean": 1e-05
+        },
+        {
+          "kind": "different",
+          "a": "secondary",
+          "b": "default",
+          "name": "Specified secondary parameter produces a visible change",
+          "min_mean": 1e-05
+        },
+        {
+          "kind": "different",
+          "a": "early",
+          "b": "late",
+          "name": "Declared time behavior",
+          "min_mean": 1e-05
+        }
+      ]
+    },
+    {
+      "number": 190,
+      "name": "护盾受击波纹",
+      "slug": "shield_hit",
+      "fixture": "gallery",
+      "primary": "u_intensity",
+      "region": [
+        160,
+        75,
+        320,
+        300
+      ],
+      "animated": true,
+      "states": [
+        {
+          "id": "off",
+          "time": 0.25,
+          "enabled": false,
+          "event": false
+        },
+        {
+          "id": "default",
+          "time": 0.25,
+          "enabled": true,
+          "event": true
+        },
+        {
+          "id": "min",
+          "time": 0.25,
+          "enabled": true,
+          "event": true,
+          "parameters": {
+            "u_intensity": 0
+          }
+        },
+        {
+          "id": "max",
+          "time": 0.25,
+          "enabled": true,
+          "event": true,
+          "parameters": {
+            "u_intensity": 5
+          }
+        },
+        {
+          "id": "secondary",
+          "time": 0.25,
+          "enabled": true,
+          "event": true,
+          "parameters": {
+            "u_ring_width": 0.2
+          }
+        },
+        {
+          "id": "early",
+          "time": 0,
+          "enabled": true,
+          "event": false
+        },
+        {
+          "id": "late",
+          "time": 2,
+          "enabled": true,
+          "event": true
+        }
+      ],
+      "checks": [
+        {
+          "kind": "different",
+          "a": "min",
+          "b": "max",
+          "name": "Primary endpoints produce a visible change",
+          "min_mean": 1e-05
+        },
+        {
+          "kind": "different",
+          "a": "secondary",
+          "b": "default",
+          "name": "Specified secondary parameter produces a visible change",
+          "min_mean": 1e-05
+        },
+        {
+          "kind": "same",
+          "a": "late",
+          "b": "no_event_late",
+          "name": "Expired event does not repeat"
+        },
+        {
+          "kind": "different",
+          "a": "early",
+          "b": "default",
+          "name": "A single trigger is visible",
+          "min_mean": 1e-05
+        }
+      ],
+      "hit_local": [
+        0,
+        0,
+        0.92
+      ]
+    },
+    {
+      "number": 96,
+      "name": "透明玻璃",
+      "slug": "clear",
+      "fixture": "gallery",
+      "primary": "u_distortion",
+      "region": [
+        160,
+        75,
+        320,
+        300
+      ],
+      "animated": false,
+      "states": [
+        {
+          "id": "off",
+          "time": 1,
+          "enabled": false,
+          "event": false
+        },
+        {
+          "id": "default",
+          "time": 1,
+          "enabled": true,
+          "event": false
+        },
+        {
+          "id": "min",
+          "time": 1,
+          "enabled": true,
+          "event": false,
+          "parameters": {
+            "u_distortion": 0
+          }
+        },
+        {
+          "id": "max",
+          "time": 1,
+          "enabled": true,
+          "event": false,
+          "parameters": {
+            "u_distortion": 0.08
+          }
+        },
+        {
+          "id": "secondary",
+          "time": 1,
+          "enabled": true,
+          "event": false,
+          "parameters": {
+            "u_opacity": 0.2
+          }
+        },
+        {
+          "id": "early",
+          "time": 0.5,
+          "enabled": true,
+          "event": false
+        },
+        {
+          "id": "late",
+          "time": 2,
+          "enabled": true,
+          "event": false
+        }
+      ],
+      "checks": [
+        {
+          "kind": "different",
+          "a": "min",
+          "b": "max",
+          "name": "Primary endpoints produce a visible change",
+          "min_mean": 1e-05
+        },
+        {
+          "kind": "different",
+          "a": "secondary",
+          "b": "default",
+          "name": "Specified secondary parameter produces a visible change",
+          "min_mean": 1e-05
+        },
+        {
+          "kind": "same",
+          "a": "early",
+          "b": "late",
+          "name": "Declared time behavior"
+        },
+        {
+          "kind": "same",
+          "a": "straight",
+          "b": "background",
+          "name": "Zero glass distortion samples background",
+          "region": [
+            280,
+            180,
+            80,
+            80
+          ],
+          "max_channel": 0.00784313725490196
+        }
+      ]
+    },
+    {
+      "number": 326,
+      "name": "高斯模糊",
+      "slug": "gaussian",
+      "fixture": "blur_chart",
+      "primary": "u_radius_px",
+      "region": [
+        0,
+        0,
+        640,
+        480
+      ],
+      "animated": false,
+      "states": [
+        {
+          "id": "off",
+          "time": 1,
+          "enabled": false,
+          "event": false
+        },
+        {
+          "id": "default",
+          "time": 1,
+          "enabled": true,
+          "event": false
+        },
+        {
+          "id": "min",
+          "time": 1,
+          "enabled": true,
+          "event": false,
+          "parameters": {
+            "u_radius_px": 0
+          }
+        },
+        {
+          "id": "max",
+          "time": 1,
+          "enabled": true,
+          "event": false,
+          "parameters": {
+            "u_radius_px": 16
+          }
+        },
+        {
+          "id": "secondary",
+          "time": 1,
+          "enabled": true,
+          "event": false,
+          "parameters": {
+            "u_quality": 0
+          }
+        },
+        {
+          "id": "early",
+          "time": 0.5,
+          "enabled": true,
+          "event": false
+        },
+        {
+          "id": "late",
+          "time": 2,
+          "enabled": true,
+          "event": false
+        }
+      ],
+      "checks": [
+        {
+          "kind": "different",
+          "a": "min",
+          "b": "max",
+          "name": "Primary endpoints produce a visible change",
+          "min_mean": 1e-05
+        },
+        {
+          "kind": "different",
+          "a": "secondary",
+          "b": "default",
+          "name": "Specified secondary parameter produces a visible change",
+          "min_mean": 1e-05
+        },
+        {
+          "kind": "same",
+          "a": "early",
+          "b": "late",
+          "name": "Declared time behavior"
+        },
+        {
+          "kind": "same",
+          "a": "min",
+          "b": "off",
+          "name": "Zero progress/width/strength/radius restores original"
+        },
+        {
+          "kind": "same",
+          "a": "max",
+          "b": "off",
+          "name": "Gaussian preserves solid color away from chart edge",
+          "region": [
+            32,
+            32,
+            96,
+            416
+          ],
+          "max_channel": 0.00392156862745098
+        },
+        {
+          "kind": "smooth_edges",
+          "a": "max",
+          "b": "off",
+          "name": "Gaussian smooths black/white hard edges",
+          "region": [
+            200,
+            32,
+            408,
+            416
+          ]
+        }
+      ]
+    },
+    {
+      "number": 317,
+      "name": "LUT调色",
+      "slug": "lut",
+      "fixture": "color_chart",
+      "primary": "u_amount",
+      "region": [
+        0,
+        0,
+        640,
+        480
+      ],
+      "animated": false,
+      "states": [
+        {
+          "id": "off",
+          "time": 1,
+          "enabled": false,
+          "event": false
+        },
+        {
+          "id": "default",
+          "time": 1,
+          "enabled": true,
+          "event": false
+        },
+        {
+          "id": "min",
+          "time": 1,
+          "enabled": true,
+          "event": false,
+          "parameters": {
+            "u_amount": 0
+          }
+        },
+        {
+          "id": "max",
+          "time": 1,
+          "enabled": true,
+          "event": false,
+          "parameters": {
+            "u_amount": 1
+          }
+        },
+        {
+          "id": "secondary",
+          "time": 1,
+          "enabled": true,
+          "event": false,
+          "parameters": {
+            "lut_texture": "res://assets/neutral_lut.png"
+          }
+        },
+        {
+          "id": "early",
+          "time": 0.5,
+          "enabled": true,
+          "event": false
+        },
+        {
+          "id": "late",
+          "time": 2,
+          "enabled": true,
+          "event": false
+        }
+      ],
+      "checks": [
+        {
+          "kind": "different",
+          "a": "min",
+          "b": "max",
+          "name": "Primary endpoints produce a visible change",
+          "min_mean": 1e-05
+        },
+        {
+          "kind": "different",
+          "a": "secondary",
+          "b": "default",
+          "name": "Specified secondary parameter produces a visible change",
+          "min_mean": 1e-05
+        },
+        {
+          "kind": "same",
+          "a": "early",
+          "b": "late",
+          "name": "Declared time behavior"
+        },
+        {
+          "kind": "same",
+          "a": "min",
+          "b": "off",
+          "name": "Zero progress/width/strength/radius restores original"
+        },
+        {
+          "kind": "same",
+          "a": "secondary",
+          "b": "off",
+          "name": "Neutral LUT preserves color chart including blue maximum",
+          "max_channel": 0.00392156862745098
+        }
+      ]
+    },
+    {
+      "number": 348,
+      "name": "CRT显像管",
+      "slug": "crt",
+      "fixture": "gallery",
+      "primary": "u_curvature",
+      "region": [
+        0,
+        0,
+        640,
+        480
+      ],
+      "animated": false,
+      "states": [
+        {
+          "id": "off",
+          "time": 1,
+          "enabled": false,
+          "event": false
+        },
+        {
+          "id": "default",
+          "time": 1,
+          "enabled": true,
+          "event": false
+        },
+        {
+          "id": "min",
+          "time": 1,
+          "enabled": true,
+          "event": false,
+          "parameters": {
+            "u_curvature": 0
+          }
+        },
+        {
+          "id": "max",
+          "time": 1,
+          "enabled": true,
+          "event": false,
+          "parameters": {
+            "u_curvature": 0.2
+          }
+        },
+        {
+          "id": "secondary",
+          "time": 1,
+          "enabled": true,
+          "event": false,
+          "parameters": {
+            "u_rgb_mask": 1
+          }
+        },
+        {
+          "id": "early",
+          "time": 0.5,
+          "enabled": true,
+          "event": false
+        },
+        {
+          "id": "late",
+          "time": 2,
+          "enabled": true,
+          "event": false
+        }
+      ],
+      "checks": [
+        {
+          "kind": "different",
+          "a": "min",
+          "b": "max",
+          "name": "Primary endpoints produce a visible change",
+          "min_mean": 1e-05
+        },
+        {
+          "kind": "different",
+          "a": "secondary",
+          "b": "default",
+          "name": "Specified secondary parameter produces a visible change",
+          "min_mean": 1e-05
+        },
+        {
+          "kind": "same",
+          "a": "early",
+          "b": "late",
+          "name": "Declared time behavior"
+        },
+        {
+          "kind": "same",
+          "a": "all_zero",
+          "b": "off",
+          "name": "All CRT parameters zero restores original"
+        }
+      ]
+    }
+  ]
+}

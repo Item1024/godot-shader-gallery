@@ -1447,7 +1447,9 @@ metadata_path = "res://{directory}/metadata.json"
 首批 20 项已完成 M3 精修：右侧按各项元数据显示中文参数、范围、单位、步长与默认值，数值可以拖滑块或用键盘输入。静态项隐藏播放速度，其余 401 项保留“基础参数”。受击闪白点击“播放一次”或图案触发；LUT 可选暖色/中性表；高斯使用真正横、竖两遍。
 首批 20 项已实现 M4 可复用资产：各目录的 usage.tscn 可按 F6 运行，material.tres 保存默认参数，dependencies.json 列出复制所需文件。动态案例附带连续时间播放器；最小接入场景不依赖图库 UI、catalog 或 stage.gd，已逐项在独立空工程验证。接入方法和平台限制见对应 README。
 
-M4 已按用户调整后的范围完成验收，依据为首批 20 项空工程验证（335 项断言）及已有 M2/M3 回归结果。421 项全库 GPU 验收曾因内存分配失败中断，现已由用户取消，本轮未完成该检查，不能写成全库通过；本次收尾未启动 Godot 或重跑既有测试。
+M4 已按用户调整后的范围完成验收，依据为首批 20 项空工程验证（335 项断言）及已有 M2/M3 回归结果。421 项全库 GPU 验收曾因内存分配失败中断，现已由用户取消，本轮未完成该检查，不能写成全库通过；M4 收尾时未启动 Godot 或重跑既有测试。
+
+M5 已建立首批 20 项 × 7 个固定状态的截图与比较流程：140 个状态、98 项画面行为断言及 20 项独立进程默认图重复检查通过，候选参考图等待人工确认。M5 本轮 421 项全库运行检查也已由用户取消，未执行；本轮未改动运行代码或 Shader。结果和审阅入口见 [M5 验证记录](docs/M5_VERIFICATION.md)。
 
 421 项的“原理与限制”及目录 README 都采用大白话：先讲画面像什么，再讲本示例具体怎么画出来。参数和演示局限也用日常语言说明。
 
@@ -1468,8 +1470,9 @@ M4 已按用户调整后的范围完成验收，依据为首批 20 项空工程�
 - tools/test_runtime.gd：M2 播放、命中与输入行为检查，报告保存到 artifacts/m2/。
 - tools/test_m3.gd：首批参数、重置、端点、透明边、高斯和 LUT 的实际像素检查，报告及截图在 artifacts/m3/。
 - tools/test_m4.py 与 tools/test_m4.gd：按依赖清单逐项创建空工程，导入后实际渲染检查；结果与复制工程在 artifacts/m4/。
+- tools/capture_visuals.gd、tools/compare_visuals.py 与 tests/visual_cases.json：M5 固定状态、行为/重复性检查与差异图；人工确认流程见 tests/visual/README.md。
 - shared/usage_player.gd 与 shared/surface_hit.gd：独立接入场景的时间/输入适配和水面/球面命中，与图库复用同一播放器和求交公式。
-- docs/OPTIMIZATION_PLAN.md：M1–M3 已完成；M4 按调整后范围已完成；下一步为 M5：140 个固定状态的画面回归，本次不实施。
+- docs/OPTIMIZATION_PLAN.md：M1–M4 已完成；M5 采集与自动检查通过，待人工确认参考图；之后进入 M6 浏览与性能。
 - artifacts/：实际运行审查输出的报告与截图。
 
 ## 安全重建
@@ -1514,7 +1517,7 @@ SSAO、SSR、SSIL、体积雾等管线案例使用 Godot 内置渲染功能，�
 审查报告写入 artifacts/runtime_audit.json。只在审查真正完成后，才能把报告作为运行结果。
 
 本机已完成的检查及其范围见 [验证记录](docs/VERIFICATION.md)。
-M3 的参数与画面结论见 [M3 验收记录](docs/M3_VERIFICATION.md)，M4 的资产、空工程验证及限制见 [M4 验收记录](docs/M4_VERIFICATION.md)。M5–M6 尚未实施；全库退出时仍有已知的 7 个 Texture RID 释放警告。
+M3 的参数与画面结论见 [M3 验收记录](docs/M3_VERIFICATION.md)，M4 的资产、空工程验证及限制见 [M4 验收记录](docs/M4_VERIFICATION.md)。M5 候选图与待确认范围见 [M5 验证记录](docs/M5_VERIFICATION.md)；M6 尚未实施。全库退出时原有的 7 个 Texture RID 释放警告仍未定位。
 
 ## 界面与素材说明
 
