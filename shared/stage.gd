@@ -11,15 +11,21 @@ var camera: Camera3D
 var player = EffectPlayer.new()
 var elapsed: float:
 	get: return player.effect_time
-	set(value): player.seek(value)
+	set(value):
+		player.seek(value)
+		request_redraw()
 var paused: bool:
 	get: return player.paused
-	set(value): player.paused = value
+	set(value):
+		player.paused = value
+		_sync_updates()
 var enabled := true
 var amount := 0.55
 var speed: float:
 	get: return player.playback_speed
-	set(value): player.playback_speed = value
+	set(value):
+		player.playback_speed = value
+		_sync_updates()
 var scale_value := 1.0
 var orbit := 0.0
 var elevation := 0.28
@@ -34,20 +40,22 @@ var _pointer_down := false
 var _dragging := false
 var _press_position := Vector2.ZERO
 var _last_pointer := Vector2.ZERO
+var preview_active := true
 
 
 func _init() -> void:
 	size = Vector2i(900, 660)
 	own_world_3d = true
-	render_target_update_mode = SubViewport.UPDATE_ALWAYS
+	render_target_update_mode = SubViewport.UPDATE_DISABLED
 	handle_input_locally = false
 	transparent_bg = false
 
 
 func _ready() -> void:
+	size_changed.connect(request_redraw)
 	get_window().focus_exited.connect(cancel_pointer)
 	if get_parent() is SubViewportContainer:
-		get_parent().visibility_changed.connect(cancel_pointer)
+		get_parent().visibility_changed.connect(func(): set_preview_active(get_parent().is_visible_in_tree()))
 
 
 func configure(data: Dictionary) -> void:
@@ -86,6 +94,63 @@ func configure(data: Dictionary) -> void:
 		_build_3d()
 	else:
 		_build_canvas(kind)
+	_sync_updates()
+
+
+func _is_live() -> bool:
+	return preview_active and not entry.is_empty() and entry.get("animated", true) and not paused and speed != 0.0
+
+
+func _sync_updates() -> void:
+	set_process(_is_live())
+	if not preview_active:
+		render_target_update_mode = SubViewport.UPDATE_DISABLED
+	else:
+		request_redraw()
+
+
+func request_redraw() -> void:
+	if preview_active:
+		render_target_update_mode = SubViewport.UPDATE_WHEN_VISIBLE if _is_live() else SubViewport.UPDATE_ONCE
+		if not _is_live() and not RenderingServer.frame_post_draw.is_connected(_finish_redraw):
+			RenderingServer.frame_post_draw.connect(_finish_redraw, CONNECT_ONE_SHOT)
+
+
+func _finish_redraw() -> void:
+	# Keep the node property in sync with the renderer's automatic ONCE -> DISABLED.
+	if render_target_update_mode == SubViewport.UPDATE_ONCE:
+		render_target_update_mode = SubViewport.UPDATE_DISABLED
+
+
+func set_preview_active(value: bool) -> void:
+	preview_active = value
+	cancel_pointer()
+	_sync_updates()
+
+
+func draw_frame() -> void:
+	# Explicitly queue every awaited draw, including hidden/paused captures.
+	render_target_update_mode = SubViewport.UPDATE_ONCE
+	await RenderingServer.frame_post_draw
+	render_target_update_mode = SubViewport.UPDATE_WHEN_VISIBLE if _is_live() else SubViewport.UPDATE_DISABLED
+
+
+func clear_preview() -> void:
+	player.bind_materials([])
+	for child in get_children(): child.free()
+	entry = {}
+	parameter_values.clear()
+	uniform_names.clear()
+	shader_material = null
+	vertical_material = null
+	subject = null
+	camera = null
+	environment = null
+	canvas_root = null
+	canvas_picture = null
+	interaction_surface = null
+	cancel_pointer()
+	_sync_updates()
 
 
 func _set_uniforms() -> void:
@@ -355,6 +420,7 @@ func _position_camera() -> void:
 	if camera:
 		camera.position = Vector3(sin(orbit) * distance, distance * elevation + 0.6, cos(orbit) * distance)
 		camera.look_at(Vector3(0, -0.05, 0))
+		request_redraw()
 
 
 func set_parameter(key: String, value: Variant) -> bool:
@@ -397,12 +463,14 @@ func set_parameter(key: String, value: Variant) -> bool:
 	for material: ShaderMaterial in player.materials:
 		material.set_shader_parameter(key, value)
 	_apply_pipeline()
+	request_redraw()
 	return true
 
 
 func play_once() -> void:
 	if enabled and entry.get("action", "") == "播放一次":
 		player.trigger_event()
+		request_redraw()
 
 
 func reset() -> void:
@@ -413,6 +481,7 @@ func reset() -> void:
 	enabled = true
 	_set_uniforms()
 	shader_material.set_shader_parameter("u_mouse", Vector2(0.5, 0.5))
+	_sync_updates()
 
 
 func cancel_pointer() -> void:
@@ -446,6 +515,8 @@ func orbit_input(event: InputEvent) -> void:
 				distance = maxf(3.2, distance - 0.3)
 			elif event.button_index == MOUSE_BUTTON_WHEEL_DOWN:
 				distance = minf(9.0, distance + 0.3)
+			else:
+				return
 			cancel_pointer()
 			_position_camera()
 	elif event is InputEventMouseMotion and _pointer_down:
@@ -479,6 +550,7 @@ func trigger_at(pixel: Vector2) -> bool:
 			return false
 		set_parameter("u_mouse", (pixel - region.position) / region.size)
 		play_once()
+	request_redraw()
 	return true
 
 
@@ -491,4 +563,5 @@ func surface_hit(pixel: Vector2) -> Dictionary:
 
 
 func _process(delta: float) -> void:
-	player.advance(delta)
+	if _is_live():
+		player.advance(delta)

@@ -2,12 +2,15 @@ extends SceneTree
 
 const Stage = preload("res://shared/stage.gd")
 const OUTPUT := "res://artifacts/m3"
+var output := OUTPUT
 var catalog: Array
 var checks: Array = []
 var captures: Array = []
 
 
 func _initialize() -> void:
+	for argument in OS.get_cmdline_user_args():
+		if argument.begins_with("--output="): output = argument.trim_prefix("--output=")
 	call_deferred("_run")
 
 
@@ -35,12 +38,13 @@ func state(stage: Stage) -> void:
 
 
 func capture(stage: Stage, name: String = "") -> Image:
+	stage.set_process(false)
 	await process_frame
-	await RenderingServer.frame_post_draw
-	await RenderingServer.frame_post_draw
+	await stage.draw_frame()
+	await stage.draw_frame()
 	var image := stage.get_texture().get_image()
 	if not name.is_empty():
-		var path := OUTPUT.path_join(name + ".png")
+		var path := output.path_join(name + ".png")
 		image.save_png(path)
 		captures.append({"path": path, "sha256": FileAccess.get_sha256(path)})
 	return image
@@ -391,7 +395,7 @@ func gui() -> void:
 	gallery.items.select(6)
 	await process_frame
 	await RenderingServer.frame_post_draw
-	root.get_texture().get_image().save_png(OUTPUT.path_join("gallery_parameters.png"))
+	root.get_texture().get_image().save_png(output.path_join("gallery_parameters.png"))
 	gallery.search.text="no-result-m3-test"
 	gallery._filter()
 	check(gallery.current.is_empty() and gallery.stage.get_child_count()==0,"zero search results clear previous preview")
@@ -399,7 +403,7 @@ func gui() -> void:
 
 
 func _run() -> void:
-	DirAccess.make_dir_recursive_absolute(ProjectSettings.globalize_path(OUTPUT))
+	DirAccess.make_dir_recursive_absolute(ProjectSettings.globalize_path(output))
 	catalog=JSON.parse_string(FileAccess.get_file_as_string("res://catalog.json"))
 	for entry: Dictionary in catalog:
 		if not entry.has("parameters"): continue
@@ -418,6 +422,6 @@ func _run() -> void:
 		if entry.has("parameters"): hashes[entry["shader"]]=FileAccess.get_sha256(entry["shader"])
 	for path in ["res://shared/stage.gd","res://shared/gallery.gd","res://shared/effect_player.gd","res://tools/test_m3.gd","res://tools/effect_profiles.py","res://catalog.json","res://assets/neutral_lut.png","res://assets/warm_lut.png","res://assets/subject.svg","res://assets/cottage.png"]: hashes[path]=FileAccess.get_sha256(path)
 	report["source_sha256"]=hashes
-	FileAccess.open(OUTPUT.path_join("report.json"),FileAccess.WRITE).store_string(JSON.stringify(report,"\t"))
+	FileAccess.open(output.path_join("report.json"),FileAccess.WRITE).store_string(JSON.stringify(report,"\t"))
 	print("M3_COMPLETE checks=%d failures=%d captures=%d" % [checks.size(),failures,captures.size()])
 	quit(0 if failures==0 else 1)

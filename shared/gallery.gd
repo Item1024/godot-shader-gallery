@@ -26,6 +26,8 @@ var compare_button: CheckButton
 var parameter_panel: VBoxContainer
 var parameter_controls: Dictionary = {}
 var screenshot_pending := false
+var search_timer: Timer
+var tabs: TabContainer
 
 
 func _style(color: Color, border: Color = Color.TRANSPARENT) -> StyleBoxFlat:
@@ -141,7 +143,12 @@ func _build_ui() -> void:
 	search.placeholder_text = "搜索名称 / 英文关键词"
 	search.clear_button_enabled = true
 	search.custom_minimum_size.y = 44
-	search.text_changed.connect(func(_value): _filter())
+	search_timer = Timer.new()
+	search_timer.wait_time = 0.15
+	search_timer.one_shot = true
+	search_timer.timeout.connect(_filter)
+	add_child(search_timer)
+	search.text_changed.connect(func(_value): search_timer.start())
 	sidebar.add_child(search)
 	category = OptionButton.new()
 	category.custom_minimum_size.y = 44
@@ -171,7 +178,7 @@ func _build_ui() -> void:
 	subtitle.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	subtitle.custom_minimum_size.y = 46
 	main.add_child(subtitle)
-	var tabs := TabContainer.new()
+	tabs = TabContainer.new()
 	tabs.size_flags_vertical = Control.SIZE_EXPAND_FILL
 	main.add_child(tabs)
 	var preview := VBoxContainer.new()
@@ -184,6 +191,7 @@ func _build_ui() -> void:
 	preview.add_child(viewport_container)
 	stage = Stage.new()
 	viewport_container.add_child(stage)
+	tabs.tab_changed.connect(func(index): stage.set_preview_active(index == 0))
 	viewport_container.gui_input.connect(stage.orbit_input)
 	var footer := HBoxContainer.new()
 	footer.add_theme_constant_override("separation", 12)
@@ -341,6 +349,7 @@ func _build_parameters() -> void:
 
 
 func _filter() -> void:
+	search_timer.stop()
 	items.clear()
 	results.clear()
 	var query := search.text.strip_edges().to_lower()
@@ -356,17 +365,18 @@ func _filter() -> void:
 		items.add_item("%03d  %s" % [entry["number"], entry["name"]])
 	count_label.text = "%d / %d 个效果" % [results.size(), catalog.size()]
 	if not results.is_empty():
-		items.select(0)
-		_show(catalog[results[0]])
+		var selection := 0
+		for index in range(results.size()):
+			if catalog[results[index]].get("number") == current.get("number"):
+				selection = index
+				break
+		items.select(selection)
+		items.ensure_current_is_visible()
+		_show(catalog[results[selection]])
 	else:
 		current = {}
-		var empty_materials: Array[ShaderMaterial] = []
-		stage.player.bind_materials(empty_materials)
-		for child in stage.get_children(): child.free()
-		stage.camera = null
-		stage.shader_material = null
-		stage.interaction_surface = null
-		stage.canvas_picture = null
+		stage.clear_preview()
+		compare_button.disabled = true
 		heading.text = "没有匹配的效果"
 		subtitle.text = "请修改关键词或分类。"
 		badge.text = ""
@@ -379,7 +389,9 @@ func _filter() -> void:
 
 
 func _show(entry: Dictionary) -> void:
+	if current.get("number") == entry["number"]: return
 	current = entry
+	compare_button.disabled = false
 	heading.text = entry["name"]
 	badge.text = "%03d  /  %s  /  %s" % [entry["number"], entry["category"], entry["implementation"]]
 	subtitle.text = entry["summary"]
@@ -435,6 +447,9 @@ func _unhandled_key_input(event: InputEvent) -> void:
 
 func _audit() -> void:
 	var output := ProjectSettings.globalize_path("res://artifacts")
+	for argument in OS.get_cmdline_user_args():
+		if argument.begins_with("--audit-output="):
+			output = ProjectSettings.globalize_path(argument.trim_prefix("--audit-output="))
 	DirAccess.make_dir_recursive_absolute(output)
 	var report: Array = []
 	var selected_categories: Array[int] = []
@@ -448,8 +463,8 @@ func _audit() -> void:
 			continue
 		_show(entry)
 		await get_tree().process_frame
-		await RenderingServer.frame_post_draw
-		await RenderingServer.frame_post_draw
+		await stage.draw_frame()
+		await stage.draw_frame()
 		var uniforms: Array = stage.shader_material.shader.get_shader_uniform_list()
 		var image: Image = stage.get_texture().get_image()
 		var valid: bool = uniforms.size() > 0 and image != null and not image.is_empty()
@@ -463,7 +478,7 @@ func _audit() -> void:
 	file.close()
 	_show(catalog[0])
 	await get_tree().process_frame
-	await RenderingServer.frame_post_draw
+	await stage.draw_frame()
 	get_viewport().get_texture().get_image().save_png(output.path_join("gallery.png"))
 	print("AUDIT_COMPLETE " + str(report.size()))
 	if "--quit-after-audit" in OS.get_cmdline_user_args():

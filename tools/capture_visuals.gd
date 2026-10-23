@@ -24,10 +24,10 @@ func write_report() -> void:
 
 
 func snapshot(stage: Stage, id: String, category: String) -> bool:
-	# Rendering remains enabled during these waits; this also settles screen copies.
+	# Each settling frame explicitly requests a draw in on-demand mode.
 	for frame in range(4):
 		await process_frame
-		await RenderingServer.frame_post_draw
+		await stage.draw_frame()
 	var image := stage.get_texture().get_image()
 	if image == null or image.is_empty():
 		fail("Empty GPU image: " + id)

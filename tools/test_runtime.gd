@@ -3,6 +3,7 @@ extends SceneTree
 const Stage = preload("res://shared/stage.gd")
 const EffectPlayer = preload("res://shared/effect_player.gd")
 const OUTPUT := "res://artifacts/m2"
+var output := OUTPUT
 var catalog: Array
 var checks: Array = []
 var hits: Array = []
@@ -11,6 +12,8 @@ var render_checks := false
 
 
 func _initialize() -> void:
+	for argument in OS.get_cmdline_user_args():
+		if argument.begins_with("--output="): output = argument.trim_prefix("--output=")
 	call_deferred("_run")
 
 
@@ -168,9 +171,10 @@ func _pointer_tests(number: int) -> void:
 
 
 func _capture(stage: Stage) -> Image:
+	stage.set_process(false)
 	await process_frame
-	await RenderingServer.frame_post_draw
-	await RenderingServer.frame_post_draw
+	await stage.draw_frame()
+	await stage.draw_frame()
 	return stage.get_texture().get_image()
 
 
@@ -260,7 +264,7 @@ func _hit_tests(number: int) -> void:
 					_check(gpu_error <= 3.0, label + " GPU vertex marker", {"error_px": gpu_error})
 					record["gpu_marker_error_px"] = gpu_error
 					if sample == 0:
-						image.save_png(OUTPUT.path_join("marker_%03d_%d_%d.png" % [number, viewport_size.x, pose]))
+						image.save_png(output.path_join("marker_%03d_%d_%d.png" % [number, viewport_size.x, pose]))
 				hits.append(record)
 	_check(stage.surface_hit(Vector2(-5000, -5000)).is_empty(), "%03d off-model ray misses" % number)
 	stage.free()
@@ -274,7 +278,7 @@ func _event_images(number: int) -> void:
 	_check(stage.trigger_at(pixel), "%03d rendered event trigger" % number)
 	stage.elapsed = 2.2
 	var active := await _capture(stage)
-	active.save_png(OUTPUT.path_join("event_%03d_active.png" % number))
+	active.save_png(output.path_join("event_%03d_active.png" % number))
 	stage.player.event_time = -1.0
 	stage.player._write_event()
 	var idle := await _capture(stage)
@@ -424,7 +428,7 @@ func _gui_tests() -> void:
 func _run() -> void:
 	catalog = JSON.parse_string(FileAccess.get_file_as_string("res://catalog.json"))
 	render_checks = "--render-checks" in OS.get_cmdline_user_args()
-	DirAccess.make_dir_recursive_absolute(ProjectSettings.globalize_path(OUTPUT))
+	DirAccess.make_dir_recursive_absolute(ProjectSettings.globalize_path(output))
 	_time_tests()
 	_pointer_tests(118)
 	_pointer_tests(190)
@@ -443,7 +447,7 @@ func _run() -> void:
 		hashes[path] = FileAccess.get_file_as_string("res://" + path).replace("\r\n", "\n").sha256_text()
 	var report := {"engine": Engine.get_version_info()["string"], "gpu": RenderingServer.get_video_adapter_name(), "rendering_method": RenderingServer.get_current_rendering_method(), "render_checks": render_checks, "source_sha256_lf": hashes, "checks": checks, "hits": hits, "waves": waves, "total": checks.size(), "failures": failed}
 	var filename := "runtime_gpu.json" if render_checks else "runtime_logic.json"
-	var file := FileAccess.open(OUTPUT.path_join(filename), FileAccess.WRITE)
+	var file := FileAccess.open(output.path_join(filename), FileAccess.WRITE)
 	file.store_string(JSON.stringify(report, "\t") + "\n")
 	file.close()
 	print("M2_RUNTIME checks=%d hits=%d failures=%d render_checks=%s" % [checks.size(), hits.size(), failed, render_checks])
