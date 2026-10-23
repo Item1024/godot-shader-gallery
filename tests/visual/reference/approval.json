@@ -1,0 +1,8 @@
+{
+  "status": "approved",
+  "reviewer": "项目用户（本聊天确认）",
+  "reviewed_at": "2026-10-23",
+  "capture_sha256": "5ef8afe48d3cb941f6db76514d93554827fda42e87526f9414d8d035cd94c186",
+  "scope": "全部 140 个固定状态及相对 M1 的预期变化",
+  "confirmation": "用户在展示四页候选状态、四页 M1 对照并解释批准含义后回复：可以。"
+}

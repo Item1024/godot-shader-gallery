@@ -17,7 +17,7 @@
 
 M4 已按用户调整后的范围完成验收，依据为首批 20 项空工程验证（335 项断言）及已有 M2/M3 回归结果。421 项全库 GPU 验收曾因内存分配失败中断，现已由用户取消，本轮未完成该检查，不能写成全库通过；M4 收尾时未启动 Godot 或重跑既有测试。
 
-M5 已建立首批 20 项 × 7 个固定状态的截图与比较流程：140 个状态、98 项画面行为断言及 20 项独立进程默认图重复检查通过，候选参考图等待人工确认。M5 本轮 421 项全库运行检查也已由用户取消，未执行；本轮未改动运行代码或 Shader。结果和审阅入口见 [M5 验证记录](docs/M5_VERIFICATION.md)。
+M5 已按调整后范围完成验收：140 个状态、98 项画面行为断言及 20 项独立进程默认图重复检查通过，用户于 2026-10-23 批准全部参考状态及相对 M1 的预期变化。参考图、原始采集与批准记录已保存；新的独立采集与参考图比较 140 项通过。M5 本轮 421 项全库运行检查已由用户取消，未执行，不能写成全库通过。结果见 [M5 验证记录](docs/M5_VERIFICATION.md)。
 
 421 项的“原理与限制”及目录 README 都采用大白话：先讲画面像什么，再讲本示例具体怎么画出来。参数和演示局限也用日常语言说明。
 
@@ -40,7 +40,7 @@ M5 已建立首批 20 项 × 7 个固定状态的截图与比较流程：140 个
 - tools/test_m4.py 与 tools/test_m4.gd：按依赖清单逐项创建空工程，导入后实际渲染检查；结果与复制工程在 artifacts/m4/。
 - tools/capture_visuals.gd、tools/compare_visuals.py 与 tests/visual_cases.json：M5 固定状态、行为/重复性检查与差异图；人工确认流程见 tests/visual/README.md。
 - shared/usage_player.gd 与 shared/surface_hit.gd：独立接入场景的时间/输入适配和水面/球面命中，与图库复用同一播放器和求交公式。
-- docs/OPTIMIZATION_PLAN.md：M1–M4 已完成；M5 采集与自动检查通过，待人工确认参考图；之后进入 M6 浏览与性能。
+- docs/OPTIMIZATION_PLAN.md：M1–M5 已完成；下一步为 M6 浏览与性能。
 - artifacts/：实际运行审查输出的报告与截图。
 
 ## 安全重建
@@ -85,7 +85,7 @@ SSAO、SSR、SSIL、体积雾等管线案例使用 Godot 内置渲染功能，�
 审查报告写入 artifacts/runtime_audit.json。只在审查真正完成后，才能把报告作为运行结果。
 
 本机已完成的检查及其范围见 [验证记录](docs/VERIFICATION.md)。
-M3 的参数与画面结论见 [M3 验收记录](docs/M3_VERIFICATION.md)，M4 的资产、空工程验证及限制见 [M4 验收记录](docs/M4_VERIFICATION.md)。M5 候选图与待确认范围见 [M5 验证记录](docs/M5_VERIFICATION.md)；M6 尚未实施。全库退出时原有的 7 个 Texture RID 释放警告仍未定位。
+M3 的参数与画面结论见 [M3 验收记录](docs/M3_VERIFICATION.md)，M4 的资产、空工程验证及限制见 [M4 验收记录](docs/M4_VERIFICATION.md)。M5 参考图与验收结果见 [M5 验证记录](docs/M5_VERIFICATION.md)；M6 待实施。全库退出时原有的 7 个 Texture RID 释放警告仍未定位。
 
 ## 界面与素材说明
 
