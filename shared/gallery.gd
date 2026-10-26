@@ -468,7 +468,8 @@ func _audit() -> void:
 		var uniforms: Array = stage.shader_material.shader.get_shader_uniform_list()
 		var image: Image = stage.get_texture().get_image()
 		var valid: bool = uniforms.size() > 0 and image != null and not image.is_empty()
-		report.append({"number": entry["number"], "name": entry["name"], "valid": valid, "kind": entry["kind"], "implementation": entry["implementation"]})
+		report.append({"number": entry["number"], "name": entry["name"], "valid": valid, "kind": entry["kind"], "implementation": entry["implementation"],
+			"shader_sha256": FileAccess.get_sha256(entry["shader"]), "readme_sha256": FileAccess.get_sha256(entry["readme"])})
 		if index == 0 or (index > 0 and catalog[index - 1]["category_number"] != entry["category_number"]):
 			image.save_png(output.path_join("category_%02d.png" % entry["category_number"]))
 		print("AUDIT %03d/%03d %s %s" % [index + 1, catalog.size(), "PASS" if valid else "FAIL", entry["name"]])
